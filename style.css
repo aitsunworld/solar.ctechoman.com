@@ -225,6 +225,10 @@ h1, h2, h3, h4 {
 }
 .lang-btn:hover { color: var(--color-text-dark); }
 
+.mobile-menu-btn {
+  display: none;
+}
+
 /* Hero Section (Asymmetrical & Organic) */
 .hero {
   min-height: 100vh;
@@ -696,6 +700,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .cta-content h2 {
   color: #fff;
   font-size: 2.5rem;
+  line-height: 1.4;
   margin-bottom: 2.5rem;
 }
 

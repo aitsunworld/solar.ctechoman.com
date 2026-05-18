@@ -42,6 +42,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="chatbot.css">
 </head>
 
 <body>
@@ -71,7 +72,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Mobile Menu Toggle -->
-      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu" style="display: none;">
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
         <span></span>
         <span></span>
         <span></span>
@@ -127,21 +128,24 @@ $lang = require_once "lang/{$active_lang}.php";
         <div class="results-grid mt-4">
           <div class="result-box">
             <span class="result-label"><?= $lang['calc_sys_size'] ?></span>
-            <strong class="result-value text-eco" id="res-size">0 kW</strong>
+            <strong class="result-value text-eco" id="res-size" dir="ltr" style="display: inline-block;">0 kW</strong>
           </div>
           <div class="result-box">
             <span class="result-label"><?= $lang['calc_est_panels'] ?></span>
-            <strong class="result-value" id="res-panels">0</strong>
+            <strong class="result-value" id="res-panels" dir="ltr" style="display: inline-block;">0</strong>
           </div>
           <div class="result-box">
             <span class="result-label"><?= $lang['calc_est_cost'] ?></span>
-            <strong class="result-value" id="res-cost">0 OMR</strong>
+            <strong class="result-value" id="res-cost" dir="ltr" style="display: inline-block;">0 OMR</strong>
           </div>
           <div class="result-box highlight">
             <span class="result-label"><?= $lang['calc_yearly_savings'] ?></span>
-            <strong class="result-value" id="res-savings">0 OMR</strong>
+            <strong class="result-value" id="res-savings" dir="ltr" style="display: inline-block;">0 OMR</strong>
           </div>
         </div>
+        <button id="calc-explain-btn" class="btn btn-secondary mt-3" style="width: 100%; border: 1.5px solid var(--color-accent); background: transparent; color: var(--color-accent); font-weight: 600; padding: 0.8rem; border-radius: var(--radius-pill); cursor: pointer; transition: all 0.2s;">
+          ✨ <?= $active_lang === 'ar' ? 'اشرح لي النتائج بمستشار الذكاء الاصطناعي' : 'Explain results with AI Advisor' ?>
+        </button>
         <p class="mt-3 text-muted" style="font-size: 0.8rem;"><?= $lang['calc_note'] ?></p>
       </div>
 
@@ -460,6 +464,7 @@ $lang = require_once "lang/{$active_lang}.php";
         <iframe
           src="https://www.conceptgrps.com/enquire-form?primary_color=3a8dcc&secondary_color=0d1014&site_link=ctechoman.com"
           style="width: 100%; height: 950px; border: none; overflow: hidden; border-radius: 1rem;"
+          loading="lazy"
           title="Enquiry Form"></iframe>
       </div>
     </div>
@@ -488,7 +493,10 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="calculator-engine.js" defer></script>
+  <script src="analytics.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="chatbot.js" defer></script>
 </body>
 
 </html>

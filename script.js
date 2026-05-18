@@ -84,11 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const resCost = document.getElementById('res-cost');
     const resSavings = document.getElementById('res-savings');
 
-    const TARIFF = 0.020; 
-    const ANNUAL_YIELD_PER_KW = 1700; 
-    const PANEL_WATTAGE = 550; 
-    const COST_PER_KW = 350; 
-
     // Function to animate numbers
     function animateValue(obj, start, end, duration, prefix = "", suffix = "") {
         let startTimestamp = null;
@@ -104,12 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Format numbers nicely
             if (typeof end === 'string' && end.includes('-')) {
                 // Do not animate string ranges
-                obj.innerHTML = end;
+                obj.textContent = end;
                 return;
             } else if (Number.isInteger(end)) {
-                obj.innerHTML = `${prefix}${Math.floor(currentVal).toLocaleString()}${suffix}`;
+                obj.textContent = `${prefix}${Math.floor(currentVal).toLocaleString()}${suffix}`;
             } else {
-                obj.innerHTML = `${prefix}${currentVal.toFixed(1)}${suffix}`;
+                obj.textContent = `${prefix}${currentVal.toFixed(1)}${suffix}`;
             }
             
             if (progress < 1) {
@@ -123,34 +118,42 @@ document.addEventListener('DOMContentLoaded', () => {
         const monthlyBill = parseFloat(billSlider.value);
         billDisplay.textContent = monthlyBill;
 
-        const monthlyConsumption = monthlyBill / TARIFF;
-        const yearlyConsumption = monthlyConsumption * 12;
-        let systemSize = yearlyConsumption / ANNUAL_YIELD_PER_KW;
-        if (systemSize < 1) systemSize = 1;
-        
-        const totalWatts = systemSize * 1000;
-        const numPanels = Math.ceil(totalWatts / PANEL_WATTAGE);
-        const exactSystemSize = (numPanels * PANEL_WATTAGE) / 1000;
-        
-        const baseCost = exactSystemSize * COST_PER_KW;
-        const minCost = Math.floor(baseCost * 0.9);
-        const maxCost = Math.ceil(baseCost * 1.1);
-        const costString = `${minCost.toLocaleString()} - ${maxCost.toLocaleString()} OMR`;
-        
-        const yearlySavings = monthlyBill * 12;
+        // Fetch user dropdown selections
+        const selectedPropType = propType.value || 'residential';
+        const selectedLocation = loc.value || 'muscat';
+
+        // Calculate using Centralized Engine (Single Source of Truth)
+        let result = { systemSizeKw: 1, panelCount: 2, costRange: { formatted: "0 OMR" }, yearlySavingsOmr: 0, paybackYears: 4 };
+        if (window.SolarCalculatorEngine) {
+            result = window.SolarCalculatorEngine.calculate(monthlyBill, selectedPropType, selectedLocation);
+        }
 
         // Animate Results (if elements exist)
         if (resSize.textContent === '0 kW') {
-            animateValue(resSize, 0, exactSystemSize, 1000, "", " kW");
-            animateValue(resPanels, 0, numPanels, 1000);
-            resCost.textContent = costString; // Range is hard to animate, set directly
-            animateValue(resSavings, 0, yearlySavings, 1000, "", " OMR");
+            animateValue(resSize, 0, result.systemSizeKw, 1000, "", " kW");
+            animateValue(resPanels, 0, result.panelCount, 1000);
+            resCost.textContent = result.costRange.formatted; // Range is hard to animate, set directly
+            animateValue(resSavings, 0, result.yearlySavingsOmr, 1000, "", " OMR");
         } else {
             // Instantly update if not first load
-            resSize.textContent = exactSystemSize.toFixed(1) + ' kW';
-            resPanels.textContent = numPanels;
-            resCost.textContent = costString;
-            resSavings.textContent = `${yearlySavings.toLocaleString()} OMR`;
+            resSize.textContent = result.systemSizeKw.toFixed(1) + ' kW';
+            resPanels.textContent = result.panelCount;
+            resCost.textContent = result.costRange.formatted;
+            resSavings.textContent = `${result.yearlySavingsOmr.toLocaleString()} OMR`;
+        }
+
+        // Analytics Tracking
+        if (window.SolarAnalytics) {
+            window.SolarAnalytics.markCalculatorTouched();
+            // Fire throttled tracking event
+            window.SolarAnalytics.track("calculator_change", {
+                monthly_bill: monthlyBill,
+                property_type: selectedPropType,
+                location: selectedLocation,
+                system_size_kw: result.systemSizeKw,
+                panel_count: result.panelCount,
+                yearly_savings_omr: result.yearlySavingsOmr
+            });
         }
     }
 
@@ -159,5 +162,39 @@ document.addEventListener('DOMContentLoaded', () => {
     loc.addEventListener('change', calculateSolar);
 
     calculateSolar();
+
+    // Hook up explain with AI advisor button
+    const explainBtn = document.getElementById('calc-explain-btn');
+    if (explainBtn) {
+        explainBtn.addEventListener('click', function() {
+            if (window.SolarChatbot && window.SolarCalculatorEngine) {
+                const monthlyBill = parseFloat(billSlider.value);
+                const selectedPropType = propType.value || 'residential';
+                const selectedLocation = loc.value || 'muscat';
+
+                const result = window.SolarCalculatorEngine.calculate(monthlyBill, selectedPropType, selectedLocation);
+
+                // Send to Chatbot Context & Open Window
+                window.SolarChatbot.explainCalculatorResult({
+                    systemSize: result.systemSizeKw.toFixed(1),
+                    panels: result.panelCount,
+                    cost: result.costRange.formatted.replace(" OMR", ""),
+                    monthlySavings: result.monthlySavingsOmr.toLocaleString(),
+                    yearlySavings: result.yearlySavingsOmr.toLocaleString(),
+                    payback: result.paybackYears.toFixed(1)
+                });
+
+                // Track CTA Conversions
+                if (window.SolarAnalytics) {
+                    window.SolarAnalytics.track("calculator_explain_click", {
+                        monthly_bill: monthlyBill,
+                        property_type: selectedPropType,
+                        location: selectedLocation,
+                        system_size_kw: result.systemSizeKw
+                    });
+                }
+            }
+        });
+    }
 
 });
