@@ -1,0 +1,494 @@
+<?php
+session_start();
+
+// Handle language toggle
+if (isset($_GET['lang']) && in_array($_GET['lang'], ['en', 'ar'])) {
+  $_SESSION['lang'] = $_GET['lang'];
+}
+
+$active_lang = $_SESSION['lang'] ?? 'en';
+$dir = ($active_lang === 'ar') ? 'rtl' : 'ltr';
+
+// Load constants
+$constants = require_once "constants.php";
+
+// Load language dictionary
+$lang = require_once "lang/{$active_lang}.php";
+?>
+<!DOCTYPE html>
+<html lang="<?= $active_lang ?>" dir="<?= $dir ?>">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><?= $lang['title'] ?></title>
+  <meta name="description" content="<?= $lang['desc'] ?>">
+  <meta property="og:title" content="<?= $lang['title'] ?>">
+  <meta property="og:description" content="<?= $lang['og_desc'] ?>">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solar.ctechoman.com">
+  <meta property="og:image" content="https://www.ctechoman.com/public/logo.webp">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="https://www.ctechoman.com/public/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" type="image/x-icon"
+    href="https://www.ctechoman.com/public/apple-touch-icon-57x57-precomposed.png">
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
+    href="https://www.ctechoman.com/public/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+    href="https://www.ctechoman.com/public/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+    href="https://www.ctechoman.com/public/apple-touch-icon-144x144-precomposed.png">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Organic Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC Logo">
+      </a>
+      <div class="nav-links">
+        <a href="#calculator" class="nav-link"><?= $lang['nav_calculator'] ?></a>
+        <a href="#benefits" class="nav-link"><?= $lang['nav_benefits'] ?></a>
+        <a href="#process" class="nav-link"><?= $lang['nav_process'] ?></a>
+        <?php if ($active_lang === 'en'): ?>
+          <a href="?lang=ar" class="lang-btn" style="text-decoration:none;">العربية</a>
+        <?php else: ?>
+          <a href="?lang=en" class="lang-btn" style="text-decoration:none;">English</a>
+        <?php endif; ?>
+        <a href="#contact" class="btn btn-primary"><?= $lang['nav_quote'] ?></a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu" style="display: none;">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="hero-grid">
+      <div class="hero-text reveal">
+        <h1><?= $lang['hero_title'] ?></h1>
+        <p><?= $lang['hero_desc'] ?></p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
+          <a href="#video" class="btn-video">
+            <span class="play-icon">▶</span>
+            <span class="video-text"><?= $lang['hero_btn_video'] ?></span>
+          </a>
+        </div>
+
+        <div class="hero-slider-nav">
+          <div class="slider-item active">
+            <span class="slider-num">1.</span>
+            <div class="slider-line"></div>
+          </div>
+          <div class="slider-item">
+            <span class="slider-num">2.</span>
+            <div class="slider-line"></div>
+          </div>
+          <div class="slider-item">
+            <span class="slider-num">3.</span>
+            <div class="slider-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal delay-200">
+        <div class="lightning-bg"></div>
+        <img src="lightbulb.png" alt="Renewable Energy" class="lightbulb-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Solar Calculator -->
+  <section id="calculator" class="calculator-section container reveal">
+    <div class="calculator-wrapper">
+      <div class="calc-info">
+        <h2><?= $lang['calc_title'] ?></h2>
+        <p class="text-muted"><?= $lang['calc_desc'] ?></p>
+
+        <div class="results-grid mt-4">
+          <div class="result-box">
+            <span class="result-label"><?= $lang['calc_sys_size'] ?></span>
+            <strong class="result-value text-eco" id="res-size">0 kW</strong>
+          </div>
+          <div class="result-box">
+            <span class="result-label"><?= $lang['calc_est_panels'] ?></span>
+            <strong class="result-value" id="res-panels">0</strong>
+          </div>
+          <div class="result-box">
+            <span class="result-label"><?= $lang['calc_est_cost'] ?></span>
+            <strong class="result-value" id="res-cost">0 OMR</strong>
+          </div>
+          <div class="result-box highlight">
+            <span class="result-label"><?= $lang['calc_yearly_savings'] ?></span>
+            <strong class="result-value" id="res-savings">0 OMR</strong>
+          </div>
+        </div>
+        <p class="mt-3 text-muted" style="font-size: 0.8rem;"><?= $lang['calc_note'] ?></p>
+      </div>
+
+      <div class="calc-form">
+        <h3 class="mb-3"><?= $lang['calc_monthly_bill'] ?></h3>
+        <div class="slider-container">
+          <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5">
+          <div class="slider-value"><span id="bill-display">50</span></div>
+        </div>
+
+        <div class="form-row">
+          <select id="property-type">
+            <option value="residential"><?= $lang['calc_prop_residential'] ?></option>
+            <option value="commercial"><?= $lang['calc_prop_commercial'] ?></option>
+            <option value="industrial"><?= $lang['calc_prop_industrial'] ?></option>
+          </select>
+
+          <select id="location">
+            <option value="muscat"><?= $lang['calc_loc_muscat'] ?></option>
+            <option value="dhofar"><?= $lang['calc_loc_dhofar'] ?></option>
+            <option value="batinah"><?= $lang['calc_loc_batinah'] ?></option>
+            <option value="other"><?= $lang['calc_loc_other'] ?></option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="benefits" class="benefits container section-padding">
+    <div class="section-title reveal">
+      <h2><?= $lang['ben_title'] ?></h2>
+      <p class="text-muted mt-2" style="font-size: 1.25rem;"><?= $lang['ben_desc'] ?></p>
+    </div>
+
+    <div class="staggered-grid">
+      <div class="benefit-card reveal">
+        <div class="icon-blob">💰</div>
+        <h3><?= $lang['ben_1_title'] ?></h3>
+        <p class="text-muted"><?= $lang['ben_1_desc'] ?></p>
+      </div>
+
+      <div class="benefit-card reveal delay-100">
+        <div class="icon-blob" style="background: #E0F2FE; color: #3a8dcc;">🌍</div>
+        <h3><?= $lang['ben_2_title'] ?></h3>
+        <p class="text-muted"><?= $lang['ben_2_desc'] ?></p>
+      </div>
+
+      <div class="benefit-card reveal delay-200">
+        <div class="icon-blob" style="background: #F1F5F9; color: #444444;">📈</div>
+        <h3><?= $lang['ben_3_title'] ?></h3>
+        <p class="text-muted"><?= $lang['ben_3_desc'] ?></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="container section-padding">
+    <div class="cta-banner reveal">
+      <div class="cta-content">
+        <span class="cta-pre"><?= $lang['cta_pre'] ?></span>
+        <h2><?= $lang['cta_title'] ?></h2>
+        <div class="cta-actions">
+          <a href="#contact" class="btn btn-hero-primary"><?= $lang['cta_btn'] ?></a>
+          <a href="tel:<?= $constants['phone_2'] ?>" class="cta-hotline">
+            <span class="hotline-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                </path>
+              </svg>
+            </span>
+            <?= $constants['phone_2'] ?>
+          </a>
+        </div>
+      </div>
+      <div class="cta-visual">
+        <img src="img2.png" alt="Solar Installation">
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="projects" class="container section-padding gallery-section">
+    <div class="gallery-header reveal">
+      <div class="gallery-title-area">
+        <span class="gallery-pre"><span class="pre-icon">❖</span> <?= $lang['gal_pre'] ?> <span
+            class="dot"></span></span>
+        <h2><?= $lang['gal_title'] ?></h2>
+        <p class="text-muted"><?= $lang['gal_desc'] ?></p>
+      </div>
+      <a href="#projects" class="btn btn-dark-green"><?= $lang['gal_btn'] ?></a>
+    </div>
+
+    <div class="gallery-grid reveal delay-100">
+      <div class="gallery-col">
+        <div class="gallery-item tall">
+          <img
+            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            alt="Solar Project 1">
+        </div>
+        <div class="gallery-item short">
+          <img
+            src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            alt="Solar Project 2">
+        </div>
+      </div>
+      <div class="gallery-col">
+        <div class="gallery-item short">
+          <img
+            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            alt="Solar Project 3">
+        </div>
+        <div class="gallery-item tall">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1679917152396-4b18accacb9d?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Solar Project 4">
+        </div>
+      </div>
+      <div class="gallery-col">
+        <div class="gallery-item tall">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?q=80&w=2153&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Solar Project 5">
+        </div>
+        <div class="gallery-item short">
+          <img
+            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            alt="Solar Project 6">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section id="why-choose-us" class="container section-padding text-center" style="text-align: center;">
+    <div class="reveal">
+      <span
+        style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;"><?= $lang['why_pre'] ?></span>
+      <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 4rem;"><?= $lang['why_title'] ?></h2>
+    </div>
+
+    <div class="choose-us-grid">
+      <div class="choose-col left-col">
+        <div class="choose-item reveal delay-100">
+          <div class="choose-text">
+            <h4><?= $lang['why_1_title'] ?></h4>
+            <p class="text-muted"><?= $lang['why_1_desc'] ?></p>
+          </div>
+          <div class="choose-icon">🏅</div>
+        </div>
+        <div class="choose-item reveal delay-200">
+          <div class="choose-text">
+            <h4><?= $lang['why_2_title'] ?></h4>
+            <p class="text-muted"><?= $lang['why_2_desc'] ?></p>
+          </div>
+          <div class="choose-icon">🏆</div>
+        </div>
+        <div class="choose-item reveal delay-300">
+          <div class="choose-text">
+            <h4><?= $lang['why_3_title'] ?></h4>
+            <p class="text-muted"><?= $lang['why_3_desc'] ?></p>
+          </div>
+          <div class="choose-icon">⚡</div>
+        </div>
+      </div>
+
+      <div class="choose-center reveal" style="position: relative;">
+        <img src="solar_panel.png" alt="Solar Panel"
+          style="width: 100%; max-width: 300px; position: relative; z-index: 2;">
+
+        <img src="cloud1.png" class="cloud-anim cloud-1" alt="Cloud">
+        <img src="cloud2.png" class="cloud-anim cloud-2" alt="Cloud">
+      </div>
+
+      <div class="choose-col right-col">
+        <div class="choose-item reveal delay-100">
+          <div class="choose-icon">☀️</div>
+          <div class="choose-text">
+            <h4><?= $lang['why_4_title'] ?></h4>
+            <p class="text-muted"><?= $lang['why_4_desc'] ?></p>
+          </div>
+        </div>
+        <div class="choose-item reveal delay-200">
+          <div class="choose-icon">👨‍🔬</div>
+          <div class="choose-text">
+            <h4><?= $lang['why_5_title'] ?></h4>
+            <p class="text-muted"><?= $lang['why_5_desc'] ?></p>
+          </div>
+        </div>
+        <div class="choose-item reveal delay-300">
+          <div class="choose-icon">🇴🇲</div>
+          <div class="choose-text">
+            <h4><?= $lang['why_6_title'] ?></h4>
+            <p class="text-muted"><?= $lang['why_6_desc'] ?></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="container section-padding">
+    <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto;">
+      <h2><?= $lang['proc_title'] ?></h2>
+    </div>
+
+    <div class="process-flow">
+      <div class="flow-step reveal">
+        <div class="flow-number">1</div>
+        <h4><?= $lang['proc_1_title'] ?></h4>
+        <p class="text-muted"><?= $lang['proc_1_desc'] ?></p>
+      </div>
+      <div class="flow-step reveal delay-100">
+        <div class="flow-number">2</div>
+        <h4><?= $lang['proc_2_title'] ?></h4>
+        <p class="text-muted"><?= $lang['proc_2_desc'] ?></p>
+      </div>
+      <div class="flow-step reveal delay-200">
+        <div class="flow-number">3</div>
+        <h4><?= $lang['proc_3_title'] ?></h4>
+        <p class="text-muted"><?= $lang['proc_3_desc'] ?></p>
+      </div>
+      <div class="flow-step reveal delay-300">
+        <div class="flow-number">4</div>
+        <h4><?= $lang['proc_4_title'] ?></h4>
+        <p class="text-muted"><?= $lang['proc_4_desc'] ?></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="container section-padding"
+    style="background-color: var(--color-surface); border-radius: var(--radius-card); margin-top: 4rem; box-shadow: var(--shadow-soft);">
+    <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto;">
+      <h2><?= $lang['test_title'] ?></h2>
+      <p class="text-muted mt-2"><?= $lang['test_desc'] ?></p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="benefit-card reveal"
+        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-bg);">
+        <div>
+          <div style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;"><?= $lang['test_1_quote'] ?></p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div
+            style="width: 50px; height: 50px; background: var(--color-primary); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+            SA</div>
+          <div>
+            <h4 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_1_name'] ?></h4>
+            <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_1_role'] ?></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefit-card reveal delay-100"
+        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-bg);">
+        <div>
+          <div style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;"><?= $lang['test_2_quote'] ?></p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div
+            style="width: 50px; height: 50px; background: var(--color-accent); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+            MA</div>
+          <div>
+            <h4 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_2_name'] ?></h4>
+            <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_2_role'] ?></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefit-card reveal delay-200"
+        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-bg);">
+        <div>
+          <div style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
+          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;"><?= $lang['test_3_quote'] ?></p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div
+            style="width: 50px; height: 50px; background: var(--color-text-dark); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+            FA</div>
+          <div>
+            <h4 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_3_name'] ?></h4>
+            <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_3_role'] ?></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ & Contact Split -->
+  <section id="contact" class="container section-padding">
+    <div class="split-section">
+      <div class="faq-section reveal">
+        <h2 class="mb-4"><?= $lang['faq_title'] ?></h2>
+        <div class="accordion">
+          <?php foreach ($lang['faqs'] as $faq): ?>
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span><?= $faq['q'] ?></span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner"><?= $faq['a'] ?></div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+
+      <div class="contact-form reveal delay-200">
+        <iframe
+          src="https://www.conceptgrps.com/enquire-form?primary_color=3a8dcc&secondary_color=0d1014&site_link=ctechoman.com"
+          style="width: 100%; height: 950px; border: none; overflow: hidden; border-radius: 1rem;"
+          title="Enquiry Form"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col" style="display: flex; flex-direction: column; justify-content: center;">
+        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC"
+          style="height: 50px; width: auto; max-width: 200px; margin-bottom: 1.5rem;">
+        <p class="text-muted"><?= $lang['foot_copy'] ?></p>
+      </div>
+      <div class="footer-col">
+        <h4><?= $lang['foot_loc_title'] ?></h4>
+        <p class="text-muted"><?= $lang['foot_loc_desc'] ?></p>
+      </div>
+      <div class="footer-col">
+        <h4><?= $lang['foot_mail_title'] ?></h4>
+        <p class="text-muted"><?= $lang['foot_mail_desc'] ?></p>
+      </div>
+      <div class="footer-col">
+        <h4><?= $lang['foot_call_title'] ?></h4>
+        <p class="text-muted"><?= $lang['foot_call_desc'] ?></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
