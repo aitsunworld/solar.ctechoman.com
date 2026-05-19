@@ -80,6 +80,8 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
   </nav>
 
+  <main id="main-content">
+
   <!-- Hero Section -->
   <section class="hero container">
     <div class="hero-grid">
@@ -293,21 +295,21 @@ $lang = require_once "lang/{$active_lang}.php";
       <div class="choose-col left-col">
         <div class="choose-item reveal delay-100">
           <div class="choose-text">
-            <h4><?= $lang['why_1_title'] ?></h4>
+            <h3><?= $lang['why_1_title'] ?></h3>
             <p class="text-muted"><?= $lang['why_1_desc'] ?></p>
           </div>
           <div class="choose-icon">🏅</div>
         </div>
         <div class="choose-item reveal delay-200">
           <div class="choose-text">
-            <h4><?= $lang['why_2_title'] ?></h4>
+            <h3><?= $lang['why_2_title'] ?></h3>
             <p class="text-muted"><?= $lang['why_2_desc'] ?></p>
           </div>
           <div class="choose-icon">🏆</div>
         </div>
         <div class="choose-item reveal delay-300">
           <div class="choose-text">
-            <h4><?= $lang['why_3_title'] ?></h4>
+            <h3><?= $lang['why_3_title'] ?></h3>
             <p class="text-muted"><?= $lang['why_3_desc'] ?></p>
           </div>
           <div class="choose-icon">⚡</div>
@@ -326,21 +328,21 @@ $lang = require_once "lang/{$active_lang}.php";
         <div class="choose-item reveal delay-100">
           <div class="choose-icon">☀️</div>
           <div class="choose-text">
-            <h4><?= $lang['why_4_title'] ?></h4>
+            <h3><?= $lang['why_4_title'] ?></h3>
             <p class="text-muted"><?= $lang['why_4_desc'] ?></p>
           </div>
         </div>
         <div class="choose-item reveal delay-200">
           <div class="choose-icon">👨‍🔬</div>
           <div class="choose-text">
-            <h4><?= $lang['why_5_title'] ?></h4>
+            <h3><?= $lang['why_5_title'] ?></h3>
             <p class="text-muted"><?= $lang['why_5_desc'] ?></p>
           </div>
         </div>
         <div class="choose-item reveal delay-300">
           <div class="choose-icon">🇴🇲</div>
           <div class="choose-text">
-            <h4><?= $lang['why_6_title'] ?></h4>
+            <h3><?= $lang['why_6_title'] ?></h3>
             <p class="text-muted"><?= $lang['why_6_desc'] ?></p>
           </div>
         </div>
@@ -357,22 +359,22 @@ $lang = require_once "lang/{$active_lang}.php";
     <div class="process-flow">
       <div class="flow-step reveal">
         <div class="flow-number">1</div>
-        <h4><?= $lang['proc_1_title'] ?></h4>
+        <h3><?= $lang['proc_1_title'] ?></h3>
         <p class="text-muted"><?= $lang['proc_1_desc'] ?></p>
       </div>
       <div class="flow-step reveal delay-100">
         <div class="flow-number">2</div>
-        <h4><?= $lang['proc_2_title'] ?></h4>
+        <h3><?= $lang['proc_2_title'] ?></h3>
         <p class="text-muted"><?= $lang['proc_2_desc'] ?></p>
       </div>
       <div class="flow-step reveal delay-200">
         <div class="flow-number">3</div>
-        <h4><?= $lang['proc_3_title'] ?></h4>
+        <h3><?= $lang['proc_3_title'] ?></h3>
         <p class="text-muted"><?= $lang['proc_3_desc'] ?></p>
       </div>
       <div class="flow-step reveal delay-300">
         <div class="flow-number">4</div>
-        <h4><?= $lang['proc_4_title'] ?></h4>
+        <h3><?= $lang['proc_4_title'] ?></h3>
         <p class="text-muted"><?= $lang['proc_4_desc'] ?></p>
       </div>
     </div>
@@ -398,7 +400,7 @@ $lang = require_once "lang/{$active_lang}.php";
             style="width: 50px; height: 50px; background: var(--color-primary); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
             SA</div>
           <div>
-            <h4 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_1_name'] ?></h4>
+            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_1_name'] ?></h3>
             <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_1_role'] ?></span>
           </div>
         </div>
@@ -415,7 +417,7 @@ $lang = require_once "lang/{$active_lang}.php";
             style="width: 50px; height: 50px; background: var(--color-accent); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
             MA</div>
           <div>
-            <h4 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_2_name'] ?></h4>
+            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_2_name'] ?></h3>
             <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_2_role'] ?></span>
           </div>
         </div>
@@ -432,7 +434,7 @@ $lang = require_once "lang/{$active_lang}.php";
             style="width: 50px; height: 50px; background: var(--color-text-dark); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
             FA</div>
           <div>
-            <h4 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_3_name'] ?></h4>
+            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_3_name'] ?></h3>
             <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_3_role'] ?></span>
           </div>
         </div>
@@ -470,6 +472,8 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
   </section>
 
+  </main>
+
   <!-- Footer -->
   <footer>
     <div class="container footer-grid">
@@ -479,15 +483,15 @@ $lang = require_once "lang/{$active_lang}.php";
         <p class="text-muted"><?= $lang['foot_copy'] ?></p>
       </div>
       <div class="footer-col">
-        <h4><?= $lang['foot_loc_title'] ?></h4>
+        <h3><?= $lang['foot_loc_title'] ?></h3>
         <p class="text-muted"><?= $lang['foot_loc_desc'] ?></p>
       </div>
       <div class="footer-col">
-        <h4><?= $lang['foot_mail_title'] ?></h4>
+        <h3><?= $lang['foot_mail_title'] ?></h3>
         <p class="text-muted"><?= $lang['foot_mail_desc'] ?></p>
       </div>
       <div class="footer-col">
-        <h4><?= $lang['foot_call_title'] ?></h4>
+        <h3><?= $lang['foot_call_title'] ?></h3>
         <p class="text-muted"><?= $lang['foot_call_desc'] ?></p>
       </div>
     </div>

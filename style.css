@@ -883,7 +883,8 @@ footer {
   gap: 3rem;
 }
 
-.footer-col h4 {
+.footer-col h4,
+.footer-col h3 {
   margin-bottom: 1.5rem;
   font-size: 1.25rem;
   color: var(--color-primary);
@@ -961,7 +962,8 @@ footer {
   box-shadow: 0 10px 20px rgba(58, 141, 204, 0.2);
 }
 
-.choose-text h4 {
+.choose-text h4,
+.choose-text h3 {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
   color: var(--color-text-dark);
