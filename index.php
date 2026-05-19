@@ -57,7 +57,7 @@ $lang = require_once "lang/{$active_lang}.php";
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="#" class="logo">
-        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC Logo">
+        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC Logo" width="160" height="48">
       </a>
       <div class="nav-links">
         <a href="#calculator" class="nav-link"><?= $lang['nav_calculator'] ?></a>
@@ -113,7 +113,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
       <div class="hero-visual reveal delay-200">
         <div class="lightning-bg"></div>
-        <img src="lightbulb.png" alt="Renewable Energy" class="lightbulb-img">
+        <img src="lightbulb.png" alt="Renewable Energy" class="lightbulb-img" width="500" height="500">
       </div>
     </div>
   </section>
@@ -152,18 +152,18 @@ $lang = require_once "lang/{$active_lang}.php";
       <div class="calc-form">
         <h3 class="mb-3"><?= $lang['calc_monthly_bill'] ?></h3>
         <div class="slider-container">
-          <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5">
+          <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="<?= $lang['calc_monthly_bill'] ?>">
           <div class="slider-value"><span id="bill-display">50</span></div>
         </div>
 
         <div class="form-row">
-          <select id="property-type">
+          <select id="property-type" aria-label="<?= $lang['calc_prop_residential'] ?>">
             <option value="residential"><?= $lang['calc_prop_residential'] ?></option>
             <option value="commercial"><?= $lang['calc_prop_commercial'] ?></option>
             <option value="industrial"><?= $lang['calc_prop_industrial'] ?></option>
           </select>
 
-          <select id="location">
+          <select id="location" aria-label="<?= $lang['calc_loc_muscat'] ?>">
             <option value="muscat"><?= $lang['calc_loc_muscat'] ?></option>
             <option value="dhofar"><?= $lang['calc_loc_dhofar'] ?></option>
             <option value="batinah"><?= $lang['calc_loc_batinah'] ?></option>
@@ -224,7 +224,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
       </div>
       <div class="cta-visual">
-        <img src="img2.png" alt="Solar Installation">
+        <img src="img2.png" alt="Solar Installation" width="480" height="360">
       </div>
     </div>
   </section>
@@ -246,36 +246,36 @@ $lang = require_once "lang/{$active_lang}.php";
         <div class="gallery-item tall">
           <img
             src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-            alt="Solar Project 1">
+            alt="Solar Project 1" width="600" height="800">
         </div>
         <div class="gallery-item short">
           <img
             src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-            alt="Solar Project 2">
+            alt="Solar Project 2" width="600" height="400">
         </div>
       </div>
       <div class="gallery-col">
         <div class="gallery-item short">
           <img
             src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-            alt="Solar Project 3">
+            alt="Solar Project 3" width="600" height="400">
         </div>
         <div class="gallery-item tall">
           <img
             src="https://plus.unsplash.com/premium_photo-1679917152396-4b18accacb9d?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Solar Project 4">
+            alt="Solar Project 4" width="600" height="800">
         </div>
       </div>
       <div class="gallery-col">
         <div class="gallery-item tall">
           <img
             src="https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?q=80&w=2153&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Solar Project 5">
+            alt="Solar Project 5" width="600" height="800">
         </div>
         <div class="gallery-item short">
           <img
             src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-            alt="Solar Project 6">
+            alt="Solar Project 6" width="600" height="400">
         </div>
       </div>
     </div>
@@ -315,11 +315,11 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <div class="choose-center reveal" style="position: relative;">
-        <img src="solar_panel.png" alt="Solar Panel"
+        <img src="solar_panel.png" alt="Solar Panel" width="300" height="250"
           style="width: 100%; max-width: 300px; position: relative; z-index: 2;">
 
-        <img src="cloud1.png" class="cloud-anim cloud-1" alt="Cloud">
-        <img src="cloud2.png" class="cloud-anim cloud-2" alt="Cloud">
+        <img src="cloud1.png" class="cloud-anim cloud-1" alt="Cloud" width="120" height="60">
+        <img src="cloud2.png" class="cloud-anim cloud-2" alt="Cloud" width="120" height="60">
       </div>
 
       <div class="choose-col right-col">
@@ -474,7 +474,7 @@ $lang = require_once "lang/{$active_lang}.php";
   <footer>
     <div class="container footer-grid">
       <div class="footer-col" style="display: flex; flex-direction: column; justify-content: center;">
-        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC"
+        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC" width="160" height="50"
           style="height: 50px; width: auto; max-width: 200px; margin-bottom: 1.5rem;">
         <p class="text-muted"><?= $lang['foot_copy'] ?></p>
       </div>

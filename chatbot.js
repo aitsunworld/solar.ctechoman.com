@@ -205,7 +205,7 @@
       <div class="sb-quick-replies" id="sb-replies-list" style="display: none;"></div>
       <div class="sb-lead-form" id="sb-form-panel" style="display: none;"></div>
       <div class="sb-input-panel" id="sb-input-panel">
-        <input type="text" class="sb-text-input" id="sb-chat-input" placeholder="${TRANSLATIONS[state.lang].placeholder}" />
+        <input type="text" class="sb-text-input" id="sb-chat-input" placeholder="${TRANSLATIONS[state.lang].placeholder}" aria-label="Type message" />
         <button class="sb-send-btn" id="sb-send-btn">${state.lang === "ar" ? "←" : "→"}</button>
       </div>
       <div class="sb-footer">
@@ -692,10 +692,10 @@
 
     el.repliesList.style.display = "none";
     setSafeHTML(el.formPanel, `
-      <input type="text" id="sb-lead-name" class="sb-input" placeholder="${t.name}" required />
-      <input type="tel" id="sb-lead-phone" class="sb-input" placeholder="${t.phone}" required />
-      <input type="email" id="sb-lead-email" class="sb-input" placeholder="${t.email} (${state.lang === "ar" ? "اختياري" : "Optional"})" />
-      <input type="text" id="sb-lead-loc" class="sb-input" placeholder="${t.location}" required />
+      <input type="text" id="sb-lead-name" class="sb-input" placeholder="${t.name}" aria-label="${t.name}" required />
+      <input type="tel" id="sb-lead-phone" class="sb-input" placeholder="${t.phone}" aria-label="${t.phone}" required />
+      <input type="email" id="sb-lead-email" class="sb-input" placeholder="${t.email} (${state.lang === "ar" ? "اختياري" : "Optional"})" aria-label="${t.email}" />
+      <input type="text" id="sb-lead-loc" class="sb-input" placeholder="${t.location}" aria-label="${t.location}" required />
       <button class="sb-submit-btn" id="sb-form-submit">${state.lang === "ar" ? "إرسال ←" : "Submit →"}</button>
     `);
     el.formPanel.style.display = "block";
