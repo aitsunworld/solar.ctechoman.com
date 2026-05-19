@@ -149,13 +149,42 @@ $lang = require_once "lang/{$active_lang}.php";
           ✨ <?= $active_lang === 'ar' ? 'اشرح لي النتائج بمستشار الذكاء الاصطناعي' : 'Explain results with AI Advisor' ?>
         </button>
         <p class="mt-3 text-muted" style="font-size: 0.8rem;"><?= $lang['calc_note'] ?></p>
+
+        <div id="load-recommendations" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--color-border); width: 100%;">
+          <h4 style="margin-bottom: 1rem; color: var(--color-primary); font-size: 1.1rem; text-align: start;"><?= $active_lang === 'ar' ? 'توصيات النظام المتقدمة' : 'Advanced System Recommendations' ?></h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="result-box" style="background: rgba(58, 141, 204, 0.05);">
+              <span class="result-label"><?= $active_lang === 'ar' ? 'حجم العاكس المقترح' : 'Recommended Inverter' ?></span>
+              <strong class="result-value" id="res-inverter" style="color: var(--color-primary);">0 kW</strong>
+            </div>
+            <div class="result-box" style="background: rgba(62, 182, 73, 0.05);">
+              <span class="result-label"><?= $active_lang === 'ar' ? 'سعة البطارية المقترحة' : 'Battery Storage' ?></span>
+              <strong class="result-value text-eco" id="res-battery">0 kWh</strong>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="calc-form">
-        <h3 class="mb-3"><?= $lang['calc_monthly_bill'] ?></h3>
-        <div class="slider-container">
-          <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="<?= $lang['calc_monthly_bill'] ?>">
-          <div class="slider-value"><span id="bill-display">50</span></div>
+        <div class="calc-tabs" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+          <button id="tab-bill" class="calc-tab active" style="flex: 1; padding: 0.75rem; border: none; border-radius: var(--radius-pill); background: var(--color-primary); color: #fff; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+            <?= $active_lang === 'ar' ? 'تقدير الفاتورة' : 'Bill Estimator' ?>
+          </button>
+          <button id="tab-appliances" class="calc-tab" style="flex: 1; padding: 0.75rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: transparent; color: var(--color-text); font-weight: 600; cursor: pointer; transition: all 0.2s;">
+            <?= $active_lang === 'ar' ? 'مدقق الأجهزة' : 'Appliance Auditor' ?>
+          </button>
+        </div>
+
+        <div id="bill-inputs-container">
+          <h3 class="mb-3"><?= $lang['calc_monthly_bill'] ?></h3>
+          <div class="slider-container">
+            <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="<?= $lang['calc_monthly_bill'] ?>">
+            <div class="slider-value"><span id="bill-display">50</span></div>
+          </div>
+        </div>
+
+        <div id="appliance-inputs-container" style="display: none; max-height: 400px; overflow-y: auto; padding-right: 0.5rem; margin-bottom: 1.5rem; text-align: start;">
+          <!-- Appliances rendered dynamically via Javascript for multi-language SSOT support -->
         </div>
 
         <div class="form-row">
@@ -462,12 +491,82 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
       </div>
 
-      <div class="contact-form reveal delay-200">
-        <iframe
-          src="https://www.conceptgrps.com/enquire-form?primary_color=3a8dcc&secondary_color=0d1014&site_link=ctechoman.com"
-          style="width: 100%; height: 950px; border: none; overflow: hidden; border-radius: 1rem;"
-          loading="lazy"
-          title="Enquiry Form"></iframe>
+      <div class="contact-form reveal delay-200" style="background: var(--color-surface); padding: 3rem; border-radius: var(--radius-card); box-shadow: var(--shadow-soft); border: 1px solid var(--color-border); text-align: start;">
+        <h3 class="mb-4" style="font-size: 1.5rem; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'طلب استشارة مجانية' : 'Request Free Solar Consultation' ?></h3>
+        
+        <form id="native-lead-form" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <input type="hidden" name="action" value="submit_lead">
+          <input type="hidden" name="lang" value="<?= $active_lang ?>">
+          
+          <div class="form-group">
+            <label for="lead-name" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'الاسم الكامل' : 'Full Name' ?> *</label>
+            <input type="text" id="lead-name" name="name" required placeholder="<?= $active_lang === 'ar' ? 'أدخل اسمك الكامل' : 'Enter your full name' ?>" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Full Name">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label for="lead-phone" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'رقم الهاتف (واتساب)' : 'Phone Number (WhatsApp)' ?> *</label>
+              <input type="tel" id="lead-phone" name="phone" required placeholder="968 XXXXXXXX" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Phone Number">
+            </div>
+            <div class="form-group">
+              <label for="lead-email" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'البريد الإلكتروني' : 'Email Address' ?> *</label>
+              <input type="email" id="lead-email" name="email" required placeholder="example@domain.com" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Email Address">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label for="lead-gov" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'المحافظة' : 'Governorate' ?> *</label>
+              <select id="lead-gov" name="governorate" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Governorate">
+                <option value="muscat"><?= $lang['calc_loc_muscat'] ?></option>
+                <option value="dhofar"><?= $lang['calc_loc_dhofar'] ?></option>
+                <option value="batinah"><?= $lang['calc_loc_batinah'] ?></option>
+                <option value="dakhiliyah"><?= $active_lang === 'ar' ? 'الداخلية' : 'Dakhiliyah' ?></option>
+                <option value="other"><?= $lang['calc_loc_other'] ?></option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="lead-prop" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'نوع العقار' : 'Property Type' ?> *</label>
+              <select id="lead-prop" name="property_type" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Property Type">
+                <option value="residential"><?= $lang['calc_prop_residential'] ?></option>
+                <option value="commercial"><?= $lang['calc_prop_commercial'] ?></option>
+                <option value="industrial"><?= $lang['calc_prop_industrial'] ?></option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label for="lead-bill" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'متوسط الفاتورة الكهربائية (ريال)' : 'Average Electricity Bill (OMR)' ?> *</label>
+              <input type="number" id="lead-bill" name="monthly_bill" required min="10" max="5000" value="50" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Electricity Bill">
+            </div>
+            <div class="form-group">
+              <label for="lead-consult" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'نوع الاستشارة' : 'Consultation Type' ?> *</label>
+              <select id="lead-consult" name="consultation_type" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Consultation Type">
+                <option value="site_survey"><?= $active_lang === 'ar' ? 'معاينة موقع مجانية' : 'Free Site Survey' ?></option>
+                <option value="video_call"><?= $active_lang === 'ar' ? 'استشارة بالفيديو عن بعد' : 'Online Video Call' ?></option>
+                <option value="office"><?= $active_lang === 'ar' ? 'زيارة مكتب كونسيبت' : 'Office Consultation' ?></option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lead-notes" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'ملاحظات إضافية (اختياري)' : 'Additional Notes (Optional)' ?></label>
+            <textarea id="lead-notes" name="message" rows="3" placeholder="<?= $active_lang === 'ar' ? 'تحدث إلينا عن احتياجاتك المحددة...' : 'Tell us about your specific solar needs...' ?>" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: 1rem; background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; font-family: inherit; resize: vertical; transition: border-color 0.2s;" aria-label="Additional Notes"></textarea>
+          </div>
+
+          <!-- Anti-Spam HoneyPot -->
+          <div style="display: none;">
+            <input type="text" name="honeypot" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-weight: 600; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+            <span><?= $active_lang === 'ar' ? 'تأكيد وحجز الاستشارة 🚀' : 'Confirm & Book Consultation 🚀' ?></span>
+            <span class="spinner" style="display: none; width: 20px; height: 20px; border: 3px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite;"></span>
+          </button>
+
+          <div id="form-feedback" class="mt-3 text-center" style="display: none; padding: 0.85rem 1rem; border-radius: var(--radius-pill); font-weight: 600; font-size: 0.95rem;"></div>
+        </form>
       </div>
     </div>
   </section>

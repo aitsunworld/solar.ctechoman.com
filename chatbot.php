@@ -4,9 +4,10 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 /**
  * chatbot.php
- * Concept Technologies LLC — Solar Chatbot Backend Proxy
- * Securely forwards leads to n8n and calls Claude API for AI fallbacks.
- * Keeps API keys hidden from client side.
+ * Concept Technologies LLC — Solar Backend Lead Proxy & AI Advisor
+ * 
+ * Securely sanitises, validates, and forwards leads to n8n (Odoo CRM) and routes
+ * Omani solar consultation requests. Isolates API credentials from the front-end.
  */
 
 // --- SECURITY & CORS HEADERS ---
@@ -38,9 +39,16 @@ $credentials = file_exists(__DIR__ . '/credentials.php') ? require __DIR__ . '/c
 define("N8N_WEBHOOK_URL", "https://n8n.aitsun.space/webhook/solar-lead");
 define("GROQ_API_KEY", getenv("GROQ_API_KEY") ?: ($credentials['groq_api_key'] ?? 'YOUR_REAL_GROQ_API_KEY_HERE'));
 
-// Parse JSON Input Payload
-$inputRaw = file_get_contents("php://input");
-$payload = json_decode($inputRaw, true);
+// Parse Input Payload: Support both standard Form POST and Raw JSON bodies
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
+    $payload = $_POST;
+    if (isset($payload['action']) && $payload['action'] === 'submit_lead') {
+        $payload['data'] = $_POST;
+    }
+} else {
+    $inputRaw = file_get_contents("php://input");
+    $payload = json_decode($inputRaw, true) ?: [];
+}
 
 if (!$payload || !isset($payload['action'])) {
     http_response_code(400);
@@ -70,7 +78,7 @@ switch ($action) {
         break;
 }
 
-// ─── ACTION 1: SUBMIT LEAD TO n8n ───────────────────────────────────────────
+// ─── ACTION 1: SECURE & SANITISED LEAD SUBMISSION TO n8n (CRM) ───────────────
 function handleLeadSubmit($data) {
     if (empty($data)) {
         http_response_code(400);
@@ -78,30 +86,84 @@ function handleLeadSubmit($data) {
         exit;
     }
 
-    // Get user IP address safely
+    // Anti-Spam Honeypot check
+    if (!empty($data['honeypot'])) {
+        http_response_code(200); // Fail silently for spam bots
+        echo json_encode(["status" => "success", "message" => "Verification completed"]);
+        exit;
+    }
+
+    // Server-Side Sanitisation & Strict Validation
+    $name = isset($data['name']) ? strip_tags(trim($data['name'])) : '';
+    $phone = isset($data['phone']) ? preg_replace('/\D/', '', $data['phone']) : '';
+    $email = isset($data['email']) ? filter_var(trim($data['email']), FILTER_SANITIZE_EMAIL) : '';
+    $governorate = isset($data['governorate']) ? strip_tags(trim($data['governorate'])) : 'muscat';
+    $property_type = isset($data['property_type']) ? strip_tags(trim($data['property_type'])) : 'residential';
+    $monthly_bill = isset($data['monthly_bill']) ? floatval($data['monthly_bill']) : 50.0;
+    $consultation_type = isset($data['consultation_type']) ? strip_tags(trim($data['consultation_type'])) : 'site_survey';
+    $message = isset($data['message']) ? strip_tags(trim($data['message'])) : '';
+    $lang = isset($data['lang']) ? strip_tags(trim($data['lang'])) : 'en';
+
+    // Estimated Calculator Metrics if routed from custom sizer
+    $estimated_kw = isset($data['estimated_kw']) ? floatval($data['estimated_kw']) : 0.0;
+    $estimated_cost = isset($data['estimated_cost']) ? strip_tags(trim($data['estimated_cost'])) : '';
+    $estimated_savings = isset($data['estimated_savings']) ? floatval($data['estimated_savings']) : 0.0;
+    $sizer_mode = isset($data['sizer_mode']) ? strip_tags(trim($data['sizer_mode'])) : 'bill';
+
+    if (empty($name)) {
+        http_response_code(400);
+        echo json_encode(["status" => "error", "message" => "Name is required"]);
+        exit;
+    }
+
+    if (strlen($phone) < 8) {
+        http_response_code(400);
+        echo json_encode(["status" => "error", "message" => "Phone number must be at least 8 digits"]);
+        exit;
+    }
+
+    if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400);
+        echo json_encode(["status" => "error", "message" => "Invalid email address format"]);
+        exit;
+    }
+
+    // Get user IP safely
     $userIp = $_SERVER['HTTP_CLIENT_IP'] 
         ?? $_SERVER['HTTP_X_FORWARDED_FOR'] 
         ?? $_SERVER['REMOTE_ADDR'] 
         ?? '';
 
-    // If multiple IPs in X-Forwarded-For, take the first one
     if (strpos($userIp, ',') !== false) {
         $userIp = trim(explode(',', $userIp)[0]);
     }
 
-    // Get session ID if active
     $sessionId = session_id() ?: '';
 
-    // Prepare payload (aligned with your n8n workflow schema)
+    // Standardized Payload structure for n8n to write securely to Odoo
     $n8nPayload = json_encode([
-        "workflow" => "solar_lead_capture",
+        "source" => "solar.ctechoman.com",
+        "lead_type" => "solar_custom_enquiry",
         "session_id" => $sessionId,
         "user_ip" => $userIp,
-        "language" => $data['lang'] ?? 'en',
-        "data" => $data
+        "language" => $lang,
+        "payload" => [
+            "name" => $name,
+            "phone" => $phone,
+            "email" => $email,
+            "governorate" => $governorate,
+            "property_type" => $property_type,
+            "monthly_bill" => $monthly_bill,
+            "consultation_type" => $consultation_type,
+            "message" => $message,
+            "sizer_mode" => $sizer_mode,
+            "estimated_kw" => $estimated_kw,
+            "estimated_cost" => $estimated_cost,
+            "estimated_savings" => $estimated_savings
+        ]
     ]);
 
-    // Send curl request to n8n webhook
+    // Send payload via secure cURL POST to the n8n webhook
     $ch = curl_init(N8N_WEBHOOK_URL);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -110,7 +172,7 @@ function handleLeadSubmit($data) {
         "Content-Type: application/json",
         "Content-Length: " . strlen($n8nPayload)
     ]);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 12);
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -118,23 +180,22 @@ function handleLeadSubmit($data) {
     curl_close($ch);
 
     if ($curlError) {
-        // Log locally if n8n is unreachable
-        error_log("[SolarChatbot Proxy] n8n curl error: " . $curlError);
+        error_log("[SolarLead Proxy] n8n hook error: " . $curlError);
         http_response_code(502);
         echo json_encode(["status" => "error", "message" => "CRM webhook target unreachable"]);
         exit;
     }
 
     if ($httpCode >= 200 && $httpCode < 300) {
-        echo json_encode(["status" => "ok", "message" => "Lead successfully forwarded to CRM"]);
+        echo json_encode(["status" => "success", "message" => "Lead successfully forwarded to CRM"]);
     } else {
-        error_log("[SolarChatbot Proxy] n8n returned HTTP code: " . $httpCode);
+        error_log("[SolarLead Proxy] n8n returned error code: " . $httpCode);
         http_response_code($httpCode);
         echo json_encode(["status" => "error", "message" => "CRM server responded with error"]);
     }
 }
 
-// ─── ACTION 2: CLAUDE AI FALLBACK ROUTE ─────────────────────────────────────
+// ─── ACTION 2: DYNAMIC AI SALES ADVISOR (GROQ COMPATIBLE LLAMA-3.3) ─────────
 function handleAIChat($prompt, $lang, $calcContext) {
     if (empty($prompt)) {
         http_response_code(400);
@@ -162,18 +223,18 @@ function handleAIChat($prompt, $lang, $calcContext) {
         $_SESSION['chatbot_history'] = [];
     }
 
-    // Build the dynamic, localized, sales-focused System Prompt
-    $sysPrompt = "You are Tariq, a helpful and senior Omani Solar Energy Consultant representing Concept Technologies LLC in Oman.\n";
+    // Build highly optimized system prompt for the GCC / Oman market
+    $sysPrompt = "You are Tariq, a warm and senior Omani Solar Energy Consultant representing Concept Technologies LLC in Oman.\n";
     $sysPrompt .= "Your ONLY objectives are:\n";
-    $sysPrompt .= "1. Answer the user's solar questions clearly, and detail regional solar cost benefits or grid net-metering regulations in Oman.\n";
+    $sysPrompt .= "1. Answer the user's solar questions clearly, referencing regional Omani costs (in OMR) and APSR net-metering grid regulations.\n";
     $sysPrompt .= "2. Constantly guide the user toward scheduling a free site survey or energy audit.\n";
-    $sysPrompt .= "3. Keep your answers short, warm, extremely professional, and sales-focused. Answer in under 100 words.\n";
+    $sysPrompt .= "3. Keep your replies short (under 90 words), extremely professional, warm, and conversion-focused.\n";
     $sysPrompt .= "4. Respond strictly in the language they type in (" . ($lang === "ar" ? "Arabic" : "English") . ").\n";
     $sysPrompt .= "5. NEVER discuss topics outside of solar energy or Concept Technologies. Politely redirect unrelated queries to solar.\n";
-    $sysPrompt .= "6. IMPORTANT: Do NOT repeat your introductory welcome greeting (e.g., \"Welcome to Concept Technologies...\", \"I'm Tariq...\") if the user is already talking to you in a continuous conversation. Only introduce yourself in the first turn.\n";
-    $sysPrompt .= "7. LEAD DATA EXTRACTION: If the user provides any of their contact details (such as their name, phone number, location, or email) anywhere in their messages, you must extract them. At the very end of your response, you MUST append a hidden metadata tag in this exact format:\n";
+    $sysPrompt .= "6. Do NOT repeat your introductory welcome greeting if the user is already talking to you in a continuous conversation.\n";
+    $sysPrompt .= "7. LEAD DATA EXTRACTION: If the user types any contact details (such as their name, phone number, location, or email) in raw text, you must extract them. At the very end of your response, you MUST append a hidden metadata tag in this exact format:\n";
     $sysPrompt .= "[LEAD_DATA: {\"name\": \"EXTRACTED_NAME\", \"phone\": \"EXTRACTED_PHONE\", \"location\": \"EXTRACTED_LOCATION\", \"email\": \"EXTRACTED_EMAIL\"}]\n";
-    $sysPrompt .= "Replace EXTRACTED_NAME, EXTRACTED_PHONE, EXTRACTED_LOCATION, and EXTRACTED_EMAIL with the details you found. If a detail is missing, use an empty string \"\". Ensure the JSON is perfectly valid. Do not explain this tag to the user.";
+    $sysPrompt .= "Ensure the JSON is perfectly valid. Do not explain this tag to the user.";
 
     if (!empty($calcContext)) {
         $sysPrompt .= "\nCURRENT CONTEXT:\nThe user is currently interacting with the solar calculator on the webpage and generated these calculations:\n";
@@ -194,7 +255,7 @@ function handleAIChat($prompt, $lang, $calcContext) {
         $_SESSION['chatbot_history'] = array_slice($_SESSION['chatbot_history'], -12);
     }
 
-    // Build payload for Groq Chat Completions API (OpenAI Compatible)
+    // Build payload for Groq Chat Completions API
     $groqPayload = json_encode([
         "model" => "llama-3.3-70b-versatile",
         "messages" => array_merge(
@@ -258,7 +319,7 @@ function handleAnalyticsLog($data) {
 
     $logFile = __DIR__ . "/analytics.log";
     
-    // Mask customer IP ranges to enforce GCC privacy guidelines
+    // Mask customer IP ranges to enforce privacy guidelines
     $data['ip_masked'] = preg_replace('/(\d+)\.(\d+)\.(\d+)\.(\d+)/', '$1.$2.xxx.xxx', $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0');
     $data['user_agent'] = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
     $logEntry = json_encode($data) . "\n";
