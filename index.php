@@ -41,7 +41,7 @@ $lang = require_once "lang/{$active_lang}.php";
     href="https://www.ctechoman.com/public/apple-touch-icon-144x144-precomposed.png">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.2">
   <link rel="stylesheet" href="chatbot.css">
 </head>
 
@@ -596,10 +596,10 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
   </footer>
 
-  <script src="calculator-engine.js" defer></script>
-  <script src="analytics.js" defer></script>
-  <script src="script.js" defer></script>
-  <script src="chatbot.js" defer></script>
+  <script src="calculator-engine.js?v=2.2" defer></script>
+  <script src="analytics.js?v=2.2" defer></script>
+  <script src="script.js?v=2.2" defer></script>
+  <script src="chatbot.js?v=2.2" defer></script>
 </body>
 
 </html>
