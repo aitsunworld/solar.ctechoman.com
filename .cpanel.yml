@@ -1,0 +1,10 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/ctechoman/solar.ctechoman.com/
+    # Safe incremental synchronization using rsync (excludes Git files, cPanel configs, and server-side SSL paths)
+    - /bin/rsync -rlptD --exclude '.git' --exclude '.cpanel.yml' --exclude '.well-known' ./ $DEPLOYPATH
+    # Ensure correct production folder permissions (755)
+    - /bin/find $DEPLOYPATH -type d -exec /bin/chmod 755 {} \;
+    # Ensure correct production file permissions (644)
+    - /bin/find $DEPLOYPATH -type f -exec /bin/chmod 644 {} \;
