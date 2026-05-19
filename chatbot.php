@@ -30,9 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // --- CONFIGURATION ---
-// In production, load these from environment variables (.env) or your server config!
+$credentials = file_exists(__DIR__ . '/credentials.php') ? require __DIR__ . '/credentials.php' : [];
+
 define("N8N_WEBHOOK_URL", "https://n8n.aitsun.space/webhook/solar-lead");
-define("GROQ_API_KEY", getenv("GROQ_API_KEY") ?: "__n8n_BLANK_VALUE_e5362baf-c777-4d57-a609-6eaf1f9e87f6");
+define("GROQ_API_KEY", getenv("GROQ_API_KEY") ?: ($credentials['groq_api_key'] ?? 'YOUR_REAL_GROQ_API_KEY_HERE'));
 
 // Parse JSON Input Payload
 $inputRaw = file_get_contents("php://input");
