@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // --- CONFIGURATION ---
 // In production, load these from environment variables (.env) or your server config!
 define("N8N_WEBHOOK_URL", "https://n8n.aitsun.space/webhook/solar-lead");
-define("ANTHROPIC_API_KEY", getenv("ANTHROPIC_API_KEY") ?: "YOUR_CLAUDE_API_KEY_HERE");
+define("GROQ_API_KEY", getenv("GROQ_API_KEY") ?: "__n8n_BLANK_VALUE_e5362baf-c777-4d57-a609-6eaf1f9e87f6");
 
 // Parse JSON Input Payload
 $inputRaw = file_get_contents("php://input");
@@ -139,7 +139,7 @@ function handleAIChat($prompt, $lang, $calcContext) {
     }
 
     // Safety fallback if key is not configured
-    if (ANTHROPIC_API_KEY === "YOUR_CLAUDE_API_KEY_HERE" || empty(ANTHROPIC_API_KEY)) {
+    if (GROQ_API_KEY === "YOUR_GROQ_API_KEY_HERE" || empty(GROQ_API_KEY)) {
         $fallback = [
             "ar" => "مرحباً! يبدو أنني أواجه مشكلة في الاتصال بالذكاء الاصطناعي حالياً. هل ترغب في معرفة المزيد عن تكاليف أنظمتنا أو حساب توفيرك الكهربائي؟",
             "en" => "Hi! It seems my AI engine is currently offline. Would you like to check our system costs, compute your solar savings, or speak with an expert?"
@@ -168,27 +168,26 @@ function handleAIChat($prompt, $lang, $calcContext) {
         $sysPrompt .= "Reference these numbers if they ask what they mean, explaining the high return on investment in Oman.";
     }
 
-    // Build payload for Claude Messages API (Claude 3.5 Sonnet)
-    $claudePayload = json_encode([
-        "model" => "claude-3-5-sonnet-20241022",
-        "max_tokens" => 300,
-        "temperature" => 0.3,
-        "system" => $sysPrompt,
+    // Build payload for Groq Chat Completions API (OpenAI Compatible)
+    $groqPayload = json_encode([
+        "model" => "llama-3.3-70b-versatile",
         "messages" => [
+            ["role" => "system", "content" => $sysPrompt],
             ["role" => "user", "content" => $prompt]
-        ]
+        ],
+        "temperature" => 0.3,
+        "max_tokens" => 300
     ]);
 
-    // Send curl request to Anthropic API
-    $ch = curl_init("https://api.anthropic.com/v1/messages");
+    // Send curl request to Groq API
+    $ch = curl_init("https://api.groq.com/openai/v1/chat/completions");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $claudePayload);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $groqPayload);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        "x-api-key: " . ANTHROPIC_API_KEY,
-        "anthropic-version: 2023-06-01",
+        "Authorization: Bearer " . GROQ_API_KEY,
         "Content-Type: application/json",
-        "Content-Length: " . strlen($claudePayload)
+        "Content-Length: " . strlen($groqPayload)
     ]);
     curl_setopt($ch, CURLOPT_TIMEOUT, 15);
 
@@ -198,7 +197,7 @@ function handleAIChat($prompt, $lang, $calcContext) {
     curl_close($ch);
 
     if ($curlError) {
-        error_log("[SolarChatbot Proxy] Claude API error: " . $curlError);
+        error_log("[SolarChatbot Proxy] Groq API error: " . $curlError);
         http_response_code(502);
         echo json_encode(["status" => "error", "message" => "AI engine unreachable"]);
         exit;
@@ -206,11 +205,11 @@ function handleAIChat($prompt, $lang, $calcContext) {
 
     $resData = json_decode($response, true);
 
-    if ($httpCode === 200 && isset($resData['content'][0]['text'])) {
-        $aiReply = $resData['content'][0]['text'];
+    if ($httpCode === 200 && isset($resData['choices'][0]['message']['content'])) {
+        $aiReply = $resData['choices'][0]['message']['content'];
         echo json_encode(["status" => "ok", "reply" => $aiReply]);
     } else {
-        error_log("[SolarChatbot Proxy] Claude API returned error. HTTP Code: " . $httpCode . ", Payload: " . $response);
+        error_log("[SolarChatbot Proxy] Groq API returned error. HTTP Code: " . $httpCode . ", Payload: " . $response);
         http_response_code($httpCode ?: 500);
         echo json_encode([
             "status" => "error", 
