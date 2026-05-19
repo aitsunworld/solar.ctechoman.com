@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 /**
  * chatbot.php
  * Concept Technologies LLC — Solar Chatbot Backend Proxy
@@ -149,6 +152,16 @@ function handleAIChat($prompt, $lang, $calcContext) {
         exit;
     }
 
+    // Initialize/Reset session history on language switch or first message
+    if (!isset($_SESSION['chatbot_lang']) || $_SESSION['chatbot_lang'] !== $lang) {
+        $_SESSION['chatbot_lang'] = $lang;
+        $_SESSION['chatbot_history'] = [];
+    }
+
+    if (!isset($_SESSION['chatbot_history'])) {
+        $_SESSION['chatbot_history'] = [];
+    }
+
     // Build the dynamic, localized, sales-focused System Prompt
     $sysPrompt = "You are Tariq, a helpful and senior Omani Solar Energy Consultant representing Concept Technologies LLC in Oman.\n";
     $sysPrompt .= "Your ONLY objectives are:\n";
@@ -157,6 +170,7 @@ function handleAIChat($prompt, $lang, $calcContext) {
     $sysPrompt .= "3. Keep your answers short, warm, extremely professional, and sales-focused. Answer in under 100 words.\n";
     $sysPrompt .= "4. Respond strictly in the language they type in (" . ($lang === "ar" ? "Arabic" : "English") . ").\n";
     $sysPrompt .= "5. NEVER discuss topics outside of solar energy or Concept Technologies. Politely redirect unrelated queries to solar.\n";
+    $sysPrompt .= "6. IMPORTANT: Do NOT repeat your introductory welcome greeting (e.g., \"Welcome to Concept Technologies...\", \"I'm Tariq...\") if the user is already talking to you in a continuous conversation. Only introduce yourself in the first turn.";
 
     if (!empty($calcContext)) {
         $sysPrompt .= "\nCURRENT CONTEXT:\nThe user is currently interacting with the solar calculator on the webpage and generated these calculations:\n";
@@ -169,13 +183,21 @@ function handleAIChat($prompt, $lang, $calcContext) {
         $sysPrompt .= "Reference these numbers if they ask what they mean, explaining the high return on investment in Oman.";
     }
 
+    // Append the new user message to the conversation memory
+    $_SESSION['chatbot_history'][] = ["role" => "user", "content" => $prompt];
+
+    // Cap history size to prevent payload bloat (keep last 12 messages = 6 turns)
+    if (count($_SESSION['chatbot_history']) > 12) {
+        $_SESSION['chatbot_history'] = array_slice($_SESSION['chatbot_history'], -12);
+    }
+
     // Build payload for Groq Chat Completions API (OpenAI Compatible)
     $groqPayload = json_encode([
         "model" => "llama-3.3-70b-versatile",
-        "messages" => [
-            ["role" => "system", "content" => $sysPrompt],
-            ["role" => "user", "content" => $prompt]
-        ],
+        "messages" => array_merge(
+            [["role" => "system", "content" => $sysPrompt]],
+            $_SESSION['chatbot_history']
+        ),
         "temperature" => 0.3,
         "max_tokens" => 300
     ]);
@@ -208,6 +230,10 @@ function handleAIChat($prompt, $lang, $calcContext) {
 
     if ($httpCode === 200 && isset($resData['choices'][0]['message']['content'])) {
         $aiReply = $resData['choices'][0]['message']['content'];
+        
+        // Save the assistant's reply to the conversation memory
+        $_SESSION['chatbot_history'][] = ["role" => "assistant", "content" => $aiReply];
+        
         echo json_encode(["status" => "ok", "reply" => $aiReply]);
     } else {
         error_log("[SolarChatbot Proxy] Groq API returned error. HTTP Code: " . $httpCode . ", Payload: " . $response);
