@@ -562,6 +562,30 @@
       window.SolarAnalytics.track("chatbot_message_sent", { text_length: text.length });
     }
 
+    // --- AGREEMENT & QUOTE INTENT DETECTION ---
+    const normalized = text.toLowerCase().trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
+    const agreementPatterns = [
+      /\b(sure|yes|go on|okay|ok|yeah|yup|yep|agree|confirm|details)\b/i,
+      /\b(quote|quotation|survey|site survey|price|estimation|quot)\b/i,
+      /\b(نعم|أجل|بالتأكيد|بالتاكيد|موافق|معاينة|عرض سعر|اقتباس|سعر|طبعا|اوكي|حاضر)\b/
+    ];
+    const isGreeting = /^(hy|hi|hello|hey|hola|مرحبا|سلام|اهلا|أهلاً|مرحباً)$/i.test(normalized);
+
+    if (!isGreeting && agreementPatterns.some(pattern => pattern.test(normalized))) {
+      if (window.SolarAnalytics) {
+        window.SolarAnalytics.track("chatbot_quote_intent_match", { text: text });
+      }
+      addBotMessage(
+        l === "ar"
+          ? "رائع! سنساعدك في الحصول على عرض سعر مجاني. أحتاج بعض المعلومات منك."
+          : "Great! Let's get you a free solar quote. I just need a few details."
+      );
+      setTimeout(function () {
+        renderLeadForm();
+      }, 1200);
+      return;
+    }
+
     // 1. Check local keyword DB match
     const matchedFaq = matchKeywordFAQ(text, l);
     if (matchedFaq) {
