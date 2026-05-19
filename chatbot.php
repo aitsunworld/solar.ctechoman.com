@@ -170,7 +170,10 @@ function handleAIChat($prompt, $lang, $calcContext) {
     $sysPrompt .= "3. Keep your answers short, warm, extremely professional, and sales-focused. Answer in under 100 words.\n";
     $sysPrompt .= "4. Respond strictly in the language they type in (" . ($lang === "ar" ? "Arabic" : "English") . ").\n";
     $sysPrompt .= "5. NEVER discuss topics outside of solar energy or Concept Technologies. Politely redirect unrelated queries to solar.\n";
-    $sysPrompt .= "6. IMPORTANT: Do NOT repeat your introductory welcome greeting (e.g., \"Welcome to Concept Technologies...\", \"I'm Tariq...\") if the user is already talking to you in a continuous conversation. Only introduce yourself in the first turn.";
+    $sysPrompt .= "6. IMPORTANT: Do NOT repeat your introductory welcome greeting (e.g., \"Welcome to Concept Technologies...\", \"I'm Tariq...\") if the user is already talking to you in a continuous conversation. Only introduce yourself in the first turn.\n";
+    $sysPrompt .= "7. LEAD DATA EXTRACTION: If the user provides any of their contact details (such as their name, phone number, location, or email) anywhere in their messages, you must extract them. At the very end of your response, you MUST append a hidden metadata tag in this exact format:\n";
+    $sysPrompt .= "[LEAD_DATA: {\"name\": \"EXTRACTED_NAME\", \"phone\": \"EXTRACTED_PHONE\", \"location\": \"EXTRACTED_LOCATION\", \"email\": \"EXTRACTED_EMAIL\"}]\n";
+    $sysPrompt .= "Replace EXTRACTED_NAME, EXTRACTED_PHONE, EXTRACTED_LOCATION, and EXTRACTED_EMAIL with the details you found. If a detail is missing, use an empty string \"\". Ensure the JSON is perfectly valid. Do not explain this tag to the user.";
 
     if (!empty($calcContext)) {
         $sysPrompt .= "\nCURRENT CONTEXT:\nThe user is currently interacting with the solar calculator on the webpage and generated these calculations:\n";

@@ -627,7 +627,42 @@
           ? "آسف، لم أفهم سؤالك تماماً. هل تريد معرفة التكاليف أو حساب توفيرك الكهربائي؟"
           : "Sorry, I couldn't process that query. Would you like to check system costs or calculate electric offsets?");
         
-        addMessage("bot", reply);
+        // Check for auto-extracted lead data tag
+        let cleanReply = reply;
+        const leadMatch = reply.match(/\[LEAD_DATA:\s*(\{.*?\})\]/s);
+        if (leadMatch) {
+          try {
+            const extracted = JSON.parse(leadMatch[1]);
+            // Clean the reply by removing the tag
+            cleanReply = reply.replace(/\[LEAD_DATA:\s*\{.*?\}\]/gs, "").trim();
+
+            // Validate that we have at least a name or phone to trigger a lead submit
+            if (extracted.name || extracted.phone) {
+              const leadObj = {
+                name: extracted.name || "Chatbot User",
+                phone: extracted.phone || "",
+                email: extracted.email || "",
+                location: extracted.location || "Oman (Extracted)",
+                lang: lang,
+                timestamp: new Date().toISOString(),
+                calculator: state.calculatorContext
+              };
+
+              console.log("[SolarBot] Automatically extracted lead from chat stream:", leadObj);
+              
+              // Send the lead to n8n proxy background
+              postLeadData(leadObj);
+              
+              if (window.SolarAnalytics) {
+                window.SolarAnalytics.track("lead_extracted_from_chat", leadObj);
+              }
+            }
+          } catch (e) {
+            console.error("[SolarBot] Failed to parse lead metadata tag: ", e);
+          }
+        }
+
+        addMessage("bot", cleanReply);
         renderQuickReplies([
           { label: lang === "ar" ? "📋 احصل على عرض" : "📋 Get a Quote", value: "quote" },
           { label: lang === "ar" ? "🔙 القائمة الرئيسية" : "🔙 Main Menu", value: "menu" },
