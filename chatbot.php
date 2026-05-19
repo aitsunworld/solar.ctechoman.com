@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // --- CONFIGURATION ---
 // In production, load these from environment variables (.env) or your server config!
-define("N8N_WEBHOOK_URL", "https://solar.ctechoman.com/webhook/solar-lead");
+define("N8N_WEBHOOK_URL", "https://n8n.aitsun.space/webhook/solar-lead");
 define("ANTHROPIC_API_KEY", getenv("ANTHROPIC_API_KEY") ?: "YOUR_CLAUDE_API_KEY_HERE");
 
 // Parse JSON Input Payload
