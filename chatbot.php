@@ -74,9 +74,26 @@ function handleLeadSubmit($data) {
         exit;
     }
 
-    // Prepare payload
+    // Get user IP address safely
+    $userIp = $_SERVER['HTTP_CLIENT_IP'] 
+        ?? $_SERVER['HTTP_X_FORWARDED_FOR'] 
+        ?? $_SERVER['REMOTE_ADDR'] 
+        ?? '';
+
+    // If multiple IPs in X-Forwarded-For, take the first one
+    if (strpos($userIp, ',') !== false) {
+        $userIp = trim(explode(',', $userIp)[0]);
+    }
+
+    // Get session ID if active
+    $sessionId = session_id() ?: '';
+
+    // Prepare payload (aligned with your n8n workflow schema)
     $n8nPayload = json_encode([
         "workflow" => "solar_lead_capture",
+        "session_id" => $sessionId,
+        "user_ip" => $userIp,
+        "language" => $data['lang'] ?? 'en',
         "data" => $data
     ]);
 
