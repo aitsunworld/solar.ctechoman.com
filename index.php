@@ -115,7 +115,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
       <div class="hero-visual reveal delay-200">
         <div class="lightning-bg"></div>
-        <img src="lightbulb.png" alt="Renewable Energy" class="lightbulb-img" width="500" height="500">
+        <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500">
       </div>
     </div>
   </section>
@@ -226,7 +226,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
       </div>
       <div class="cta-visual">
-        <img src="img2.png" alt="Solar Installation" width="480" height="360">
+        <img src="img2.webp" alt="Solar Installation" width="480" height="360">
       </div>
     </div>
   </section>
@@ -317,11 +317,11 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <div class="choose-center reveal" style="position: relative;">
-        <img src="solar_panel.png" alt="Solar Panel" width="300" height="250"
+        <img src="solar_panel.webp" alt="Solar Panel" width="300" height="250"
           style="width: 100%; max-width: 300px; position: relative; z-index: 2;">
 
-        <img src="cloud1.png" class="cloud-anim cloud-1" alt="Cloud" width="120" height="60">
-        <img src="cloud2.png" class="cloud-anim cloud-2" alt="Cloud" width="120" height="60">
+        <img src="cloud1.webp" class="cloud-anim cloud-1" alt="Cloud" width="120" height="60">
+        <img src="cloud2.webp" class="cloud-anim cloud-2" alt="Cloud" width="120" height="60">
       </div>
 
       <div class="choose-col right-col">
