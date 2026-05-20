@@ -67,6 +67,11 @@ return [
     'why_6_title' => '100% Omani-Owned Company',
     'why_6_desc' => 'Part of Al Bahja Group, established in 1947. Mainly in manufacturing and allied activities.',
 
+    // Brands
+    'brands_title' => 'Trusted Brands & Products',
+    'brands_subtitle' => 'Premium solar brands we install across Oman.',
+    'brands_placeholder' => 'Brand Logo',
+
     // Process
     'proc_title' => 'Seamless Journey',
     'proc_1_title' => 'Consult',

@@ -659,4 +659,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 8000);
     }
 
+    // --- 7. Video Modal Controls ---
+    const watchVideoBtn = document.getElementById('watch-video-btn');
+    const videoModal = document.getElementById('video-modal');
+    const closeVideoModal = document.getElementById('close-video-modal');
+    const videoIframe = document.getElementById('video-iframe');
+    const videoUrlPlaceholder = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
+
+    if (watchVideoBtn && videoModal && closeVideoModal && videoIframe) {
+        const openModal = () => {
+            videoIframe.src = videoUrlPlaceholder;
+            videoModal.classList.add('active');
+            videoModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden'; // Lock background scrolling
+        };
+
+        const closeModal = () => {
+            videoModal.classList.remove('active');
+            videoModal.setAttribute('aria-hidden', 'true');
+            videoIframe.src = ''; // Halt playback instantly
+            document.body.style.overflow = ''; // Restore background scrolling
+        };
+
+        watchVideoBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+
+        closeVideoModal.addEventListener('click', closeModal);
+
+        // Close on clicking outside container
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeModal();
+            }
+        });
+
+        // Close on Escape press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
+
 });

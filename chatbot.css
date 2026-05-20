@@ -454,37 +454,46 @@
   direction: rtl;
 }
 
-.sb-widget-btn[dir="rtl"] {
+.sb-widget-btn.sb-left {
   right: auto;
   left: 24px;
 }
 
-.sb-msg-row[dir="rtl"] {
+/* Bot row in RTL: avatar on the right, bubble on the left */
+.sb-chat-window[dir="rtl"] .sb-msg-row.bot {
   flex-direction: row-reverse;
 }
 
-.sb-msg-row.user[dir="rtl"] {
+/* User row in RTL: stays left-to-right visually (avatar left, bubble right) */
+.sb-chat-window[dir="rtl"] .sb-msg-row.user {
   flex-direction: row;
 }
 
-.sb-msg-row[dir="rtl"] .sb-avatar {
-  margin-left: 0;
-}
-
-.sb-msg-row.bot[dir="rtl"] .sb-bubble {
+/* Bot bubble corners in RTL */
+.sb-chat-window[dir="rtl"] .sb-msg-row.bot .sb-bubble {
   border-radius: 16px 4px 16px 16px;
+  text-align: right;
 }
 
-.sb-msg-row.user[dir="rtl"] .sb-bubble {
+/* User bubble corners in RTL */
+.sb-chat-window[dir="rtl"] .sb-msg-row.user .sb-bubble {
   border-radius: 4px 16px 16px 16px;
+  text-align: right;
 }
 
-.sb-typing-indicator[dir="rtl"] {
+/* Typing indicator corners in RTL */
+.sb-chat-window[dir="rtl"] .sb-typing-indicator {
   border-radius: 16px 4px 16px 16px;
 }
 
-.sb-quick-replies[dir="rtl"] {
+/* Quick replies flush-start in RTL */
+.sb-chat-window[dir="rtl"] .sb-quick-replies {
   justify-content: flex-start;
+}
+
+/* Input panel send arrow direction in RTL */
+.sb-chat-window[dir="rtl"] .sb-text-input {
+  text-align: right;
 }
 
 /* Position overrides (left side configuration) */

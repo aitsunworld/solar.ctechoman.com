@@ -266,6 +266,9 @@
     state.notificationCount = 0;
     removeBadge();
 
+    // Mark session as engaged so smart triggers don't fire again this session
+    sessionStorage.setItem("sb_chatbot_engaged", "true");
+
     if (window.SolarAnalytics) {
       window.SolarAnalytics.track("chatbot_open");
     }
@@ -343,12 +346,22 @@
 
   function triggerWelcome() {
     state.flow = FLOW.WELCOME;
-    addBotMessage(TRANSLATIONS[state.lang].greeting);
-    
-    setTimeout(function () {
-      addBotMessage(TRANSLATIONS[state.lang].greetingCta, getMainMenuReplies());
-      state.flow = FLOW.MAIN_MENU;
-    }, 1200);
+
+    if (state.lang === "ar") {
+      // Arabic: deliver single fast greeting with the main menu inline for snappy RTL UX
+      addBotMessage(TRANSLATIONS.ar.greeting);
+      setTimeout(function () {
+        addBotMessage(TRANSLATIONS.ar.greetingCta, getMainMenuReplies());
+        state.flow = FLOW.MAIN_MENU;
+      }, 800);
+    } else {
+      // English: classic 2-bubble sequence with typing delay
+      addBotMessage(TRANSLATIONS.en.greeting);
+      setTimeout(function () {
+        addBotMessage(TRANSLATIONS.en.greetingCta, getMainMenuReplies());
+        state.flow = FLOW.MAIN_MENU;
+      }, 1200);
+    }
   }
 
   function getMainMenuReplies() {
@@ -814,40 +827,94 @@
   // ─── SMART TRIGGERS ──────────────────────────────────────────────────────────
 
   function startSmartTriggers() {
-    // 1. Auto-Open after 15 seconds
-    setTimeout(function () {
-      if (!state.isOpen) {
-        openChat();
-      }
-    }, 15000);
+    // Helper: returns true if the chatbot is already open OR the user already engaged this session
+    function isEngaged() {
+      return state.isOpen || sessionStorage.getItem("sb_chatbot_engaged") === "true";
+    }
 
-    // 2. Exit Intent Trigger (Auto-Open)
-    document.addEventListener("mouseleave", function (e) {
-      if (e.clientY < 0 && !state.isOpen && !state.exitIntentFired) {
-        state.exitIntentFired = true;
-        openChat();
-      }
-    });
+    // Helper: lock ALL smart triggers (called when user manually opens the widget)
+    function lockAllTriggers() {
+      sessionStorage.setItem("sb_chatbot_engaged", "true");
+      sessionStorage.setItem("sb_trigger_15s_fired", "true");
+      sessionStorage.setItem("sb_trigger_scroll_fired", "true");
+      sessionStorage.setItem("sb_trigger_exit_fired", "true");
+    }
 
-    // 3. Scroll to Calculator Section Trigger
-    let calculatorTriggered = false;
-    window.addEventListener("scroll", function () {
-      if (calculatorTriggered) return;
-      const calcElem = document.getElementById("calculator");
-      if (calcElem) {
-        const rect = calcElem.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          calculatorTriggered = true;
-          if (!state.isOpen) {
+    // Lock triggers when the user manually clicks the launcher button
+    el.widgetBtn.addEventListener("click", lockAllTriggers);
+
+    // 1. Auto-Open after 15 seconds — fires once per session only
+    if (!sessionStorage.getItem("sb_trigger_15s_fired")) {
+      setTimeout(function () {
+        if (!isEngaged()) {
+          sessionStorage.setItem("sb_trigger_15s_fired", "true");
+          openChat();
+        }
+      }, 15000);
+    }
+
+    // 2. Exit Intent Trigger — desktop: mouse leaves top of viewport
+    //                        — mobile: user switches tab / app (visibilitychange)
+    if (!sessionStorage.getItem("sb_trigger_exit_fired")) {
+      // Desktop exit intent
+      document.addEventListener("mouseleave", function (e) {
+        if (e.clientY < 0 && !sessionStorage.getItem("sb_trigger_exit_fired")) {
+          sessionStorage.setItem("sb_trigger_exit_fired", "true");
+          if (!isEngaged()) {
             openChat();
           }
         }
-      }
-    });
+      });
 
-    // 4. User Inactivity Trigger (Pulsing notification badge)
-    let inactiveTimer;
-    const resetTimer = function () {
+      // Mobile exit intent — fires when user switches tabs or minimizes
+      document.addEventListener("visibilitychange", function () {
+        if (
+          document.visibilityState === "hidden" &&
+          !sessionStorage.getItem("sb_trigger_exit_fired")
+        ) {
+          sessionStorage.setItem("sb_trigger_exit_fired", "true");
+          // Note: page is hidden so we queue open for when user returns
+          sessionStorage.setItem("sb_trigger_exit_pending", "true");
+        }
+        // When user returns to the page, open the chat if pending
+        if (
+          document.visibilityState === "visible" &&
+          sessionStorage.getItem("sb_trigger_exit_pending") === "true"
+        ) {
+          sessionStorage.removeItem("sb_trigger_exit_pending");
+          if (!isEngaged()) {
+            openChat();
+          }
+        }
+      });
+    }
+
+    // 3. Scroll to Calculator Section Trigger — fires once per session
+    if (!sessionStorage.getItem("sb_trigger_scroll_fired")) {
+      var onScrollTrigger = function () {
+        if (sessionStorage.getItem("sb_trigger_scroll_fired")) {
+          window.removeEventListener("scroll", onScrollTrigger);
+          return;
+        }
+        var calcElem = document.getElementById("calculator");
+        if (calcElem) {
+          var rect = calcElem.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            sessionStorage.setItem("sb_trigger_scroll_fired", "true");
+            window.removeEventListener("scroll", onScrollTrigger);
+            if (!isEngaged()) {
+              openChat();
+            }
+          }
+        }
+      };
+      window.addEventListener("scroll", onScrollTrigger);
+    }
+
+    // 4. User Inactivity Trigger (Pulsing notification badge) — not session-locked,
+    //    just guards against re-firing while chat is already open
+    var inactiveTimer;
+    var resetTimer = function () {
       clearTimeout(inactiveTimer);
       if (!state.isOpen) {
         inactiveTimer = setTimeout(greetVisitor, 45000);

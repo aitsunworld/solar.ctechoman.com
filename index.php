@@ -91,7 +91,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
         <div class="hero-actions">
           <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
-          <a href="#video" class="btn-video">
+          <a href="javascript:void(0)" class="btn-video" id="watch-video-btn">
             <span class="play-icon">▶</span>
             <span class="video-text"><?= $lang['hero_btn_video'] ?></span>
           </a>
@@ -379,6 +379,23 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
   </section>
 
+  <!-- Trusted Brands & Products -->
+  <section id="partners" class="partners-section text-center reveal" style="text-align: center; padding: 5rem 0;">
+    <div class="container">
+      <span style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;"><?= $lang['why_pre'] ?></span>
+      <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 1rem;"><?= $lang['brands_title'] ?></h2>
+      <p class="text-muted" style="margin-bottom: 3.5rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;"><?= $lang['brands_subtitle'] ?></p>
+      
+      <div class="partners-grid">
+        <?php for ($i = 1; $i <= 6; $i++): ?>
+          <div class="partner-card">
+            <span class="partner-placeholder-text"><?= $lang['brands_placeholder'] ?> <?= $i ?></span>
+          </div>
+        <?php endfor; ?>
+      </div>
+    </div>
+  </section>
+
   <!-- Process -->
   <section id="process" class="container section-padding">
     <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto;">
@@ -596,10 +613,20 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
   </footer>
 
-  <script src="calculator-engine.js?v=2.2" defer></script>
-  <script src="analytics.js?v=2.2" defer></script>
-  <script src="script.js?v=2.2" defer></script>
-  <script src="chatbot.js?v=2.2" defer></script>
+  <!-- Video Modal overlay -->
+  <div id="video-modal" class="video-modal-overlay" aria-hidden="true" role="dialog">
+    <div class="video-modal-container">
+      <button class="video-modal-close" id="close-video-modal" aria-label="Close modal">&times;</button>
+      <div class="video-iframe-wrapper">
+        <iframe id="video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="calculator-engine.js?v=2.3" defer></script>
+  <script src="analytics.js?v=2.3" defer></script>
+  <script src="script.js?v=2.3" defer></script>
+  <script src="chatbot.js?v=2.3" defer></script>
 </body>
 
 </html>
