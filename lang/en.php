@@ -8,9 +8,9 @@ return [
     'nav_benefits' => 'Benefits',
     'nav_process' => 'Process',
     'nav_quote' => 'Get a Quote',
-    'hero_title' => 'Renewable Energy<br>Solutions that Deliver<br>Financial Savings',
-    'hero_desc' => 'Provide Solar Panels And Renewable Energy Products.',
-    'hero_btn' => 'Enquire Online',
+    'hero_title' => 'Premium Solar Energy Solutions for Oman',
+    'hero_desc' => 'Reduce your electricity bills to zero with the most reliable solar panels and renewable energy systems in the Sultanate.',
+    'hero_btn' => 'Get a Quote',
     'hero_btn_video' => 'Watch Video',
 
     // Calculator

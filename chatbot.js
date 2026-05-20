@@ -209,7 +209,7 @@
         <button class="sb-send-btn" id="sb-send-btn">${state.lang === "ar" ? "←" : "→"}</button>
       </div>
       <div class="sb-footer">
-        Powered by <strong>Concept Technologies LLC</strong>
+        Powered by <a href="https://aitsun.ai" target="_blank" rel="noopener noreferrer" style="color: var(--sb-text-muted); text-decoration: none; font-weight: bold;">AITSUN.AI</a>
       </div>
     `);
 
@@ -814,22 +814,38 @@
   // ─── SMART TRIGGERS ──────────────────────────────────────────────────────────
 
   function startSmartTriggers() {
-    // 1. Auto Greet Delay
+    // 1. Auto-Open after 15 seconds
     setTimeout(function () {
-      if (!state.isOpen && !state.hasGreeted) {
-        greetVisitor();
+      if (!state.isOpen) {
+        openChat();
       }
-    }, 5000);
+    }, 15000);
 
-    // 2. Exit Intent Trigger
+    // 2. Exit Intent Trigger (Auto-Open)
     document.addEventListener("mouseleave", function (e) {
       if (e.clientY < 0 && !state.isOpen && !state.exitIntentFired) {
         state.exitIntentFired = true;
-        greetVisitor();
+        openChat();
       }
     });
 
-    // 3. User Inactivity Trigger
+    // 3. Scroll to Calculator Section Trigger
+    let calculatorTriggered = false;
+    window.addEventListener("scroll", function () {
+      if (calculatorTriggered) return;
+      const calcElem = document.getElementById("calculator");
+      if (calcElem) {
+        const rect = calcElem.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          calculatorTriggered = true;
+          if (!state.isOpen) {
+            openChat();
+          }
+        }
+      }
+    });
+
+    // 4. User Inactivity Trigger (Pulsing notification badge)
     let inactiveTimer;
     const resetTimer = function () {
       clearTimeout(inactiveTimer);

@@ -41,34 +41,24 @@
 
   // ─── APPLIANCE DEFINITION REGISTRY (BOTTOM-UP ELECTRICAL LOAD SCHEDULE) ─────
   const APPLIANCES = [
+    // HVAC
+    { id: "ac_1ton", category: "HVAC", name_en: "AC 1 ton", name_ar: "مكيف 1 طن", min_w: 1200, max_w: 1500, hours: 8.0, default_qty: 1 },
+    { id: "ac_2ton", category: "HVAC", name_en: "AC 2 ton", name_ar: "مكيف 2 طن", min_w: 2400, max_w: 3000, hours: 8.0, default_qty: 1 },
+    { id: "water_heater", category: "HVAC", name_en: "Water Heater", name_ar: "سخان مياه", min_w: 1500, max_w: 2000, hours: 3.0, default_qty: 0 },
+
     // Kitchen
-    { id: "fridge", category: "Kitchen", name_en: "Refrigerator & Freezer", name_ar: "ثلاجة وفريزر", min_w: 150, max_w: 400, hours: 24.0, default_qty: 1 },
-    { id: "washer", category: "Kitchen", name_en: "Washing Machine", name_ar: "غسالة ملابس", min_w: 2000, max_w: 2500, hours: 1.0, default_qty: 1 },
-    { id: "dishwasher", category: "Kitchen", name_en: "Dishwasher", name_ar: "غسالة صحون", min_w: 1800, max_w: 2200, hours: 1.5, default_qty: 0 },
-    { id: "microwave", category: "Kitchen", name_en: "Microwave Oven", name_ar: "مايكرويف", min_w: 1000, max_w: 1500, hours: 0.5, default_qty: 1 },
-    { id: "stove", category: "Kitchen", name_en: "Electric Cooktop/Stove", name_ar: "طباخ كهربائي", min_w: 1500, max_w: 7000, hours: 1.5, default_qty: 0 },
-    { id: "kettle", category: "Kitchen", name_en: "Kettle / Coffee Maker", name_ar: "غلاية / صانعة قهوة", min_w: 1200, max_w: 2200, hours: 0.5, default_qty: 1 },
-    
-    // HVAC / Heating
-    { id: "split_ac", category: "HVAC", name_en: "Air Conditioner (Split AC)", name_ar: "مكيف سبليت", min_w: 2000, max_w: 3000, hours: 10.0, default_qty: 3 },
-    { id: "water_heater", category: "HVAC", name_en: "Water Heater", name_ar: "سخان مياه", min_w: 150, max_w: 250, hours: 5.0, default_qty: 2 },
-    { id: "cooler", category: "HVAC", name_en: "Evaporative Cooler", name_ar: "مكيف صحراوي", min_w: 400, max_w: 900, hours: 12.5, default_qty: 0 },
+    { id: "refrigerator", category: "Kitchen", name_en: "Refrigerator", name_ar: "ثلاجة", min_w: 150, max_w: 300, hours: 24.0, default_qty: 1 },
+    { id: "freezer", category: "Kitchen", name_en: "Freezer", name_ar: "فريزر", min_w: 200, max_w: 400, hours: 24.0, default_qty: 0 },
+    { id: "washing_machine", category: "Kitchen", name_en: "Washing Machine", name_ar: "غسالة ملابس", min_w: 500, max_w: 1000, hours: 1.0, default_qty: 0 },
+    { id: "microwave", category: "Kitchen", name_en: "Microwave", name_ar: "مايكرويف", min_w: 1000, max_w: 1500, hours: 0.5, default_qty: 0 },
 
-    // General / Living
-    { id: "tv", category: "General", name_en: "TV & Sound System", name_ar: "تلفاز ونظام صوتي", min_w: 150, max_w: 500, hours: 6.5, default_qty: 2 },
-    { id: "lighting", category: "General", name_en: "Lighting (LED/Chandeliers)", name_ar: "إضاءة (LED/ثريا)", min_w: 10, max_w: 500, hours: 6.0, default_qty: 15 },
-    { id: "iron", category: "General", name_en: "Steam Iron", name_ar: "مكواة بخار", min_w: 1500, max_w: 2400, hours: 0.2, default_qty: 1 },
-    { id: "vacuum", category: "General", name_en: "Vacuum Cleaner", name_ar: "مكنسة كهربائية", min_w: 1200, max_w: 2200, hours: 0.3, default_qty: 1 },
-    { id: "pc", category: "General", name_en: "PC / Laptop", name_ar: "كمبيوتر / لابتوب", min_w: 50, max_w: 400, hours: 8.0, default_qty: 1 },
+    // General
+    { id: "tv", category: "General", name_en: "TV", name_ar: "تلفاز", min_w: 80, max_w: 150, hours: 6.0, default_qty: 1 },
+    { id: "led_lights", category: "General", name_en: "LED Lights (Set of 10)", name_ar: "أضواء LED (طقم 10)", min_w: 50, max_w: 100, hours: 6.0, default_qty: 1 },
 
-    // Villa / Luxury
-    { id: "pool_pump", category: "Luxury", name_en: "Pool Filtration Pump", name_ar: "مضخة فلترة المسبح", min_w: 750, max_w: 1500, hours: 8.0, default_qty: 0 },
-    { id: "pool_heater", category: "Luxury", name_en: "Pool Heater (Electric)", name_ar: "سخان مسبح كهربائي", min_w: 9000, max_w: 18000, hours: 4.0, default_qty: 0 },
-    { id: "jacuzzi", category: "Luxury", name_en: "Jacuzzi/Spa Pump", name_ar: "مضخة جاكوزي", min_w: 150, max_w: 3000, hours: 1.0, default_qty: 0 },
-    { id: "irrigation", category: "Luxury", name_en: "Smart Irrigation System", name_ar: "نظام ري ذكي", min_w: 100, max_w: 500, hours: 3.0, default_qty: 0 },
-
-    // Security / Smart
-    { id: "cctv", category: "Security", name_en: "CCTV & Alarm System", name_ar: "كاميرات مراقبة وإنذار", min_w: 20, max_w: 100, hours: 24.0, default_qty: 1 }
+    // Luxury
+    { id: "water_pump", category: "Luxury", name_en: "Water Pump", name_ar: "مضخة مياه", min_w: 750, max_w: 1500, hours: 2.0, default_qty: 0 },
+    { id: "ev_charger", category: "Luxury", name_en: "EV Charger", name_ar: "شاحن سيارة كهربائية", min_w: 3600, max_w: 7200, hours: 4.0, default_qty: 0 }
   ];
 
   // ─── SOLAR ESTIMATION ENGINE ────────────────────────────────────────────────
@@ -82,7 +72,7 @@
    * @param {number} [availableSpace] - Available roof area in sqm (optional)
    * @returns {Object} Calculated metrics and constraint warnings
    */
-  function calculateSolarResults(monthlyBill, propertyType, location, availableSpace) {
+  function calculateSolarResults(monthlyBill, propertyType, location, availableSpace, overrideSystemSize = null) {
     // Sanitise inputs
     const bill = Math.max(10, parseFloat(monthlyBill) || 50);
     const prop = (propertyType || "residential").toLowerCase();
@@ -100,7 +90,7 @@
 
     // Sizing computation: Offset 100% of daytime consumption
     // Assuming Oman net-metering grid injection parity
-    let targetSystemSizeKw = yearlyConsumptionKwh / yieldKwh;
+    let targetSystemSizeKw = overrideSystemSize !== null ? overrideSystemSize : (yearlyConsumptionKwh / yieldKwh);
     if (targetSystemSizeKw < 1.0) targetSystemSizeKw = 1.0; // Min system scale threshold
 
     // Determine panel metrics
@@ -217,8 +207,11 @@
     // Convert equivalent bottom-up consumption back to OMR bill (SSOT parity!)
     const simulatedBill = monthlyConsumptionKwh * tariff;
 
-    // Run core sizer using simulated equivalent bill
-    const results = calculateSolarResults(simulatedBill, prop, loc, availableSpace);
+    // Specific calculation formula for Omani sun hours (5.5) and 1.2 safety factor
+    const overrideSystemSize = (avgDailyKwh * 1.2) / 5.5;
+
+    // Run core sizer using simulated equivalent bill and the exact overridden system size
+    const results = calculateSolarResults(simulatedBill, prop, loc, availableSpace, overrideSystemSize);
 
     // Calculate Inverter size (Max watts * 1.25 standard safety headroom limit)
     const inverterSizeKw = parseFloat(((totalMaxWatts * 1.25) / 1000).toFixed(1));
