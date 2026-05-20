@@ -662,18 +662,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
   height: 100vh;
   background-color: rgba(15, 23, 42, 0.85); /* Slate 900 dim overlay */
   backdrop-filter: blur(4px);
-  display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none;
 }
 
 .video-modal-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
+  display: flex;
 }
 
 .video-modal-container {
