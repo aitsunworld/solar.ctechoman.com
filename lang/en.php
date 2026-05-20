@@ -71,6 +71,17 @@ return [
     'brands_title' => 'Trusted Brands & Products',
     'brands_subtitle' => 'Premium solar brands we install across Oman.',
     'brands_placeholder' => 'Brand Logo',
+    // Category cards
+    'cat_inverters' => 'Inverters',
+    'cat_inverters_brands' => 'Huawei, Sungrow, Solis, Canadian Solar, Deye, Power & Sun',
+    'cat_panels' => 'Solar Panels',
+    'cat_panels_brands' => 'Canadian Solar, Trina, LONGi, Jinko, JaSolar',
+    'cat_batteries' => 'Batteries',
+    'cat_batteries_brands' => 'Canadian Solar, Solis, Deye, Jebel, LONGi, Power & Sun',
+    'cat_ac' => 'Air Conditioner',
+    'cat_ac_subtitle' => 'Premium quality units',
+    'cat_controller' => 'Charge Controller',
+    'cat_controller_subtitle' => 'High efficiency controllers',
 
     // Process
     'proc_title' => 'Seamless Journey',

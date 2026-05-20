@@ -386,12 +386,41 @@ $lang = require_once "lang/{$active_lang}.php";
       <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 1rem;"><?= $lang['brands_title'] ?></h2>
       <p class="text-muted" style="margin-bottom: 3.5rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;"><?= $lang['brands_subtitle'] ?></p>
       
-      <div class="partners-grid">
-        <?php for ($i = 1; $i <= 6; $i++): ?>
-          <div class="partner-card">
-            <span class="partner-placeholder-text"><?= $lang['brands_placeholder'] ?> <?= $i ?></span>
-          </div>
-        <?php endfor; ?>
+      <div class="category-cards-grid">
+        <!-- Card 1: Inverters -->
+        <div class="category-card reveal">
+          <div class="category-icon">⚡</div>
+          <h3 class="category-title"><?= $lang['cat_inverters'] ?></h3>
+          <p class="category-brands"><?= $lang['cat_inverters_brands'] ?></p>
+        </div>
+
+        <!-- Card 2: Solar Panels -->
+        <div class="category-card reveal">
+          <div class="category-icon">☀️</div>
+          <h3 class="category-title"><?= $lang['cat_panels'] ?></h3>
+          <p class="category-brands"><?= $lang['cat_panels_brands'] ?></p>
+        </div>
+
+        <!-- Card 3: Batteries -->
+        <div class="category-card reveal">
+          <div class="category-icon">🔋</div>
+          <h3 class="category-title"><?= $lang['cat_batteries'] ?></h3>
+          <p class="category-brands"><?= $lang['cat_batteries_brands'] ?></p>
+        </div>
+
+        <!-- Card 4: Air Conditioner -->
+        <div class="category-card reveal">
+          <div class="category-icon">❄️</div>
+          <h3 class="category-title"><?= $lang['cat_ac'] ?></h3>
+          <p class="category-subtitle"><?= $lang['cat_ac_subtitle'] ?></p>
+        </div>
+
+        <!-- Card 5: Charge Controller -->
+        <div class="category-card reveal">
+          <div class="category-icon">🔌</div>
+          <h3 class="category-title"><?= $lang['cat_controller'] ?></h3>
+          <p class="category-subtitle"><?= $lang['cat_controller_subtitle'] ?></p>
+        </div>
       </div>
     </div>
   </section>

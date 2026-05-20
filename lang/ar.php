@@ -71,6 +71,17 @@ return [
     'brands_title' => 'العلامات التجارية والمنتجات الموثوقة',
     'brands_subtitle' => 'ماركات الطاقة الشمسية المتميزة التي نقوم بتركيبها في جميع أنحاء عمان.',
     'brands_placeholder' => 'شعار العلامة التجارية',
+    // Category cards (Arabic)
+    'cat_inverters' => 'عاكسات',
+    'cat_inverters_brands' => 'هواوي، سونجرو، سولس، كندي سولار، ديي، Power & Sun',
+    'cat_panels' => 'الألواح الشمسية',
+    'cat_panels_brands' => 'كندي سولار، ترينا، لونجي، جنكو، جا سولار',
+    'cat_batteries' => 'البطاريات',
+    'cat_batteries_brands' => 'كندي سولار، سولس، ديي، جبل، لونجي، Power & Sun',
+    'cat_ac' => 'مكيف الهواء',
+    'cat_ac_subtitle' => 'وحدات ذات جودة عالية',
+    'cat_controller' => 'منظم الشحن',
+    'cat_controller_subtitle' => 'منظمات كفاءة عالية',
 
     // Process
     'proc_title' => 'رحلة سلسة',
