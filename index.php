@@ -19,6 +19,7 @@ $lang = require_once "lang/{$active_lang}.php";
 <html lang="<?= $active_lang ?>" dir="<?= $dir ?>">
 
 <head>
+  <script>document.documentElement.classList.add('js-enabled');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= $lang['title'] ?></title>
@@ -85,7 +86,7 @@ $lang = require_once "lang/{$active_lang}.php";
   <!-- Hero Section -->
   <section class="hero container">
     <div class="hero-grid">
-      <div class="hero-text reveal">
+      <div class="hero-text">
         <h1><?= $lang['hero_title'] ?></h1>
         <p><?= $lang['hero_desc'] ?></p>
 
@@ -110,7 +111,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
       </div>
 
-      <div class="hero-visual reveal delay-200">
+      <div class="hero-visual">
         <div class="lightning-bg"></div>
         <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500">
       </div>
@@ -384,7 +385,7 @@ $lang = require_once "lang/{$active_lang}.php";
       <p class="text-muted" style="margin-bottom: 3.5rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;"><?= $lang['brands_subtitle'] ?></p>
 
       <!-- 4 Premium Animated Horizontal Marquee Lanes -->
-      <div class="product-marquees-container reveal">
+      <div class="product-marquees-container">
         <!-- Lane 1: Inverters (⚡) -->
         <div class="marquee-lane">
           <div class="marquee-lane-header">

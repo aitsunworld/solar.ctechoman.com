@@ -1585,14 +1585,43 @@ footer {
   justify-content: center;
 }
 
-/* Animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+/* Animations & Page Load Transitions */
+
+/* Asynchronous immediate page-load animations for above-the-fold hero elements */
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.reveal.active {
+.hero-text {
+  opacity: 0;
+  animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+}
+
+.hero-visual {
+  opacity: 0;
+  animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+/* Scroll reveal system with progressive enhancement fallback */
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.js-enabled .reveal {
+  opacity: 0;
+  transform: translateY(25px); /* Lower offset to prevent layout shifts and increase perceived speed */
+}
+
+.js-enabled .reveal.active {
   opacity: 1;
   transform: translateY(0);
 }

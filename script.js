@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. Scroll Reveal Animations (Intersection Observer) ---
     const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
     const revealOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.05,            // Trigger as soon as 5% of the element is visible
+        rootMargin: "0px 0px -10px 0px" // Trigger almost immediately upon entering viewport
     };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
