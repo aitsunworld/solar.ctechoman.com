@@ -631,16 +631,7 @@ $lang = require_once "lang/{$active_lang}.php";
           <div class="marquee-wrapper direction-right">
             <div class="marquee-track">
               <?php for ($i = 0; $i < 2; $i++): ?>
-                <div class="marquee-card" title="Concept Certified Integration">
-                  <div class="marquee-card-logo">
-                    <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies Logo" style="filter: none; max-height: 18px;" loading="lazy" width="120" height="18">
-                  </div>
-                  <span class="marquee-card-name">Concept Solar AC</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'تكييف تيار مستمر 100٪' : '100% DC Aircon' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'مستقل عن الشبكة' : 'Off-Grid Cool' ?></span>
-                  </div>
-                </div>
+
                 <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="marquee-card" title="Canadian Solar Controller">
                   <div class="marquee-card-logo">
                     <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
