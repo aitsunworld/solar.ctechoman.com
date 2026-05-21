@@ -1,4 +1,10 @@
 <?php
+header('Content-Type: text/html; charset=UTF-8');
+ini_set('default_charset', 'UTF-8');
+if (function_exists('mb_internal_encoding')) {
+  mb_internal_encoding('UTF-8');
+}
+
 session_start();
 
 // Handle language toggle
@@ -44,11 +50,11 @@ $lang = require_once "lang/{$active_lang}.php";
   <!-- Preconnect and Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Tajawal:wght@300;400;500;700;900&family=Noto+Sans+Arabic:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css?v=2.3">
-  <link rel="stylesheet" href="chatbot.css">
+  <link rel="stylesheet" href="style.css?v=2.5">
+  <link rel="stylesheet" href="chatbot.css?v=2.5">
 </head>
 
 <body>

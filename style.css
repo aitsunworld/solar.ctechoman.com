@@ -1,4 +1,6 @@
-﻿/* ==========================================================================
+@charset "UTF-8";
+
+/* ==========================================================================
    Bright & Organic Solar Theme (Unconventional Layout)
    ========================================================================== */
 
@@ -25,8 +27,8 @@
   --gradient-eco: linear-gradient(135deg, #444444 0%, #111111 100%);
 
   /* Typography */
-  --font-primary: 'Outfit', sans-serif;
-  --font-arabic: 'Tajawal', sans-serif;
+  --font-primary: 'Outfit', 'Tajawal', 'Noto Sans Arabic', 'Segoe UI', Arial, sans-serif;
+  --font-arabic: 'Tajawal', 'Noto Sans Arabic', 'Segoe UI', Arial, sans-serif;
 
   /* Soft Shadows & Border Radius */
   --shadow-soft: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
@@ -45,7 +47,7 @@
 }
 
 [dir="rtl"] {
-  --font-primary: 'Tajawal', sans-serif;
+  --font-primary: 'Tajawal', 'Noto Sans Arabic', 'Segoe UI', Arial, sans-serif;
 }
 
 * {
@@ -818,7 +820,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ==========================================================================
-   Premium Logo Wall â€” Continuous Horizontal Marquee (3 Rows)
+   Premium Logo Wall - Continuous Horizontal Marquee (3 Rows)
    ========================================================================== */
 
 .partners-section {
@@ -864,7 +866,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   line-height: 1.6;
 }
 
-/* Row Wrapper â€” clips overflow and adds edge fade vignettes */
+/* Row Wrapper - clips overflow and adds edge fade vignettes */
 .logo-row-wrapper {
   position: relative;
   width: 100%;
@@ -953,7 +955,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.1);
 }
 
-/* GPU-accelerated keyframes â€” seamless 50% loop */
+/* GPU-accelerated keyframes - seamless 50% loop */
 @keyframes logo-scroll-left {
   0%   { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(-50%, 0, 0); }
@@ -1736,7 +1738,7 @@ footer {
 }
 
 /* ==========================================================================
-   Premium Appliance Auditor â€” Segmented Controls & Glassmorphic Dashboard
+   Premium Appliance Auditor - Segmented Controls & Glassmorphic Dashboard
    ========================================================================== */
 
 /* Remove default scrollbar and adjust parent height */
@@ -2039,3 +2041,4 @@ html[dir="rtl"] .appliance-info {
 html[dir="rtl"] .choose-center {
   transform: scaleX(-1);
 }
+

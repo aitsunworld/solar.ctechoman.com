@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 /* ==========================================================================
    Concept Technologies LLC — Solar Sales Chatbot Styles (chatbot.css)
    ========================================================================== */
@@ -100,7 +102,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  font-family: 'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Outfit', 'Tajawal', 'Noto Sans Arabic', 'Segoe UI', system-ui, -apple-system, sans-serif;
   animation: sb-slideUp 0.25s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1), max-height 0.3s ease;
   direction: ltr;

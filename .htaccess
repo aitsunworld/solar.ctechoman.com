@@ -1,0 +1,11 @@
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .htm .php .css .js .json
+
+AddType "text/html; charset=UTF-8" .html .htm .php
+AddType "text/css; charset=UTF-8" .css
+AddType "application/javascript; charset=UTF-8" .js
+AddType "application/json; charset=UTF-8" .json
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>

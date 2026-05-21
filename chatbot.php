@@ -2,6 +2,10 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+ini_set('default_charset', 'UTF-8');
+if (function_exists('mb_internal_encoding')) {
+    mb_internal_encoding('UTF-8');
+}
 /**
  * chatbot.php
  * Concept Technologies LLC — Solar Backend Lead Proxy & AI Advisor
@@ -22,14 +26,24 @@ header("Access-Control-Allow-Origin: " . $allowed_origin);
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
+function json_utf8($data) {
+    return json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+}
+
+function json_response($data, $statusCode = null) {
+    if ($statusCode !== null) {
+        http_response_code($statusCode);
+    }
+    echo json_utf8($data);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(["status" => "error", "message" => "Method not allowed"]);
+    json_response(["status" => "error", "message" => "Method not allowed"], 405);
     exit;
 }
 
@@ -51,8 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 }
 
 if (!$payload || !isset($payload['action'])) {
-    http_response_code(400);
-    echo json_encode(["status" => "error", "message" => "Invalid payload or missing action"]);
+    json_response(["status" => "error", "message" => "Invalid payload or missing action"], 400);
     exit;
 }
 
@@ -73,23 +86,20 @@ switch ($action) {
         break;
 
     default:
-        http_response_code(400);
-        echo json_encode(["status" => "error", "message" => "Unknown action: " . $action]);
+        json_response(["status" => "error", "message" => "Unknown action: " . $action], 400);
         break;
 }
 
 // ─── ACTION 1: SECURE & SANITISED LEAD SUBMISSION TO n8n (CRM) ───────────────
 function handleLeadSubmit($data) {
     if (empty($data)) {
-        http_response_code(400);
-        echo json_encode(["status" => "error", "message" => "Missing lead data"]);
+        json_response(["status" => "error", "message" => "Missing lead data"], 400);
         exit;
     }
 
     // Anti-Spam Honeypot check
     if (!empty($data['honeypot'])) {
-        http_response_code(200); // Fail silently for spam bots
-        echo json_encode(["status" => "success", "message" => "Verification completed"]);
+        json_response(["status" => "success", "message" => "Verification completed"], 200); // Fail silently for spam bots
         exit;
     }
 
@@ -111,20 +121,17 @@ function handleLeadSubmit($data) {
     $sizer_mode = isset($data['sizer_mode']) ? strip_tags(trim($data['sizer_mode'])) : 'bill';
 
     if (empty($name)) {
-        http_response_code(400);
-        echo json_encode(["status" => "error", "message" => "Name is required"]);
+        json_response(["status" => "error", "message" => "Name is required"], 400);
         exit;
     }
 
     if (strlen($phone) < 8) {
-        http_response_code(400);
-        echo json_encode(["status" => "error", "message" => "Phone number must be at least 8 digits"]);
+        json_response(["status" => "error", "message" => "Phone number must be at least 8 digits"], 400);
         exit;
     }
 
     if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        http_response_code(400);
-        echo json_encode(["status" => "error", "message" => "Invalid email address format"]);
+        json_response(["status" => "error", "message" => "Invalid email address format"], 400);
         exit;
     }
 
@@ -141,7 +148,7 @@ function handleLeadSubmit($data) {
     $sessionId = session_id() ?: '';
 
     // Standardized Payload structure for n8n to write securely to Odoo
-    $n8nPayload = json_encode([
+    $n8nPayload = json_utf8([
         "source" => "solar.ctechoman.com",
         "lead_type" => "solar_custom_enquiry",
         "session_id" => $sessionId,
@@ -181,25 +188,22 @@ function handleLeadSubmit($data) {
 
     if ($curlError) {
         error_log("[SolarLead Proxy] n8n hook error: " . $curlError);
-        http_response_code(502);
-        echo json_encode(["status" => "error", "message" => "CRM webhook target unreachable"]);
+        json_response(["status" => "error", "message" => "CRM webhook target unreachable"], 502);
         exit;
     }
 
     if ($httpCode >= 200 && $httpCode < 300) {
-        echo json_encode(["status" => "success", "message" => "Lead successfully forwarded to CRM"]);
+        json_response(["status" => "success", "message" => "Lead successfully forwarded to CRM"]);
     } else {
         error_log("[SolarLead Proxy] n8n returned error code: " . $httpCode);
-        http_response_code($httpCode);
-        echo json_encode(["status" => "error", "message" => "CRM server responded with error"]);
+        json_response(["status" => "error", "message" => "CRM server responded with error"], $httpCode);
     }
 }
 
 // ─── ACTION 2: DYNAMIC AI SALES ADVISOR (GROQ COMPATIBLE LLAMA-3.3) ─────────
 function handleAIChat($prompt, $lang, $calcContext) {
     if (empty($prompt)) {
-        http_response_code(400);
-        echo json_encode(["status" => "error", "message" => "Prompt is required"]);
+        json_response(["status" => "error", "message" => "Prompt is required"], 400);
         exit;
     }
 
@@ -209,7 +213,7 @@ function handleAIChat($prompt, $lang, $calcContext) {
             "ar" => "مرحباً! يبدو أنني أواجه مشكلة في الاتصال بالذكاء الاصطناعي حالياً. هل ترغب في معرفة المزيد عن تكاليف أنظمتنا أو حساب توفيرك الكهربائي؟",
             "en" => "Hi! It seems my AI engine is currently offline. Would you like to check our system costs, compute your solar savings, or speak with an expert?"
         ];
-        echo json_encode(["status" => "ok", "reply" => $fallback[$lang] ?? $fallback["en"]]);
+        json_response(["status" => "ok", "reply" => $fallback[$lang] ?? $fallback["en"]]);
         exit;
     }
 
@@ -256,7 +260,7 @@ function handleAIChat($prompt, $lang, $calcContext) {
     }
 
     // Build payload for Groq Chat Completions API
-    $groqPayload = json_encode([
+    $groqPayload = json_utf8([
         "model" => "llama-3.3-70b-versatile",
         "messages" => array_merge(
             [["role" => "system", "content" => $sysPrompt]],
@@ -285,8 +289,7 @@ function handleAIChat($prompt, $lang, $calcContext) {
 
     if ($curlError) {
         error_log("[SolarChatbot Proxy] Groq API error: " . $curlError);
-        http_response_code(502);
-        echo json_encode(["status" => "error", "message" => "AI engine unreachable"]);
+        json_response(["status" => "error", "message" => "AI engine unreachable"], 502);
         exit;
     }
 
@@ -298,22 +301,20 @@ function handleAIChat($prompt, $lang, $calcContext) {
         // Save the assistant's reply to the conversation memory
         $_SESSION['chatbot_history'][] = ["role" => "assistant", "content" => $aiReply];
         
-        echo json_encode(["status" => "ok", "reply" => $aiReply]);
+        json_response(["status" => "ok", "reply" => $aiReply]);
     } else {
         error_log("[SolarChatbot Proxy] Groq API returned error. HTTP Code: " . $httpCode . ", Payload: " . $response);
-        http_response_code($httpCode ?: 500);
-        echo json_encode([
+        json_response([
             "status" => "error", 
             "message" => "AI engine returned error code: " . $httpCode
-        ]);
+        ], $httpCode ?: 500);
     }
 }
 
 // ─── ACTION 3: SERVER-SIDE TELEMETRY LOGGER ──────────────────────────────────
 function handleAnalyticsLog($data) {
     if (empty($data)) {
-        http_response_code(400);
-        echo json_encode(["status" => "error", "message" => "Missing log data"]);
+        json_response(["status" => "error", "message" => "Missing log data"], 400);
         exit;
     }
 
@@ -322,13 +323,12 @@ function handleAnalyticsLog($data) {
     // Mask customer IP ranges to enforce privacy guidelines
     $data['ip_masked'] = preg_replace('/(\d+)\.(\d+)\.(\d+)\.(\d+)/', '$1.$2.xxx.xxx', $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0');
     $data['user_agent'] = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
-    $logEntry = json_encode($data) . "\n";
+    $logEntry = json_utf8($data) . "\n";
 
     // Securely write using concurrent block flags
     if (file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX)) {
-        echo json_encode(["status" => "ok", "message" => "Event logged successfully"]);
+        json_response(["status" => "ok", "message" => "Event logged successfully"]);
     } else {
-        http_response_code(500);
-        echo json_encode(["status" => "error", "message" => "Failed to write server log"]);
+        json_response(["status" => "error", "message" => "Failed to write server log"], 500);
     }
 }
