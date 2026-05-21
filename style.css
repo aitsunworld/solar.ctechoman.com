@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Bright & Organic Solar Theme (Unconventional Layout)
    ========================================================================== */
 
@@ -818,354 +818,189 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* ==========================================================================
-   Premium Product Ecosystem & Brand Grid
+   Premium Logo Wall â€” Continuous Horizontal Marquee (3 Rows)
    ========================================================================== */
 
-/* ==========================================================================
-   Premium Cinematic Product Marquees & Lanes
-   ========================================================================== */
-
-.product-marquees-container {
-  display: flex;
-  flex-direction: column;
-  gap: 3.5rem;
-  margin-top: 3rem;
-  width: 100%;
-}
-
-.marquee-lane {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
+.partners-section {
   overflow: hidden;
 }
 
-.marquee-lane-header {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 0 1rem;
-  text-align: start;
+.logo-wall-section {
+  width: 100%;
+  padding: 5rem 0;
+  background: transparent;
 }
 
-.marquee-lane-icon {
-  font-size: 1.75rem;
-  line-height: 1;
-  width: 52px;
-  height: 52px;
-  background: rgba(58, 141, 204, 0.08);
-  border: 1px solid rgba(58, 141, 204, 0.15);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(58, 141, 204, 0.04);
+.logo-wall-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 0 2rem;
 }
 
-/* Alternate Icon Colors for Premium Gamut */
-.marquee-lane:nth-child(1) .marquee-lane-icon {
-  background: rgba(58, 141, 204, 0.08);
-  border-color: rgba(58, 141, 204, 0.15);
+.logo-wall-eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   color: var(--color-primary);
-}
-.marquee-lane:nth-child(2) .marquee-lane-icon {
-  background: rgba(245, 158, 11, 0.08);
-  border-color: rgba(245, 158, 11, 0.15);
-  color: #f59e0b;
-}
-.marquee-lane:nth-child(3) .marquee-lane-icon {
-  background: rgba(16, 185, 129, 0.08);
-  border-color: rgba(16, 185, 129, 0.15);
-  color: #10b981;
-}
-.marquee-lane:nth-child(4) .marquee-lane-icon {
-  background: rgba(59, 130, 246, 0.08);
-  border-color: rgba(59, 130, 246, 0.15);
-  color: #3b82f6;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
 }
 
-.marquee-lane-text h3 {
-  font-size: 1.35rem;
-  font-weight: 800;
+.logo-wall-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
   color: var(--color-text-dark);
-  margin-bottom: 0.25rem;
-  letter-spacing: -0.01em;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.1;
 }
 
-.marquee-lane-text p {
-  font-size: 0.9rem;
+.logo-wall-subtitle {
+  font-size: 1.05rem;
   color: var(--color-text-muted);
-  margin: 0;
-  line-height: 1.3;
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-/* The Marquee Viewport with Edge Vignette Overlays */
-.marquee-wrapper {
+/* Row Wrapper â€” clips overflow and adds edge fade vignettes */
+.logo-row-wrapper {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 1.25rem 0;
+  padding: 0.85rem 0;
+  margin-bottom: 0.5rem;
 }
 
-.marquee-wrapper::before,
-.marquee-wrapper::after {
+.logo-row-wrapper::before,
+.logo-row-wrapper::after {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 150px;
+  width: 120px;
   z-index: 5;
   pointer-events: none;
-  transition: opacity 0.3s;
 }
 
-.marquee-wrapper::before {
+.logo-row-wrapper::before {
   left: 0;
-  background: linear-gradient(to right, #ffffff, transparent);
+  background: linear-gradient(to right, var(--color-bg) 0%, transparent 100%);
 }
 
-.marquee-wrapper::after {
+.logo-row-wrapper::after {
   right: 0;
-  background: linear-gradient(to left, #ffffff, transparent);
+  background: linear-gradient(to left, var(--color-bg) 0%, transparent 100%);
 }
 
-/* The Continuous Scrolling Track */
-.marquee-track {
+/* The scrolling flex track */
+.logo-row {
   display: flex;
+  flex-wrap: nowrap;
   width: max-content;
+  align-items: center;
   will-change: transform;
 }
 
-/* Staggered Speed & Bidirectional Motion */
-.direction-left .marquee-track {
-  animation: marquee-left 25s linear infinite;
+/* Row 1 & 3: left-scrolling */
+.logo-row--left {
+  animation: logo-scroll-left 30s linear infinite;
 }
 
-.direction-right .marquee-track {
-  animation: marquee-right 25s linear infinite;
+/* Row 2: right-scrolling */
+.logo-row--right {
+  animation: logo-scroll-right 30s linear infinite;
 }
 
-/* Pause whole track on marquee container hover */
-.marquee-wrapper:hover .marquee-track {
+/* Row 3 variant: slightly slower for depth effect */
+.logo-row--slow {
+  animation-duration: 40s;
+}
+
+/* Pause on hover */
+.logo-row-wrapper:hover .logo-row {
   animation-play-state: paused;
 }
 
-/* Luxury Glassmorphic Product Card */
-.marquee-card {
+/* Individual Logo Item */
+.logo-item {
   flex: 0 0 auto;
-  width: 290px;
-  margin: 0 12px;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-decoration: none;
-  box-sizing: border-box;
-  text-align: start;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s,
-              background-color 0.4s,
-              box-shadow 0.4s;
-  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.015);
-}
-
-.marquee-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  border-color: rgba(58, 141, 204, 0.35);
-  background-color: #ffffff;
-  box-shadow: 0 20px 40px rgba(58, 141, 204, 0.08), 0 1px 8px rgba(0, 0, 0, 0.01);
-}
-
-.marquee-card-logo {
-  height: 38px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  margin-bottom: 1.25rem;
-  width: 100%;
+  justify-content: center;
+  padding: 0 2.5rem;
+  height: 60px;
 }
 
-.marquee-card-logo img {
-  max-height: 100%;
+.logo-item img {
+  display: block;
+  max-height: 36px;
   width: auto;
+  max-width: 120px;
   object-fit: contain;
-  filter: grayscale(100%) opacity(0.5);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(100%) opacity(0.45);
+  transition: filter 0.4s ease, transform 0.4s ease;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-.marquee-card:hover .marquee-card-logo img {
+.logo-row-wrapper:hover .logo-item img {
   filter: grayscale(0%) opacity(1);
 }
 
-.marquee-card-name {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: var(--color-text-dark);
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.01em;
+.logo-item img:hover {
+  transform: scale(1.1);
 }
 
-/* Micro-Tags / Compact Spec Pills */
-.marquee-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: auto;
-  width: 100%;
+/* GPU-accelerated keyframes â€” seamless 50% loop */
+@keyframes logo-scroll-left {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
-.marquee-card-tag {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  background: rgba(58, 141, 204, 0.08);
-  padding: 0.25rem 0.65rem;
-  border-radius: 50px;
-  white-space: nowrap;
-  letter-spacing: 0.01em;
+@keyframes logo-scroll-right {
+  0%   { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
-.marquee-card-tag:nth-child(even) {
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.08);
-}
-
-/* Hardware schematic look remove / visual cleanup guarantees */
-.marquee-card-logo .brand-logo-fallback {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/* GPU Accelerated Keyframes */
-@keyframes marquee-left {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes marquee-right {
-  0% {
-    transform: translate3d(-50%, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-/* RTL Support overrides */
-[dir="rtl"] .marquee-lane-header {
-  text-align: right;
-}
-
-[dir="rtl"] .marquee-card {
-  text-align: right;
-  align-items: flex-start;
-}
-
-[dir="rtl"] .marquee-card-logo {
-  justify-content: flex-start;
-}
-
-/* Mobile & Tablet Responsiveness */
-@media (max-width: 992px) {
-  .product-marquees-container {
-    gap: 2.5rem;
-  }
-  .marquee-wrapper::before,
-  .marquee-wrapper::after {
-    width: 60px; /* Slimmer vigneting for narrower viewports */
-  }
-  .marquee-card {
-    width: 260px;
-    padding: 1.25rem;
-  }
-}
-
+/* Mobile responsive */
 @media (max-width: 768px) {
-  .marquee-lane-header {
-    gap: 0.85rem;
+  .logo-wall-header {
+    margin-bottom: 2.5rem;
   }
-  .marquee-lane-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 1.4rem;
+  .logo-item {
+    padding: 0 1.5rem;
+    height: 50px;
   }
-  .marquee-lane-text h3 {
-    font-size: 1.15rem;
+  .logo-item img {
+    max-height: 28px;
+    max-width: 90px;
   }
-  .marquee-lane-text p {
-    font-size: 0.8rem;
+  .logo-row-wrapper::before,
+  .logo-row-wrapper::after {
+    width: 60px;
   }
-  /* Speed up marquee on mobile slightly for faster visual scan */
-  .direction-left .marquee-track {
-    animation-duration: 20s;
+  .logo-row--left {
+    animation-duration: 22s;
   }
-  .direction-right .marquee-track {
-    animation-duration: 20s;
+  .logo-row--right {
+    animation-duration: 22s;
   }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .brand-logos-row {
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 0.75rem;
-  }
-
-  .brand-logo-card {
-    height: 68px;
-    padding: 0.6rem;
-  }
-
-  .brand-logo-card img {
-    max-height: 32px;
-  }
-
-  .brand-category-header {
-    gap: 0.75rem;
-  }
-
-  .brand-cat-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 1.25rem;
-    border-radius: 12px;
-  }
-
-  .brand-cat-info h3 {
-    font-size: 1.05rem;
-  }
-
-  .category-cards-grid {
-    grid-template-columns: 1fr;
+  .logo-row--slow {
+    animation-duration: 30s;
   }
 }
 
-@media (min-width: 577px) and (max-width: 992px) {
-  .category-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 480px) {
+  .logo-item {
+    padding: 0 1rem;
+  }
+  .logo-item img {
+    max-height: 24px;
+    max-width: 75px;
   }
 }
-
-@media (min-width: 993px) {
-  .category-cards-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 
 
 /* Horizontal Process Flow */
@@ -1901,7 +1736,7 @@ footer {
 }
 
 /* ==========================================================================
-   Premium Appliance Auditor — Segmented Controls & Glassmorphic Dashboard
+   Premium Appliance Auditor â€” Segmented Controls & Glassmorphic Dashboard
    ========================================================================== */
 
 /* Remove default scrollbar and adjust parent height */
