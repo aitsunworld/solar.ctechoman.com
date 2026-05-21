@@ -41,7 +41,7 @@ $lang = require_once "lang/{$active_lang}.php";
     href="https://www.ctechoman.com/public/apple-touch-icon-144x144-precomposed.png">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="stylesheet" href="style.css?v=2.3">
   <link rel="stylesheet" href="chatbot.css">
 </head>
 
@@ -91,10 +91,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
         <div class="hero-actions">
           <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
-          <a href="javascript:void(0)" class="btn-video" id="watch-video-btn">
-            <span class="play-icon">▶</span>
-            <span class="video-text"><?= $lang['hero_btn_video'] ?></span>
-          </a>
+
         </div>
 
         <div class="hero-slider-nav">
@@ -385,14 +382,143 @@ $lang = require_once "lang/{$active_lang}.php";
       <span style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;"><?= $lang['why_pre'] ?></span>
       <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 1rem;"><?= $lang['brands_title'] ?></h2>
       <p class="text-muted" style="margin-bottom: 3.5rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;"><?= $lang['brands_subtitle'] ?></p>
-      
-      <div class="partners-grid">
-        <?php for ($i = 1; $i <= 6; $i++): ?>
-          <div class="partner-card">
-            <span class="partner-placeholder-text"><?= $lang['brands_placeholder'] ?> <?= $i ?></span>
+
+      <!-- Category: Inverters -->
+      <div class="brand-category reveal">
+        <div class="brand-category-header">
+          <div class="brand-cat-icon">⚡</div>
+          <div class="brand-cat-info">
+            <h3><?= $lang['brands_cat_inverters'] ?></h3>
+            <p><?= $lang['brands_cat_inverters_desc'] ?></p>
           </div>
-        <?php endfor; ?>
+        </div>
+        <div class="brand-logos-row">
+          <a href="https://solar.huawei.com" target="_blank" rel="noopener" class="brand-logo-card" title="Huawei FusionSolar">
+            <img src="https://logo.clearbit.com/huawei.com" alt="Huawei" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Huawei</span>
+          </a>
+          <a href="https://www.sungrowpower.com" target="_blank" rel="noopener" class="brand-logo-card" title="Sungrow">
+            <img src="https://logo.clearbit.com/sungrowpower.com" alt="Sungrow" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Sungrow</span>
+          </a>
+          <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="brand-logo-card" title="Solis">
+            <img src="https://logo.clearbit.com/ginlong.com" alt="Solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Solis</span>
+          </a>
+          <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
+            <img src="https://logo.clearbit.com/canadiansolar.com" alt="Canadian Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
+          </a>
+          <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="brand-logo-card" title="Deye">
+            <img src="https://logo.clearbit.com/deyeinverter.com" alt="Deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Deye</span>
+          </a>
+          <div class="brand-logo-card" title="Power & Sun">
+            <span class="brand-logo-fallback" style="display:flex">Power & Sun</span>
+          </div>
+        </div>
       </div>
+
+      <!-- Category: Solar Panels -->
+      <div class="brand-category reveal delay-100">
+        <div class="brand-category-header">
+          <div class="brand-cat-icon">☀️</div>
+          <div class="brand-cat-info">
+            <h3><?= $lang['brands_cat_panels'] ?></h3>
+            <p><?= $lang['brands_cat_panels_desc'] ?></p>
+          </div>
+        </div>
+        <div class="brand-logos-row">
+          <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
+            <img src="https://logo.clearbit.com/canadiansolar.com" alt="Canadian Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
+          </a>
+          <a href="https://www.trinasolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Trina Solar">
+            <img src="https://logo.clearbit.com/trinasolar.com" alt="Trina Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Trina Solar</span>
+          </a>
+          <a href="https://www.longi.com" target="_blank" rel="noopener" class="brand-logo-card" title="LONGi">
+            <img src="https://logo.clearbit.com/longi.com" alt="LONGi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">LONGi</span>
+          </a>
+          <a href="https://www.jinkosolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Jinko Solar">
+            <img src="https://logo.clearbit.com/jinkosolar.com" alt="Jinko Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Jinko Solar</span>
+          </a>
+          <a href="https://www.jasolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="JA Solar">
+            <img src="https://logo.clearbit.com/jasolar.com" alt="JA Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">JA Solar</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Category: Batteries -->
+      <div class="brand-category reveal delay-200">
+        <div class="brand-category-header">
+          <div class="brand-cat-icon">🔋</div>
+          <div class="brand-cat-info">
+            <h3><?= $lang['brands_cat_batteries'] ?></h3>
+            <p><?= $lang['brands_cat_batteries_desc'] ?></p>
+          </div>
+        </div>
+        <div class="brand-logos-row">
+          <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
+            <img src="https://logo.clearbit.com/canadiansolar.com" alt="Canadian Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
+          </a>
+          <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="brand-logo-card" title="Solis">
+            <img src="https://logo.clearbit.com/ginlong.com" alt="Solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Solis</span>
+          </a>
+          <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="brand-logo-card" title="Deye">
+            <img src="https://logo.clearbit.com/deyeinverter.com" alt="Deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Deye</span>
+          </a>
+          <div class="brand-logo-card" title="Jebel">
+            <span class="brand-logo-fallback" style="display:flex">Jebel</span>
+          </div>
+          <a href="https://www.longi.com" target="_blank" rel="noopener" class="brand-logo-card" title="LONGi">
+            <img src="https://logo.clearbit.com/longi.com" alt="LONGi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">LONGi</span>
+          </a>
+          <div class="brand-logo-card" title="Power & Sun">
+            <span class="brand-logo-fallback" style="display:flex">Power & Sun</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category: Air Conditioner -->
+      <div class="brand-category reveal delay-300">
+        <div class="brand-category-header">
+          <div class="brand-cat-icon">❄️</div>
+          <div class="brand-cat-info">
+            <h3><?= $lang['brands_cat_ac'] ?></h3>
+            <p><?= $lang['brands_cat_ac_desc'] ?></p>
+          </div>
+        </div>
+        <div class="brand-logos-row brand-logos-row--few">
+          <div class="brand-logo-card brand-logo-card--wide">
+            <span class="brand-cat-badge"><?= $lang['brands_cat_ac_desc'] ?></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category: Charge Controller -->
+      <div class="brand-category reveal delay-300">
+        <div class="brand-category-header">
+          <div class="brand-cat-icon">🔌</div>
+          <div class="brand-cat-info">
+            <h3><?= $lang['brands_cat_chargecontroller'] ?></h3>
+            <p><?= $lang['brands_cat_chargecontroller_desc'] ?></p>
+          </div>
+        </div>
+        <div class="brand-logos-row brand-logos-row--few">
+          <div class="brand-logo-card brand-logo-card--wide">
+            <span class="brand-cat-badge"><?= $lang['brands_cat_chargecontroller_desc'] ?></span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -613,15 +739,7 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
   </footer>
 
-  <!-- Video Modal overlay -->
-  <div id="video-modal" class="video-modal-overlay" aria-hidden="true" role="dialog">
-    <div class="video-modal-container">
-      <button class="video-modal-close" id="close-video-modal" aria-label="Close modal">&times;</button>
-      <div class="video-iframe-wrapper">
-        <iframe id="video-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
+
 
   <script src="calculator-engine.js?v=2.3" defer></script>
   <script src="analytics.js?v=2.3" defer></script>

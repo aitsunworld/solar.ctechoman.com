@@ -71,6 +71,16 @@ return [
     'brands_title' => 'Trusted Brands & Products',
     'brands_subtitle' => 'Premium solar brands we install across Oman.',
     'brands_placeholder' => 'Brand Logo',
+    'brands_cat_inverters' => 'Inverters',
+    'brands_cat_panels' => 'Solar Panels',
+    'brands_cat_batteries' => 'Batteries',
+    'brands_cat_ac' => 'Air Conditioner',
+    'brands_cat_chargecontroller' => 'Charge Controller',
+    'brands_cat_inverters_desc' => 'Smart hybrid & grid-tied inverters',
+    'brands_cat_panels_desc' => 'High-efficiency monocrystalline modules',
+    'brands_cat_batteries_desc' => 'Lithium-ion energy storage solutions',
+    'brands_cat_ac_desc' => 'Premium quality units',
+    'brands_cat_chargecontroller_desc' => 'High efficiency controllers',
 
     // Process
     'proc_title' => 'Seamless Journey',

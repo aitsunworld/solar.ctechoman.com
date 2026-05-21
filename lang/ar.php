@@ -71,6 +71,16 @@ return [
     'brands_title' => 'العلامات التجارية والمنتجات الموثوقة',
     'brands_subtitle' => 'ماركات الطاقة الشمسية المتميزة التي نقوم بتركيبها في جميع أنحاء عمان.',
     'brands_placeholder' => 'شعار العلامة التجارية',
+    'brands_cat_inverters' => 'العواكس',
+    'brands_cat_panels' => 'الألواح الشمسية',
+    'brands_cat_batteries' => 'البطاريات',
+    'brands_cat_ac' => 'مكيف الهواء',
+    'brands_cat_chargecontroller' => 'منظم الشحن',
+    'brands_cat_inverters_desc' => 'عواكس هجينة ذكية ومربوطة بالشبكة',
+    'brands_cat_panels_desc' => 'ألواح أحادية البلورة عالية الكفاءة',
+    'brands_cat_batteries_desc' => 'حلول تخزين الطاقة بأيون الليثيوم',
+    'brands_cat_ac_desc' => 'وحدات عالية الجودة',
+    'brands_cat_chargecontroller_desc' => 'منظمات شحن عالية الكفاءة',
 
     // Process
     'proc_title' => 'رحلة سلسة',

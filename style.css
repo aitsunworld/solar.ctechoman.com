@@ -284,40 +284,7 @@ h1, h2, h3, h4 {
   color: #fff;
 }
 
-.btn-video {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: var(--color-text-dark);
-  font-weight: 700;
-  text-decoration: none;
-  transition: var(--transition);
-}
 
-.btn-video:hover {
-  transform: translateY(-3px);
-  color: var(--color-primary);
-}
-
-.play-icon {
-  width: 50px;
-  height: 50px;
-  background: var(--color-surface);
-  border-radius: var(--radius-circle);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-soft);
-  color: var(--color-text-dark);
-  font-size: 1.2rem;
-  padding-left: 4px; /* optical center */
-  transition: var(--transition);
-}
-
-.btn-video:hover .play-icon {
-  background: var(--color-primary);
-  color: #fff;
-}
 
 .hero-slider-nav {
   display: flex;
@@ -609,127 +576,186 @@ input[type="range"]::-webkit-slider-thumb:hover {
   border-bottom: 1px solid #f1f5f9;
 }
 
-.partners-grid {
+/* Brand Category Block */
+.brand-category {
+  margin-bottom: 2.5rem;
+  text-align: start;
+}
+
+.brand-category:last-child {
+  margin-bottom: 0;
+}
+
+.brand-category-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.brand-cat-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--color-accent-light);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.brand-cat-info h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin-bottom: 0.15rem;
+  line-height: 1.3;
+}
+
+.brand-cat-info p {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Brand Logo Cards Row */
+.brand-logos-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
 }
 
-.partner-card {
+.brand-logos-row--few {
+  grid-template-columns: 1fr;
+  max-width: 400px;
+}
+
+.brand-logo-card {
   background: #ffffff;
-  border: 2px dashed #cbd5e1;
-  border-radius: 12px;
-  height: 110px;
+  border: 1.5px solid #e8ecf1;
+  border-radius: 14px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  padding: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01);
-}
-
-.partner-card:hover {
-  transform: translateY(-6px) scale(1.03);
-  border-color: var(--color-primary);
-  box-shadow: 0 12px 20px -3px rgba(58, 141, 204, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
-.partner-placeholder-text {
-  color: #94a3b8;
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  transition: color 0.3s;
-}
-
-.partner-card:hover .partner-placeholder-text {
-  color: var(--color-primary);
-}
-
-/* Video Modal Overlay */
-.video-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(15, 23, 42, 0.85); /* Slate 900 dim overlay */
-  backdrop-filter: blur(4px);
-  align-items: center;
-  justify-content: center;
-  z-index: 100000;
-  display: none;
-}
-
-.video-modal-overlay.active {
-  display: flex;
-}
-
-.video-modal-container {
+  padding: 0.75rem 1rem;
+  text-decoration: none;
   position: relative;
-  width: 90%;
-  max-width: 560px; /* Premium 560px iframe width */
-  background: transparent;
-  transform: scale(0.95);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.video-modal-overlay.active .video-modal-container {
-  transform: scale(1);
-}
-
-.video-iframe-wrapper {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 widescreen aspect ratio */
-  height: 0;
-  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
 }
 
-#video-iframe {
+.brand-logo-card::before {
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  background: #000;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(58, 141, 204, 0.04) 0%, rgba(62, 182, 73, 0.04) 100%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  border-radius: inherit;
 }
 
-.video-modal-close {
-  position: absolute;
-  top: -45px;
-  right: 0;
-  background: transparent;
-  border: none;
-  color: #ffffff;
-  font-size: 2.8rem;
-  cursor: pointer;
-  line-height: 1;
-  transition: transform 0.2s, color 0.2s;
-  outline: none;
+.brand-logo-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 24px -4px rgba(58, 141, 204, 0.15),
+              0 4px 8px -2px rgba(0, 0, 0, 0.04);
 }
 
-.video-modal-close:hover {
+.brand-logo-card:hover::before {
+  opacity: 1;
+}
+
+.brand-logo-card img {
+  max-height: 40px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(30%);
+  opacity: 0.85;
+  transition: all 0.35s;
+}
+
+.brand-logo-card:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* Text-based fallback for brands without embeddable logos */
+.brand-logo-fallback {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+  transition: color 0.35s;
+}
+
+.brand-logo-card:hover .brand-logo-fallback {
   color: var(--color-primary);
-  transform: scale(1.15) rotate(90deg);
 }
 
-@media (max-width: 576px) {
-  .video-modal-close {
-    top: -40px;
-    right: 5px;
-    font-size: 2.4rem;
+/* Wide card for categories without specific brand logos */
+.brand-logo-card--wide {
+  max-width: 400px;
+  height: 64px;
+  border-style: dashed;
+  border-color: var(--color-border);
+}
+
+.brand-cat-badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .brand-logos-row {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .brand-logo-card {
+    height: 68px;
+    padding: 0.6rem;
+  }
+
+  .brand-logo-card img {
+    max-height: 32px;
+  }
+
+  .brand-category-header {
+    gap: 0.75rem;
+  }
+
+  .brand-cat-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+    border-radius: 12px;
+  }
+
+  .brand-cat-info h3 {
+    font-size: 1.05rem;
   }
 }
+
+
 
 /* Horizontal Process Flow */
 .process-flow {
