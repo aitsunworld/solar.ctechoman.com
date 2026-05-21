@@ -67,6 +67,27 @@ return [
     'why_6_title' => '100% Omani-Owned Company',
     'why_6_desc' => 'Part of Al Bahja Group, established in 1947. Mainly in manufacturing and allied activities.',
 
+    // AC & Charge Controller Features Specs
+    'brands_ac_badge' => 'Concept Certified Integration',
+    'brands_ac_title' => 'Solar Air Conditioning Systems',
+    'brands_ac_desc' => 'Custom engineered 100% off-grid DC-powered and grid-hybrid solar AC units built to withstand Oman\'s extreme summer heat.',
+    'brands_ac_f1_title' => '100% Off-Grid & Hybrid Solar ACs',
+    'brands_ac_f1_desc' => 'Runs directly on DC solar power during the day, with grid hybrid switching for 24/7 cooling.',
+    'brands_ac_f2_title' => 'Eco-Friendly High-Efficiency Cooling',
+    'brands_ac_f2_desc' => 'Uses green R32 refrigerants to deliver maximum BTU cooling with minimal energy consumption.',
+    'brands_ac_f3_title' => 'Smart WiFi App Telemetry',
+    'brands_ac_f3_desc' => 'Allows real-time smart scheduling, temperature control, and energy monitoring via smartphone.',
+
+    'brands_cc_badge' => 'DCRP Approved Technology',
+    'brands_cc_title' => 'Smart MPPT Charge Controllers',
+    'brands_cc_desc' => 'Concept integrates ultra-efficient Maximum Power Point Tracking (MPPT) regulators that maximize power conversion up to 99%.',
+    'brands_cc_f1_title' => 'Advanced Ultra-Fast MPPT Technology',
+    'brands_cc_f1_desc' => 'Maximum Power Point Tracking with up to 99% conversion efficiency to maximize battery charge.',
+    'brands_cc_f2_title' => 'Multi-Stage Electronic Safe Protection',
+    'brands_cc_f2_desc' => 'Safeguards against over-charge, over-discharge, short-circuits, and reverse battery connection.',
+    'brands_cc_f3_title' => 'LCD Display & Smart Telemetry',
+    'brands_cc_f3_desc' => 'Built-in digital display and industrial RS485 connectivity for battery performance monitoring.',
+
     // Brands
     'brands_title' => 'Trusted Brands & Products',
     'brands_subtitle' => 'Premium solar brands we install across Oman.',
@@ -81,21 +102,6 @@ return [
     'brands_cat_batteries_desc' => 'Lithium-ion energy storage solutions',
     'brands_cat_ac_desc' => 'Premium quality units',
     'brands_cat_chargecontroller_desc' => 'High efficiency controllers',
-
-    // AC & Charge Controller Features Specs
-    'brands_ac_f1_title' => '100% Off-Grid & Hybrid Solar ACs',
-    'brands_ac_f1_desc' => 'Runs directly on DC solar power during the day, with grid hybrid switching for 24/7 cooling.',
-    'brands_ac_f2_title' => 'Eco-Friendly High-Efficiency Cooling',
-    'brands_ac_f2_desc' => 'Uses green R32 refrigerants to deliver maximum BTU cooling with minimal energy consumption.',
-    'brands_ac_f3_title' => 'Smart WiFi App Telemetry',
-    'brands_ac_f3_desc' => 'Allows real-time smart scheduling, temperature control, and energy monitoring via smartphone.',
-
-    'brands_cc_f1_title' => 'Advanced Ultra-Fast MPPT Technology',
-    'brands_cc_f1_desc' => 'Maximum Power Point Tracking with up to 99% conversion efficiency to maximize battery charge.',
-    'brands_cc_f2_title' => 'Multi-Stage Electronic Safe Protection',
-    'brands_cc_f2_desc' => 'Safeguards against over-charge, over-discharge, short-circuits, and reverse battery connection.',
-    'brands_cc_f3_title' => 'LCD Display & Smart Telemetry',
-    'brands_cc_f3_desc' => 'Built-in digital display and industrial RS485 connectivity for battery performance monitoring.',
 
     // Process
     'proc_title' => 'Seamless Journey',
