@@ -394,28 +394,29 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
         <div class="brand-logos-row">
           <a href="https://solar.huawei.com" target="_blank" rel="noopener" class="brand-logo-card" title="Huawei FusionSolar">
-            <img src="https://logo.clearbit.com/huawei.com" alt="Huawei" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/huawei.svg" alt="Huawei" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Huawei</span>
           </a>
           <a href="https://www.sungrowpower.com" target="_blank" rel="noopener" class="brand-logo-card" title="Sungrow">
-            <img src="https://logo.clearbit.com/sungrowpower.com" alt="Sungrow" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/sungrow.png" alt="Sungrow" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Sungrow</span>
           </a>
           <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="brand-logo-card" title="Solis">
-            <img src="https://logo.clearbit.com/ginlong.com" alt="Solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/solis.png" alt="Solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Solis</span>
           </a>
           <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
-            <img src="https://logo.clearbit.com/canadiansolar.com" alt="Canadian Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/canadian_solar.png" alt="Canadian Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
           </a>
           <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="brand-logo-card" title="Deye">
-            <img src="https://logo.clearbit.com/deyeinverter.com" alt="Deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/deye.png" alt="Deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Deye</span>
           </a>
-          <div class="brand-logo-card" title="Power & Sun">
-            <span class="brand-logo-fallback" style="display:flex">Power & Sun</span>
-          </div>
+          <a href="https://powernsun.com" target="_blank" rel="noopener" class="brand-logo-card" title="Power & Sun">
+            <img src="brands/power_sun.png" alt="Power & Sun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
+          </a>
         </div>
       </div>
 
@@ -430,23 +431,23 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
         <div class="brand-logos-row">
           <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
-            <img src="https://logo.clearbit.com/canadiansolar.com" alt="Canadian Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/canadian_solar.png" alt="Canadian Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
           </a>
           <a href="https://www.trinasolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Trina Solar">
-            <img src="https://logo.clearbit.com/trinasolar.com" alt="Trina Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/trina_solar.svg" alt="Trina Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Trina Solar</span>
           </a>
           <a href="https://www.longi.com" target="_blank" rel="noopener" class="brand-logo-card" title="LONGi">
-            <img src="https://logo.clearbit.com/longi.com" alt="LONGi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/longi.svg" alt="LONGi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">LONGi</span>
           </a>
           <a href="https://www.jinkosolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Jinko Solar">
-            <img src="https://logo.clearbit.com/jinkosolar.com" alt="Jinko Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/jinko_solar.png" alt="Jinko Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Jinko Solar</span>
           </a>
           <a href="https://www.jasolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="JA Solar">
-            <img src="https://logo.clearbit.com/jasolar.com" alt="JA Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/ja_solar.svg" alt="JA Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">JA Solar</span>
           </a>
         </div>
@@ -463,27 +464,29 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
         <div class="brand-logos-row">
           <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
-            <img src="https://logo.clearbit.com/canadiansolar.com" alt="Canadian Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/canadian_solar.png" alt="Canadian Solar" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
           </a>
           <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="brand-logo-card" title="Solis">
-            <img src="https://logo.clearbit.com/ginlong.com" alt="Solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/solis.png" alt="Solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Solis</span>
           </a>
           <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="brand-logo-card" title="Deye">
-            <img src="https://logo.clearbit.com/deyeinverter.com" alt="Deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/deye.png" alt="Deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">Deye</span>
           </a>
-          <div class="brand-logo-card" title="Jebel">
-            <span class="brand-logo-fallback" style="display:flex">Jebel</span>
-          </div>
+          <a href="https://jebel.ae" target="_blank" rel="noopener" class="brand-logo-card" title="Jebel">
+            <img src="brands/jebel.png" alt="Jebel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Jebel</span>
+          </a>
           <a href="https://www.longi.com" target="_blank" rel="noopener" class="brand-logo-card" title="LONGi">
-            <img src="https://logo.clearbit.com/longi.com" alt="LONGi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="brands/longi.svg" alt="LONGi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
             <span class="brand-logo-fallback" style="display:none">LONGi</span>
           </a>
-          <div class="brand-logo-card" title="Power & Sun">
-            <span class="brand-logo-fallback" style="display:flex">Power & Sun</span>
-          </div>
+          <a href="https://powernsun.com" target="_blank" rel="noopener" class="brand-logo-card" title="Power & Sun">
+            <img src="brands/power_sun.png" alt="Power & Sun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
+          </a>
         </div>
       </div>
 
