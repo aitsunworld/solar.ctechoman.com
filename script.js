@@ -22,13 +22,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. Navbar Scroll Style Trigger ---
     const navbar = document.getElementById('navbar');
     if (navbar) {
+        let lastScrollY = 0;
+        let ticking = false;
+        
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+            lastScrollY = window.scrollY;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    if (lastScrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
-        });
+        }, { passive: true });
     }
 
     // --- 3. Scroll Reveal Animations (Intersection Observer) ---

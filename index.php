@@ -41,6 +41,11 @@ $lang = require_once "lang/{$active_lang}.php";
   <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
     href="https://www.ctechoman.com/public/apple-touch-icon-144x144-precomposed.png">
 
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
   <!-- Styles -->
   <link rel="stylesheet" href="style.css?v=2.3">
   <link rel="stylesheet" href="chatbot.css">
@@ -113,7 +118,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
       <div class="hero-visual">
         <div class="lightning-bg"></div>
-        <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500">
+        <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500" fetchpriority="high">
       </div>
     </div>
   </section>
@@ -274,36 +279,36 @@ $lang = require_once "lang/{$active_lang}.php";
       <div class="gallery-col">
         <div class="gallery-item tall">
           <img
-            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70&fm=webp"
             alt="Solar Project 1" width="600" height="800">
         </div>
         <div class="gallery-item short">
           <img
-            src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70&fm=webp"
             alt="Solar Project 2" width="600" height="400">
         </div>
       </div>
       <div class="gallery-col">
         <div class="gallery-item short">
           <img
-            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70&fm=webp"
             alt="Solar Project 3" width="600" height="400">
         </div>
         <div class="gallery-item tall">
           <img
-            src="https://plus.unsplash.com/premium_photo-1679917152396-4b18accacb9d?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://plus.unsplash.com/premium_photo-1679917152396-4b18accacb9d?q=70&w=600&fm=webp&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Solar Project 4" width="600" height="800">
         </div>
       </div>
       <div class="gallery-col">
         <div class="gallery-item tall">
           <img
-            src="https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?q=80&w=2153&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?q=70&w=600&fm=webp&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Solar Project 5" width="600" height="800">
         </div>
         <div class="gallery-item short">
           <img
-            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70&fm=webp"
             alt="Solar Project 6" width="600" height="400">
         </div>
       </div>
@@ -344,7 +349,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <div class="choose-center reveal" style="position: relative;">
-        <img src="solar_panel.webp" alt="Solar Panel" width="300" height="250"
+        <img src="solar_panel.webp" alt="Solar Panel" width="300" height="338"
           style="width: 100%; max-width: 300px; position: relative; z-index: 2;">
 
         <img src="cloud1.webp" class="cloud-anim cloud-1" alt="Cloud" width="120" height="60">
@@ -400,7 +405,7 @@ $lang = require_once "lang/{$active_lang}.php";
               <?php for ($i = 0; $i < 2; $i++): ?>
                 <a href="https://solar.huawei.com" target="_blank" rel="noopener" class="marquee-card" title="Huawei FusionSolar">
                   <div class="marquee-card-logo">
-                    <img src="brands/huawei.svg" alt="Huawei" class="logo-huawei" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/huawei.svg" alt="Huawei" class="logo-huawei" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Huawei</span>
                   </div>
                   <span class="marquee-card-name">Huawei</span>
@@ -412,7 +417,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.sungrowpower.com" target="_blank" rel="noopener" class="marquee-card" title="Sungrow">
                   <div class="marquee-card-logo">
-                    <img src="brands/sungrow.png" alt="Sungrow" class="logo-sungrow" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/sungrow.png" alt="Sungrow" class="logo-sungrow" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Sungrow</span>
                   </div>
                   <span class="marquee-card-name">Sungrow</span>
@@ -423,7 +428,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="marquee-card" title="Solis">
                   <div class="marquee-card-logo">
-                    <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Solis</span>
                   </div>
                   <span class="marquee-card-name">Solis</span>
@@ -434,7 +439,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="marquee-card" title="Deye">
                   <div class="marquee-card-logo">
-                    <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Deye</span>
                   </div>
                   <span class="marquee-card-name">Deye</span>
@@ -445,7 +450,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="marquee-card" title="Canadian Solar">
                   <div class="marquee-card-logo">
-                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
                   </div>
                   <span class="marquee-card-name">Canadian Solar</span>
@@ -456,7 +461,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://powernsun.com" target="_blank" rel="noopener" class="marquee-card" title="Power & Sun">
                   <div class="marquee-card-logo">
-                    <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
                   </div>
                   <span class="marquee-card-name">Power & Sun</span>
@@ -484,7 +489,7 @@ $lang = require_once "lang/{$active_lang}.php";
               <?php for ($i = 0; $i < 2; $i++): ?>
                 <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="marquee-card" title="Canadian Solar Panels">
                   <div class="marquee-card-logo">
-                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
                   </div>
                   <span class="marquee-card-name">Canadian Solar</span>
@@ -495,7 +500,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.trinasolar.com" target="_blank" rel="noopener" class="marquee-card" title="Trina Solar">
                   <div class="marquee-card-logo">
-                    <img src="brands/trina_solar.svg" alt="Trina Solar" class="logo-trina" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/trina_solar.svg" alt="Trina Solar" class="logo-trina" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Trina Solar</span>
                   </div>
                   <span class="marquee-card-name">Trina Solar</span>
@@ -506,7 +511,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.longi.com" target="_blank" rel="noopener" class="marquee-card" title="LONGi">
                   <div class="marquee-card-logo">
-                    <img src="brands/longi.svg" alt="LONGi" class="logo-longi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/longi.svg" alt="LONGi" class="logo-longi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">LONGi</span>
                   </div>
                   <span class="marquee-card-name">LONGi Solar</span>
@@ -517,7 +522,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.jinkosolar.com" target="_blank" rel="noopener" class="marquee-card" title="Jinko Solar">
                   <div class="marquee-card-logo">
-                    <img src="brands/jinko_solar.png" alt="Jinko Solar" class="logo-jinko" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/jinko_solar.png" alt="Jinko Solar" class="logo-jinko" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Jinko Solar</span>
                   </div>
                   <span class="marquee-card-name">Jinko Solar</span>
@@ -528,7 +533,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.jasolar.com" target="_blank" rel="noopener" class="marquee-card" title="JA Solar">
                   <div class="marquee-card-logo">
-                    <img src="brands/ja_solar.svg" alt="JA Solar" class="logo-ja" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/ja_solar.svg" alt="JA Solar" class="logo-ja" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">JA Solar</span>
                   </div>
                   <span class="marquee-card-name">JA Solar</span>
@@ -556,7 +561,7 @@ $lang = require_once "lang/{$active_lang}.php";
               <?php for ($i = 0; $i < 2; $i++): ?>
                 <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="marquee-card" title="Canadian Solar Storage">
                   <div class="marquee-card-logo">
-                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
                   </div>
                   <span class="marquee-card-name">Canadian Solar</span>
@@ -567,7 +572,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="marquee-card" title="Solis Battery Storage">
                   <div class="marquee-card-logo">
-                    <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Solis</span>
                   </div>
                   <span class="marquee-card-name">Solis Storage</span>
@@ -578,7 +583,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="marquee-card" title="Deye Low Voltage Storage">
                   <div class="marquee-card-logo">
-                    <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Deye</span>
                   </div>
                   <span class="marquee-card-name">Deye Battery</span>
@@ -589,7 +594,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://jebel.ae" target="_blank" rel="noopener" class="marquee-card" title="Jebel Storage">
                   <div class="marquee-card-logo">
-                    <img src="brands/jebel.png" alt="Jebel" class="logo-jebel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/jebel.png" alt="Jebel" class="logo-jebel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Jebel</span>
                   </div>
                   <span class="marquee-card-name">Jebel Energy</span>
@@ -600,7 +605,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://powernsun.com" target="_blank" rel="noopener" class="marquee-card" title="Power & Sun Storage">
                   <div class="marquee-card-logo">
-                    <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
                   </div>
                   <span class="marquee-card-name">Power & Sun</span>
@@ -628,7 +633,7 @@ $lang = require_once "lang/{$active_lang}.php";
               <?php for ($i = 0; $i < 2; $i++): ?>
                 <div class="marquee-card" title="Concept Certified Integration">
                   <div class="marquee-card-logo">
-                    <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies Logo" style="filter: none; max-height: 18px;" loading="lazy">
+                    <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies Logo" style="filter: none; max-height: 18px;" loading="lazy" width="120" height="18">
                   </div>
                   <span class="marquee-card-name">Concept Solar AC</span>
                   <div class="marquee-card-tags">
@@ -638,7 +643,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </div>
                 <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="marquee-card" title="Canadian Solar Controller">
                   <div class="marquee-card-logo">
-                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
                   </div>
                   <span class="marquee-card-name">Canadian Solar</span>
@@ -649,7 +654,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="marquee-card" title="Deye Off-Grid Integration">
                   <div class="marquee-card-logo">
-                    <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Deye</span>
                   </div>
                   <span class="marquee-card-name">Deye Regulators</span>
@@ -660,7 +665,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </a>
                 <a href="https://powernsun.com" target="_blank" rel="noopener" class="marquee-card" title="Power & Sun MPPTs">
                   <div class="marquee-card-logo">
-                    <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
                     <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
                   </div>
                   <span class="marquee-card-name">Power & Sun</span>
