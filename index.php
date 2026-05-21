@@ -499,9 +499,27 @@ $lang = require_once "lang/{$active_lang}.php";
             <p><?= $lang['brands_cat_ac_desc'] ?></p>
           </div>
         </div>
-        <div class="brand-logos-row brand-logos-row--few">
-          <div class="brand-logo-card brand-logo-card--wide">
-            <span class="brand-cat-badge"><?= $lang['brands_cat_ac_desc'] ?></span>
+        <div class="brand-features-row">
+          <div class="brand-feature-card">
+            <div class="brand-feature-icon">⚡</div>
+            <div class="brand-feature-info">
+              <h4><?= $lang['brands_ac_f1_title'] ?></h4>
+              <p><?= $lang['brands_ac_f1_desc'] ?></p>
+            </div>
+          </div>
+          <div class="brand-feature-card">
+            <div class="brand-feature-icon">🔄</div>
+            <div class="brand-feature-info">
+              <h4><?= $lang['brands_ac_f2_title'] ?></h4>
+              <p><?= $lang['brands_ac_f2_desc'] ?></p>
+            </div>
+          </div>
+          <div class="brand-feature-card">
+            <div class="brand-feature-icon">📱</div>
+            <div class="brand-feature-info">
+              <h4><?= $lang['brands_ac_f3_title'] ?></h4>
+              <p><?= $lang['brands_ac_f3_desc'] ?></p>
+            </div>
           </div>
         </div>
       </div>
@@ -515,9 +533,27 @@ $lang = require_once "lang/{$active_lang}.php";
             <p><?= $lang['brands_cat_chargecontroller_desc'] ?></p>
           </div>
         </div>
-        <div class="brand-logos-row brand-logos-row--few">
-          <div class="brand-logo-card brand-logo-card--wide">
-            <span class="brand-cat-badge"><?= $lang['brands_cat_chargecontroller_desc'] ?></span>
+        <div class="brand-features-row">
+          <div class="brand-feature-card">
+            <div class="brand-feature-icon">🚀</div>
+            <div class="brand-feature-info">
+              <h4><?= $lang['brands_cc_f1_title'] ?></h4>
+              <p><?= $lang['brands_cc_f1_desc'] ?></p>
+            </div>
+          </div>
+          <div class="brand-feature-card">
+            <div class="brand-feature-icon">🛡️</div>
+            <div class="brand-feature-info">
+              <h4><?= $lang['brands_cc_f2_title'] ?></h4>
+              <p><?= $lang['brands_cc_f2_desc'] ?></p>
+            </div>
+          </div>
+          <div class="brand-feature-card">
+            <div class="brand-feature-icon">📊</div>
+            <div class="brand-feature-info">
+              <h4><?= $lang['brands_cc_f3_title'] ?></h4>
+              <p><?= $lang['brands_cc_f3_desc'] ?></p>
+            </div>
           </div>
         </div>
       </div>

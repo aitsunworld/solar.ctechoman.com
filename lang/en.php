@@ -82,6 +82,21 @@ return [
     'brands_cat_ac_desc' => 'Premium quality units',
     'brands_cat_chargecontroller_desc' => 'High efficiency controllers',
 
+    // AC & Charge Controller Features Specs
+    'brands_ac_f1_title' => '100% Off-Grid & Hybrid Solar ACs',
+    'brands_ac_f1_desc' => 'Runs directly on DC solar power during the day, with grid hybrid switching for 24/7 cooling.',
+    'brands_ac_f2_title' => 'Eco-Friendly High-Efficiency Cooling',
+    'brands_ac_f2_desc' => 'Uses green R32 refrigerants to deliver maximum BTU cooling with minimal energy consumption.',
+    'brands_ac_f3_title' => 'Smart WiFi App Telemetry',
+    'brands_ac_f3_desc' => 'Allows real-time smart scheduling, temperature control, and energy monitoring via smartphone.',
+
+    'brands_cc_f1_title' => 'Advanced Ultra-Fast MPPT Technology',
+    'brands_cc_f1_desc' => 'Maximum Power Point Tracking with up to 99% conversion efficiency to maximize battery charge.',
+    'brands_cc_f2_title' => 'Multi-Stage Electronic Safe Protection',
+    'brands_cc_f2_desc' => 'Safeguards against over-charge, over-discharge, short-circuits, and reverse battery connection.',
+    'brands_cc_f3_title' => 'LCD Display & Smart Telemetry',
+    'brands_cc_f3_desc' => 'Built-in digital display and industrial RS485 connectivity for battery performance monitoring.',
+
     // Process
     'proc_title' => 'Seamless Journey',
     'proc_1_title' => 'Consult',
