@@ -753,6 +753,22 @@ input[type="range"]::-webkit-slider-thumb:hover {
   .brand-cat-info h3 {
     font-size: 1.05rem;
   }
+
+  .category-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 992px) {
+  .category-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 993px) {
+  .category-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 
