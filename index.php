@@ -53,8 +53,8 @@ $lang = require_once "lang/{$active_lang}.php";
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Tajawal:wght@300;400;500;700;900&family=Noto+Sans+Arabic:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="style.css?v=2.5">
-  <link rel="stylesheet" href="chatbot.css?v=2.5">
+  <link rel="stylesheet" href="style.css?v=2.6">
+  <link rel="stylesheet" href="chatbot.css?v=2.6">
 </head>
 
 <body>
@@ -390,292 +390,70 @@ $lang = require_once "lang/{$active_lang}.php";
 
   <!-- Trusted Brands & Products -->
   <section id="partners" class="partners-section text-center reveal" style="text-align: center; padding: 5rem 0;">
-    <div class="container">
-      <span style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;"><?= $lang['why_pre'] ?></span>
-      <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 1rem;"><?= $lang['brands_title'] ?></h2>
-      <p class="text-muted" style="margin-bottom: 3.5rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;"><?= $lang['brands_subtitle'] ?></p>
+    <div class="logo-wall-section">
+      <div class="logo-wall-header">
+        <span class="logo-wall-eyebrow"><?= $lang['why_pre'] ?></span>
+        <h2 class="logo-wall-title"><?= $lang['brands_title'] ?></h2>
+        <p class="logo-wall-subtitle"><?= $lang['brands_subtitle'] ?></p>
+      </div>
 
-      <!-- 4 Premium Animated Horizontal Marquee Lanes -->
-      <div class="product-marquees-container">
-        <!-- Lane 1: Inverters (⚡) -->
-        <div class="marquee-lane">
-          <div class="marquee-lane-header">
-            <span class="marquee-lane-icon">⚡</span>
-            <div class="marquee-lane-text">
-              <h3><?= $lang['brands_cat_inverters'] ?></h3>
-              <p><?= $lang['brands_cat_inverters_desc'] ?></p>
-            </div>
-          </div>
-          <div class="marquee-wrapper direction-left">
-            <div class="marquee-track">
-              <?php for ($i = 0; $i < 2; $i++): ?>
-                <a href="https://solar.huawei.com" target="_blank" rel="noopener" class="marquee-card" title="Huawei FusionSolar">
-                  <div class="marquee-card-logo">
-                    <img src="brands/huawei.svg" alt="Huawei" class="logo-huawei" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Huawei</span>
-                  </div>
-                  <span class="marquee-card-name">Huawei</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'هجين' : 'Hybrid' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'مربوط بالشبكة' : 'Grid-Tied' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'كفاءة 98.6٪' : '98.6% Eff' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.sungrowpower.com" target="_blank" rel="noopener" class="marquee-card" title="Sungrow">
-                  <div class="marquee-card-logo">
-                    <img src="brands/sungrow.png" alt="Sungrow" class="logo-sungrow" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Sungrow</span>
-                  </div>
-                  <span class="marquee-card-name">Sungrow</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'منفعة ذكية' : 'Smart Utility' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'كفاءة 99٪' : '99% Eff' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="marquee-card" title="Solis">
-                  <div class="marquee-card-logo">
-                    <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Solis</span>
-                  </div>
-                  <span class="marquee-card-name">Solis</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'أطوار متعددة' : 'Multi-Phase' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'تصميم مدمج' : 'Compact' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="marquee-card" title="Deye">
-                  <div class="marquee-card-logo">
-                    <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Deye</span>
-                  </div>
-                  <span class="marquee-card-name">Deye</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'هجين بالكامل' : 'Pure Hybrid' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'منفذ MPPT متعدد' : 'Multi-MPPT' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="marquee-card" title="Canadian Solar">
-                  <div class="marquee-card-logo">
-                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
-                  </div>
-                  <span class="marquee-card-name">Canadian Solar</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'تحمل شديد' : 'Heavy Duty' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'معيار عالي' : 'IP66 Rated' ?></span>
-                  </div>
-                </a>
-                <a href="https://powernsun.com" target="_blank" rel="noopener" class="marquee-card" title="Power & Sun">
-                  <div class="marquee-card-logo">
-                    <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
-                  </div>
-                  <span class="marquee-card-name">Power & Sun</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'موزع الخليج' : 'GCC Distributor' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'متوفر بالمخازن' : 'In-Stock GCC' ?></span>
-                  </div>
-                </a>
-              <?php endfor; ?>
-            </div>
-          </div>
-        </div>
-
-        <!-- Lane 2: Solar Panels (☀️) -->
-        <div class="marquee-lane">
-          <div class="marquee-lane-header">
-            <span class="marquee-lane-icon">☀️</span>
-            <div class="marquee-lane-text">
-              <h3><?= $lang['brands_cat_panels'] ?></h3>
-              <p><?= $lang['brands_cat_panels_desc'] ?></p>
-            </div>
-          </div>
-          <div class="marquee-wrapper direction-right">
-            <div class="marquee-track">
-              <?php for ($i = 0; $i < 2; $i++): ?>
-                <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="marquee-card" title="Canadian Solar Panels">
-                  <div class="marquee-card-logo">
-                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
-                  </div>
-                  <span class="marquee-card-name">Canadian Solar</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'كفاءة 22.5٪' : '22.5% Eff' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'تقنية N-Type' : 'N-Type TOPCon' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.trinasolar.com" target="_blank" rel="noopener" class="marquee-card" title="Trina Solar">
-                  <div class="marquee-card-logo">
-                    <img src="brands/trina_solar.svg" alt="Trina Solar" class="logo-trina" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Trina Solar</span>
-                  </div>
-                  <span class="marquee-card-name">Trina Solar</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'فيرتكس إس+' : 'Vertex S+' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'ضمان 25 سنة' : '25-Yr Warranty' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.longi.com" target="_blank" rel="noopener" class="marquee-card" title="LONGi">
-                  <div class="marquee-card-logo">
-                    <img src="brands/longi.svg" alt="LONGi" class="logo-longi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">LONGi</span>
-                  </div>
-                  <span class="marquee-card-name">LONGi Solar</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'هاي مو 6' : 'Hi-MO 6' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'تدهور منخفض جداً' : 'Ultra-Low Degradation' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.jinkosolar.com" target="_blank" rel="noopener" class="marquee-card" title="Jinko Solar">
-                  <div class="marquee-card-logo">
-                    <img src="brands/jinko_solar.png" alt="Jinko Solar" class="logo-jinko" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Jinko Solar</span>
-                  </div>
-                  <span class="marquee-card-name">Jinko Solar</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'تايجر نيو' : 'Tiger Neo' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'وجهين Gen 2' : 'Bifacial Gen 2' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.jasolar.com" target="_blank" rel="noopener" class="marquee-card" title="JA Solar">
-                  <div class="marquee-card-logo">
-                    <img src="brands/ja_solar.svg" alt="JA Solar" class="logo-ja" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">JA Solar</span>
-                  </div>
-                  <span class="marquee-card-name">JA Solar</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'ديب بلو 4.0' : 'DeepBlue 4.0' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'تحمل حراري' : 'High Temp Build' ?></span>
-                  </div>
-                </a>
-              <?php endfor; ?>
-            </div>
-          </div>
-        </div>
-
-        <!-- Lane 3: Batteries (🔋) -->
-        <div class="marquee-lane">
-          <div class="marquee-lane-header">
-            <span class="marquee-lane-icon">🔋</span>
-            <div class="marquee-lane-text">
-              <h3><?= $lang['brands_cat_batteries'] ?></h3>
-              <p><?= $lang['brands_cat_batteries_desc'] ?></p>
-            </div>
-          </div>
-          <div class="marquee-wrapper direction-left">
-            <div class="marquee-track">
-              <?php for ($i = 0; $i < 2; $i++): ?>
-                <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="marquee-card" title="Canadian Solar Storage">
-                  <div class="marquee-card-logo">
-                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
-                  </div>
-                  <span class="marquee-card-name">Canadian Solar</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'ليثيوم LFP' : 'LiFePO4 Safe' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'BMS ذكي مدمج' : 'Smart BMS' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="marquee-card" title="Solis Battery Storage">
-                  <div class="marquee-card-logo">
-                    <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Solis</span>
-                  </div>
-                  <span class="marquee-card-name">Solis Storage</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'فولتية عالية' : 'High Voltage' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? '+6000 دورة' : '6,000+ Cycles' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="marquee-card" title="Deye Low Voltage Storage">
-                  <div class="marquee-card-logo">
-                    <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Deye</span>
-                  </div>
-                  <span class="marquee-card-name">Deye Battery</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'جهد منخفض' : 'Low Voltage' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'تصميم معياري' : 'Modular Rack' ?></span>
-                  </div>
-                </a>
-                <a href="https://jebel.ae" target="_blank" rel="noopener" class="marquee-card" title="Jebel Storage">
-                  <div class="marquee-card-logo">
-                    <img src="brands/jebel.png" alt="Jebel" class="logo-jebel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Jebel</span>
-                  </div>
-                  <span class="marquee-card-name">Jebel Energy</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'معتمد للخليج' : 'GCC Certified' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'حرارة شديدة' : 'Desert Tested' ?></span>
-                  </div>
-                </a>
-                <a href="https://powernsun.com" target="_blank" rel="noopener" class="marquee-card" title="Power & Sun Storage">
-                  <div class="marquee-card-logo">
-                    <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
-                  </div>
-                  <span class="marquee-card-name">Power & Sun</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'تخزين كابينة' : 'Cabinet Storage' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'دعم محلي' : 'Local GCC Support' ?></span>
-                  </div>
-                </a>
-              <?php endfor; ?>
-            </div>
-          </div>
-        </div>
-
-        <!-- Lane 4: Solar AC + Charge Controllers (❄️) -->
-        <div class="marquee-lane">
-          <div class="marquee-lane-header">
-            <span class="marquee-lane-icon">❄️</span>
-            <div class="marquee-lane-text">
-              <h3><?= $lang['brands_cat_ac'] ?> &amp; <?= $lang['brands_cat_chargecontroller'] ?></h3>
-              <p><?= $lang['brands_ac_desc'] ?></p>
-            </div>
-          </div>
-          <div class="marquee-wrapper direction-right">
-            <div class="marquee-track">
-              <?php for ($i = 0; $i < 2; $i++): ?>
-
-                <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="marquee-card" title="Canadian Solar Controller">
-                  <div class="marquee-card-logo">
-                    <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
-                  </div>
-                  <span class="marquee-card-name">Canadian Solar</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'شحن ذكي' : 'Smart Charge' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'التحكم بالقدرة' : 'Power Control' ?></span>
-                  </div>
-                </a>
-                <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="marquee-card" title="Deye Off-Grid Integration">
-                  <div class="marquee-card-logo">
-                    <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Deye</span>
-                  </div>
-                  <span class="marquee-card-name">Deye Regulators</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'منظم MPPT 99٪' : '99% MPPT Eff' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'مراقبة بالواي فاي' : 'WiFi Monitored' ?></span>
-                  </div>
-                </a>
-                <a href="https://powernsun.com" target="_blank" rel="noopener" class="marquee-card" title="Power & Sun MPPTs">
-                  <div class="marquee-card-logo">
-                    <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="120" height="38">
-                    <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
-                  </div>
-                  <span class="marquee-card-name">Power & Sun</span>
-                  <div class="marquee-card-tags">
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'معتمد DCRP' : 'DCRP Approved' ?></span>
-                    <span class="marquee-card-tag"><?= $active_lang === 'ar' ? 'شبكة الخليج جاهزة' : 'GCC Grid Ready' ?></span>
-                  </div>
-                </a>
-              <?php endfor; ?>
-            </div>
-          </div>
+      <!-- Row 1: scrolls LEFT -->
+      <div class="logo-row-wrapper">
+        <div class="logo-row logo-row--left">
+          <?php for ($i = 0; $i < 2; $i++): ?>
+            <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/deye.png" alt="Deye" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
+          <?php endfor; ?>
         </div>
       </div>
+
+      <!-- Row 2: scrolls RIGHT -->
+      <div class="logo-row-wrapper">
+        <div class="logo-row logo-row--right">
+          <?php for ($i = 0; $i < 2; $i++): ?>
+            <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/deye.png" alt="Deye" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
+          <?php endfor; ?>
+        </div>
+      </div>
+
+      <!-- Row 3: scrolls LEFT -->
+      <div class="logo-row-wrapper">
+        <div class="logo-row logo-row--left logo-row--slow">
+          <?php for ($i = 0; $i < 2; $i++): ?>
+            <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/deye.png" alt="Deye" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
+          <?php endfor; ?>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -905,3 +683,4 @@ $lang = require_once "lang/{$active_lang}.php";
 </body>
 
 </html>
+
