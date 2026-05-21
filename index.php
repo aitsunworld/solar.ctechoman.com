@@ -383,329 +383,163 @@ $lang = require_once "lang/{$active_lang}.php";
       <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 1rem;"><?= $lang['brands_title'] ?></h2>
       <p class="text-muted" style="margin-bottom: 3.5rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;"><?= $lang['brands_subtitle'] ?></p>
 
-      <!-- Category: Inverters -->
-      <div class="brand-category reveal">
-        <div class="brand-category-header">
-          <div class="brand-cat-icon">⚡</div>
-          <div class="brand-cat-info">
-            <h3><?= $lang['brands_cat_inverters'] ?></h3>
-            <p><?= $lang['brands_cat_inverters_desc'] ?></p>
-          </div>
-        </div>
-        <div class="brand-logos-row">
-          <a href="https://solar.huawei.com" target="_blank" rel="noopener" class="brand-logo-card" title="Huawei FusionSolar">
-            <img src="brands/huawei.svg" alt="Huawei" class="logo-huawei" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Huawei</span>
-          </a>
-          <a href="https://www.sungrowpower.com" target="_blank" rel="noopener" class="brand-logo-card" title="Sungrow">
-            <img src="brands/sungrow.png" alt="Sungrow" class="logo-sungrow" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Sungrow</span>
-          </a>
-          <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="brand-logo-card" title="Solis">
-            <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Solis</span>
-          </a>
-          <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
-            <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
-          </a>
-          <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="brand-logo-card" title="Deye">
-            <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Deye</span>
-          </a>
-          <a href="https://powernsun.com" target="_blank" rel="noopener" class="brand-logo-card" title="Power & Sun">
-            <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Category: Solar Panels -->
-      <div class="brand-category reveal delay-100">
-        <div class="brand-category-header">
-          <div class="brand-cat-icon">☀️</div>
-          <div class="brand-cat-info">
-            <h3><?= $lang['brands_cat_panels'] ?></h3>
-            <p><?= $lang['brands_cat_panels_desc'] ?></p>
-          </div>
-        </div>
-        <div class="brand-logos-row">
-          <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
-            <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
-          </a>
-          <a href="https://www.trinasolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Trina Solar">
-            <img src="brands/trina_solar.svg" alt="Trina Solar" class="logo-trina" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Trina Solar</span>
-          </a>
-          <a href="https://www.longi.com" target="_blank" rel="noopener" class="brand-logo-card" title="LONGi">
-            <img src="brands/longi.svg" alt="LONGi" class="logo-longi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">LONGi</span>
-          </a>
-          <a href="https://www.jinkosolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Jinko Solar">
-            <img src="brands/jinko_solar.png" alt="Jinko Solar" class="logo-jinko" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Jinko Solar</span>
-          </a>
-          <a href="https://www.jasolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="JA Solar">
-            <img src="brands/ja_solar.svg" alt="JA Solar" class="logo-ja" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">JA Solar</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Category: Batteries -->
-      <div class="brand-category reveal delay-200">
-        <div class="brand-category-header">
-          <div class="brand-cat-icon">🔋</div>
-          <div class="brand-cat-info">
-            <h3><?= $lang['brands_cat_batteries'] ?></h3>
-            <p><?= $lang['brands_cat_batteries_desc'] ?></p>
-          </div>
-        </div>
-        <div class="brand-logos-row">
-          <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
-            <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
-          </a>
-          <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="brand-logo-card" title="Solis">
-            <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Solis</span>
-          </a>
-          <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="brand-logo-card" title="Deye">
-            <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Deye</span>
-          </a>
-          <a href="https://jebel.ae" target="_blank" rel="noopener" class="brand-logo-card" title="Jebel">
-            <img src="brands/jebel.png" alt="Jebel" class="logo-jebel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Jebel</span>
-          </a>
-          <a href="https://www.longi.com" target="_blank" rel="noopener" class="brand-logo-card" title="LONGi">
-            <img src="brands/longi.svg" alt="LONGi" class="logo-longi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">LONGi</span>
-          </a>
-          <a href="https://powernsun.com" target="_blank" rel="noopener" class="brand-logo-card" title="Power & Sun">
-            <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Category: Air Conditioner & Charge Controller Showcase Grid -->
-      <div class="showcases-row">
-        <!-- Category: Air Conditioner -->
-        <div class="brand-category reveal delay-300">
-        <div class="brand-category-header">
-          <div class="brand-cat-icon">❄️</div>
-          <div class="brand-cat-info">
-            <h3><?= $lang['brands_cat_ac'] ?></h3>
-            <p><?= $lang['brands_cat_ac_desc'] ?></p>
-          </div>
-        </div>
-        
-        <div class="cool-showcase-card">
-          <!-- Left side: Text and Specs -->
-          <div class="showcase-content">
-            <span class="showcase-badge badge-ac"><?= $lang['brands_ac_badge'] ?></span>
-            <h3 class="showcase-title"><?= $lang['brands_ac_title'] ?></h3>
-            <p class="showcase-desc"><?= $lang['brands_ac_desc'] ?></p>
-            
-            <div class="showcase-features-grid">
-              <div class="showcase-feature-item">
-                <div class="feature-icon-wrapper ac-accent">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6M2 12h20"/></svg>
-                </div>
-                <div class="feature-text">
-                  <h4><?= $lang['brands_ac_f1_title'] ?></h4>
-                  <p><?= $lang['brands_ac_f1_desc'] ?></p>
-                </div>
-              </div>
-              <div class="showcase-feature-item">
-                <div class="feature-icon-wrapper ac-accent">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                </div>
-                <div class="feature-text">
-                  <h4><?= $lang['brands_ac_f2_title'] ?></h4>
-                  <p><?= $lang['brands_ac_f2_desc'] ?></p>
-                </div>
-              </div>
-              <div class="showcase-feature-item">
-                <div class="feature-icon-wrapper ac-accent">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.34 8.7a16.74 16.74 0 0 1 21.32 0M8.66 16.22a5.66 5.66 0 0 1 6.68 0M12 20h.01"/></svg>
-                </div>
-                <div class="feature-text">
-                  <h4><?= $lang['brands_ac_f3_title'] ?></h4>
-                  <p><?= $lang['brands_ac_f3_desc'] ?></p>
-                </div>
-              </div>
+      <!-- Consolidated Product Categories Grid -->
+      <div class="product-categories-grid reveal">
+        <!-- Card 1: Inverters (⚡) -->
+        <div class="product-card">
+          <div class="product-card-header">
+            <div class="product-card-icon">⚡</div>
+            <div class="product-card-info">
+              <h3><?= $lang['brands_cat_inverters'] ?></h3>
+              <p><?= $lang['brands_cat_inverters_desc'] ?></p>
             </div>
           </div>
-          
-          <!-- Right side: Visual AC interaction -->
-          <div class="showcase-visual-wrapper">
-            <div class="ac-device-container">
-              <div class="ac-sun-glow"></div>
-              
-              <div class="ac-device">
-                <div class="ac-grille"></div>
-                <div class="ac-display">
-                  <span class="ac-temp">16</span><span class="ac-unit">°C</span>
-                  <span class="ac-wifi-icon">
-                    <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21l-12-12c5.55-5.55 18.45-5.55 24 0l-12 12zm0-4l8-8c-3.66-3.66-12.34-3.66-16 0l8 8z"/></svg>
-                  </span>
-                </div>
-                <div class="ac-brand-print">Concept</div>
-                <div class="ac-louver"></div>
-                <div class="ac-led"></div>
-              </div>
-              
-              <div class="ac-breeze-container">
-                <svg class="breeze-svg" viewBox="0 0 120 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path class="wave-line wave-line-1" d="M20 0 C 15 20, 5 45, 0 70" stroke="rgba(58, 141, 204, 0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                  <path class="wave-line wave-line-2" d="M40 0 C 42 25, 30 50, 25 70" stroke="rgba(58, 141, 204, 0.45)" stroke-width="1.5" stroke-linecap="round"/>
-                  <path class="wave-line wave-line-3" d="M60 0 C 60 25, 60 50, 60 70" stroke="rgba(58, 141, 204, 0.5)" stroke-width="1.8" stroke-linecap="round"/>
-                  <path class="wave-line wave-line-4" d="M80 0 C 78 25, 90 50, 95 70" stroke="rgba(58, 141, 204, 0.45)" stroke-width="1.5" stroke-linecap="round"/>
-                  <path class="wave-line wave-line-5" d="M100 0 C 105 20, 115 45, 120 70" stroke="rgba(58, 141, 204, 0.4)" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </div>
+          <div class="product-card-logos">
+            <a href="https://solar.huawei.com" target="_blank" rel="noopener" class="brand-logo-card" title="Huawei FusionSolar">
+              <img src="brands/huawei.svg" alt="Huawei" class="logo-huawei" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Huawei</span>
+            </a>
+            <a href="https://www.sungrowpower.com" target="_blank" rel="noopener" class="brand-logo-card" title="Sungrow">
+              <img src="brands/sungrow.png" alt="Sungrow" class="logo-sungrow" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Sungrow</span>
+            </a>
+            <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="brand-logo-card" title="Solis">
+              <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Solis</span>
+            </a>
+            <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
+              <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
+            </a>
+            <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="brand-logo-card" title="Deye">
+              <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Deye</span>
+            </a>
+            <a href="https://powernsun.com" target="_blank" rel="noopener" class="brand-logo-card" title="Power & Sun">
+              <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
+            </a>
+          </div>
+          <div class="product-card-features">
+            <span>✔ <?= $active_lang === 'ar' ? 'هجين ومتصل بالشبكة' : 'Hybrid & Grid-Tied' ?></span>
+            <span>✔ <?= $active_lang === 'ar' ? 'كفاءة فائقة تصل لـ 98.6٪' : 'High Efficiency (Up to 98.6%)' ?></span>
+            <span>✔ <?= $active_lang === 'ar' ? 'مراقبة ذكية عبر السحابة' : 'Smart Cloud Monitoring' ?></span>
+          </div>
+        </div>
+
+        <!-- Card 2: Solar Panels (☀️) -->
+        <div class="product-card">
+          <div class="product-card-header">
+            <div class="product-card-icon">☀️</div>
+            <div class="product-card-info">
+              <h3><?= $lang['brands_cat_panels'] ?></h3>
+              <p><?= $lang['brands_cat_panels_desc'] ?></p>
             </div>
+          </div>
+          <div class="product-card-logos">
+            <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
+              <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
+            </a>
+            <a href="https://www.trinasolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Trina Solar">
+              <img src="brands/trina_solar.svg" alt="Trina Solar" class="logo-trina" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Trina Solar</span>
+            </a>
+            <a href="https://www.longi.com" target="_blank" rel="noopener" class="brand-logo-card" title="LONGi">
+              <img src="brands/longi.svg" alt="LONGi" class="logo-longi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">LONGi</span>
+            </a>
+            <a href="https://www.jinkosolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Jinko Solar">
+              <img src="brands/jinko_solar.png" alt="Jinko Solar" class="logo-jinko" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Jinko Solar</span>
+            </a>
+            <a href="https://www.jasolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="JA Solar">
+              <img src="brands/ja_solar.svg" alt="JA Solar" class="logo-ja" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">JA Solar</span>
+            </a>
+          </div>
+          <div class="product-card-features">
+            <span>✔ <?= $active_lang === 'ar' ? 'خلايا أحادية الكريستال' : 'Tier-1 Monocrystalline' ?></span>
+            <span>✔ <?= $active_lang === 'ar' ? 'ضمان أداء لمدة 25 سنة' : '25-Year Performance Warranty' ?></span>
+            <span>✔ <?= $active_lang === 'ar' ? 'مقاومة درجات الحرارة العالية' : 'High Heat Tolerance' ?></span>
+          </div>
+        </div>
+
+        <!-- Card 3: Batteries (🔋) -->
+        <div class="product-card">
+          <div class="product-card-header">
+            <div class="product-card-icon">🔋</div>
+            <div class="product-card-info">
+              <h3><?= $lang['brands_cat_batteries'] ?></h3>
+              <p><?= $lang['brands_cat_batteries_desc'] ?></p>
+            </div>
+          </div>
+          <div class="product-card-logos">
+            <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
+              <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
+            </a>
+            <a href="https://www.ginlong.com" target="_blank" rel="noopener" class="brand-logo-card" title="Solis">
+              <img src="brands/solis.png" alt="Solis" class="logo-solis" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Solis</span>
+            </a>
+            <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="brand-logo-card" title="Deye">
+              <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Deye</span>
+            </a>
+            <a href="https://jebel.ae" target="_blank" rel="noopener" class="brand-logo-card" title="Jebel">
+              <img src="brands/jebel.png" alt="Jebel" class="logo-jebel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Jebel</span>
+            </a>
+            <a href="https://www.longi.com" target="_blank" rel="noopener" class="brand-logo-card" title="LONGi">
+              <img src="brands/longi.svg" alt="LONGi" class="logo-longi" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">LONGi</span>
+            </a>
+            <a href="https://powernsun.com" target="_blank" rel="noopener" class="brand-logo-card" title="Power & Sun">
+              <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
+            </a>
+          </div>
+          <div class="product-card-features">
+            <span>✔ <?= $active_lang === 'ar' ? 'فوسفات الحديد والليثيوم' : 'LiFePO4 Safe Chemistry' ?></span>
+            <span>✔ <?= $active_lang === 'ar' ? 'نظام BMS ذكي مدمج' : 'Smart Embedded BMS' ?></span>
+            <span>✔ <?= $active_lang === 'ar' ? 'أكثر من 6000 دورة شحن' : '6,000+ Cycles Lifespan' ?></span>
+          </div>
+        </div>
+
+        <!-- Card 4: Solar AC & Controllers (❄️) -->
+        <div class="product-card">
+          <div class="product-card-header">
+            <div class="product-card-icon">❄️</div>
+            <div class="product-card-info">
+              <h3><?= $lang['brands_cat_ac'] ?> &amp; <?= $lang['brands_cat_chargecontroller'] ?></h3>
+              <p><?= $lang['brands_ac_desc'] ?></p>
+            </div>
+          </div>
+          <div class="product-card-logos">
+            <div class="brand-logo-card brand-logo-concept" title="Concept Certified Integration">
+              <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies Logo" style="filter: none; max-height: 18px;" loading="lazy">
+            </div>
+            <a href="https://www.canadiansolar.com" target="_blank" rel="noopener" class="brand-logo-card" title="Canadian Solar">
+              <img src="brands/canadian_solar.png" alt="Canadian Solar" class="logo-canadian" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Canadian Solar</span>
+            </a>
+            <a href="https://www.deyeinverter.com" target="_blank" rel="noopener" class="brand-logo-card" title="Deye">
+              <img src="brands/deye.png" alt="Deye" class="logo-deye" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Deye</span>
+            </a>
+            <a href="https://powernsun.com" target="_blank" rel="noopener" class="brand-logo-card" title="Power & Sun">
+              <img src="brands/power_sun.png" alt="Power & Sun" class="logo-powersun" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <span class="brand-logo-fallback" style="display:none">Power & Sun</span>
+            </a>
+          </div>
+          <div class="product-card-features">
+            <span>✔ <?= $active_lang === 'ar' ? 'تكييف طاقة شمسية DC بالكامل' : '100% Off-Grid DC AC' ?></span>
+            <span>✔ <?= $active_lang === 'ar' ? 'كفاءة MPPT تفوق 99٪' : '99%+ Efficient MPPT' ?></span>
+            <span>✔ <?= $active_lang === 'ar' ? 'مصمم للمناخ الصحراوي القاسي' : 'Extreme Climate Built' ?></span>
           </div>
         </div>
       </div>
-
-      <!-- Category: Charge Controller -->
-      <div class="brand-category reveal delay-300">
-        <div class="brand-category-header">
-          <div class="brand-cat-icon">🔌</div>
-          <div class="brand-cat-info">
-            <h3><?= $lang['brands_cat_chargecontroller'] ?></h3>
-            <p><?= $lang['brands_cat_chargecontroller_desc'] ?></p>
-          </div>
-        </div>
-        
-        <div class="cool-showcase-card">
-          <!-- Left side: Text and Specs -->
-          <div class="showcase-content">
-            <span class="showcase-badge badge-cc"><?= $lang['brands_cc_badge'] ?></span>
-            <h3 class="showcase-title"><?= $lang['brands_cc_title'] ?></h3>
-            <p class="showcase-desc"><?= $lang['brands_cc_desc'] ?></p>
-            
-            <div class="showcase-features-grid">
-              <div class="showcase-feature-item">
-                <div class="feature-icon-wrapper cc-accent">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                </div>
-                <div class="feature-text">
-                  <h4><?= $lang['brands_cc_f1_title'] ?></h4>
-                  <p><?= $lang['brands_cc_f1_desc'] ?></p>
-                </div>
-              </div>
-              <div class="showcase-feature-item">
-                <div class="feature-icon-wrapper cc-accent">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
-                <div class="feature-text">
-                  <h4><?= $lang['brands_cc_f2_title'] ?></h4>
-                  <p><?= $lang['brands_cc_f2_desc'] ?></p>
-                </div>
-              </div>
-              <div class="showcase-feature-item">
-                <div class="feature-icon-wrapper cc-accent">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                </div>
-                <div class="feature-text">
-                  <h4><?= $lang['brands_cc_f3_title'] ?></h4>
-                  <p><?= $lang['brands_cc_f3_desc'] ?></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Right side: Visual MPPT flow animation -->
-          <div class="showcase-visual-wrapper">
-            <div class="mppt-flow-container">
-              <div class="flow-node solar-node" title="Solar PV Input">
-                <div class="node-icon-bg">
-                  <svg class="node-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/>
-                    <path d="M12 3v18M3 12h18M3 7.5h18M3 16.5h18"/>
-                  </svg>
-                </div>
-                <span class="node-label">PV PANELS</span>
-              </div>
-              
-              <div class="flow-line-wrapper">
-                <svg class="flow-line-svg" viewBox="0 0 60 20">
-                  <path d="M 0 10 L 60 10" stroke="rgba(226, 232, 240, 0.8)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                  <path d="M 0 10 L 60 10" stroke="var(--color-primary)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8" class="flowing-dots" fill="none"/>
-                </svg>
-              </div>
-              
-              <div class="mppt-device">
-                <div class="mppt-heatsink">
-                  <div class="heatsink-fin"></div>
-                  <div class="heatsink-fin"></div>
-                  <div class="heatsink-fin"></div>
-                  <div class="heatsink-fin"></div>
-                  <div class="heatsink-fin"></div>
-                  <div class="heatsink-fin"></div>
-                  <div class="heatsink-fin"></div>
-                </div>
-                
-                <div class="mppt-lcd">
-                  <div class="lcd-screen-ticker">
-                    <div class="ticker-slide">
-                      <div class="lcd-line">PV IN: 124.6V</div>
-                      <div class="lcd-line">BAT: 27.2V 38A</div>
-                      <div class="lcd-line-small">MPPT ACTIVE 99%</div>
-                    </div>
-                    <div class="ticker-slide">
-                      <div class="lcd-line">POWER: 1034W</div>
-                      <div class="lcd-line">TEMP: 42°C SAFE</div>
-                      <div class="lcd-line-small">SYS OK - DCRP</div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="mppt-leds">
-                  <div class="mppt-led led-pv" title="PV Charge Status"></div>
-                  <div class="mppt-led led-bat" title="Battery Status"></div>
-                  <div class="mppt-led led-load" title="Load Output Status"></div>
-                </div>
-                
-                <div class="mppt-brand">CONCEPT</div>
-                
-                <div class="mppt-terminals">
-                  <div class="terminal-port"></div>
-                  <div class="terminal-port"></div>
-                  <div class="terminal-port"></div>
-                </div>
-              </div>
-              
-              <div class="flow-line-wrapper">
-                <svg class="flow-line-svg" viewBox="0 0 60 20">
-                  <path d="M 0 10 L 60 10" stroke="rgba(226, 232, 240, 0.8)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-                  <path d="M 0 10 L 60 10" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8" class="flowing-dots flowing-dots--fast" fill="none"/>
-                </svg>
-              </div>
-              
-              <div class="flow-node battery-node" title="Battery Bank Status">
-                <div class="node-icon-bg">
-                  <svg class="node-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="6" y="7" width="12" height="14" rx="2"/>
-                    <path d="M9 7V5c0-.5.5-1 1-1h4c.5 0 1 .5 1 1v2"/>
-                    <line x1="9" y1="11" x2="15" y2="11" class="bat-level bat-level-1" stroke="#10b981" stroke-width="2"/>
-                    <line x1="9" y1="14" x2="15" y2="14" class="bat-level bat-level-2" stroke="#10b981" stroke-width="2"/>
-                    <line x1="9" y1="17" x2="15" y2="17" class="bat-level bat-level-3" stroke="#10b981" stroke-width="2"/>
-                  </svg>
-                </div>
-                <span class="node-label">BATTERY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     </div>
   </section>
 
