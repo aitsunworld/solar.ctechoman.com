@@ -636,16 +636,16 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .brand-logo-card {
-  background: #ffffff;
-  border: 1.5px solid #e8ecf1;
-  border-radius: 14px;
-  height: 80px;
+  background: #f8fafc;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 1.25rem;
   text-decoration: none;
   position: relative;
   overflow: hidden;
@@ -655,17 +655,18 @@ input[type="range"]::-webkit-slider-thumb:hover {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(58, 141, 204, 0.04) 0%, rgba(62, 182, 73, 0.04) 100%);
+  background: linear-gradient(135deg, rgba(58, 141, 204, 0.02) 0%, rgba(62, 182, 73, 0.02) 100%);
   opacity: 0;
-  transition: opacity 0.35s;
+  transition: opacity 0.4s;
   border-radius: inherit;
 }
 
 .brand-logo-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-primary);
-  box-shadow: 0 8px 24px -4px rgba(58, 141, 204, 0.15),
-              0 4px 8px -2px rgba(0, 0, 0, 0.04);
+  background: #ffffff;
+  border-color: rgba(58, 141, 204, 0.15);
+  transform: translateY(-4px) scale(1.025);
+  box-shadow: 0 16px 32px -12px rgba(58, 141, 204, 0.2),
+              0 4px 12px -4px rgba(0, 0, 0, 0.03);
 }
 
 .brand-logo-card:hover::before {
@@ -673,20 +674,56 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .brand-logo-card img {
-  max-height: 40px;
-  max-width: 100%;
+  max-width: 90%;
   width: auto;
   height: auto;
   object-fit: contain;
-  filter: grayscale(30%);
-  opacity: 0.85;
-  transition: all 0.35s;
+  filter: grayscale(100%) brightness(0.9) contrast(0.9);
+  opacity: 0.55;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .brand-logo-card:hover img {
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1) contrast(1);
   opacity: 1;
-  transform: scale(1.08);
+  transform: scale(1.04);
+}
+
+/* Brand Specific Height Normalization for Visual Balance */
+.brand-logo-card img.logo-huawei {
+  max-height: 25px;
+}
+.brand-logo-card img.logo-sungrow {
+  max-height: 26px;
+  max-width: 95%;
+}
+.brand-logo-card img.logo-solis {
+  max-height: 28px;
+}
+.brand-logo-card img.logo-canadian {
+  max-height: 26px;
+  max-width: 95%;
+}
+.brand-logo-card img.logo-deye {
+  max-height: 22px;
+}
+.brand-logo-card img.logo-powersun {
+  max-height: 26px;
+}
+.brand-logo-card img.logo-trina {
+  max-height: 30px;
+}
+.brand-logo-card img.logo-longi {
+  max-height: 18px; /* bold red text needs smaller max-height to look elegant */
+}
+.brand-logo-card img.logo-jinko {
+  max-height: 28px;
+}
+.brand-logo-card img.logo-ja {
+  max-height: 22px; /* JA Solar is very bold and wide */
+}
+.brand-logo-card img.logo-jebel {
+  max-height: 22px;
 }
 
 /* Text-based fallback for brands without embeddable logos */
