@@ -822,15 +822,33 @@ input[type="range"]::-webkit-slider-thumb:hover {
    Concept Premium Interactive Showcases (Solar AC & MPPT Controller)
    ========================================================================== */
 
-.cool-showcase-card {
+.showcases-row {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+  align-items: stretch;
+}
+
+.showcases-row .brand-category {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0 !important;
+}
+
+.showcases-row .brand-category .cool-showcase-card {
+  flex-grow: 1;
+}
+
+.cool-showcase-card {
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
   border: 1px solid rgba(226, 232, 240, 0.8);
   border-radius: 24px;
-  padding: 2.5rem;
-  gap: 2.5rem;
-  margin-top: 1.5rem;
+  padding: 2.25rem 2rem 2rem 2rem;
+  gap: 2rem;
+  margin-top: 1.25rem;
   overflow: hidden;
   position: relative;
   text-align: start;
@@ -838,6 +856,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
               border-color 0.4s, 
               box-shadow 0.4s;
+  box-sizing: border-box;
 }
 
 .cool-showcase-card:hover {
@@ -851,7 +870,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  flex-grow: 1;
 }
 
 .showcase-badge {
@@ -861,7 +880,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -880,39 +899,39 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .showcase-title {
-  font-size: 1.85rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--color-text-dark);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .showcase-desc {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--color-text-muted);
-  line-height: 1.6;
-  margin-bottom: 2rem;
-  max-width: 95%;
+  line-height: 1.55;
+  margin-bottom: 1.75rem;
 }
 
 .showcase-features-grid {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.15rem;
   width: 100%;
+  margin-bottom: 1.75rem;
 }
 
 .showcase-feature-item {
   display: flex;
-  gap: 1rem;
+  gap: 0.85rem;
   align-items: flex-start;
 }
 
 .feature-icon-wrapper {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -935,31 +954,33 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .feature-text h4 {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--color-text-dark);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .feature-text p {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--color-text-muted);
-  line-height: 1.45;
+  line-height: 1.4;
   margin: 0;
 }
 
-/* Right Side: Visual Showcase Area */
+/* Visual Showcase Area */
 .showcase-visual-wrapper {
   background: radial-gradient(circle at 50% 50%, #f8fafc 0%, #f1f5f9 100%);
-  border-radius: 20px;
+  border-radius: 16px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  min-height: 300px;
+  padding: 1.5rem;
+  min-height: 230px;
   overflow: hidden;
   border: 1px solid rgba(226, 232, 240, 0.6);
+  margin-top: auto;
+  box-sizing: border-box;
 }
 
 /* AC Device & Animations */
@@ -975,8 +996,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .ac-sun-glow {
   position: absolute;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   background: radial-gradient(circle, rgba(62, 182, 73, 0.08) 0%, rgba(62, 182, 73, 0) 70%);
   border-radius: 50%;
   z-index: 1;
@@ -984,40 +1005,40 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .ac-device {
-  width: 240px;
-  height: 68px;
+  width: 200px;
+  height: 60px;
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 90%, #f1f5f9 100%);
-  border-radius: 8px 8px 14px 14px;
+  border-radius: 8px 8px 12px 12px;
   position: relative;
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08), 
-              0 0 1px 1px rgba(0, 0, 0, 0.03), 
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.06), 
+              0 0 1px 1px rgba(0, 0, 0, 0.02), 
               inset 0 1px 0 #ffffff;
   border: 1px solid #e2e8f0;
   z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 8px 14px;
+  padding: 6px 12px;
   box-sizing: border-box;
 }
 
 .ac-grille {
   width: 100%;
-  height: 4px;
-  background: repeating-linear-gradient(90deg, #e2e8f0, #e2e8f0 4px, transparent 4px, transparent 8px);
+  height: 3px;
+  background: repeating-linear-gradient(90deg, #e2e8f0, #e2e8f0 3px, transparent 3px, transparent 6px);
   opacity: 0.6;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .ac-display {
   position: absolute;
-  right: 32px;
-  top: 18px;
+  right: 24px;
+  top: 15px;
   background: #0d1e15;
-  border-radius: 4px;
-  padding: 2px 6px;
+  border-radius: 3px;
+  padding: 2px 4px;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: #10b981;
   text-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
   display: flex;
@@ -1029,7 +1050,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .ac-temp {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
 }
 
 .ac-wifi-icon {
@@ -1046,9 +1067,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .ac-brand-print {
   position: absolute;
   left: 50%;
-  top: 24px;
+  top: 20px;
   transform: translateX(-50%);
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   color: #94a3b8;
@@ -1057,7 +1078,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .ac-louver {
   width: calc(100% - 8px);
-  height: 4px;
+  height: 3px;
   background: #cbd5e1;
   border-radius: 2px;
   margin-top: auto;
@@ -1074,10 +1095,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .ac-led {
   position: absolute;
-  right: 18px;
-  top: 22px;
-  width: 4px;
-  height: 4px;
+  right: 14px;
+  top: 18px;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
   background: #3eb649;
   box-shadow: 0 0 6px #3eb649;
@@ -1091,11 +1112,11 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .ac-breeze-container {
   position: absolute;
-  bottom: -35px;
+  bottom: -30px;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  height: 80px;
+  width: 160px;
+  height: 70px;
   overflow: hidden;
   pointer-events: none;
   z-index: 5;
@@ -1139,9 +1160,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
-  max-width: 440px;
+  max-width: 380px;
   position: relative;
   z-index: 5;
 }
@@ -1150,21 +1171,21 @@ input[type="range"]::-webkit-slider-thumb:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
 .node-icon-bg {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-primary);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
   transition: transform 0.3s;
 }
 
@@ -1173,7 +1194,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .node-label {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   color: var(--color-text-muted);
   letter-spacing: 0.05em;
@@ -1208,18 +1229,18 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 /* MPPT Hardware Controller Box */
 .mppt-device {
-  width: 130px;
-  height: 190px;
+  width: 110px;
+  height: 165px;
   background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-  border-radius: 16px;
+  border-radius: 12px;
   border: 2px solid #334155;
-  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.2), 
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15), 
               inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
-  padding: 12px 10px;
+  padding: 10px 8px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   z-index: 10;
   box-sizing: border-box;
   text-align: center;
@@ -1227,29 +1248,28 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .mppt-heatsink {
   display: flex;
-  gap: 3px;
+  gap: 2px;
   justify-content: center;
 }
 
 .heatsink-fin {
-  width: 5px;
-  height: 10px;
+  width: 4px;
+  height: 8px;
   background: #475569;
   border-radius: 1px 1px 0 0;
-  box-shadow: inset 1px 0 0 rgba(255,255,255,0.05);
 }
 
 .mppt-lcd {
-  height: 48px;
+  height: 40px;
   background: #022c22;
   border: 1px solid #10b981;
-  border-radius: 6px;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.15), 
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.1), 
               inset 0 1px 2px rgba(0,0,0,0.5);
-  padding: 4px 6px;
+  padding: 3px 4px;
   color: #34d399;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.58rem;
+  font-size: 0.52rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1265,7 +1285,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .ticker-slide {
-  height: 38px;
+  height: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1273,30 +1293,30 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 @keyframes lcd-scroll {
   0%, 48% { transform: translateY(0); }
-  50%, 98% { transform: translateY(-38px); }
+  50%, 98% { transform: translateY(-32px); }
 }
 
 .lcd-line {
   font-weight: 700;
   letter-spacing: 0.2px;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 .lcd-line-small {
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   opacity: 0.85;
   margin-top: 1px;
 }
 
 .mppt-leds {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
 }
 
 .mppt-led {
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: #475569;
 }
@@ -1318,7 +1338,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .mppt-brand {
-  font-size: 0.5rem;
+  font-size: 0.45rem;
   font-weight: 900;
   letter-spacing: 0.15em;
   color: #64748b;
@@ -1328,16 +1348,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .mppt-terminals {
   display: flex;
   justify-content: space-between;
-  padding: 0 6px;
+  padding: 0 4px;
   margin-top: auto;
 }
 
 .terminal-port {
-  width: 8px;
-  height: 5px;
+  width: 6px;
+  height: 4px;
   background: #64748b;
-  border-radius: 1px 1px 3px 3px;
-  box-shadow: inset 0 -1px 1px rgba(0,0,0,0.5);
+  border-radius: 1px 1px 2px 2px;
 }
 
 .battery-node .node-icon-bg {
@@ -1357,13 +1376,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
   50% { opacity: 1; }
 }
 
-/* ==========================================
-   Dynamic LTR / RTL Alignments
-   ========================================== */
-
+/* Dynamic LTR / RTL Alignments */
 [dir="rtl"] .cool-showcase-card {
   text-align: right;
-  grid-template-columns: 1fr 1.2fr;
 }
 
 [dir="rtl"] .showcase-content {
@@ -1388,12 +1403,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 [dir="rtl"] .ac-display {
   right: auto;
-  left: 32px;
+  left: 24px;
 }
 
 [dir="rtl"] .ac-led {
   right: auto;
-  left: 18px;
+  left: 14px;
 }
 
 [dir="rtl"] .ac-breeze-container {
@@ -1402,36 +1417,14 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
-  .cool-showcase-card {
-    grid-template-columns: 1fr !important;
-    padding: 1.75rem;
-    gap: 2rem;
-  }
-  
-  .showcase-visual-wrapper {
-    min-height: 250px;
-    padding: 1.5rem;
-  }
-  
-  .ac-device {
-    width: 200px;
-    height: 60px;
-  }
-  
-  .ac-breeze-container {
-    width: 160px;
-    height: 70px;
-    bottom: -30px;
-  }
-  
-  .mppt-flow-container {
-    transform: scale(0.9);
+  .showcases-row {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 480px) {
   .mppt-flow-container {
-    transform: scale(0.78);
+    transform: scale(0.85);
   }
 }
 

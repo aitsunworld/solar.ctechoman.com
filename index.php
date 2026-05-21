@@ -490,8 +490,10 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
       </div>
 
-      <!-- Category: Air Conditioner -->
-      <div class="brand-category reveal delay-300">
+      <!-- Category: Air Conditioner & Charge Controller Showcase Grid -->
+      <div class="showcases-row">
+        <!-- Category: Air Conditioner -->
+        <div class="brand-category reveal delay-300">
         <div class="brand-category-header">
           <div class="brand-cat-icon">❄️</div>
           <div class="brand-cat-info">
@@ -702,6 +704,7 @@ $lang = require_once "lang/{$active_lang}.php";
           </div>
         </div>
       </div>
+    </div>
 
     </div>
   </section>
