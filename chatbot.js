@@ -102,7 +102,7 @@
       ar: `🔧 **عملية التركيب:**\n\n1. **مسح الموقع** – يزور مهندسنا منزلك (1-2 ساعة)\n2. **التصميم** – تصميم نظام مخصص (2-3 أيام)\n3. **التصاريح** – نتولى موافقات DCREC (5-10 أيام)\n4. **التركيب** – تركيب الألواح (1-2 يوم)\n5. **توصيل الشبكة** – توصيل MEDC والاختبار (3-5 أيام)\n\n**المجموع: عادةً 2-4 أسابيع من التوقيع حتى التشغيل!**`,
     },
     maintenance: {
-      keywords: ["maintenance", "maintain", "clean", "repair", "warranty", "broken", "صيانة", "ضمان", "تنظيف", "إصلاح"],
+      keywords: ["maintenance", "maintain", "clean", "repair", "broken", "صيانة", "تنظيف", "إصلاح"],
       en: `🛠️ **Solar Maintenance:**\n\n**Very minimal!** Solar panels are almost maintenance-free.\n\n• **Cleaning:** 2–4 times/year (we offer service plans)\n• **Monitoring:** 24/7 via our app\n• **Warranty:** 25-year panel performance warranty\n• **Inverter:** 10-year warranty, typically lasts 15+ years\n• **Annual check:** We recommend yearly professional inspection\n\nConcept Technologies offers maintenance packages starting at OMR 50/year.`,
       ar: `🛠️ **صيانة الطاقة الشمسية:**\n\n**صيانة بسيطة جداً!** الألواح الشمسية لا تحتاج تقريباً إلى صيانة.\n\n• **التنظيف:** 2-4 مرات/سنة (نقدم خطط خدمة)\n• **المراقبة:** 24/7 عبر تطبيقنا\n• **الضمان:** ضمان أداء الألواح 25 سنة\n• **العاكس:** ضمان 10 سنوات، يدوم عادةً 15+ سنة\n• **فحص سنوي:** نوصي بالفحص المهني السنوي\n\nكونسبت تكنولوجيز تقدم باقات صيانة تبدأ من 50 ريال/سنة.`,
     },
@@ -147,6 +147,134 @@
       ar: `🏠 **ملائمة السطح للتركيب:**\n\nمعظم الأسطح الخرسانية المستوية (الشائعة جداً في عُمان) والأسطح المعدنية أو القرميدية المائلة مناسبة تماماً لتركيب الألواح الشمسية.\n\nخلال **معاينة الموقع المجانية**، يقوم مهندسونا بتقييم:\n1. المساحة المتاحة الخالية من العوائق\n2. الظلال الناتجة عن الجدران أو المباني المجاورة\n3. قدرة تحمل السطح الهيكلية\n4. التوجيه المثالي للألواح (باتجاه الجنوب لتحقيق أقصى إنتاجية)`,
     },
   };
+
+  const INTENTS = {
+    cost: {
+      en: [
+        "cost of solar", "solar price", "how much is solar", "is solar expensive", "solar price in oman",
+        "system cost", "panel price", "installation cost", "what is the price", "cost", "price", "expensive", "afford"
+      ],
+      ar: [
+        "تكلفة الطاقة الشمسية", "سعر الالواح", "كم تكلفة", "هل الطاقة الشمسية غالية", "سعر النظام الشمسي",
+        "اسعار الالواح الشمسية", "كم سعر", "كم يكلف", "سعر", "تكلفة", "غالي", "فلوس", "مبالغ"
+      ]
+    },
+    savings: {
+      en: [
+        "how much will i save", "solar savings", "solar roi", "return on investment", "payback period",
+        "electricity savings", "bill savings", "save money", "financial benefit", "save", "saving", "roi", "payback"
+      ],
+      ar: [
+        "كم سافر", "توفير الطاقة الشمسية", "توفير الفاتورة", "عائد الاستثمار", "فترة الاسترداد",
+        "توفير الكهرباء", "وفر فلوس", "توفير", "وفر", "عائد", "ارباح", "جدوى"
+      ]
+    },
+    installation: {
+      en: [
+        "how to install", "installation process", "how long to install", "steps to install solar",
+        "solar setup", "installing solar panels", "install", "installation", "process", "steps", "setup"
+      ],
+      ar: [
+        "كيف يتم التركيب", "خطوات تركيب الطاقة الشمسية", "كم يستغرق التركيب", "طريقة التركيب",
+        "تركيب الالواح", "تركيب", "كيف", "خطوات", "مده", "وقت"
+      ]
+    },
+    maintenance: {
+      en: [
+        "solar maintenance", "how to clean solar panels", "do solar panels need maintenance", "cleaning panels",
+        "solar repair", "solar warranty", "broken solar panels", "maintain", "clean", "repair", "warranty", "broken"
+      ],
+      ar: [
+        "صيانة الالواح الشمسية", "كيف انظف الالواح", "تنظيف الالواح", "اصلاح الالواح",
+        "ضمان الالواح", "خراب الالواح", "صيانة", "تنظيف", "تصليح", "ضمان", "تلف"
+      ]
+    },
+    regulations: {
+      en: [
+        "oman solar regulations", "is solar legal in oman", "solar permits medc", "dcrec solar approval",
+        "net metering oman", "solar law", "regulation", "legal", "permit", "law", "oman", "authority", "dcrec", "medc"
+      ],
+      ar: [
+        "قوانين الطاقة الشمسية في عمان", "هل الطاقة الشمسية قانونية", "تصاريح شركة الكهرباء", "موافقات الطاقة الشمسية",
+        "قياس صافي التغذية", "قانون", "تصريح", "سماح", "شروط", "حوافز", "ترخيص"
+      ]
+    },
+    calculator: {
+      en: [
+        "how to use calculator", "solar calculator", "estimate solar bill", "calculate panels needed",
+        "system size estimation", "calculator", "calculate", "estimate", "bill", "panels"
+      ],
+      ar: [
+        "كيف استخدم الحاسبة", "حاسبة الطاقة الشمسية", "تقدير فاتورة الكهرباء", "حساب عدد الالواح",
+        "حجم النظام المطلوب", "حاسبه", "احسب", "تقدير", "فاتوره"
+      ]
+    },
+    weather: {
+      en: [
+        "solar in rainy weather", "do panels work in winter", "does dust affect solar panels",
+        "solar panels in cloudy weather", "weather performance", "weather", "cloudy", "rain", "dust", "heat", "sunlight"
+      ],
+      ar: [
+        "الطاقة الشمسية في المطر", "هل تعمل الالواح في الشتاء", "تاثير الغبار على الالواح",
+        "الالواح في الغيم", "الطقس", "مطر", "غائم", "غبار", "حرارة", "شمس", "غيوم",
+        "الطقس الغائم", "طقس غائم"
+      ]
+    },
+    warranty: {
+      en: [
+        "solar panel warranty", "how long is the warranty", "durability of solar panels",
+        "system lifespan", "inverter warranty", "warranty", "guarantee", "durability", "lifespan"
+      ],
+      ar: [
+        "ضمان الالواح الشمسية", "كم مدة الضمان", "عمر الالواح الافتراضي", "ضمان العاكس", "كفالة", "عمر"
+      ]
+    },
+    battery: {
+      en: [
+        "do i need a battery", "solar battery storage", "backup power", "off-grid solar oman",
+        "solar batteries", "battery", "batteries", "storage", "backup", "offgrid"
+      ],
+      ar: [
+        "هل احتاج بطارية", "تخزين الطاقة بالبطاريات", "كهرباء احتياطية", "طاقة شمسية بدون شبكة",
+        "بطاريات", "بطارية", "تخزين", "احتياطي", "خزان"
+      ]
+    },
+    power_home: {
+      en: [
+        "can solar power my entire home", "can i run air conditioner on solar", "powering heavy appliances",
+        "solar for whole house", "run house on solar", "power home", "entire home", "run house", "ac", "air conditioner"
+      ],
+      ar: [
+        "هل تشغل البيت بالكامل", "هل تشغل المكيف", "تشغيل الاجهزة الثقيلة", "طاقة شمسية للمنزل كامل",
+        "تشغيل منزل", "مكيف", "مكيفات", "بيت", "البيت", "تشغيل كل البيت", "تشغيل البيت", "تشغيل البيت بالكامل"
+      ]
+    },
+    night: {
+      en: [
+        "does solar work at night", "solar power after sunset", "electricity at night", "night power",
+        "night", "dark", "no sun", "sunset", "evening", "do panels work at night", "do panels work at nite"
+      ],
+      ar: [
+        "هل تعمل الطاقة الشمسية في الليل", "كهرباء بعد غروب الشمس", "كهرباء بالليل", "الليل", "ظلام", "مساء",
+        "الالواح في الليل", "عمل الالواح في الليل"
+      ]
+    },
+    roof: {
+      en: [
+        "is my roof suitable", "solar panel roof space", "roof orientation for solar",
+        "flat concrete roof solar", "shading issues", "roof", "suitable", "surface", "area", "space"
+      ],
+      ar: [
+        "هل سطحي مناسب", "مساحة السطح للالواح", "اتجاه الالواح على السطح", "سطح خرساني", "ظل", "سطح", "اسطح"
+      ]
+    }
+  };
+
+  const STOP_WORDS = new Set([
+    "what", "is", "the", "does", "do", "can", "i", "a", "an", "of", "in", "at", "on", "how", "will", 
+    "we", "get", "you", "your", "my", "it", "its", "to", "for", "with", "are", "about",
+    "هل", "في", "من", "على", "ما", "كيف", "هو", "هي", "تم", "عن", "مع", "هذا", "هذه", "التي", "الذي", "ان", "او", "لا", "كان"
+  ]);
 
   const FLOW = {
     WELCOME: "WELCOME",
@@ -630,7 +758,7 @@
     }
 
     // 1. Check local keyword DB match
-    const matchedFaq = matchKeywordFAQ(text, l);
+    const matchedFaq = matchIntent(text, l);
     if (matchedFaq) {
       if (window.SolarAnalytics) {
         window.SolarAnalytics.track("chatbot_faq_match", { category: matchedFaq.key });
@@ -994,6 +1122,9 @@
     if (!str) return "";
     let s = str.toLowerCase();
     
+    // English "nite" -> "night"
+    s = s.replace(/\bnite\b/g, "night");
+    
     // Arabic character normalization
     s = s.replace(/[\u064B-\u0652]/g, ""); // Strip diacritics
     s = s.replace(/[أإآٱ]/g, "ا");
@@ -1003,7 +1134,38 @@
     
     // Remove punctuation
     s = s.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?؟!"']/g, " ");
-    return s.trim();
+    
+    const tokens = s.split(/\s+/).filter(t => t.length > 0);
+    const cleanTokens = tokens.map(token => {
+      if (/[\u0600-\u06FF]/.test(token)) {
+        let w = token;
+        
+        // 1. Strip conjunction "و" (and)
+        if (w.startsWith("و") && w.length > 3) {
+          w = w.substring(1);
+        }
+        
+        // 2. Strip preposition "ب" if followed by "ال" (starts with "بال")
+        if (w.startsWith("بال") && w.length > 4) {
+          w = w.substring(1);
+        }
+        
+        // 3. Strip preposition "لل" and replace with "ال"
+        if (w.startsWith("لل") && w.length > 3) {
+          w = "ال" + w.substring(2);
+        }
+        
+        // 4. Strip definite article "ال"
+        if (w.startsWith("ال") && w.length > 3) {
+          w = w.substring(2);
+        }
+        
+        return w;
+      }
+      return token;
+    });
+    
+    return cleanTokens.join(" ").trim();
   }
 
   function levenshteinDistance(s1, s2) {
@@ -1030,110 +1192,127 @@
     return matrix[len1][len2];
   }
 
-  function matchKeywordFAQ(text, lang) {
+  function matchIntent(text, lang) {
     if (!text) return null;
+    
+    // Auto-detect language
+    if (detectArabic(text)) {
+      lang = "ar";
+    } else {
+      lang = "en";
+    }
+    
     const normalizedQuery = normalizeText(text);
     const queryTokens = normalizedQuery.split(/\s+/).filter(t => t.length > 0);
-
     if (queryTokens.length === 0) return null;
-
-    // Helper to strip "ال" prefix
-    function stripAl(word) {
-      if (word.startsWith("ال") && word.length > 3) {
-        return word.substring(2);
-      }
-      return word;
+    
+    // Filtered tokens for overlap ratio
+    let queryFiltered = queryTokens.filter(t => !STOP_WORDS.has(t));
+    if (queryFiltered.length === 0) {
+      queryFiltered = queryTokens; // Fallback if everything is a stop word
     }
-
+    
     let bestMatchKey = null;
-    let maxMatches = 0;
-
-    for (const key in FAQ_DB) {
-      const keywords = FAQ_DB[key].keywords;
-      let categoryMatchCount = 0;
-
-      for (let i = 0; i < queryTokens.length; i++) {
-        const token = queryTokens[i];
-
-        // Generate stems by stripping Arabic definite article "ال"
-        let stems = [token];
-        const cleanToken = stripAl(token);
-        if (cleanToken !== token) {
-          stems.push(cleanToken);
+    let maxScore = 0.0;
+    
+    for (const key in INTENTS) {
+      const patterns = INTENTS[key][lang] || INTENTS[key].en || [];
+      const coreKeywords = FAQ_DB[key] ? FAQ_DB[key].keywords : [];
+      let intentBestScore = 0.0;
+      
+      for (let i = 0; i < patterns.length; i++) {
+        const pat = patterns[i];
+        const normalizedPat = normalizeText(pat);
+        const patTokens = normalizedPat.split(/\s+/).filter(t => t.length > 0);
+        if (patTokens.length === 0) continue;
+        
+        // Skip single word patterns if query is not an exact match
+        if (patTokens.length === 1 && normalizedQuery !== normalizedPat) {
+          continue;
         }
-
-        for (let j = 0; j < keywords.length; j++) {
-          const kw = normalizeText(keywords[j]);
-          
-          // Generate stems for the keyword too, to support symmetric matching
-          let kwStems = [kw];
-          const cleanKw = stripAl(kw);
-          if (cleanKw !== kw) {
-            kwStems.push(cleanKw);
-          }
-
-          let matchedKeyword = false;
-
-          for (let s = 0; s < stems.length; s++) {
-            const currentToken = stems[s];
-
-            for (let k = 0; k < kwStems.length; k++) {
-              const currentKw = kwStems[k];
-
-              // Check 1: Exact match
-              if (currentToken === currentKw) {
-                categoryMatchCount += 2; // Exact matches are weighted higher
-                matchedKeyword = true;
-                break;
-              }
-
-              // Check 2: Substring inclusion for longer words
-              if ((currentToken.length >= 4 && currentKw.includes(currentToken)) || (currentKw.length >= 4 && currentToken.includes(currentKw))) {
-                categoryMatchCount += 1.5;
-                matchedKeyword = true;
-                break;
-              }
-
-              // Check 3: Fuzzy matching (Levenshtein)
-              const tokenLen = currentToken.length;
-              const kwLen = currentKw.length;
-              
-              let tolerance = 0;
-              const minLen = Math.min(tokenLen, kwLen);
-              if (minLen >= 5) {
-                tolerance = 2;
-              } else if (minLen >= 4) {
-                tolerance = 1;
-              }
-
-              if (tolerance > 0 && Math.abs(tokenLen - kwLen) <= tolerance) {
-                const dist = levenshteinDistance(currentToken, currentKw);
-                if (dist <= tolerance) {
-                  categoryMatchCount += 1;
-                  matchedKeyword = true;
-                  break;
-                }
-              }
+        
+        let patternScore = 0.0;
+        
+        // 1. Exact phrase match (10 pts)
+        if (normalizedQuery === normalizedPat) {
+          patternScore = Math.max(patternScore, 10.0);
+        }
+        
+        // 2. Fuzzy pattern match (8 pts)
+        const totalDist = levenshteinDistance(normalizedQuery, normalizedPat);
+        if (totalDist <= 2 && Math.abs(normalizedQuery.length - normalizedPat.length) <= 2) {
+          patternScore = Math.max(patternScore, 8.0);
+        }
+        
+        // Must be a multi-word phrase pattern to count for loose substring containment
+        if (patTokens.length > 1 && normalizedPat.length > 3 && (normalizedQuery.includes(normalizedPat) || normalizedPat.includes(normalizedQuery))) {
+          patternScore = Math.max(patternScore, 8.0);
+        }
+        
+        // 3. Word-overlap ratio (6 pts)
+        let patFiltered = patTokens.filter(t => !STOP_WORDS.has(t));
+        if (patFiltered.length === 0) {
+          patFiltered = patTokens;
+        }
+        
+        let overlapCount = 0;
+        for (let q = 0; q < queryFiltered.length; q++) {
+          const qToken = queryFiltered[q];
+          for (let p = 0; p < patFiltered.length; p++) {
+            const pToken = patFiltered[p];
+            // Typo tolerance <= 1 only for words longer than 3 characters
+            if (qToken === pToken || (qToken.length > 3 && pToken.length > 3 && levenshteinDistance(qToken, pToken) <= 1)) {
+              overlapCount++;
+              break;
             }
-            if (matchedKeyword) break;
           }
+        }
+        
+        const overlapRatio = Math.max(queryFiltered.length, patFiltered.length) > 0 ? (overlapCount / Math.max(queryFiltered.length, patFiltered.length)) : 0;
+        const overlapScore = overlapRatio * 6.0;
+        patternScore = Math.max(patternScore, overlapScore);
+        
+        // 4. Core keywords match (weighted by query length)
+        let keywordMatch = false;
+        for (let q = 0; q < queryTokens.length; q++) {
+          const qToken = queryTokens[q];
+          for (let k = 0; k < coreKeywords.length; k++) {
+            const kwNormalized = normalizeText(coreKeywords[k]);
+            // Typo tolerance <= 1 only for words longer than 3 characters
+            if (qToken === kwNormalized || (qToken.length > 3 && kwNormalized.length > 3 && levenshteinDistance(qToken, kwNormalized) <= 1)) {
+              keywordMatch = true;
+              break;
+            }
+          }
+          if (keywordMatch) break;
+        }
+        
+        if (keywordMatch) {
+          const keywordScore = 5.0 / queryFiltered.length;
+          patternScore = Math.max(patternScore, keywordScore);
+        }
+        
+        if (patternScore > intentBestScore) {
+          intentBestScore = patternScore;
         }
       }
-
-      if (categoryMatchCount > maxMatches) {
-        maxMatches = categoryMatchCount;
+      
+      if (intentBestScore > maxScore) {
+        maxScore = intentBestScore;
         bestMatchKey = key;
       }
     }
-
-    // Threshold of at least 1 match point to count as a real match
-    if (bestMatchKey && maxMatches >= 1) {
+    
+    console.log(`[SolarBot] Best intent match: ${bestMatchKey} with score: ${maxScore.toFixed(2)}`);
+    
+    // Strict threshold: score >= 3.0
+    if (bestMatchKey && maxScore >= 3.0) {
       return {
         key: bestMatchKey,
         content: FAQ_DB[bestMatchKey][lang] || FAQ_DB[bestMatchKey].en
       };
     }
-
+    
     return null;
   }
 

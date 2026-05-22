@@ -139,34 +139,34 @@ $lang = require_once "lang/{$active_lang}.php";
         <div class="results-grid mt-4">
           <div class="result-box">
             <span class="result-label"><?= $lang['calc_sys_size'] ?></span>
-            <strong class="result-value text-eco" id="res-size" dir="ltr" style="display: inline-block;">0 kW</strong>
+            <strong class="result-value text-eco" id="res-size" dir="ltr">0 kW</strong>
           </div>
           <div class="result-box">
             <span class="result-label"><?= $lang['calc_est_panels'] ?></span>
-            <strong class="result-value" id="res-panels" dir="ltr" style="display: inline-block;">0</strong>
+            <strong class="result-value" id="res-panels" dir="ltr">0</strong>
           </div>
           <div class="result-box">
             <span class="result-label"><?= $lang['calc_est_cost'] ?></span>
-            <strong class="result-value" id="res-cost" dir="ltr" style="display: inline-block;">0 OMR</strong>
+            <strong class="result-value" id="res-cost" dir="ltr">0 OMR</strong>
           </div>
           <div class="result-box highlight">
             <span class="result-label"><?= $lang['calc_yearly_savings'] ?></span>
-            <strong class="result-value" id="res-savings" dir="ltr" style="display: inline-block;">0 OMR</strong>
+            <strong class="result-value" id="res-savings" dir="ltr">0 OMR</strong>
           </div>
         </div>
-        <button id="calc-explain-btn" class="btn btn-secondary mt-3" style="width: 100%; border: 1.5px solid var(--color-accent); background: transparent; color: var(--color-accent); font-weight: 600; padding: 0.8rem; border-radius: var(--radius-pill); cursor: pointer; transition: all 0.2s;">
+        <button id="calc-explain-btn" class="btn btn-secondary mt-3">
           ✨ <?= $active_lang === 'ar' ? 'اشرح لي النتائج بمستشار الذكاء الاصطناعي' : 'Explain results with AI Advisor' ?>
         </button>
         <p class="mt-3 text-muted" style="font-size: 0.8rem;"><?= $lang['calc_note'] ?></p>
 
-        <div id="load-recommendations" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--color-border); width: 100%;">
-          <h4 style="margin-bottom: 1rem; color: var(--color-primary); font-size: 1.1rem; text-align: start;"><?= $active_lang === 'ar' ? 'توصيات النظام المتقدمة' : 'Advanced System Recommendations' ?></h4>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="result-box" style="background: rgba(58, 141, 204, 0.05);">
+        <div id="load-recommendations" style="display: none;">
+          <h4 class="recs-title"><?= $active_lang === 'ar' ? 'توصيات النظام المتقدمة' : 'Advanced System Recommendations' ?></h4>
+          <div class="recs-grid">
+            <div class="result-box inverter-box">
               <span class="result-label"><?= $active_lang === 'ar' ? 'حجم العاكس المقترح' : 'Recommended Inverter' ?></span>
-              <strong class="result-value" id="res-inverter" style="color: var(--color-primary);">0 kW</strong>
+              <strong class="result-value" id="res-inverter">0 kW</strong>
             </div>
-            <div class="result-box" style="background: rgba(62, 182, 73, 0.05);">
+            <div class="result-box battery-box">
               <span class="result-label"><?= $active_lang === 'ar' ? 'سعة البطارية المقترحة' : 'Battery Storage' ?></span>
               <strong class="result-value text-eco" id="res-battery">0 kWh</strong>
             </div>
@@ -175,11 +175,11 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <div class="calc-form">
-        <div class="calc-tabs" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-          <button id="tab-bill" class="calc-tab active" style="flex: 1; padding: 0.75rem; border: none; border-radius: var(--radius-pill); background: var(--color-primary); color: #fff; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+        <div class="calc-tabs">
+          <button id="tab-bill" class="calc-tab active">
             <?= $active_lang === 'ar' ? 'تقدير الفاتورة' : 'Bill Estimator' ?>
           </button>
-          <button id="tab-appliances" class="calc-tab" style="flex: 1; padding: 0.75rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: transparent; color: var(--color-text); font-weight: 600; cursor: pointer; transition: all 0.2s;">
+          <button id="tab-appliances" class="calc-tab">
             <?= $active_lang === 'ar' ? 'مدقق الأجهزة' : 'Appliance Auditor' ?>
           </button>
         </div>
@@ -218,7 +218,7 @@ $lang = require_once "lang/{$active_lang}.php";
   <section id="benefits" class="benefits container section-padding">
     <div class="section-title reveal">
       <h2><?= $lang['ben_title'] ?></h2>
-      <p class="text-muted mt-2" style="font-size: 1.25rem;"><?= $lang['ben_desc'] ?></p>
+      <p class="section-subtitle"><?= $lang['ben_desc'] ?></p>
     </div>
 
     <div class="staggered-grid">
@@ -322,11 +322,10 @@ $lang = require_once "lang/{$active_lang}.php";
   </section>
 
   <!-- Why Choose Us -->
-  <section id="why-choose-us" class="container section-padding text-center" style="text-align: center;">
-    <div class="reveal">
-      <span
-        style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;"><?= $lang['why_pre'] ?></span>
-      <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 4rem;"><?= $lang['why_title'] ?></h2>
+  <section id="why-choose-us" class="container section-padding">
+    <div class="section-title reveal">
+      <span class="section-eyebrow"><?= $lang['why_pre'] ?></span>
+      <h2><?= $lang['why_title'] ?></h2>
     </div>
 
     <div class="choose-us-grid">
@@ -459,10 +458,10 @@ $lang = require_once "lang/{$active_lang}.php";
 
   <!-- Technical Resources / Datasheet Download Center -->
   <section id="datasheets" class="datasheet-section container reveal section-padding">
-    <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto; text-align: center;">
-      <span style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;"><?= $lang['datasheet_pre'] ?></span>
-      <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 1.5rem;"><?= $lang['datasheet_title'] ?></h2>
-      <p class="text-muted" style="max-width: 600px; margin: 0 auto;"><?= $lang['datasheet_subtitle'] ?></p>
+    <div class="section-title reveal">
+      <span class="section-eyebrow"><?= $lang['datasheet_pre'] ?></span>
+      <h2><?= $lang['datasheet_title'] ?></h2>
+      <p class="section-subtitle"><?= $lang['datasheet_subtitle'] ?></p>
     </div>
 
     <div class="datasheet-grid">
@@ -619,61 +618,51 @@ $lang = require_once "lang/{$active_lang}.php";
   </section>
 
   <!-- Testimonials -->
-  <section id="testimonials" class="container section-padding"
-    style="background-color: var(--color-surface); border-radius: var(--radius-card); margin-top: 4rem; box-shadow: var(--shadow-soft);">
-    <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto;">
+  <section id="testimonials" class="container section-padding testimonials-section">
+    <div class="section-title text-center reveal">
       <h2><?= $lang['test_title'] ?></h2>
       <p class="text-muted mt-2"><?= $lang['test_desc'] ?></p>
     </div>
 
     <div class="testimonials-grid">
-      <div class="benefit-card reveal"
-        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-bg);">
+      <div class="testimonial-card reveal">
         <div>
-          <div style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;"><?= $lang['test_1_quote'] ?></p>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="text-muted testimonial-quote"><?= $lang['test_1_quote'] ?></p>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <div
-            style="width: 50px; height: 50px; background: var(--color-primary); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
-            SA</div>
+        <div class="testimonial-user">
+          <div class="testimonial-avatar avatar-primary">SA</div>
           <div>
-            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_1_name'] ?></h3>
-            <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_1_role'] ?></span>
+            <h3 class="testimonial-name"><?= $lang['test_1_name'] ?></h3>
+            <span class="testimonial-role"><?= $lang['test_1_role'] ?></span>
           </div>
         </div>
       </div>
 
-      <div class="benefit-card reveal delay-100"
-        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-bg);">
+      <div class="testimonial-card reveal delay-100">
         <div>
-          <div style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;"><?= $lang['test_2_quote'] ?></p>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="text-muted testimonial-quote"><?= $lang['test_2_quote'] ?></p>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <div
-            style="width: 50px; height: 50px; background: var(--color-accent); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
-            MA</div>
+        <div class="testimonial-user">
+          <div class="testimonial-avatar avatar-accent">MA</div>
           <div>
-            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_2_name'] ?></h3>
-            <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_2_role'] ?></span>
+            <h3 class="testimonial-name"><?= $lang['test_2_name'] ?></h3>
+            <span class="testimonial-role"><?= $lang['test_2_role'] ?></span>
           </div>
         </div>
       </div>
 
-      <div class="benefit-card reveal delay-200"
-        style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-bg);">
+      <div class="testimonial-card reveal delay-200">
         <div>
-          <div style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;"><?= $lang['test_3_quote'] ?></p>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="text-muted testimonial-quote"><?= $lang['test_3_quote'] ?></p>
         </div>
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <div
-            style="width: 50px; height: 50px; background: var(--color-text-dark); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
-            FA</div>
+        <div class="testimonial-user">
+          <div class="testimonial-avatar avatar-dark">FA</div>
           <div>
-            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_3_name'] ?></h3>
-            <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_3_role'] ?></span>
+            <h3 class="testimonial-name"><?= $lang['test_3_name'] ?></h3>
+            <span class="testimonial-role"><?= $lang['test_3_role'] ?></span>
           </div>
         </div>
       </div>
@@ -700,33 +689,33 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
       </div>
 
-      <div class="contact-form reveal delay-200" style="background: var(--color-surface); padding: 3rem; border-radius: var(--radius-card); box-shadow: var(--shadow-soft); border: 1px solid var(--color-border); text-align: start;">
-        <h3 class="mb-4" style="font-size: 1.5rem; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'طلب استشارة مجانية' : 'Request Free Solar Consultation' ?></h3>
+      <div class="contact-form reveal delay-200">
+        <h3 class="mb-4"><?= $active_lang === 'ar' ? 'طلب استشارة مجانية' : 'Request Free Solar Consultation' ?></h3>
         
-        <form id="native-lead-form" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
+        <form id="native-lead-form" method="POST">
           <input type="hidden" name="action" value="submit_lead">
           <input type="hidden" name="lang" value="<?= $active_lang ?>">
           
           <div class="form-group">
-            <label for="lead-name" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'الاسم الكامل' : 'Full Name' ?> *</label>
-            <input type="text" id="lead-name" name="name" required placeholder="<?= $active_lang === 'ar' ? 'أدخل اسمك الكامل' : 'Enter your full name' ?>" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Full Name">
+            <label for="lead-name"><?= $active_lang === 'ar' ? 'الاسم الكامل' : 'Full Name' ?> *</label>
+            <input type="text" id="lead-name" name="name" required placeholder="<?= $active_lang === 'ar' ? 'أدخل اسمك الكامل' : 'Enter your full name' ?>" aria-label="Full Name">
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-row-grid">
             <div class="form-group">
-              <label for="lead-phone" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'رقم الهاتف (واتساب)' : 'Phone Number (WhatsApp)' ?> *</label>
-              <input type="tel" id="lead-phone" name="phone" required placeholder="968 XXXXXXXX" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Phone Number">
+              <label for="lead-phone"><?= $active_lang === 'ar' ? 'رقم الهاتف (واتساب)' : 'Phone Number (WhatsApp)' ?> *</label>
+              <input type="tel" id="lead-phone" name="phone" required placeholder="968 XXXXXXXX" aria-label="Phone Number">
             </div>
             <div class="form-group">
-              <label for="lead-email" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'البريد الإلكتروني' : 'Email Address' ?> *</label>
-              <input type="email" id="lead-email" name="email" required placeholder="example@domain.com" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Email Address">
+              <label for="lead-email"><?= $active_lang === 'ar' ? 'البريد الإلكتروني' : 'Email Address' ?> *</label>
+              <input type="email" id="lead-email" name="email" required placeholder="example@domain.com" aria-label="Email Address">
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-row-grid">
             <div class="form-group">
-              <label for="lead-gov" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'المحافظة' : 'Governorate' ?> *</label>
-              <select id="lead-gov" name="governorate" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Governorate">
+              <label for="lead-gov"><?= $active_lang === 'ar' ? 'المحافظة' : 'Governorate' ?> *</label>
+              <select id="lead-gov" name="governorate" required aria-label="Governorate">
                 <option value="muscat"><?= $lang['calc_loc_muscat'] ?></option>
                 <option value="dhofar"><?= $lang['calc_loc_dhofar'] ?></option>
                 <option value="batinah"><?= $lang['calc_loc_batinah'] ?></option>
@@ -735,8 +724,8 @@ $lang = require_once "lang/{$active_lang}.php";
               </select>
             </div>
             <div class="form-group">
-              <label for="lead-prop" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'نوع العقار' : 'Property Type' ?> *</label>
-              <select id="lead-prop" name="property_type" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Property Type">
+              <label for="lead-prop"><?= $active_lang === 'ar' ? 'نوع العقار' : 'Property Type' ?> *</label>
+              <select id="lead-prop" name="property_type" required aria-label="Property Type">
                 <option value="residential"><?= $lang['calc_prop_residential'] ?></option>
                 <option value="commercial"><?= $lang['calc_prop_commercial'] ?></option>
                 <option value="industrial"><?= $lang['calc_prop_industrial'] ?></option>
@@ -744,14 +733,14 @@ $lang = require_once "lang/{$active_lang}.php";
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-row-grid">
             <div class="form-group">
-              <label for="lead-bill" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'متوسط الفاتورة الكهربائية (ريال)' : 'Average Electricity Bill (OMR)' ?> *</label>
-              <input type="number" id="lead-bill" name="monthly_bill" required min="10" max="5000" value="50" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Electricity Bill">
+              <label for="lead-bill"><?= $active_lang === 'ar' ? 'متوسط الفاتورة الكهربائية (ريال)' : 'Average Electricity Bill (OMR)' ?> *</label>
+              <input type="number" id="lead-bill" name="monthly_bill" required min="10" max="5000" value="50" aria-label="Electricity Bill">
             </div>
             <div class="form-group">
-              <label for="lead-consult" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'نوع الاستشارة' : 'Consultation Type' ?> *</label>
-              <select id="lead-consult" name="consultation_type" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Consultation Type">
+              <label for="lead-consult"><?= $active_lang === 'ar' ? 'نوع الاستشارة' : 'Consultation Type' ?> *</label>
+              <select id="lead-consult" name="consultation_type" required aria-label="Consultation Type">
                 <option value="site_survey"><?= $active_lang === 'ar' ? 'معاينة موقع مجانية' : 'Free Site Survey' ?></option>
                 <option value="video_call"><?= $active_lang === 'ar' ? 'استشارة بالفيديو عن بعد' : 'Online Video Call' ?></option>
                 <option value="office"><?= $active_lang === 'ar' ? 'زيارة مكتب كونسيبت' : 'Office Consultation' ?></option>
@@ -760,8 +749,8 @@ $lang = require_once "lang/{$active_lang}.php";
           </div>
 
           <div class="form-group">
-            <label for="lead-notes" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'ملاحظات إضافية (اختياري)' : 'Additional Notes (Optional)' ?></label>
-            <textarea id="lead-notes" name="message" rows="3" placeholder="<?= $active_lang === 'ar' ? 'تحدث إلينا عن احتياجاتك المحددة...' : 'Tell us about your specific solar needs...' ?>" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: 1rem; background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; font-family: inherit; resize: vertical; transition: border-color 0.2s;" aria-label="Additional Notes"></textarea>
+            <label for="lead-notes"><?= $active_lang === 'ar' ? 'ملاحظات إضافية (اختياري)' : 'Additional Notes (Optional)' ?></label>
+            <textarea id="lead-notes" name="message" rows="3" placeholder="<?= $active_lang === 'ar' ? 'تحدث إلينا عن احتياجاتك المحددة...' : 'Tell us about your specific solar needs...' ?>" aria-label="Additional Notes"></textarea>
           </div>
 
           <!-- Anti-Spam HoneyPot -->
@@ -769,12 +758,12 @@ $lang = require_once "lang/{$active_lang}.php";
             <input type="text" name="honeypot" tabindex="-1" autocomplete="off">
           </div>
 
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-weight: 600; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+          <button type="submit" class="btn btn-primary submit-btn">
             <span><?= $active_lang === 'ar' ? 'تأكيد وحجز الاستشارة 🚀' : 'Confirm & Book Consultation 🚀' ?></span>
-            <span class="spinner" style="display: none; width: 20px; height: 20px; border: 3px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite;"></span>
+            <span class="spinner"></span>
           </button>
 
-          <div id="form-feedback" class="mt-3 text-center" style="display: none; padding: 0.85rem 1rem; border-radius: var(--radius-pill); font-weight: 600; font-size: 0.95rem;"></div>
+          <div id="form-feedback" class="mt-3 text-center" style="display: none;"></div>
         </form>
       </div>
     </div>
