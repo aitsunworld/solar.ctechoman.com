@@ -1,37 +1,14 @@
-<?php
-header('Content-Type: text/html; charset=UTF-8');
-ini_set('default_charset', 'UTF-8');
-if (function_exists('mb_internal_encoding')) {
-  mb_internal_encoding('UTF-8');
-}
-
-session_start();
-
-// Handle language toggle
-if (isset($_GET['lang']) && in_array($_GET['lang'], ['en', 'ar'])) {
-  $_SESSION['lang'] = $_GET['lang'];
-}
-
-$active_lang = $_SESSION['lang'] ?? 'en';
-$dir = ($active_lang === 'ar') ? 'rtl' : 'ltr';
-
-// Load constants
-$constants = require_once "constants.php";
-
-// Load language dictionary
-$lang = require_once "lang/{$active_lang}.php";
-?>
 <!DOCTYPE html>
-<html lang="<?= $active_lang ?>" dir="<?= $dir ?>">
+<html lang="en" dir="ltr">
 
 <head>
   <script>document.documentElement.classList.add('js-enabled');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= $lang['title'] ?></title>
-  <meta name="description" content="<?= $lang['desc'] ?>">
-  <meta property="og:title" content="<?= $lang['title'] ?>">
-  <meta property="og:description" content="<?= $lang['og_desc'] ?>">
+  <title>Concept Technologies LLC - Premium Solar Energy Solutions</title>
+  <meta name="description" content="Clean, sustainable solar energy solutions for Oman by Concept Technologies LLC. Reduce bills to zero with our smart systems.">
+  <meta property="og:title" content="Concept Technologies LLC - Premium Solar Energy Solutions">
+  <meta property="og:description" content="Clean, sustainable solar energy solutions for Oman. Increase your property value and eliminate electricity bills.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://solar.ctechoman.com">
   <meta property="og:image" content="https://www.ctechoman.com/public/logo.webp">
@@ -72,15 +49,11 @@ $lang = require_once "lang/{$active_lang}.php";
         <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC Logo" width="160" height="48">
       </a>
       <div class="nav-links">
-        <a href="#calculator" class="nav-link"><?= $lang['nav_calculator'] ?></a>
-        <a href="#benefits" class="nav-link"><?= $lang['nav_benefits'] ?></a>
-        <a href="#process" class="nav-link"><?= $lang['nav_process'] ?></a>
-        <?php if ($active_lang === 'en'): ?>
-          <a href="?lang=ar" class="lang-btn" style="text-decoration:none;">العربية</a>
-        <?php else: ?>
-          <a href="?lang=en" class="lang-btn" style="text-decoration:none;">English</a>
-        <?php endif; ?>
-        <a href="#contact" class="btn btn-primary"><?= $lang['nav_quote'] ?></a>
+        <a href="#calculator" class="nav-link">Calculator</a>
+        <a href="#benefits" class="nav-link">Benefits</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="preview_ar.html" class="lang-btn" style="text-decoration:none;">العربية</a>
+        <a href="#contact" class="btn btn-primary">Get a Quote</a>
       </div>
 
       <!-- Mobile Menu Toggle -->
@@ -98,11 +71,11 @@ $lang = require_once "lang/{$active_lang}.php";
   <section class="hero container">
     <div class="hero-grid">
       <div class="hero-text">
-        <h1><?= $lang['hero_title'] ?></h1>
-        <p><?= $lang['hero_desc'] ?></p>
+        <h1>Premium Solar Energy Solutions for Oman</h1>
+        <p>Reduce your electricity bills to zero with the most reliable solar panels and renewable energy systems in the Sultanate.</p>
 
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
+          <a href="#contact" class="btn btn-hero-primary">Get a Quote</a>
 
         </div>
 
@@ -133,41 +106,41 @@ $lang = require_once "lang/{$active_lang}.php";
   <section id="calculator" class="calculator-section container reveal">
     <div class="calculator-wrapper">
       <div class="calc-info">
-        <h2><?= $lang['calc_title'] ?></h2>
-        <p class="text-muted"><?= $lang['calc_desc'] ?></p>
+        <h2>Smart Calculator</h2>
+        <p class="text-muted">Drag the slider to match your average monthly bill and let our system do the rest.</p>
 
         <div class="results-grid mt-4">
           <div class="result-box">
-            <span class="result-label"><?= $lang['calc_sys_size'] ?></span>
+            <span class="result-label">System Size</span>
             <strong class="result-value text-eco" id="res-size" dir="ltr" style="display: inline-block;">0 kW</strong>
           </div>
           <div class="result-box">
-            <span class="result-label"><?= $lang['calc_est_panels'] ?></span>
+            <span class="result-label">Est. Panels</span>
             <strong class="result-value" id="res-panels" dir="ltr" style="display: inline-block;">0</strong>
           </div>
           <div class="result-box">
-            <span class="result-label"><?= $lang['calc_est_cost'] ?></span>
+            <span class="result-label">Est. Cost</span>
             <strong class="result-value" id="res-cost" dir="ltr" style="display: inline-block;">0 OMR</strong>
           </div>
           <div class="result-box highlight">
-            <span class="result-label"><?= $lang['calc_yearly_savings'] ?></span>
+            <span class="result-label">Yearly Savings</span>
             <strong class="result-value" id="res-savings" dir="ltr" style="display: inline-block;">0 OMR</strong>
           </div>
         </div>
         <button id="calc-explain-btn" class="btn btn-secondary mt-3" style="width: 100%; border: 1.5px solid var(--color-accent); background: transparent; color: var(--color-accent); font-weight: 600; padding: 0.8rem; border-radius: var(--radius-pill); cursor: pointer; transition: all 0.2s;">
-          ✨ <?= $active_lang === 'ar' ? 'اشرح لي النتائج بمستشار الذكاء الاصطناعي' : 'Explain results with AI Advisor' ?>
+          ✨ Explain results with AI Advisor
         </button>
-        <p class="mt-3 text-muted" style="font-size: 0.8rem;"><?= $lang['calc_note'] ?></p>
+        <p class="mt-3 text-muted" style="font-size: 0.8rem;">* Approximations based on Oman averages (0.020 OMR/kWh).</p>
 
         <div id="load-recommendations" style="display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px dashed var(--color-border); width: 100%;">
-          <h4 style="margin-bottom: 1rem; color: var(--color-primary); font-size: 1.1rem; text-align: start;"><?= $active_lang === 'ar' ? 'توصيات النظام المتقدمة' : 'Advanced System Recommendations' ?></h4>
+          <h4 style="margin-bottom: 1rem; color: var(--color-primary); font-size: 1.1rem; text-align: start;">Advanced System Recommendations</h4>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="result-box" style="background: rgba(58, 141, 204, 0.05);">
-              <span class="result-label"><?= $active_lang === 'ar' ? 'حجم العاكس المقترح' : 'Recommended Inverter' ?></span>
+              <span class="result-label">Recommended Inverter</span>
               <strong class="result-value" id="res-inverter" style="color: var(--color-primary);">0 kW</strong>
             </div>
             <div class="result-box" style="background: rgba(62, 182, 73, 0.05);">
-              <span class="result-label"><?= $active_lang === 'ar' ? 'سعة البطارية المقترحة' : 'Battery Storage' ?></span>
+              <span class="result-label">Battery Storage</span>
               <strong class="result-value text-eco" id="res-battery">0 kWh</strong>
             </div>
           </div>
@@ -177,17 +150,17 @@ $lang = require_once "lang/{$active_lang}.php";
       <div class="calc-form">
         <div class="calc-tabs" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
           <button id="tab-bill" class="calc-tab active" style="flex: 1; padding: 0.75rem; border: none; border-radius: var(--radius-pill); background: var(--color-primary); color: #fff; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-            <?= $active_lang === 'ar' ? 'تقدير الفاتورة' : 'Bill Estimator' ?>
+            Bill Estimator
           </button>
           <button id="tab-appliances" class="calc-tab" style="flex: 1; padding: 0.75rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: transparent; color: var(--color-text); font-weight: 600; cursor: pointer; transition: all 0.2s;">
-            <?= $active_lang === 'ar' ? 'مدقق الأجهزة' : 'Appliance Auditor' ?>
+            Appliance Auditor
           </button>
         </div>
 
         <div id="bill-inputs-container">
-          <h3 class="mb-3"><?= $lang['calc_monthly_bill'] ?></h3>
+          <h3 class="mb-3">Monthly Bill (OMR)</h3>
           <div class="slider-container">
-            <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="<?= $lang['calc_monthly_bill'] ?>">
+            <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill (OMR)">
             <div class="slider-value"><span id="bill-display">50</span></div>
           </div>
         </div>
@@ -197,17 +170,17 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
 
         <div class="form-row">
-          <select id="property-type" aria-label="<?= $lang['calc_prop_residential'] ?>">
-            <option value="residential"><?= $lang['calc_prop_residential'] ?></option>
-            <option value="commercial"><?= $lang['calc_prop_commercial'] ?></option>
-            <option value="industrial"><?= $lang['calc_prop_industrial'] ?></option>
+          <select id="property-type" aria-label="Residential">
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+            <option value="industrial">Industrial</option>
           </select>
 
-          <select id="location" aria-label="<?= $lang['calc_loc_muscat'] ?>">
-            <option value="muscat"><?= $lang['calc_loc_muscat'] ?></option>
-            <option value="dhofar"><?= $lang['calc_loc_dhofar'] ?></option>
-            <option value="batinah"><?= $lang['calc_loc_batinah'] ?></option>
-            <option value="other"><?= $lang['calc_loc_other'] ?></option>
+          <select id="location" aria-label="Muscat">
+            <option value="muscat">Muscat</option>
+            <option value="dhofar">Dhofar</option>
+            <option value="batinah">Al Batinah</option>
+            <option value="other">Other</option>
           </select>
         </div>
       </div>
@@ -217,27 +190,27 @@ $lang = require_once "lang/{$active_lang}.php";
   <!-- Benefits -->
   <section id="benefits" class="benefits container section-padding">
     <div class="section-title reveal">
-      <h2><?= $lang['ben_title'] ?></h2>
-      <p class="text-muted mt-2" style="font-size: 1.25rem;"><?= $lang['ben_desc'] ?></p>
+      <h2>Why Go Solar?</h2>
+      <p class="text-muted mt-2" style="font-size: 1.25rem;">It's more than just saving money. It's a lifestyle upgrade.</p>
     </div>
 
     <div class="staggered-grid">
       <div class="benefit-card reveal">
         <div class="icon-blob">💰</div>
-        <h3><?= $lang['ben_1_title'] ?></h3>
-        <p class="text-muted"><?= $lang['ben_1_desc'] ?></p>
+        <h3>Zero Bills</h3>
+        <p class="text-muted">Eliminate your monthly electricity costs permanently and protect yourself from tariff hikes.</p>
       </div>
 
       <div class="benefit-card reveal delay-100">
         <div class="icon-blob" style="background: #E0F2FE; color: #3a8dcc;">🌍</div>
-        <h3><?= $lang['ben_2_title'] ?></h3>
-        <p class="text-muted"><?= $lang['ben_2_desc'] ?></p>
+        <h3>Eco Impact</h3>
+        <p class="text-muted">Reduce your carbon footprint drastically and contribute to a sustainable future for Oman.</p>
       </div>
 
       <div class="benefit-card reveal delay-200">
         <div class="icon-blob" style="background: #F1F5F9; color: #444444;">📈</div>
-        <h3><?= $lang['ben_3_title'] ?></h3>
-        <p class="text-muted"><?= $lang['ben_3_desc'] ?></p>
+        <h3>Property Value</h3>
+        <p class="text-muted">Homes equipped with solar panels sell faster and at a premium price on the market.</p>
       </div>
     </div>
   </section>
@@ -246,11 +219,11 @@ $lang = require_once "lang/{$active_lang}.php";
   <section class="container section-padding">
     <div class="cta-banner reveal">
       <div class="cta-content">
-        <span class="cta-pre"><?= $lang['cta_pre'] ?></span>
-        <h2><?= $lang['cta_title'] ?></h2>
+        <span class="cta-pre">ARE YOU LOOKING FOR AN INSTALLER</span>
+        <h2>We are a Global Solar Panel Pump<br>and Street light installer</h2>
         <div class="cta-actions">
-          <a href="#contact" class="btn btn-hero-primary"><?= $lang['cta_btn'] ?></a>
-          <a href="tel:<?= $constants['phone_2'] ?>" class="cta-hotline">
+          <a href="#contact" class="btn btn-hero-primary">Contact Us</a>
+          <a href="tel:+968 92315949" class="cta-hotline">
             <span class="hotline-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
@@ -259,7 +232,7 @@ $lang = require_once "lang/{$active_lang}.php";
                 </path>
               </svg>
             </span>
-            <?= $constants['phone_2'] ?>
+            +968 92315949
           </a>
         </div>
       </div>
@@ -273,12 +246,12 @@ $lang = require_once "lang/{$active_lang}.php";
   <section id="projects" class="container section-padding gallery-section">
     <div class="gallery-header reveal">
       <div class="gallery-title-area">
-        <span class="gallery-pre"><span class="pre-icon">❖</span> <?= $lang['gal_pre'] ?> <span
+        <span class="gallery-pre"><span class="pre-icon">❖</span> Latest Project <span
             class="dot"></span></span>
-        <h2><?= $lang['gal_title'] ?></h2>
-        <p class="text-muted"><?= $lang['gal_desc'] ?></p>
+        <h2>Solar Embrace the Future</h2>
+        <p class="text-muted">Solar energy is a sustainable power source harnessed from the sun's rays, utilized in various applications to reduce carbon</p>
       </div>
-      <a href="#projects" class="btn btn-dark-green"><?= $lang['gal_btn'] ?></a>
+      <a href="#projects" class="btn btn-dark-green">View More &raquo;</a>
     </div>
 
     <div class="gallery-grid reveal delay-100">
@@ -325,30 +298,30 @@ $lang = require_once "lang/{$active_lang}.php";
   <section id="why-choose-us" class="container section-padding text-center" style="text-align: center;">
     <div class="reveal">
       <span
-        style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;"><?= $lang['why_pre'] ?></span>
-      <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 4rem;"><?= $lang['why_title'] ?></h2>
+        style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;">Let the green energy illuminate the future</span>
+      <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 4rem;">Why Choose Us</h2>
     </div>
 
     <div class="choose-us-grid">
       <div class="choose-col left-col">
         <div class="choose-item reveal delay-100">
           <div class="choose-text">
-            <h3><?= $lang['why_1_title'] ?></h3>
-            <p class="text-muted"><?= $lang['why_1_desc'] ?></p>
+            <h3>ISO 2008:2015 And DCRP Certified</h3>
+            <p class="text-muted">Certified company, backed by its highly professional manufacturing, testing set up & services.</p>
           </div>
           <div class="choose-icon">🏅</div>
         </div>
         <div class="choose-item reveal delay-200">
           <div class="choose-text">
-            <h3><?= $lang['why_2_title'] ?></h3>
-            <p class="text-muted"><?= $lang['why_2_desc'] ?></p>
+            <h3>30+ Years Of Experience</h3>
+            <p class="text-muted">Pioneer and an unrivalled over 30+ Years of Experience in technology installations and engineering.</p>
           </div>
           <div class="choose-icon">🏆</div>
         </div>
         <div class="choose-item reveal delay-300">
           <div class="choose-text">
-            <h3><?= $lang['why_3_title'] ?></h3>
-            <p class="text-muted"><?= $lang['why_3_desc'] ?></p>
+            <h3>Over 10,000 Installation Base & Power Solution</h3>
+            <p class="text-muted">Our market focus spans a vast range of project types, each one demanding client-focused solutions.</p>
           </div>
           <div class="choose-icon">⚡</div>
         </div>
@@ -366,22 +339,22 @@ $lang = require_once "lang/{$active_lang}.php";
         <div class="choose-item reveal delay-100">
           <div class="choose-icon">☀️</div>
           <div class="choose-text">
-            <h3><?= $lang['why_4_title'] ?></h3>
-            <p class="text-muted"><?= $lang['why_4_desc'] ?></p>
+            <h3>Various Capacity PV Systems Have Been Installed</h3>
+            <p class="text-muted">Systems has been delivered to Telecom, Oil & Gas, Ministry and Defense for different applications.</p>
           </div>
         </div>
         <div class="choose-item reveal delay-200">
           <div class="choose-icon">👨‍🔬</div>
           <div class="choose-text">
-            <h3><?= $lang['why_5_title'] ?></h3>
-            <p class="text-muted"><?= $lang['why_5_desc'] ?></p>
+            <h3>Real Experts In This Field</h3>
+            <p class="text-muted">You are guaranteed to get the energy system that's been chosen and installed by the real experts.</p>
           </div>
         </div>
         <div class="choose-item reveal delay-300">
           <div class="choose-icon">🇴🇲</div>
           <div class="choose-text">
-            <h3><?= $lang['why_6_title'] ?></h3>
-            <p class="text-muted"><?= $lang['why_6_desc'] ?></p>
+            <h3>100% Omani-Owned Company</h3>
+            <p class="text-muted">Part of Al Bahja Group, established in 1947. Mainly in manufacturing and allied activities.</p>
           </div>
         </div>
       </div>
@@ -389,18 +362,18 @@ $lang = require_once "lang/{$active_lang}.php";
   </section>
 
   <!-- Trusted Brands & Products -->
-  <section id="partners" class="partners-section text-center reveal" style="text-align: center;">
+  <section id="partners" class="partners-section text-center reveal" style="text-align: center; padding: 5rem 0;">
     <div class="logo-wall-section">
       <div class="logo-wall-header">
-        <span class="logo-wall-eyebrow"><?= $lang['why_pre'] ?></span>
-        <h2 class="logo-wall-title"><?= $lang['brands_title'] ?></h2>
-        <p class="logo-wall-subtitle"><?= $lang['brands_subtitle'] ?></p>
+        <span class="logo-wall-eyebrow">Let the green energy illuminate the future</span>
+        <h2 class="logo-wall-title">Trusted Brands & Products</h2>
+        <p class="logo-wall-subtitle">Premium solar brands we install across Oman.</p>
       </div>
 
       <!-- Row 1: scrolls LEFT -->
       <div class="logo-row-wrapper">
         <div class="logo-row logo-row--left">
-          <?php for ($i = 0; $i < 2; $i++): ?>
+          
             <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
@@ -412,14 +385,26 @@ $lang = require_once "lang/{$active_lang}.php";
             <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
-          <?php endfor; ?>
+          
+            <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/deye.png" alt="Deye" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
+          
         </div>
       </div>
 
       <!-- Row 2: scrolls RIGHT -->
       <div class="logo-row-wrapper">
         <div class="logo-row logo-row--right">
-          <?php for ($i = 0; $i < 2; $i++): ?>
+          
             <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
@@ -431,14 +416,26 @@ $lang = require_once "lang/{$active_lang}.php";
             <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
-          <?php endfor; ?>
+          
+            <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/deye.png" alt="Deye" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
+          
         </div>
       </div>
 
       <!-- Row 3: scrolls LEFT -->
       <div class="logo-row-wrapper">
         <div class="logo-row logo-row--left logo-row--slow">
-          <?php for ($i = 0; $i < 2; $i++): ?>
+          
             <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
@@ -450,170 +447,51 @@ $lang = require_once "lang/{$active_lang}.php";
             <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
             <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
-          <?php endfor; ?>
+          
+            <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/deye.png" alt="Deye" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
+          
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- Technical Resources / Datasheet Download Center -->
-  <section id="datasheets" class="datasheet-section container reveal section-padding">
-    <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto; text-align: center;">
-      <span style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;"><?= $lang['datasheet_pre'] ?></span>
-      <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 1.5rem;"><?= $lang['datasheet_title'] ?></h2>
-      <p class="text-muted" style="max-width: 600px; margin: 0 auto;"><?= $lang['datasheet_subtitle'] ?></p>
-    </div>
-
-    <div class="datasheet-grid">
-      <!-- Huawei Card -->
-      <div class="datasheet-card">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_1_title'] ?></h3>
-          <p><?= $lang['ds_1_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_1_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_1_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=huawei_sun2000" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Canadian Solar Card -->
-      <div class="datasheet-card">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_2_title'] ?></h3>
-          <p><?= $lang['ds_2_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_2_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_2_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=canadian_solar" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Deye Card -->
-      <div class="datasheet-card">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_3_title'] ?></h3>
-          <p><?= $lang['ds_3_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_3_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_3_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=deye_hybrid" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Concept CC Card -->
-      <div class="datasheet-card">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_4_title'] ?></h3>
-          <p><?= $lang['ds_4_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_4_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_4_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=concept_mppt" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
     </div>
   </section>
 
   <!-- Process -->
   <section id="process" class="container section-padding">
     <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto;">
-      <h2><?= $lang['proc_title'] ?></h2>
+      <h2>Seamless Journey</h2>
     </div>
 
     <div class="process-flow">
       <div class="flow-step reveal">
         <div class="flow-number">1</div>
-        <h3><?= $lang['proc_1_title'] ?></h3>
-        <p class="text-muted"><?= $lang['proc_1_desc'] ?></p>
+        <h3>Consult</h3>
+        <p class="text-muted">Site and energy assessment.</p>
       </div>
       <div class="flow-step reveal delay-100">
         <div class="flow-number">2</div>
-        <h3><?= $lang['proc_2_title'] ?></h3>
-        <p class="text-muted"><?= $lang['proc_2_desc'] ?></p>
+        <h3>Design</h3>
+        <p class="text-muted">Custom engineering.</p>
       </div>
       <div class="flow-step reveal delay-200">
         <div class="flow-number">3</div>
-        <h3><?= $lang['proc_3_title'] ?></h3>
-        <p class="text-muted"><?= $lang['proc_3_desc'] ?></p>
+        <h3>Install</h3>
+        <p class="text-muted">Professional setup.</p>
       </div>
       <div class="flow-step reveal delay-300">
         <div class="flow-number">4</div>
-        <h3><?= $lang['proc_4_title'] ?></h3>
-        <p class="text-muted"><?= $lang['proc_4_desc'] ?></p>
+        <h3>Activate</h3>
+        <p class="text-muted">Turn on the savings.</p>
       </div>
     </div>
   </section>
@@ -622,8 +500,8 @@ $lang = require_once "lang/{$active_lang}.php";
   <section id="testimonials" class="container section-padding"
     style="background-color: var(--color-surface); border-radius: var(--radius-card); margin-top: 4rem; box-shadow: var(--shadow-soft);">
     <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto;">
-      <h2><?= $lang['test_title'] ?></h2>
-      <p class="text-muted mt-2"><?= $lang['test_desc'] ?></p>
+      <h2>Client Success Stories</h2>
+      <p class="text-muted mt-2">Trusted by homeowners and businesses across Oman.</p>
     </div>
 
     <div class="testimonials-grid">
@@ -631,15 +509,15 @@ $lang = require_once "lang/{$active_lang}.php";
         style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-bg);">
         <div>
           <div style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;"><?= $lang['test_1_quote'] ?></p>
+          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;">"Concept Technologies delivered beyond our expectations. Our electricity bill has practically vanished since the installation!"</p>
         </div>
         <div style="display: flex; align-items: center; gap: 1rem;">
           <div
             style="width: 50px; height: 50px; background: var(--color-primary); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
             SA</div>
           <div>
-            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_1_name'] ?></h3>
-            <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_1_role'] ?></span>
+            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);">Said Al Rashdi</h3>
+            <span style="font-size: 0.8rem; color: var(--color-text-muted);">Homeowner, Muscat</span>
           </div>
         </div>
       </div>
@@ -648,15 +526,15 @@ $lang = require_once "lang/{$active_lang}.php";
         style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-bg);">
         <div>
           <div style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;"><?= $lang['test_2_quote'] ?></p>
+          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;">"Professional team and a flawless execution. The 30+ years of experience really shows in their engineering quality."</p>
         </div>
         <div style="display: flex; align-items: center; gap: 1rem;">
           <div
             style="width: 50px; height: 50px; background: var(--color-accent); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
             MA</div>
           <div>
-            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_2_name'] ?></h3>
-            <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_2_role'] ?></span>
+            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);">Mohammed Al Balushi</h3>
+            <span style="font-size: 0.8rem; color: var(--color-text-muted);">Commercial Client, Sohar</span>
           </div>
         </div>
       </div>
@@ -665,15 +543,15 @@ $lang = require_once "lang/{$active_lang}.php";
         style="padding: 2.5rem; display: flex; flex-direction: column; justify-content: space-between; background: var(--color-bg);">
         <div>
           <div style="color: var(--color-primary); font-size: 1.5rem; margin-bottom: 1rem;">★★★★★</div>
-          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;"><?= $lang['test_3_quote'] ?></p>
+          <p class="text-muted" style="font-style: italic; margin-bottom: 2rem;">"The whole process from consultation to activation was completely seamless. Highly recommend them for anyone looking into solar."</p>
         </div>
         <div style="display: flex; align-items: center; gap: 1rem;">
           <div
             style="width: 50px; height: 50px; background: var(--color-text-dark); border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700;">
             FA</div>
           <div>
-            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);"><?= $lang['test_3_name'] ?></h3>
-            <span style="font-size: 0.8rem; color: var(--color-text-muted);"><?= $lang['test_3_role'] ?></span>
+            <h3 style="margin: 0; font-size: 1rem; color: var(--color-text-dark);">Fatima Al Harthy</h3>
+            <span style="font-size: 0.8rem; color: var(--color-text-muted);">Homeowner, Salalah</span>
           </div>
         </div>
       </div>
@@ -684,84 +562,205 @@ $lang = require_once "lang/{$active_lang}.php";
   <section id="contact" class="container section-padding">
     <div class="split-section">
       <div class="faq-section reveal">
-        <h2 class="mb-4"><?= $lang['faq_title'] ?></h2>
+        <h2 class="mb-4">Questions?</h2>
         <div class="accordion">
-          <?php foreach ($lang['faqs'] as $faq): ?>
+          
             <div class="accordion-item">
               <button class="accordion-header">
-                <span><?= $faq['q'] ?></span>
+                <span>Do panels work on cloudy days?</span>
                 <span class="icon">+</span>
               </button>
               <div class="accordion-content">
-                <div class="content-inner"><?= $faq['a'] ?></div>
+                <div class="content-inner">Yes, they still generate power, though at a reduced rate. Oman's climate ensures excellent overall yield.</div>
               </div>
             </div>
-          <?php endforeach; ?>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>How long is the warranty?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">We provide up to 25 years of performance warranty on our premium solar panels.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>How much can I save with solar energy?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">Savings depend on your energy usage, system size, and tariff rates, but most users see significant reductions in electricity bills.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>How long does installation take?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">A typical residential installation takes 1 to 3 days after all approvals are completed.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>Do I need battery storage?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">Battery storage is optional. It is useful if you want backup power during outages or to store excess energy for later use.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>What maintenance is required?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">Solar systems require minimal maintenance. Occasional cleaning and periodic inspections are usually sufficient.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>Can solar panels power my entire home?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">Yes, depending on system size and your energy consumption, solar can cover most or all of your electricity needs.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>What happens at night?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">At night, your system will draw power from the grid unless you have battery storage installed.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>Are solar panels durable?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">Yes, solar panels are designed to withstand harsh weather conditions including heat, dust, and wind.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>Is my roof suitable for solar installation?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">Most roofs are suitable, but factors like orientation, shading, and structure will be assessed during site inspection.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>Do I need government approval?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">Yes, approvals may be required depending on local regulations. Our team will assist you through the entire process.</div>
+              </div>
+            </div>
+          
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>What is the lifespan of a solar system?</span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner">Solar systems typically last 25–30 years with proper maintenance.</div>
+              </div>
+            </div>
+          
         </div>
       </div>
 
       <div class="contact-form reveal delay-200" style="background: var(--color-surface); padding: 3rem; border-radius: var(--radius-card); box-shadow: var(--shadow-soft); border: 1px solid var(--color-border); text-align: start;">
-        <h3 class="mb-4" style="font-size: 1.5rem; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'طلب استشارة مجانية' : 'Request Free Solar Consultation' ?></h3>
+        <h3 class="mb-4" style="font-size: 1.5rem; color: var(--color-text-dark);">Request Free Solar Consultation</h3>
         
         <form id="native-lead-form" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
           <input type="hidden" name="action" value="submit_lead">
-          <input type="hidden" name="lang" value="<?= $active_lang ?>">
+          <input type="hidden" name="lang" value="en">
           
           <div class="form-group">
-            <label for="lead-name" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'الاسم الكامل' : 'Full Name' ?> *</label>
-            <input type="text" id="lead-name" name="name" required placeholder="<?= $active_lang === 'ar' ? 'أدخل اسمك الكامل' : 'Enter your full name' ?>" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Full Name">
+            <label for="lead-name" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);">Full Name *</label>
+            <input type="text" id="lead-name" name="name" required placeholder="Enter your full name" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Full Name">
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
-              <label for="lead-phone" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'رقم الهاتف (واتساب)' : 'Phone Number (WhatsApp)' ?> *</label>
+              <label for="lead-phone" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);">Phone Number (WhatsApp) *</label>
               <input type="tel" id="lead-phone" name="phone" required placeholder="968 XXXXXXXX" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Phone Number">
             </div>
             <div class="form-group">
-              <label for="lead-email" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'البريد الإلكتروني' : 'Email Address' ?> *</label>
+              <label for="lead-email" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);">Email Address *</label>
               <input type="email" id="lead-email" name="email" required placeholder="example@domain.com" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Email Address">
             </div>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
-              <label for="lead-gov" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'المحافظة' : 'Governorate' ?> *</label>
+              <label for="lead-gov" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);">Governorate *</label>
               <select id="lead-gov" name="governorate" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Governorate">
-                <option value="muscat"><?= $lang['calc_loc_muscat'] ?></option>
-                <option value="dhofar"><?= $lang['calc_loc_dhofar'] ?></option>
-                <option value="batinah"><?= $lang['calc_loc_batinah'] ?></option>
-                <option value="dakhiliyah"><?= $active_lang === 'ar' ? 'الداخلية' : 'Dakhiliyah' ?></option>
-                <option value="other"><?= $lang['calc_loc_other'] ?></option>
+                <option value="muscat">Muscat</option>
+                <option value="dhofar">Dhofar</option>
+                <option value="batinah">Al Batinah</option>
+                <option value="dakhiliyah">Dakhiliyah</option>
+                <option value="other">Other</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="lead-prop" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'نوع العقار' : 'Property Type' ?> *</label>
+              <label for="lead-prop" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);">Property Type *</label>
               <select id="lead-prop" name="property_type" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Property Type">
-                <option value="residential"><?= $lang['calc_prop_residential'] ?></option>
-                <option value="commercial"><?= $lang['calc_prop_commercial'] ?></option>
-                <option value="industrial"><?= $lang['calc_prop_industrial'] ?></option>
+                <option value="residential">Residential</option>
+                <option value="commercial">Commercial</option>
+                <option value="industrial">Industrial</option>
               </select>
             </div>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
-              <label for="lead-bill" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'متوسط الفاتورة الكهربائية (ريال)' : 'Average Electricity Bill (OMR)' ?> *</label>
+              <label for="lead-bill" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);">Average Electricity Bill (OMR) *</label>
               <input type="number" id="lead-bill" name="monthly_bill" required min="10" max="5000" value="50" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Electricity Bill">
             </div>
             <div class="form-group">
-              <label for="lead-consult" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'نوع الاستشارة' : 'Consultation Type' ?> *</label>
+              <label for="lead-consult" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);">Consultation Type *</label>
               <select id="lead-consult" name="consultation_type" required style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; transition: border-color 0.2s;" aria-label="Consultation Type">
-                <option value="site_survey"><?= $active_lang === 'ar' ? 'معاينة موقع مجانية' : 'Free Site Survey' ?></option>
-                <option value="video_call"><?= $active_lang === 'ar' ? 'استشارة بالفيديو عن بعد' : 'Online Video Call' ?></option>
-                <option value="office"><?= $active_lang === 'ar' ? 'زيارة مكتب كونسيبت' : 'Office Consultation' ?></option>
+                <option value="site_survey">Free Site Survey</option>
+                <option value="video_call">Online Video Call</option>
+                <option value="office">Office Consultation</option>
               </select>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="lead-notes" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);"><?= $active_lang === 'ar' ? 'ملاحظات إضافية (اختياري)' : 'Additional Notes (Optional)' ?></label>
-            <textarea id="lead-notes" name="message" rows="3" placeholder="<?= $active_lang === 'ar' ? 'تحدث إلينا عن احتياجاتك المحددة...' : 'Tell us about your specific solar needs...' ?>" style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: 1rem; background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; font-family: inherit; resize: vertical; transition: border-color 0.2s;" aria-label="Additional Notes"></textarea>
+            <label for="lead-notes" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-text-dark);">Additional Notes (Optional)</label>
+            <textarea id="lead-notes" name="message" rows="3" placeholder="Tell us about your specific solar needs..." style="width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--color-border); border-radius: 1rem; background: var(--color-bg); color: var(--color-text); font-size: 0.95rem; font-family: inherit; resize: vertical; transition: border-color 0.2s;" aria-label="Additional Notes"></textarea>
           </div>
 
           <!-- Anti-Spam HoneyPot -->
@@ -770,7 +769,7 @@ $lang = require_once "lang/{$active_lang}.php";
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-weight: 600; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-            <span><?= $active_lang === 'ar' ? 'تأكيد وحجز الاستشارة 🚀' : 'Confirm & Book Consultation 🚀' ?></span>
+            <span>Confirm & Book Consultation 🚀</span>
             <span class="spinner" style="display: none; width: 20px; height: 20px; border: 3px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite;"></span>
           </button>
 
@@ -788,19 +787,19 @@ $lang = require_once "lang/{$active_lang}.php";
       <div class="footer-col" style="display: flex; flex-direction: column; justify-content: center;">
         <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC" width="160" height="50"
           style="height: 50px; width: auto; max-width: 200px; margin-bottom: 1.5rem;">
-        <p class="text-muted"><?= $lang['foot_copy'] ?></p>
+        <p class="text-muted">&copy; 2026 ' . $c['address_1'] . '.<br>Powering the Future.</p>
       </div>
       <div class="footer-col">
-        <h3><?= $lang['foot_loc_title'] ?></h3>
-        <p class="text-muted"><?= $lang['foot_loc_desc'] ?></p>
+        <h3>Our Location</h3>
+        <p class="text-muted">Concept Technologies LLC<br>P.O. Box 1375, Postal Code 130<br>Sultanate of Oman<br>Saturday to Thursday 9am - 7pm</p>
       </div>
       <div class="footer-col">
-        <h3><?= $lang['foot_mail_title'] ?></h3>
-        <p class="text-muted"><?= $lang['foot_mail_desc'] ?></p>
+        <h3>Mail Us</h3>
+        <p class="text-muted"><a href="mailto:solar@conceptgrps.com">solar@conceptgrps.com</a><br>Fax No : 00968 24497752</p>
       </div>
       <div class="footer-col">
-        <h3><?= $lang['foot_call_title'] ?></h3>
-        <p class="text-muted"><?= $lang['foot_call_desc'] ?></p>
+        <h3>Call Us</h3>
+        <p class="text-muted"><a href="tel:' . $c['phone_1_clean'] . '">' . $c['phone_1'] . '</a><br><a href="tel:' . $c['phone_2_clean'] . '">' . $c['phone_2'] . '</a></p>
       </div>
     </div>
   </footer>
