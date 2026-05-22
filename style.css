@@ -623,201 +623,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   border-bottom: 1px solid #f1f5f9;
 }
 
-/* Brand Category Block */
-.brand-category {
-  margin-bottom: 2.5rem;
-  text-align: start;
-}
-
-.brand-category:last-child {
-  margin-bottom: 0;
-}
-
-.brand-category-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.brand-cat-icon {
-  width: 52px;
-  height: 52px;
-  background: var(--color-accent-light);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.brand-cat-info h3 {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--color-text-dark);
-  margin-bottom: 0.15rem;
-  line-height: 1.3;
-}
-
-.brand-cat-info p {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  font-weight: 400;
-  margin: 0;
-  line-height: 1.4;
-}
-
-/* Brand Logo Cards Row */
-.brand-logos-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 1rem;
-}
-
-.brand-logos-row--few {
-  grid-template-columns: 1fr;
-  max-width: 400px;
-}
-
-.brand-logo-card {
-  background: #f8fafc;
-  border: 1px solid transparent;
-  border-radius: 12px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-  padding: 0.6rem 1.25rem;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.brand-logo-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(58, 141, 204, 0.02) 0%, rgba(62, 182, 73, 0.02) 100%);
-  opacity: 0;
-  transition: opacity 0.4s;
-  border-radius: inherit;
-}
-
-.brand-logo-card:hover {
-  background: #ffffff;
-  border-color: rgba(58, 141, 204, 0.15);
-  transform: translateY(-4px) scale(1.025);
-  box-shadow: 0 16px 32px -12px rgba(58, 141, 204, 0.2),
-    0 4px 12px -4px rgba(0, 0, 0, 0.03);
-}
-
-.brand-logo-card:hover::before {
-  opacity: 1;
-}
-
-.brand-logo-card img {
-  max-width: 90%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  filter: grayscale(100%) brightness(0.9) contrast(0.9);
-  opacity: 0.55;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.brand-logo-card:hover img {
-  filter: grayscale(0%) brightness(1) contrast(1);
-  opacity: 1;
-  transform: scale(1.04);
-}
-
-/* Brand Specific Height Normalization for Visual Balance */
-.brand-logo-card img.logo-huawei {
-  max-height: 25px;
-}
-
-.brand-logo-card img.logo-sungrow {
-  max-height: 26px;
-  max-width: 95%;
-}
-
-.brand-logo-card img.logo-solis {
-  max-height: 28px;
-}
-
-.brand-logo-card img.logo-canadian {
-  max-height: 26px;
-  max-width: 95%;
-}
-
-.brand-logo-card img.logo-deye {
-  max-height: 22px;
-}
-
-.brand-logo-card img.logo-powersun {
-  max-height: 26px;
-}
-
-.brand-logo-card img.logo-trina {
-  max-height: 30px;
-}
-
-.brand-logo-card img.logo-longi {
-  max-height: 18px;
-  /* bold red text needs smaller max-height to look elegant */
-}
-
-.brand-logo-card img.logo-jinko {
-  max-height: 28px;
-}
-
-.brand-logo-card img.logo-ja {
-  max-height: 22px;
-  /* JA Solar is very bold and wide */
-}
-
-.brand-logo-card img.logo-jebel {
-  max-height: 22px;
-}
-
-/* Text-based fallback for brands without embeddable logos */
-.brand-logo-fallback {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  line-height: 1.2;
-  transition: color 0.35s;
-}
-
-.brand-logo-card:hover .brand-logo-fallback {
-  color: var(--color-primary);
-}
-
-/* Wide card for categories without specific brand logos */
-.brand-logo-card--wide {
-  max-width: 400px;
-  height: 64px;
-  border-style: dashed;
-  border-color: var(--color-border);
-}
-
-.brand-cat-badge {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  letter-spacing: 0.05em;
-}
+/* Obsolete Brand styles pruned - Marquee is used now */
 
 /* ==========================================================================
    Premium Logo Wall - Continuous Horizontal Marquee (3 Rows)
@@ -888,12 +694,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .logo-row-wrapper::before {
   left: 0;
-  background: linear-gradient(to right, var(--color-bg) 0%, transparent 100%);
+  background: linear-gradient(to right, #ffffff 0%, transparent 100%);
 }
 
 .logo-row-wrapper::after {
   right: 0;
-  background: linear-gradient(to left, var(--color-bg) 0%, transparent 100%);
+  background: linear-gradient(to left, #ffffff 0%, transparent 100%);
 }
 
 /* The scrolling flex track */
@@ -1540,17 +1346,17 @@ footer {
   }
 
   .hero-visual {
-    height: 400px;
+    height: 300px;
   }
 
   .sun-circle {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
   }
 
   .image-mask {
-    width: 300px;
-    height: 400px;
+    width: 240px;
+    height: 300px;
   }
 
   /* New sections responsive */
@@ -2040,5 +1846,95 @@ html[dir="rtl"] .appliance-info {
 
 html[dir="rtl"] .choose-center {
   transform: scaleX(-1);
+}
+
+/* Mobile-first Layout, Padding, and Gesture Locks Resolution */
+@media (max-width: 768px) {
+  #appliance-inputs-container {
+    max-height: none !important;
+    overflow-y: visible !important;
+    padding-right: 0 !important;
+    overscroll-behavior: contain;
+  }
+}
+
+@media (max-width: 580px) {
+  /* Fix double padding squeeze on small devices */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .calculator-wrapper {
+    padding: 1.25rem 1rem !important;
+    gap: 1.75rem !important;
+  }
+  
+  .calc-info h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Compact above-the-fold hero illustration visual for mobiles */
+  .hero-visual {
+    height: 200px !important;
+  }
+
+  .lightbulb-img {
+    max-height: 180px !important;
+    width: auto !important;
+    margin: 0 auto;
+  }
+
+  /* Dual-Column responsive appliance cards */
+  .appliance-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .appliance-item {
+    padding: 0.85rem !important;
+    gap: 0.5rem !important;
+    border-radius: 1.25rem !important;
+  }
+
+  .appliance-icon-wrapper {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .appliance-icon-wrapper svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .appliance-body h4 {
+    font-size: 0.82rem !important;
+  }
+
+  .spec-badge {
+    font-size: 0.62rem !important;
+    padding: 0.15rem 0.4rem !important;
+  }
+
+  .qty-selector-pill {
+    padding: 0.15rem !important;
+  }
+
+  .qty-btn {
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 0.5rem !important;
+  }
+
+  .qty-val {
+    font-size: 0.85rem !important;
+    width: 16px !important;
+  }
 }
 

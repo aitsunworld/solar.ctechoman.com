@@ -960,20 +960,122 @@
     return pattern.test(text);
   }
 
-  function matchKeywordFAQ(text, lang) {
-    const query = text.toLowerCase();
-    for (const key in FAQ_DB) {
-      const keywords = FAQ_DB[key].keywords;
-      const matched = keywords.some(function (kw) {
-        return query.includes(kw);
-      });
-      if (matched) {
-        return {
-          key: key,
-          content: FAQ_DB[key][lang] || FAQ_DB[key].en
-        };
+  function normalizeText(str) {
+    if (!str) return "";
+    let s = str.toLowerCase();
+    
+    // Arabic character normalization
+    s = s.replace(/[\u064B-\u0652]/g, ""); // Strip diacritics
+    s = s.replace(/[أإآٱ]/g, "ا");
+    s = s.replace(/ة/g, "ه");
+    s = s.replace(/[ىي]/g, "ي");
+    
+    // Remove punctuation
+    s = s.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?؟!"']/g, " ");
+    return s.trim();
+  }
+
+  function levenshteinDistance(s1, s2) {
+    const len1 = s1.length;
+    const len2 = s2.length;
+    if (len1 === 0) return len2;
+    if (len2 === 0) return len1;
+    
+    const matrix = Array.from({ length: len1 + 1 }, () => Array(len2 + 1).fill(0));
+
+    for (let i = 0; i <= len1; i++) matrix[i][0] = i;
+    for (let j = 0; j <= len2; j++) matrix[0][j] = j;
+
+    for (let i = 1; i <= len1; i++) {
+      for (let j = 1; j <= len2; j++) {
+        const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j] + 1,      // deletion
+          matrix[i][j - 1] + 1,      // insertion
+          matrix[i - 1][j - 1] + cost // substitution
+        );
       }
     }
+    return matrix[len1][len2];
+  }
+
+  function matchKeywordFAQ(text, lang) {
+    if (!text) return null;
+    const normalizedQuery = normalizeText(text);
+    const queryTokens = normalizedQuery.split(/\s+/).filter(t => t.length > 0);
+
+    if (queryTokens.length === 0) return null;
+
+    let bestMatchKey = null;
+    let maxMatches = 0;
+
+    for (const key in FAQ_DB) {
+      const keywords = FAQ_DB[key].keywords;
+      let categoryMatchCount = 0;
+
+      for (let i = 0; i < queryTokens.length; i++) {
+        const token = queryTokens[i];
+
+        // Also check if we can remove Arabic prefix "ال" (Al-)
+        let stems = [token];
+        if (token.startsWith("ال") && token.length > 4) {
+          stems.push(token.substring(2));
+        }
+
+        for (let j = 0; j < keywords.length; j++) {
+          const kw = normalizeText(keywords[j]);
+          
+          for (let s = 0; s < stems.length; s++) {
+            const currentToken = stems[s];
+            
+            // Check 1: Exact match
+            if (currentToken === kw) {
+              categoryMatchCount += 2; // Exact matches are weighted higher
+              break;
+            }
+
+            // Check 2: Substring inclusion for longer words
+            if ((currentToken.length >= 4 && kw.includes(currentToken)) || (kw.length >= 4 && currentToken.includes(kw))) {
+              categoryMatchCount += 1.5;
+              break;
+            }
+
+            // Check 3: Fuzzy matching (Levenshtein)
+            const tokenLen = currentToken.length;
+            const kwLen = kw.length;
+            
+            let tolerance = 0;
+            if (kwLen >= 5) {
+              tolerance = 2;
+            } else if (kwLen >= 3) {
+              tolerance = 1;
+            }
+
+            if (tolerance > 0 && Math.abs(tokenLen - kwLen) <= tolerance) {
+              const dist = levenshteinDistance(currentToken, kw);
+              if (dist <= tolerance) {
+                categoryMatchCount += 1;
+                break;
+              }
+            }
+          }
+        }
+      }
+
+      if (categoryMatchCount > maxMatches) {
+        maxMatches = categoryMatchCount;
+        bestMatchKey = key;
+      }
+    }
+
+    // Threshold of at least 1 match point to count as a real match
+    if (bestMatchKey && maxMatches >= 1) {
+      return {
+        key: bestMatchKey,
+        content: FAQ_DB[bestMatchKey][lang] || FAQ_DB[bestMatchKey].en
+      };
+    }
+
     return null;
   }
 
