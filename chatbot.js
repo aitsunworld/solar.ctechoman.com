@@ -116,6 +116,36 @@
       en: `🧮 **Using the Solar Calculator:**\n\nOur calculator is on this page! Here's how to use it:\n\n1. **Enter your monthly electricity bill** in OMR\n2. The calculator automatically shows:\n   • Recommended system size (kW)\n   • Number of panels needed\n   • Estimated installation cost\n   • Monthly & yearly savings\n   • Payback period\n\nScroll up to find the calculator, or I can explain any result!`,
       ar: `🧮 **استخدام حاسبة الطاقة الشمسية:**\n\nحاسبتنا موجودة في هذه الصفحة! إليك كيفية استخدامها:\n\n1. **أدخل فاتورة الكهرباء الشهرية** بالريال العُماني\n2. تعرض الحاسبة تلقائياً:\n   • حجم النظام الموصى به (كيلوواط)\n   • عدد الألواح المطلوبة\n   • التكلفة التقديرية للتركيب\n   • التوفير الشهري والسنوي\n   • فترة الاسترداد\n\nانتقل للأعلى للعثور على الحاسبة، أو يمكنني شرح أي نتيجة!`,
     },
+    weather: {
+      keywords: ["weather", "cloudy", "rain", "dust", "heat", "sunlight", "shade", "performance", "climate", "غائم", "مطر", "سحاب", "طقس", "حرارة", "غبار", "غيوم", "امطار"],
+      en: `☀️ **Solar Panels & Weather:**\n\nYes, solar panels still generate electricity on cloudy or rainy days, though at a reduced rate (typically 10-25% of their normal output).\n\nOman's high solar irradiance and exceptional year-round climate ensure excellent overall yield even during occasional dust storms or overcast weather.`,
+      ar: `☀️ **الألواح الشمسية والطقس:**\n\nنعم، لا تزال الألواح الشمسية تولد الكهرباء في الأيام الغائمة أو الممطرة، وإن كان بمعدل أقل (عادة 10-25% من إنتاجها الطبيعي).\n\nيضمن الإشعاع الشمسي المرتفع في عُمان والمناخ الاستثنائي على مدار العام عائداً ممتازاً للنظام حتى أثناء العواصف الغبارية المؤقتة أو الغيوم.`,
+    },
+    warranty: {
+      keywords: ["warranty", "guarantee", "durability", "lifespan", "damage", "broken", "protect", "certified", "ضمان", "كفالة", "عمر", "خربان", "تلف", "مده"],
+      en: `🔒 **Warranty & Lifespan:**\n\nOur premium solar systems are built for long-term durability. We provide:\n\n• **Solar Panels:** Up to **25-year** performance warranty.\n• **Inverters:** **5 to 10-year** warranty (typically lasts 15+ years).\n• **System Lifespan:** Typically **25–30 years** with proper maintenance.`,
+      ar: `🔒 **الضمان والعمر الافتراضي:**\n\nأنظمتنا الشمسية المتميزة مصممة للعمل بكفاءة على المدى الطويل. نحن نقدم:\n\n• **الألواح الشمسية:** ضمان أداء يصل إلى **25 عاماً**.\n• **العواكس:** ضمان من **5 إلى 10 سنوات** (وتدوم عادةً لأكثر من 15 عاماً).\n• **العمر الافتراضي:** عادةً من **25 إلى 30 عاماً** مع الحد الأدنى من الصيانة.`,
+    },
+    battery: {
+      keywords: ["battery", "batteries", "storage", "backup", "off-grid", "offgrid", "charge", "مخطط", "بطارية", "بطاريات", "تخزين", "احتياطي", "شبكه"],
+      en: `🔋 **Battery Storage & Backup:**\n\nIn Oman, battery storage is optional but highly useful.\n\n• **Without Batteries:** By using the **Net-Metering scheme**, you can feed excess power generated during the day back into the grid and retrieve it at night. This is highly cost-effective and avoids battery costs.\n• **With Batteries:** Batteries are ideal if you want total off-grid independence or reliable backup power during rare grid outages.`,
+      ar: `🔋 **تخزين البطاريات والطاقة الاحتياطية:**\n\nفي سلطنة عُمان، يُعد تخزين الطاقة بالبطاريات اختيارياً ولكنه مفيد جداً.\n\n• **بدون بطاريات:** باستخدام **مخطط قياس صافي التغذية**، يمكنك حقن الكهرباء الزائدة المنتجة نهاراً في الشبكة واستردادها ليلاً. هذا الخيار اقتصادي للغاية ويغنيك عن تكلفة البطاريات.\n• **مع بطاريات:** البطاريات مثالية إذا كنت ترغب في استقلالية كاملة عن الشبكة أو توفير طاقة احتياطية عند انقطاع التيار الكهربائي.`,
+    },
+    power_home: {
+      keywords: ["power home", "entire home", "run house", "heavy appliances", "air conditioner", "pump", "fridge", "home", "house", "تشغيل منزل", "منزل بالكامل", "كل البيت", "مكيف", "مكيفات", "بيت", "منازل"],
+      en: `🏠 **Powering Your Entire Home:**\n\n**Yes!** Solar panels can power your entire home including heavy appliances like air conditioners, water pumps, and refrigerators.\n\nThe size of the system depends on your roof surface area and electricity consumption. We custom-engineer each solar system to cover up to 100% of your household energy needs.`,
+      ar: `🏠 **تشغيل المنزل بالكامل:**\n\n**نعم!** يمكن للألواح الشمسية تشغيل منزلك بالكامل بما في ذلك الأجهزة الثقيلة مثل مكيفات الهواء، ومضخات المياه، والثلاجات.\n\nيعتمد حجم النظام المطلوب على مساحة سطح منزلك واستهلاكك للطاقة. نحن نصمم كل نظام شمسى خصيصاً لتغطية ما يصل إلى 100٪ من احتياجات منزلك من الطاقة.`,
+    },
+    night: {
+      keywords: ["night", "dark", "no sun", "sunset", "evening", "لیل", "ظلام", "بدون شمس", "مساء", "ليل"],
+      en: `🌙 **Solar Power at Night:**\n\nSolar panels do not produce electricity at night as they require sunlight.\n\nDuring the night, your home will automatically draw power from the public electricity grid. Under Oman's **Net-Metering scheme**, the excess energy you fed into the grid during the day is deducted from your night-time consumption, ensuring massive bill savings.`,
+      ar: `🌙 **الطاقة الشمسية في الليل:**\n\nلا تنتج الألواح الشمسية الكهرباء ليلاً لعدم وجود ضوء الشمس.\n\nخلال الليل، سيعتمد منزلك تلقائياً على شبكة الكهرباء العامة. وبموجب **نظام قياس صافي التغذية** في عُمان، يتم خصم الطاقة الفائضة التي أنتجتها وضخيتها في الشبكة نهاراً من استهلاكك الليلي، مما يضمن لك توفيراً هائلاً.`,
+    },
+    roof: {
+      keywords: ["roof", "suitable", "surface", "area", "flat", "space", "facing", "shadow", "shading", "concrete", "سطح", "مناسب", "مساحة", "ظل", "اتجاه", "اسطح"],
+      en: `🏠 **Roof Suitability:**\n\nMost flat concrete roofs (very common in Oman) and pitched metal/tile roofs are perfectly suitable for solar installation.\n\nDuring our **free site survey**, our engineers assess:\n1. Available unobstructed surface area\n2. Shading from nearby walls or buildings\n3. Structural load capacity\n4. Ideal panel orientation (facing South for maximum yield)`,
+      ar: `🏠 **ملائمة السطح للتركيب:**\n\nمعظم الأسطح الخرسانية المستوية (الشائعة جداً في عُمان) والأسطح المعدنية أو القرميدية المائلة مناسبة تماماً لتركيب الألواح الشمسية.\n\nخلال **معاينة الموقع المجانية**، يقوم مهندسونا بتقييم:\n1. المساحة المتاحة الخالية من العوائق\n2. الظلال الناتجة عن الجدران أو المباني المجاورة\n3. قدرة تحمل السطح الهيكلية\n4. التوجيه المثالي للألواح (باتجاه الجنوب لتحقيق أقصى إنتاجية)`,
+    },
   };
 
   const FLOW = {
@@ -968,7 +998,8 @@
     s = s.replace(/[\u064B-\u0652]/g, ""); // Strip diacritics
     s = s.replace(/[أإآٱ]/g, "ا");
     s = s.replace(/ة/g, "ه");
-    s = s.replace(/[ىي]/g, "ي");
+    s = s.replace(/[ىيئ]/g, "ي");
+    s = s.replace(/ؤ/g, "و");
     
     // Remove punctuation
     s = s.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?؟!"']/g, " ");
@@ -1006,6 +1037,14 @@
 
     if (queryTokens.length === 0) return null;
 
+    // Helper to strip "ال" prefix
+    function stripAl(word) {
+      if (word.startsWith("ال") && word.length > 3) {
+        return word.substring(2);
+      }
+      return word;
+    }
+
     let bestMatchKey = null;
     let maxMatches = 0;
 
@@ -1016,48 +1055,67 @@
       for (let i = 0; i < queryTokens.length; i++) {
         const token = queryTokens[i];
 
-        // Also check if we can remove Arabic prefix "ال" (Al-)
+        // Generate stems by stripping Arabic definite article "ال"
         let stems = [token];
-        if (token.startsWith("ال") && token.length > 4) {
-          stems.push(token.substring(2));
+        const cleanToken = stripAl(token);
+        if (cleanToken !== token) {
+          stems.push(cleanToken);
         }
 
         for (let j = 0; j < keywords.length; j++) {
           const kw = normalizeText(keywords[j]);
           
+          // Generate stems for the keyword too, to support symmetric matching
+          let kwStems = [kw];
+          const cleanKw = stripAl(kw);
+          if (cleanKw !== kw) {
+            kwStems.push(cleanKw);
+          }
+
+          let matchedKeyword = false;
+
           for (let s = 0; s < stems.length; s++) {
             const currentToken = stems[s];
-            
-            // Check 1: Exact match
-            if (currentToken === kw) {
-              categoryMatchCount += 2; // Exact matches are weighted higher
-              break;
-            }
 
-            // Check 2: Substring inclusion for longer words
-            if ((currentToken.length >= 4 && kw.includes(currentToken)) || (kw.length >= 4 && currentToken.includes(kw))) {
-              categoryMatchCount += 1.5;
-              break;
-            }
+            for (let k = 0; k < kwStems.length; k++) {
+              const currentKw = kwStems[k];
 
-            // Check 3: Fuzzy matching (Levenshtein)
-            const tokenLen = currentToken.length;
-            const kwLen = kw.length;
-            
-            let tolerance = 0;
-            if (kwLen >= 5) {
-              tolerance = 2;
-            } else if (kwLen >= 3) {
-              tolerance = 1;
-            }
-
-            if (tolerance > 0 && Math.abs(tokenLen - kwLen) <= tolerance) {
-              const dist = levenshteinDistance(currentToken, kw);
-              if (dist <= tolerance) {
-                categoryMatchCount += 1;
+              // Check 1: Exact match
+              if (currentToken === currentKw) {
+                categoryMatchCount += 2; // Exact matches are weighted higher
+                matchedKeyword = true;
                 break;
               }
+
+              // Check 2: Substring inclusion for longer words
+              if ((currentToken.length >= 4 && currentKw.includes(currentToken)) || (currentKw.length >= 4 && currentToken.includes(currentKw))) {
+                categoryMatchCount += 1.5;
+                matchedKeyword = true;
+                break;
+              }
+
+              // Check 3: Fuzzy matching (Levenshtein)
+              const tokenLen = currentToken.length;
+              const kwLen = currentKw.length;
+              
+              let tolerance = 0;
+              const minLen = Math.min(tokenLen, kwLen);
+              if (minLen >= 5) {
+                tolerance = 2;
+              } else if (minLen >= 4) {
+                tolerance = 1;
+              }
+
+              if (tolerance > 0 && Math.abs(tokenLen - kwLen) <= tolerance) {
+                const dist = levenshteinDistance(currentToken, currentKw);
+                if (dist <= tolerance) {
+                  categoryMatchCount += 1;
+                  matchedKeyword = true;
+                  break;
+                }
+              }
             }
+            if (matchedKeyword) break;
           }
         }
       }

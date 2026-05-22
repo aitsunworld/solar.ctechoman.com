@@ -389,7 +389,7 @@ $lang = require_once "lang/{$active_lang}.php";
   </section>
 
   <!-- Trusted Brands & Products -->
-  <section id="partners" class="partners-section text-center reveal" style="text-align: center; padding: 5rem 0;">
+  <section id="partners" class="partners-section text-center reveal" style="text-align: center;">
     <div class="logo-wall-section">
       <div class="logo-wall-header">
         <span class="logo-wall-eyebrow"><?= $lang['why_pre'] ?></span>
@@ -454,6 +454,137 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- Technical Resources / Datasheet Download Center -->
+  <section id="datasheets" class="datasheet-section container reveal section-padding">
+    <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto; text-align: center;">
+      <span style="font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; color: var(--color-primary); text-transform: uppercase;"><?= $lang['datasheet_pre'] ?></span>
+      <h2 style="font-size: 3rem; margin-top: 0.5rem; margin-bottom: 1.5rem;"><?= $lang['datasheet_title'] ?></h2>
+      <p class="text-muted" style="max-width: 600px; margin: 0 auto;"><?= $lang['datasheet_subtitle'] ?></p>
+    </div>
+
+    <div class="datasheet-grid">
+      <!-- Huawei Card -->
+      <div class="datasheet-card">
+        <div class="datasheet-card-accent"></div>
+        <div class="datasheet-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="datasheet-content">
+          <h3><?= $lang['ds_1_title'] ?></h3>
+          <p><?= $lang['ds_1_desc'] ?></p>
+          <div class="datasheet-specs">
+            <span class="ds-spec-badge"><?= $lang['ds_1_spec_1'] ?></span>
+            <span class="ds-spec-badge"><?= $lang['ds_1_spec_2'] ?></span>
+          </div>
+        </div>
+        <a href="download.php?product=huawei_sun2000" class="btn-ds-download" target="_blank" rel="noopener">
+          <span><?= $lang['datasheet_download_btn'] ?></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Canadian Solar Card -->
+      <div class="datasheet-card">
+        <div class="datasheet-card-accent"></div>
+        <div class="datasheet-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="datasheet-content">
+          <h3><?= $lang['ds_2_title'] ?></h3>
+          <p><?= $lang['ds_2_desc'] ?></p>
+          <div class="datasheet-specs">
+            <span class="ds-spec-badge"><?= $lang['ds_2_spec_1'] ?></span>
+            <span class="ds-spec-badge"><?= $lang['ds_2_spec_2'] ?></span>
+          </div>
+        </div>
+        <a href="download.php?product=canadian_solar" class="btn-ds-download" target="_blank" rel="noopener">
+          <span><?= $lang['datasheet_download_btn'] ?></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Deye Card -->
+      <div class="datasheet-card">
+        <div class="datasheet-card-accent"></div>
+        <div class="datasheet-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="datasheet-content">
+          <h3><?= $lang['ds_3_title'] ?></h3>
+          <p><?= $lang['ds_3_desc'] ?></p>
+          <div class="datasheet-specs">
+            <span class="ds-spec-badge"><?= $lang['ds_3_spec_1'] ?></span>
+            <span class="ds-spec-badge"><?= $lang['ds_3_spec_2'] ?></span>
+          </div>
+        </div>
+        <a href="download.php?product=deye_hybrid" class="btn-ds-download" target="_blank" rel="noopener">
+          <span><?= $lang['datasheet_download_btn'] ?></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Concept CC Card -->
+      <div class="datasheet-card">
+        <div class="datasheet-card-accent"></div>
+        <div class="datasheet-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div class="datasheet-content">
+          <h3><?= $lang['ds_4_title'] ?></h3>
+          <p><?= $lang['ds_4_desc'] ?></p>
+          <div class="datasheet-specs">
+            <span class="ds-spec-badge"><?= $lang['ds_4_spec_1'] ?></span>
+            <span class="ds-spec-badge"><?= $lang['ds_4_spec_2'] ?></span>
+          </div>
+        </div>
+        <a href="download.php?product=concept_mppt" class="btn-ds-download" target="_blank" rel="noopener">
+          <span><?= $lang['datasheet_download_btn'] ?></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
 

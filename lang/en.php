@@ -181,6 +181,31 @@ return [
     ],
     'contact_title' => 'Ready to start?',
 
+    // Datasheet Download Center
+    'datasheet_pre' => 'TECHNICAL RESOURCES',
+    'datasheet_title' => 'Product Datasheet Center',
+    'datasheet_subtitle' => 'Download official technical specifications and catalogs for our premium DCRP-approved solar equipment.',
+    'datasheet_download_btn' => 'Download Datasheet',
+    'ds_efficiency' => 'Efficiency',
+    'ds_warranty' => 'Warranty',
+    'ds_years' => 'Years',
+    'ds_1_title' => 'Huawei SUN2000 Inverter (3kW - 100kW)',
+    'ds_1_desc' => 'High-efficiency smart string inverter with active arcing protection and DCRP approval for Oman\'s grid standards.',
+    'ds_1_spec_1' => 'Max Efficiency: 98.6%',
+    'ds_1_spec_2' => 'Warranty: 10 Years',
+    'ds_2_title' => 'Canadian Solar BiHiKu7 (650W+)',
+    'ds_2_desc' => 'Ultra-high power bifacial monocrystalline solar modules engineered to withstand high wind loads and intense desert dust.',
+    'ds_2_spec_1' => 'Module Efficiency: 21.2%',
+    'ds_2_spec_2' => 'Warranty: 25 Years',
+    'ds_3_title' => 'Deye Hybrid Smart Inverter (5kW - 12kW)',
+    'ds_3_desc' => 'Market-leading battery-ready hybrid inverter featuring smart load-shaving, dual MPPT tracking, and generator interface.',
+    'ds_3_spec_1' => 'Max Efficiency: 97.6%',
+    'ds_3_spec_2' => 'Warranty: 5 Years',
+    'ds_4_title' => 'Concept Custom Smart MPPT Controller',
+    'ds_4_desc' => 'Heavy-duty off-grid solar charge controller with maximum power point tracking, safety protection, and LCD telemetry.',
+    'ds_4_spec_1' => 'Tracking Efficiency: 99.0%',
+    'ds_4_spec_2' => 'Warranty: 5 Years',
+
     // Footer
     'foot_copy' => '&copy; 2026 ' . $c['address_1'] . '.<br>Powering the Future.',
     'foot_loc_title' => 'Our Location',
@@ -190,3 +215,4 @@ return [
     'foot_call_title' => 'Call Us',
     'foot_call_desc' => '<a href="tel:' . $c['phone_1_clean'] . '">' . $c['phone_1'] . '</a><br><a href="tel:' . $c['phone_2_clean'] . '">' . $c['phone_2'] . '</a>',
 ];
+
