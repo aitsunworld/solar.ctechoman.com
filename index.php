@@ -192,7 +192,7 @@ $lang = require_once "lang/{$active_lang}.php";
           </div>
         </div>
 
-        <div id="appliance-inputs-container" style="display: none; max-height: 480px; overflow-y: auto; padding-right: 0.5rem; margin-bottom: 1.5rem; text-align: start;">
+        <div id="appliance-inputs-container" style="display: none;">
           <!-- Appliances rendered dynamically via Javascript for multi-language SSOT support -->
         </div>
 

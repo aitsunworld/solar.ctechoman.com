@@ -470,14 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tabBill.addEventListener('click', () => {
             activeSizerMode = 'bill';
             tabBill.classList.add('active');
-            tabBill.style.background = 'var(--color-primary)';
-            tabBill.style.color = '#fff';
-            tabBill.style.border = 'none';
-
             tabAppliances.classList.remove('active');
-            tabAppliances.style.background = 'transparent';
-            tabAppliances.style.color = 'var(--color-text)';
-            tabAppliances.style.border = '1.5px solid var(--color-border)';
 
             billInputs.style.display = 'block';
             applianceInputs.style.display = 'none';
@@ -487,14 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tabAppliances.addEventListener('click', () => {
             activeSizerMode = 'appliances';
             tabAppliances.classList.add('active');
-            tabAppliances.style.background = 'var(--color-primary)';
-            tabAppliances.style.color = '#fff';
-            tabAppliances.style.border = 'none';
-
             tabBill.classList.remove('active');
-            tabBill.style.background = 'transparent';
-            tabBill.style.color = 'var(--color-text)';
-            tabBill.style.border = '1.5px solid var(--color-border)';
 
             billInputs.style.display = 'none';
             applianceInputs.style.display = 'block';

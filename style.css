@@ -115,10 +115,10 @@ h1, h2, h3, h4 {
   letter-spacing: -0.01em;
 }
 
-h1 { font-size: 2.1rem; }
-h2 { font-size: 1.65rem; }
-h3 { font-size: 1.3rem; }
-h4 { font-size: 1.1rem; }
+h1 { font-size: 1.85rem; }
+h2 { font-size: 1.45rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.05rem; }
 
 .text-accent { color: var(--color-accent); }
 .text-eco { color: var(--color-primary); }
@@ -126,8 +126,8 @@ h4 { font-size: 1.1rem; }
 
 /* Spacing and Section Balancing */
 .section-padding {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .mt-2 { margin-top: 0.5rem; }
@@ -866,7 +866,7 @@ html[dir="rtl"] .active-badge {
 }
 
 .section-title h2 {
-  font-size: 1.65rem;
+  font-size: 1.45rem;
   position: relative;
   display: inline-block;
   margin-top: 0.25rem;
@@ -994,7 +994,7 @@ html[dir="rtl"] .active-badge {
 }
 
 .logo-wall-title {
-  font-size: 1.65rem;
+  font-size: 1.45rem;
   margin-bottom: 0.5rem;
 }
 
@@ -1027,12 +1027,12 @@ html[dir="rtl"] .active-badge {
 
 .logo-row-wrapper::before {
   left: 0;
-  background: linear-gradient(to right, #ffffff 0%, transparent 100%);
+  background: linear-gradient(to right, #FAFAFA 0%, transparent 100%);
 }
 
 .logo-row-wrapper::after {
   right: 0;
-  background: linear-gradient(to left, #ffffff 0%, transparent 100%);
+  background: linear-gradient(to left, #FAFAFA 0%, transparent 100%);
 }
 
 .logo-row {
@@ -1070,20 +1070,23 @@ html[dir="rtl"] .active-badge {
   max-height: 22px;
   max-width: 80px;
   object-fit: contain;
-  filter: grayscale(100%) opacity(0.35);
+  /* Mobile-first: 30% grayscale + 65% opacity for clean SaaS look without hover */
+  filter: grayscale(30%) opacity(0.65);
   transition: filter 0.3s ease, transform 0.3s ease;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-/* On hover, reveal clean SaaS colors */
-.logo-row-wrapper:hover .logo-item img {
-  filter: grayscale(0%) opacity(0.85);
-}
+/* Desktop hover: reveal full SaaS colors (not applicable on mobile touch) */
+@media (hover: hover) {
+  .logo-row-wrapper:hover .logo-item img {
+    filter: grayscale(0%) opacity(0.85);
+  }
 
-.logo-item img:hover {
-  transform: scale(1.05);
-  filter: grayscale(0%) opacity(1) !important;
+  .logo-item img:hover {
+    transform: scale(1.05);
+    filter: grayscale(0%) opacity(1) !important;
+  }
 }
 
 @keyframes logo-scroll-left {
@@ -1899,9 +1902,9 @@ footer {
     padding-bottom: 3.5rem;
   }
 
-  h1 { font-size: 3rem; }
-  h2 { font-size: 2.2rem; }
-  h3 { font-size: 1.5rem; }
+  h1 { font-size: 2.6rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.45rem; }
 
   .contact-form {
     padding: 3rem;
