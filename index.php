@@ -25,6 +25,7 @@ $lang = require_once "lang/{$active_lang}.php";
 <html lang="<?= $active_lang ?>" dir="<?= $dir ?>">
 
 <head>
+  <!-- JS class signal FIRST for no-FOUC -->
   <script>document.documentElement.classList.add('js-enabled');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,23 +39,64 @@ $lang = require_once "lang/{$active_lang}.php";
 
   <!-- Favicons -->
   <link rel="shortcut icon" href="https://www.ctechoman.com/public/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" type="image/x-icon"
-    href="https://www.ctechoman.com/public/apple-touch-icon-57x57-precomposed.png">
-  <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
-    href="https://www.ctechoman.com/public/apple-touch-icon-72x72-precomposed.png">
-  <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
-    href="https://www.ctechoman.com/public/apple-touch-icon-114x114-precomposed.png">
-  <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
-    href="https://www.ctechoman.com/public/apple-touch-icon-144x144-precomposed.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.ctechoman.com/public/apple-touch-icon-114x114-precomposed.png">
 
-  <!-- Preconnect and Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- DNS Prefetch for external domains -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Tajawal:wght@300;400;500;700;900&family=Noto+Sans+Arabic:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css?v=3.0">
-  <link rel="stylesheet" href="chatbot.css?v=3.0">
+  <!-- Preload LCP hero image and nav logo -->
+  <link rel="preload" as="image" href="lightbulb.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="https://www.ctechoman.com/public/logo.webp">
+
+  <!-- CRITICAL INLINE CSS: Only what's needed for above-fold render -->
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
+    body{font-family:'Outfit','Tajawal','Noto Sans Arabic','Segoe UI',Arial,sans-serif;color:#0d1014;background-color:#FAFAFA;line-height:1.6;overflow-x:hidden;width:100%;font-size:.95rem}
+    img{max-width:100%;height:auto;display:block}
+    .navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.75rem 0;background:rgba(255,255,255,.97);border-bottom:1px solid rgba(0,0,0,.05);box-shadow:0 1px 6px rgba(0,0,0,.06)}
+    .nav-container{display:flex;justify-content:space-between;align-items:center}
+    .container{width:100%;max-width:1300px;margin:0 auto;padding-left:1rem;padding-right:1rem}
+    .logo img{height:32px;width:auto}
+    .mobile-menu-btn{display:flex;flex-direction:column;justify-content:space-between;width:30px;height:20px;background:none;border:none;cursor:pointer;z-index:1001}
+    .mobile-menu-btn span{display:block;width:100%;height:3px;background:#0d1014;border-radius:2px}
+    .nav-links{position:fixed;top:60px;left:-100%;width:100%;height:calc(100vh - 60px);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:3rem 2rem;gap:2rem;transition:left .3s ease-in-out;overflow-y:auto}
+    .nav-links.active{left:0}
+    [dir=rtl] .nav-links{left:auto;right:-100%;transition:right .3s ease-in-out}
+    [dir=rtl] .nav-links.active{right:0}
+    .nav-link{color:#0d1014;text-decoration:none;font-weight:700;font-size:1.1rem;width:100%;text-align:center;padding:.75rem 0;border-bottom:1px solid #E2E8F0}
+    .lang-btn{background:#F1F5F9;border:none;color:#64748B;cursor:pointer;font-weight:700;font-size:1rem;padding:.5rem 1.5rem;border-radius:100px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.85rem 2rem;font-weight:700;border-radius:100px;text-decoration:none;cursor:pointer;border:none;font-size:.95rem;text-align:center;min-height:48px;width:100%}
+    .btn-primary{background:#0d1014;color:#fff}
+    .btn-hero-primary{background:#3a8dcc;color:#fff}
+    .hero{min-height:auto;padding-top:80px;padding-bottom:2rem;display:flex;align-items:center}
+    .hero-grid{display:flex;flex-direction:column;gap:1.5rem;width:100%}
+    .hero-text{text-align:center}
+    h1{font-size:1.85rem;font-weight:900;line-height:1.2;color:#0d1014}
+    h2{font-size:1.45rem;font-weight:900;line-height:1.2;color:#0d1014}
+    h3{font-size:1.2rem;font-weight:900;line-height:1.2;color:#0d1014}
+    h4{font-size:1.05rem;font-weight:900;line-height:1.2;color:#0d1014}
+    .hero-text p{font-size:1rem;color:#64748B;margin-bottom:1.5rem;font-weight:500}
+    .hero-actions{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem;align-items:center;width:100%}
+    .hero-visual{width:100%;height:180px;display:flex;justify-content:center;align-items:center;position:relative;overflow:hidden}
+    .lightbulb-img{max-height:160px;width:auto;filter:drop-shadow(0 10px 20px rgba(0,0,0,.1))}
+    .text-muted{color:#64748B}
+    .bg-blobs{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+    .blob-1,.blob-2{position:absolute;width:200px;height:200px;background:#F1F5F9;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;opacity:.2}
+    .blob-1{top:-10%;left:-10%}.blob-2{bottom:10%;right:-5%}
+  </style>
+
+  <!-- Non-blocking Google Fonts (avoids render-blocking) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
+
+  <!-- Main stylesheet: load non-blocking, apply after fonts -->
+  <link rel="preload" as="style" href="style.css?v=3.1" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=3.1"></noscript>
+  <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
 <body>
@@ -69,7 +111,7 @@ $lang = require_once "lang/{$active_lang}.php";
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="#" class="logo">
-        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC Logo" width="160" height="48">
+        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC Logo" width="160" height="48" fetchpriority="high" loading="eager" decoding="async">
       </a>
       <div class="nav-links">
         <a href="#calculator" class="nav-link"><?= $lang['nav_calculator'] ?></a>
@@ -124,7 +166,8 @@ $lang = require_once "lang/{$active_lang}.php";
 
       <div class="hero-visual">
         <div class="lightning-bg"></div>
-        <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500" fetchpriority="high">
+        <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500"
+          fetchpriority="high" loading="eager" decoding="async">
       </div>
     </div>
   </section>
@@ -264,7 +307,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
       </div>
       <div class="cta-visual">
-        <img src="img2.webp" alt="Solar Installation" width="480" height="360">
+        <img src="img2.webp" alt="Solar Installation" width="480" height="360" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
@@ -285,37 +328,37 @@ $lang = require_once "lang/{$active_lang}.php";
       <div class="gallery-col">
         <div class="gallery-item tall">
           <img
-            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70&fm=webp"
-            alt="Solar Project 1" width="600" height="800">
+            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70&fm=webp"
+            alt="Solar Project 1" width="400" height="534" loading="lazy" decoding="async">
         </div>
         <div class="gallery-item short">
           <img
-            src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70&fm=webp"
-            alt="Solar Project 2" width="600" height="400">
+            src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70&fm=webp"
+            alt="Solar Project 2" width="400" height="267" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-col">
         <div class="gallery-item short">
           <img
-            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70&fm=webp"
-            alt="Solar Project 3" width="600" height="400">
+            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70&fm=webp"
+            alt="Solar Project 3" width="400" height="267" loading="lazy" decoding="async">
         </div>
         <div class="gallery-item tall">
           <img
-            src="https://plus.unsplash.com/premium_photo-1679917152396-4b18accacb9d?q=70&w=600&fm=webp&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Solar Project 4" width="600" height="800">
+            src="https://plus.unsplash.com/premium_photo-1679917152396-4b18accacb9d?q=70&w=400&fm=webp&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Solar Project 4" width="400" height="534" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="gallery-col">
         <div class="gallery-item tall">
           <img
-            src="https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?q=70&w=600&fm=webp&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Solar Project 5" width="600" height="800">
+            src="https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?q=70&w=400&fm=webp&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Solar Project 5" width="400" height="534" loading="lazy" decoding="async">
         </div>
         <div class="gallery-item short">
           <img
-            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=70&fm=webp"
-            alt="Solar Project 6" width="600" height="400">
+            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70&fm=webp"
+            alt="Solar Project 6" width="400" height="267" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -354,11 +397,11 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <div class="choose-center reveal" style="position: relative;">
-        <img src="solar_panel.webp" alt="Solar Panel" width="300" height="338"
+        <img src="solar_panel.webp" alt="Solar Panel" width="300" height="338" loading="lazy" decoding="async"
           style="width: 100%; max-width: 300px; position: relative; z-index: 2;">
 
-        <img src="cloud1.webp" class="cloud-anim cloud-1" alt="Cloud" width="120" height="60">
-        <img src="cloud2.webp" class="cloud-anim cloud-2" alt="Cloud" width="120" height="60">
+        <img src="cloud1.webp" class="cloud-anim cloud-1" alt="" role="presentation" width="120" height="60" loading="lazy">
+        <img src="cloud2.webp" class="cloud-anim cloud-2" alt="" role="presentation" width="120" height="60" loading="lazy">
       </div>
 
       <div class="choose-col right-col">
@@ -776,6 +819,7 @@ $lang = require_once "lang/{$active_lang}.php";
     <div class="container footer-grid">
       <div class="footer-col" style="display: flex; flex-direction: column; justify-content: center;">
         <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC" width="160" height="50"
+          loading="lazy" decoding="async"
           style="height: 50px; width: auto; max-width: 200px; margin-bottom: 1.5rem;">
         <p class="text-muted"><?= $lang['foot_copy'] ?></p>
       </div>
@@ -796,10 +840,68 @@ $lang = require_once "lang/{$active_lang}.php";
 
 
 
-  <script src="calculator-engine.js?v=3.0" defer></script>
-  <script src="analytics.js?v=3.0" defer></script>
-  <script src="script.js?v=3.0" defer></script>
-  <script src="chatbot.js?v=3.0" defer></script>
+  <script src="calculator-engine.js?v=3.1" defer></script>
+  <script src="script.js?v=3.1" defer></script>
+
+  <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
+  <script>
+  (function() {
+    'use strict';
+    var chatbotLoaded = false;
+    var analyticsLoaded = false;
+
+    function loadChatbot() {
+      if (chatbotLoaded) return;
+      chatbotLoaded = true;
+      // Inject chatbot CSS
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'chatbot.css?v=3.1';
+      document.head.appendChild(css);
+      // Inject chatbot JS
+      var js = document.createElement('script');
+      js.src = 'chatbot.js?v=3.1';
+      js.defer = true;
+      document.body.appendChild(js);
+    }
+
+    function loadAnalytics() {
+      if (analyticsLoaded) return;
+      analyticsLoaded = true;
+      var js = document.createElement('script');
+      js.src = 'analytics.js?v=3.1';
+      js.defer = true;
+      document.body.appendChild(js);
+    }
+
+    // Strategy: load both after idle, but load chatbot immediately on any interaction
+    var interactionEvents = ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'];
+    function onFirstInteraction() {
+      interactionEvents.forEach(function(e) {
+        window.removeEventListener(e, onFirstInteraction, { passive: true });
+      });
+      loadChatbot();
+      loadAnalytics();
+    }
+
+    interactionEvents.forEach(function(e) {
+      window.addEventListener(e, onFirstInteraction, { passive: true, once: true });
+    });
+
+    // Idle fallback: load everything after 4 seconds regardless
+    if (typeof requestIdleCallback === 'function') {
+      requestIdleCallback(function() {
+        loadChatbot();
+        loadAnalytics();
+      }, { timeout: 4000 });
+    } else {
+      setTimeout(function() {
+        loadChatbot();
+        loadAnalytics();
+      }, 4000);
+    }
+  })();
+  </script>
 </body>
 
 </html>

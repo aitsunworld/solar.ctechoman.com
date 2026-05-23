@@ -40,15 +40,12 @@
       properties: properties
     };
 
-    // 1. Log locally to DevTools in development
-    console.log(`[SolarAnalytics] Event Logged: "${eventName}"`, payload);
-
-    // 2. Google Tag Manager / GA4 Data Layer Integration
+    // 1. Google Tag Manager / GA4 Data Layer Integration
     if (window.dataLayer && typeof window.dataLayer.push === "function") {
       window.dataLayer.push(payload);
     }
 
-    // 3. Meta Pixel Integration (Mapped Events)
+    // 2. Meta Pixel Integration (Mapped Events)
     if (window.fbq && typeof window.fbq === "function") {
       if (eventName === "lead_submitted") {
         window.fbq("track", "Lead", {
@@ -66,9 +63,9 @@
       }
     }
 
-    // 4. Secure Beacon Proxy Log (Server-Side)
-    // Sends analytics to chatbot.php to store in server files if required
-    if (navigator.sendBeacon) {
+    // 3. Beacon: only for high-value events (not every micro-interaction)
+    const beaconEvents = ["lead_submitted", "calculator_change", "session_end", "form_abandoned"];
+    if (navigator.sendBeacon && beaconEvents.includes(eventName)) {
       const blob = new Blob([JSON.stringify({ action: "analytics_log", data: payload })], {
         type: "application/json"
       });
@@ -170,11 +167,12 @@
     markFormSubmitted: function () { formSubmitted = true; }
   };
 
-  // Run on page loading cycle
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+  // Run after idle to avoid blocking TBT
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(init, { timeout: 3000 });
   } else {
-    init();
+    // Fallback for Safari: 2.5s delay to let critical render complete
+    setTimeout(init, 2500);
   }
 
 })();

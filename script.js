@@ -493,9 +493,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (propType) propType.addEventListener('change', calculateSolar);
     if (loc) loc.addEventListener('change', calculateSolar);
 
-    // Dynamic Sizer Initializer
-    initApplianceSizer();
-    calculateSolar();
+    // Lazy-init calculator when it scrolls into view (eliminates main-thread blocking on load)
+    let calculatorInitialized = false;
+
+    function initCalculatorWhenReady() {
+        if (calculatorInitialized) return;
+        calculatorInitialized = true;
+        initApplianceSizer();
+        calculateSolar();
+    }
+
+    const calcSection = document.getElementById('calculator');
+    if (calcSection && 'IntersectionObserver' in window) {
+        const calcObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initCalculatorWhenReady();
+                    calcObserver.disconnect();
+                }
+            });
+        }, { rootMargin: '200px 0px' }); // Pre-init 200px before entering view
+        calcObserver.observe(calcSection);
+    } else {
+        // Fallback: init on idle or after short delay
+        if (typeof requestIdleCallback === 'function') {
+            requestIdleCallback(initCalculatorWhenReady, { timeout: 2000 });
+        } else {
+            setTimeout(initCalculatorWhenReady, 500);
+        }
+    }
 
     // Hook up AI advisor dynamic explanation trigger
     const explainBtn = document.getElementById('calc-explain-btn');
