@@ -104,6 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const resInverter = document.getElementById('res-inverter');
     const resBattery = document.getElementById('res-battery');
+    const resConnectedLoad = document.getElementById('res-connected-load');
+    const resDailyConsumption = document.getElementById('res-daily-consumption');
 
     let activeSizerMode = 'bill'; // 'bill' | 'appliances'
     const applianceQuantities = {};
@@ -608,6 +610,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (resInverter && resBattery) {
                 animateValue(resInverter, 0, result.loadSizing.inverterRecommendationKw, 1000, "", " kW");
                 animateValue(resBattery, 0, result.loadSizing.batteryRecommendationKwh, 1000, "", " kWh");
+            }
+            // Animate Connected Load and Daily Consumption Specs
+            if (resConnectedLoad && resDailyConsumption) {
+                const peakLoad = result.loadSizing.peakLoadWatts;
+                if (peakLoad >= 1000) {
+                    animateValue(resConnectedLoad, 0, parseFloat((peakLoad / 1000).toFixed(2)), 1000, "", " kW");
+                } else {
+                    animateValue(resConnectedLoad, 0, peakLoad, 1000, "", " W");
+                }
+                animateValue(resDailyConsumption, 0, result.loadSizing.avgDailyKwh, 1000, "", " kWh/day");
             }
         }
 

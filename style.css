@@ -892,6 +892,14 @@ html[dir="rtl"] .active-badge {
   gap: 1rem;
 }
 
+.result-box.load-box {
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.result-box.consumption-box {
+  background: rgba(99, 102, 241, 0.05);
+}
+
 .result-box.inverter-box {
   background: rgba(58, 141, 204, 0.05);
 }
@@ -2278,7 +2286,8 @@ footer {
     padding: 4rem;
   }
 
-  .results-grid {
+  .results-grid,
+  .recs-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 

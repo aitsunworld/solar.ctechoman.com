@@ -205,6 +205,14 @@ $lang = require_once "lang/{$active_lang}.php";
         <div id="load-recommendations" style="display: none;">
           <h4 class="recs-title"><?= $active_lang === 'ar' ? 'توصيات النظام المتقدمة' : 'Advanced System Recommendations' ?></h4>
           <div class="recs-grid">
+            <div class="result-box load-box">
+              <span class="result-label"><?= $active_lang === 'ar' ? 'إجمالي الحمل المتصل' : 'Total Connected Load' ?></span>
+              <strong class="result-value" id="res-connected-load">0 W</strong>
+            </div>
+            <div class="result-box consumption-box">
+              <span class="result-label"><?= $active_lang === 'ar' ? 'الاستهلاك اليومي المقدر' : 'Estimated Daily Consumption' ?></span>
+              <strong class="result-value" id="res-daily-consumption">0 kWh/day</strong>
+            </div>
             <div class="result-box inverter-box">
               <span class="result-label"><?= $active_lang === 'ar' ? 'حجم العاكس المقترح' : 'Recommended Inverter' ?></span>
               <strong class="result-value" id="res-inverter">0 kW</strong>
