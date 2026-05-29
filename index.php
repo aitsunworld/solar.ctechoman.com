@@ -525,532 +525,269 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
 
     <div class="datasheet-grid">
-      <!-- Huawei Inverter -->
-      <div class="datasheet-card" data-category="inverter">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
-            <path d="M12 18h.01M16 6H8a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"></path>
-          </svg>
+      <!-- Huawei Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter" data-brand="huawei">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/huawei.svg" alt="Huawei" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_1_title'] ?></h3>
-          <p><?= $lang['ds_1_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_1_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_1_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>Huawei</h3>
+          <p><?= $lang['brand_huawei_tag'] ?></p>
         </div>
-        <a href="download.php?product=huawei_sun2000" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
 
-      <!-- Sungrow Inverter -->
-      <div class="datasheet-card" data-category="inverter">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
-            <path d="M12 18h.01M16 6H8a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"></path>
-          </svg>
+      <!-- Sungrow Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter" data-brand="sungrow">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/sungrow.png" alt="Sungrow" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_sungrow_inv_title'] ?></h3>
-          <p><?= $lang['ds_sungrow_inv_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_sungrow_inv_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_sungrow_inv_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>Sungrow</h3>
+          <p><?= $lang['brand_sungrow_tag'] ?></p>
         </div>
-        <a href="download.php?product=sungrow_sg110cx" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
 
-      <!-- Solis Inverter -->
-      <div class="datasheet-card" data-category="inverter">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
-            <path d="M12 18h.01M16 6H8a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"></path>
-          </svg>
+      <!-- Solis Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter battery" data-brand="solis">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/solis.png" alt="Solis" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_solis_inv_title'] ?></h3>
-          <p><?= $lang['ds_solis_inv_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_solis_inv_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_solis_inv_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>Solis</h3>
+          <p><?= $lang['brand_solis_tag'] ?></p>
         </div>
-        <a href="download.php?product=solis_s5" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
 
-      <!-- Canadian Inverter -->
-      <div class="datasheet-card" data-category="inverter">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
-            <path d="M12 18h.01M16 6H8a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"></path>
-          </svg>
+      <!-- Canadian Solar Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter panel battery" data-brand="canadian">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/canadian_solar.png" alt="Canadian Solar" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_canadian_inv_title'] ?></h3>
-          <p><?= $lang['ds_canadian_inv_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_canadian_inv_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_canadian_inv_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>Canadian Solar</h3>
+          <p><?= $lang['brand_canadian_tag'] ?></p>
         </div>
-        <a href="download.php?product=canadian_solar_inv" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
 
-      <!-- Deye Inverter -->
-      <div class="datasheet-card" data-category="inverter">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
-            <path d="M12 18h.01M16 6H8a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"></path>
-          </svg>
+      <!-- Deye Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter battery" data-brand="deye">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/deye.png" alt="Deye" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_3_title'] ?></h3>
-          <p><?= $lang['ds_3_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_3_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_3_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>Deye</h3>
+          <p><?= $lang['brand_deye_tag'] ?></p>
         </div>
-        <a href="download.php?product=deye_hybrid" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
 
-      <!-- Power & Sun Inverter -->
-      <div class="datasheet-card" data-category="inverter">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
-            <path d="M12 18h.01M16 6H8a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2z"></path>
-          </svg>
+      <!-- Power & Sun Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter battery" data-brand="powersun">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/power_sun.png" alt="Power & Sun" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_powersun_inv_title'] ?></h3>
-          <p><?= $lang['ds_powersun_inv_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_powersun_inv_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_powersun_inv_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>Power & Sun</h3>
+          <p><?= $lang['brand_powersun_tag'] ?></p>
         </div>
-        <a href="download.php?product=power_sun_inv" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
+      </div>
+    </div> <!-- Close datasheet-grid for flagship brands -->
+
+    <!-- Expandable brand grid for remaining brands -->
+    <div class="expandable-brand-grid" id="expandable-brands">
+      <!-- Trina Solar Brand -->
+      <div class="datasheet-card brand-card" data-category="panel" data-brand="trina">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/trina_solar.svg" alt="Trina Solar" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Trina Solar</h3>
+          <p><?= $lang['brand_trina_tag'] ?></p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
       </div>
 
-      <!-- Canadian Solar Panel -->
-      <div class="datasheet-card" data-category="panel">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="4" y="3" width="16" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-            <line x1="15" y1="3" x2="15" y2="21"></line>
-            <line x1="4" y1="9" x2="20" y2="9"></line>
-            <line x1="4" y1="15" x2="20" y2="15"></line>
-          </svg>
+      <!-- LONGi Solar Brand -->
+      <div class="datasheet-card brand-card" data-category="panel battery" data-brand="longi">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/longi.svg" alt="LONGi" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_2_title'] ?></h3>
-          <p><?= $lang['ds_2_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_2_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_2_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>LONGi</h3>
+          <p><?= $lang['brand_longi_tag'] ?></p>
         </div>
-        <a href="download.php?product=canadian_solar" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
 
-      <!-- Trina Solar Panel -->
-      <div class="datasheet-card" data-category="panel">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="4" y="3" width="16" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-            <line x1="15" y1="3" x2="15" y2="21"></line>
-            <line x1="4" y1="9" x2="20" y2="9"></line>
-            <line x1="4" y1="15" x2="20" y2="15"></line>
-          </svg>
+      <!-- Jinko Solar Brand -->
+      <div class="datasheet-card brand-card" data-category="panel" data-brand="jinko">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/jinko_solar.png" alt="Jinko Solar" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_trina_panel_title'] ?></h3>
-          <p><?= $lang['ds_trina_panel_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_trina_panel_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_trina_panel_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>Jinko Solar</h3>
+          <p><?= $lang['brand_jinko_tag'] ?></p>
         </div>
-        <a href="download.php?product=trina_vertex" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
 
-      <!-- LONGi Panel -->
-      <div class="datasheet-card" data-category="panel">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="4" y="3" width="16" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-            <line x1="15" y1="3" x2="15" y2="21"></line>
-            <line x1="4" y1="9" x2="20" y2="9"></line>
-            <line x1="4" y1="15" x2="20" y2="15"></line>
-          </svg>
+      <!-- JA Solar Brand -->
+      <div class="datasheet-card brand-card" data-category="panel" data-brand="ja">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/ja_solar.svg" alt="JA Solar" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_longi_panel_title'] ?></h3>
-          <p><?= $lang['ds_longi_panel_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_longi_panel_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_longi_panel_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>JA Solar</h3>
+          <p><?= $lang['brand_ja_tag'] ?></p>
         </div>
-        <a href="download.php?product=longi_himo6" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
 
-      <!-- Jinko Panel -->
-      <div class="datasheet-card" data-category="panel">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="4" y="3" width="16" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-            <line x1="15" y1="3" x2="15" y2="21"></line>
-            <line x1="4" y1="9" x2="20" y2="9"></line>
-            <line x1="4" y1="15" x2="20" y2="15"></line>
-          </svg>
+      <!-- Jebel Brand -->
+      <div class="datasheet-card brand-card" data-category="battery" data-brand="jebel">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/jebel.png" alt="Jebel" class="brand-logo-img" loading="lazy">
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_jinko_panel_title'] ?></h3>
-          <p><?= $lang['ds_jinko_panel_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_jinko_panel_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_jinko_panel_spec_2'] ?></span>
-          </div>
+        <div class="brand-content">
+          <h3>Jebel</h3>
+          <p><?= $lang['brand_jebel_tag'] ?></p>
         </div>
-        <a href="download.php?product=jinko_tiger" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
 
-      <!-- JA Solar Panel -->
-      <div class="datasheet-card" data-category="panel">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="4" y="3" width="16" height="18" rx="2" ry="2"></rect>
-            <line x1="9" y1="3" x2="9" y2="21"></line>
-            <line x1="15" y1="3" x2="15" y2="21"></line>
-            <line x1="4" y1="9" x2="20" y2="9"></line>
-            <line x1="4" y1="15" x2="20" y2="15"></line>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_ja_panel_title'] ?></h3>
-          <p><?= $lang['ds_ja_panel_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_ja_panel_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_ja_panel_spec_2'] ?></span>
+      <!-- Concept Brand -->
+      <div class="datasheet-card brand-card" data-category="controller" data-brand="concept">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <div class="brand-logo-icon" style="height: 38px; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: var(--color-primary);">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
           </div>
         </div>
-        <a href="download.php?product=ja_solar_blue" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
+        <div class="brand-content">
+          <h3>Concept</h3>
+          <p><?= $lang['brand_concept_tag'] ?></p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </a>
+        </button>
       </div>
+    </div> <!-- Close expandable-brand-grid -->
 
-      <!-- Canadian Solar Battery -->
-      <div class="datasheet-card" data-category="battery">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="5" y1="8" x2="19" y2="8"></line>
-            <line x1="5" y1="14" x2="19" y2="14"></line>
-            <circle cx="9" cy="5" r="1"></circle>
-            <circle cx="9" cy="11" r="1"></circle>
-            <circle cx="9" cy="17" r="1"></circle>
-          </svg>
+    <!-- Centered Glassy Accordion Toggle Button -->
+    <div class="brand-toggle-wrapper" style="text-align: center; margin-top: 2rem;">
+      <button type="button" id="brand-toggle-btn" class="btn btn-secondary">
+        <span><?= $lang['brand_toggle_show'] ?></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 0.5rem; transition: transform 0.3s ease;">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Premium Brand Explorer Modal -->
+    <div id="brand-datasheet-modal" class="ds-modal-overlay" aria-hidden="true" style="display: none;">
+      <div class="ds-modal-content">
+        <button type="button" class="ds-modal-close" id="ds-modal-close-btn" aria-label="<?= $lang['brand_modal_close'] ?>">&times;</button>
+        <div class="ds-modal-header">
+          <div class="ds-modal-brand-logo-wrapper" id="modal-logo-container">
+            <!-- Brand Logo rendered dynamically -->
+          </div>
+          <h3 id="modal-brand-title">Brand Products</h3>
+          <p id="modal-brand-tagline" class="text-muted"></p>
         </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_canadian_bat_title'] ?></h3>
-          <p><?= $lang['ds_canadian_bat_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_canadian_bat_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_canadian_bat_spec_2'] ?></span>
+        <div class="ds-modal-body">
+          <h4 class="modal-body-title"><?= $lang['brand_modal_title'] ?></h4>
+          <div id="modal-products-grid" class="modal-products-grid">
+            <!-- Dynamically populated via Javascript -->
           </div>
         </div>
-        <a href="download.php?product=canadian_solar_battery" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Solis Battery -->
-      <div class="datasheet-card" data-category="battery">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="5" y1="8" x2="19" y2="8"></line>
-            <line x1="5" y1="14" x2="19" y2="14"></line>
-            <circle cx="9" cy="5" r="1"></circle>
-            <circle cx="9" cy="11" r="1"></circle>
-            <circle cx="9" cy="17" r="1"></circle>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_solis_bat_title'] ?></h3>
-          <p><?= $lang['ds_solis_bat_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_solis_bat_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_solis_bat_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=solis_flexi" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Deye Battery -->
-      <div class="datasheet-card" data-category="battery">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="5" y1="8" x2="19" y2="8"></line>
-            <line x1="5" y1="14" x2="19" y2="14"></line>
-            <circle cx="9" cy="5" r="1"></circle>
-            <circle cx="9" cy="11" r="1"></circle>
-            <circle cx="9" cy="17" r="1"></circle>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_deye_bat_title'] ?></h3>
-          <p><?= $lang['ds_deye_bat_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_deye_bat_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_deye_bat_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=deye_bos_g" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Jebel Battery -->
-      <div class="datasheet-card" data-category="battery">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="5" y1="8" x2="19" y2="8"></line>
-            <line x1="5" y1="14" x2="19" y2="14"></line>
-            <circle cx="9" cy="5" r="1"></circle>
-            <circle cx="9" cy="11" r="1"></circle>
-            <circle cx="9" cy="17" r="1"></circle>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_jebel_bat_title'] ?></h3>
-          <p><?= $lang['ds_jebel_bat_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_jebel_bat_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_jebel_bat_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=jebel_battery" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
-      <!-- LONGi Battery -->
-      <div class="datasheet-card" data-category="battery">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="5" y1="8" x2="19" y2="8"></line>
-            <line x1="5" y1="14" x2="19" y2="14"></line>
-            <circle cx="9" cy="5" r="1"></circle>
-            <circle cx="9" cy="11" r="1"></circle>
-            <circle cx="9" cy="17" r="1"></circle>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_longi_bat_title'] ?></h3>
-          <p><?= $lang['ds_longi_bat_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_longi_bat_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_longi_bat_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=longi_battery" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Power & Sun Battery -->
-      <div class="datasheet-card" data-category="battery">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="5" y1="8" x2="19" y2="8"></line>
-            <line x1="5" y1="14" x2="19" y2="14"></line>
-            <circle cx="9" cy="5" r="1"></circle>
-            <circle cx="9" cy="11" r="1"></circle>
-            <circle cx="9" cy="17" r="1"></circle>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_powersun_bat_title'] ?></h3>
-          <p><?= $lang['ds_powersun_bat_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_powersun_bat_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_powersun_bat_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=power_sun_ess" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
-      </div>
-
-      <!-- Concept CC Card -->
-      <div class="datasheet-card" data-category="controller">
-        <div class="datasheet-card-accent"></div>
-        <div class="datasheet-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="datasheet-icon">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-        </div>
-        <div class="datasheet-content">
-          <h3><?= $lang['ds_4_title'] ?></h3>
-          <p><?= $lang['ds_4_desc'] ?></p>
-          <div class="datasheet-specs">
-            <span class="ds-spec-badge"><?= $lang['ds_4_spec_1'] ?></span>
-            <span class="ds-spec-badge"><?= $lang['ds_4_spec_2'] ?></span>
-          </div>
-        </div>
-        <a href="download.php?product=concept_mppt" class="btn-ds-download" target="_blank" rel="noopener">
-          <span><?= $lang['datasheet_download_btn'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-        </a>
       </div>
     </div>
   </section>
@@ -1264,6 +1001,113 @@ $lang = require_once "lang/{$active_lang}.php";
   </footer>
 
 
+
+  <script>
+    window.BrandProductsData = {
+      huawei: {
+        name: 'Huawei',
+        logo: 'brands/huawei.svg',
+        tagline: `<?= addslashes($lang['brand_huawei_tag']) ?>`,
+        products: [
+          { key: 'huawei_sun2000', category: 'inverter', title: `<?= addslashes($lang['ds_1_title']) ?>`, desc: `<?= addslashes($lang['ds_1_desc']) ?>`, specs: [`<?= addslashes($lang['ds_1_spec_1']) ?>`, `<?= addslashes($lang['ds_1_spec_2']) ?>`] }
+        ]
+      },
+      sungrow: {
+        name: 'Sungrow',
+        logo: 'brands/sungrow.png',
+        tagline: `<?= addslashes($lang['brand_sungrow_tag']) ?>`,
+        products: [
+          { key: 'sungrow_sg110cx', category: 'inverter', title: `<?= addslashes($lang['ds_sungrow_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_sungrow_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_sungrow_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_sungrow_inv_spec_2']) ?>`] }
+        ]
+      },
+      solis: {
+        name: 'Solis',
+        logo: 'brands/solis.png',
+        tagline: `<?= addslashes($lang['brand_solis_tag']) ?>`,
+        products: [
+          { key: 'solis_s5', category: 'inverter', title: `<?= addslashes($lang['ds_solis_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_solis_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_solis_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_solis_inv_spec_2']) ?>`] },
+          { key: 'solis_flexi', category: 'battery', title: `<?= addslashes($lang['ds_solis_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_solis_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_solis_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_solis_bat_spec_2']) ?>`] }
+        ]
+      },
+      canadian: {
+        name: 'Canadian Solar',
+        logo: 'brands/canadian_solar.png',
+        tagline: `<?= addslashes($lang['brand_canadian_tag']) ?>`,
+        products: [
+          { key: 'canadian_solar', category: 'panel', title: `<?= addslashes($lang['ds_2_title']) ?>`, desc: `<?= addslashes($lang['ds_2_desc']) ?>`, specs: [`<?= addslashes($lang['ds_2_spec_1']) ?>`, `<?= addslashes($lang['ds_2_spec_2']) ?>`] },
+          { key: 'canadian_solar_inv', category: 'inverter', title: `<?= addslashes($lang['ds_canadian_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_canadian_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_canadian_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_canadian_inv_spec_2']) ?>`] },
+          { key: 'canadian_solar_battery', category: 'battery', title: `<?= addslashes($lang['ds_canadian_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_canadian_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_canadian_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_canadian_bat_spec_2']) ?>`] }
+        ]
+      },
+      deye: {
+        name: 'Deye',
+        logo: 'brands/deye.png',
+        tagline: `<?= addslashes($lang['brand_deye_tag']) ?>`,
+        products: [
+          { key: 'deye_hybrid', category: 'inverter', title: `<?= addslashes($lang['ds_3_title']) ?>`, desc: `<?= addslashes($lang['ds_3_desc']) ?>`, specs: [`<?= addslashes($lang['ds_3_spec_1']) ?>`, `<?= addslashes($lang['ds_3_spec_2']) ?>`] },
+          { key: 'deye_bos_g', category: 'battery', title: `<?= addslashes($lang['ds_deye_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_deye_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_deye_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_deye_bat_spec_2']) ?>`] }
+        ]
+      },
+      powersun: {
+        name: 'Power & Sun',
+        logo: 'brands/power_sun.png',
+        tagline: `<?= addslashes($lang['brand_powersun_tag']) ?>`,
+        products: [
+          { key: 'power_sun_inv', category: 'inverter', title: `<?= addslashes($lang['ds_powersun_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_powersun_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_powersun_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_powersun_inv_spec_2']) ?>`] },
+          { key: 'power_sun_ess', category: 'battery', title: `<?= addslashes($lang['ds_powersun_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_powersun_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_powersun_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_powersun_bat_spec_2']) ?>`] }
+        ]
+      },
+      trina: {
+        name: 'Trina Solar',
+        logo: 'brands/trina_solar.svg',
+        tagline: `<?= addslashes($lang['brand_trina_tag']) ?>`,
+        products: [
+          { key: 'trina_vertex', category: 'panel', title: `<?= addslashes($lang['ds_trina_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_trina_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_trina_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_trina_panel_spec_2']) ?>`] }
+        ]
+      },
+      longi: {
+        name: 'LONGi',
+        logo: 'brands/longi.svg',
+        tagline: `<?= addslashes($lang['brand_longi_tag']) ?>`,
+        products: [
+          { key: 'longi_himo6', category: 'panel', title: `<?= addslashes($lang['ds_longi_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_longi_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_longi_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_longi_panel_spec_2']) ?>`] },
+          { key: 'longi_battery', category: 'battery', title: `<?= addslashes($lang['ds_longi_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_longi_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_longi_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_longi_bat_spec_2']) ?>`] }
+        ]
+      },
+      jinko: {
+        name: 'Jinko Solar',
+        logo: 'brands/jinko_solar.png',
+        tagline: `<?= addslashes($lang['brand_jinko_tag']) ?>`,
+        products: [
+          { key: 'jinko_tiger', category: 'panel', title: `<?= addslashes($lang['ds_jinko_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_jinko_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_jinko_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_jinko_panel_spec_2']) ?>`] }
+        ]
+      },
+      ja: {
+        name: 'JA Solar',
+        logo: 'brands/ja_solar.svg',
+        tagline: `<?= addslashes($lang['brand_ja_tag']) ?>`,
+        products: [
+          { key: 'ja_solar_blue', category: 'panel', title: `<?= addslashes($lang['ds_ja_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_ja_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_ja_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_ja_panel_spec_2']) ?>`] }
+        ]
+      },
+      jebel: {
+        name: 'Jebel',
+        logo: 'brands/jebel.png',
+        tagline: `<?= addslashes($lang['brand_jebel_tag']) ?>`,
+        products: [
+          { key: 'jebel_battery', category: 'battery', title: `<?= addslashes($lang['ds_jebel_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_jebel_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_jebel_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_jebel_bat_spec_2']) ?>`] }
+        ]
+      },
+      concept: {
+        name: 'Concept',
+        logo: '',
+        tagline: `<?= addslashes($lang['brand_concept_tag']) ?>`,
+        products: [
+          { key: 'concept_mppt', category: 'controller', title: `<?= addslashes($lang['ds_4_title']) ?>`, desc: `<?= addslashes($lang['ds_4_desc']) ?>`, specs: [`<?= addslashes($lang['ds_4_spec_1']) ?>`, `<?= addslashes($lang['ds_4_spec_2']) ?>`] }
+        ]
+      }
+    };
+  </script>
 
   <script src="calculator-engine.js?v=3.1" defer></script>
   <script src="script.js?v=3.1" defer></script>

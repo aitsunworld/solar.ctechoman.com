@@ -279,6 +279,25 @@ return [
     'ds_powersun_bat_spec_1' => 'Capacity: 5.12 kWh',
     'ds_powersun_bat_spec_2' => 'Warranty: 5 Years',
 
+    // Brands & Modals
+    'brand_btn_explore' => 'View Products',
+    'brand_toggle_show' => 'View All Brands',
+    'brand_toggle_hide' => 'Show Less',
+    'brand_modal_close' => 'Close',
+    'brand_modal_title' => 'Available Products & Datasheets',
+    'brand_huawei_tag' => 'Global leader in smart string inverters and advanced digital power electronics.',
+    'brand_sungrow_tag' => 'World\'s most bankable inverter brand with multi-MPPT grid-tied solar systems.',
+    'brand_solis_tag' => 'Innovative string inverters and scalable residential LFP energy storage systems.',
+    'brand_canadian_tag' => 'Leading tier-1 solar panel manufacturer, hybrid commercial inverters, and home energy cubes.',
+    'brand_deye_tag' => 'Market-leading high-voltage batteries and smart hybrid multi-mode off-grid solar inverters.',
+    'brand_powersun_tag' => 'Heavy-duty telecom-spec rack batteries and off-grid priority battery-ready solar inverters.',
+    'brand_trina_tag' => 'Ultra-high performance dual-glass bifacial monocrystalline desert solar modules.',
+    'brand_longi_tag' => 'Next-generation HPBC cell solar modules and high-density residential LFP backup battery systems.',
+    'brand_jinko_tag' => 'Premium N-type cell bifacial desert panels with extreme low heat degradation.',
+    'brand_ja_tag' => 'High-efficiency multi-busbar PERC solar modules with stable long-term yields.',
+    'brand_jebel_tag' => 'Wall-mounted deep-cycle LiFePO4 battery systems engineered to withstand intense Omani heat.',
+    'brand_concept_tag' => 'Heavy-duty MPPT charge controllers certified for off-grid industrial telemetry installations.',
+
     // Footer
     'foot_copy' => '&copy; 2026 ' . $c['address_1'] . '.<br>Powering the Future.',
     'foot_loc_title' => 'Our Location',

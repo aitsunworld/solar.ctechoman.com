@@ -876,32 +876,218 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 8000);
     }
 
-    // --- 7. Product Datasheet Center dynamic category filters ---
+    // --- 7. Product Datasheet Center dynamic category filters & Accordion ---
     const dsFilterTabs = document.querySelectorAll('.ds-filter-tab');
     const dsCards = document.querySelectorAll('.datasheet-card');
-
+    const expandableGrid = document.getElementById('expandable-brands');
+    const brandToggleBtn = document.getElementById('brand-toggle-btn');
+    const brandToggleWrapper = document.querySelector('.brand-toggle-wrapper');
+ 
     if (dsFilterTabs.length > 0 && dsCards.length > 0) {
         dsFilterTabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 dsFilterTabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
-
+ 
                 const selectedCategory = tab.dataset.category;
-                dsCards.forEach(card => {
-                    if (selectedCategory === 'all' || card.dataset.category === selectedCategory) {
-                        card.style.display = 'flex';
-                        card.style.opacity = '0';
-                        card.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            card.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                
+                if (selectedCategory === 'all') {
+                    // Reset to default flagship brand view + toggle controls
+                    if (brandToggleWrapper) brandToggleWrapper.style.display = 'block';
+                    
+                    // Collapse or keep accordion in its native state
+                    const isExpanded = expandableGrid && expandableGrid.classList.contains('expanded');
+                    
+                    dsCards.forEach(card => {
+                        // Check if card is inside expandable grid
+                        const inExpandable = card.closest('.expandable-brand-grid');
+                        if (inExpandable) {
+                            // If accordion is expanded, show it; otherwise hide it
+                            card.style.display = 'flex';
+                            card.style.opacity = isExpanded ? '1' : '0';
+                            card.style.transform = 'scale(1)';
+                        } else {
+                            card.style.display = 'flex';
                             card.style.opacity = '1';
                             card.style.transform = 'scale(1)';
-                        }, 50);
-                    } else {
-                        card.style.display = 'none';
+                        }
+                    });
+                } else {
+                    // Filtering: show matches cross-catalog, hide toggle button, force grid visible
+                    if (brandToggleWrapper) brandToggleWrapper.style.display = 'none';
+                    
+                    dsCards.forEach(card => {
+                        const categories = (card.dataset.category || '').split(' ');
+                        if (categories.includes(selectedCategory)) {
+                            card.style.display = 'flex';
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                card.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 50);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    // Toggle button handler
+    if (brandToggleBtn && expandableGrid) {
+        brandToggleBtn.addEventListener('click', () => {
+            const isExpanded = expandableGrid.classList.toggle('expanded');
+            brandToggleBtn.classList.toggle('expanded', isExpanded);
+            
+            // Translations
+            const labelShow = isArabic ? "عرض جميع العلامات التجارية" : "View All Brands";
+            const labelHide = isArabic ? "عرض أقل" : "Show Less";
+            
+            const btnSpan = brandToggleBtn.querySelector('span');
+            if (btnSpan) btnSpan.textContent = isExpanded ? labelHide : labelShow;
+        });
+    }
+
+    // --- 8. Brand-Centric Datasheet Modal Interactions ---
+    const modal = document.getElementById('brand-datasheet-modal');
+    const modalCloseBtn = document.getElementById('ds-modal-close-btn');
+    const modalLogoContainer = document.getElementById('modal-logo-container');
+    const modalBrandTitle = document.getElementById('modal-brand-title');
+    const modalBrandTagline = document.getElementById('modal-brand-tagline');
+    const modalProductsGrid = document.getElementById('modal-products-grid');
+    const brandCards = document.querySelectorAll('.brand-card');
+ 
+    if (modal && brandCards.length > 0) {
+        // Open Modal
+        brandCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Prevent duplicate trigger if clicking direct child anchors
+                if (e.target.closest('a')) return;
+ 
+                const brandKey = card.dataset.brand;
+                const brandData = window.BrandProductsData ? window.BrandProductsData[brandKey] : null;
+                if (!brandData) return;
+ 
+                // Set Header details
+                modalBrandTitle.textContent = brandData.name;
+                modalBrandTagline.textContent = brandData.tagline;
+ 
+                // Render Brand Logo
+                if (brandData.logo) {
+                    modalLogoContainer.innerHTML = `<img src="${brandData.logo}" alt="${brandData.name}" class="modal-brand-logo">`;
+                } else {
+                    // Fallback to stylized SVG icon for Concept brand
+                    modalLogoContainer.innerHTML = `
+                        <div class="brand-logo-icon" style="height: 38px; display: flex; align-items: center; justify-content: center;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: var(--color-primary);">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                            </svg>
+                        </div>`;
+                }
+ 
+                // Render Products List Grouped by Category
+                const downloadText = isArabic ? "تحميل ورقة البيانات" : "Download Datasheet";
+                
+                const grouped = {
+                    inverter: [],
+                    panel: [],
+                    battery: [],
+                    controller: []
+                };
+
+                brandData.products.forEach(prod => {
+                    const cat = prod.category || 'inverter';
+                    if (grouped[cat]) {
+                        grouped[cat].push(prod);
                     }
                 });
+
+                const modalCategoryHeadings = {
+                    inverter: isArabic ? "العواكس" : "Inverters",
+                    panel: isArabic ? "الألواح الشمسية" : "Solar Panels",
+                    battery: isArabic ? "البطاريات" : "Batteries",
+                    controller: isArabic ? "منظمات الشحن" : "Controllers"
+                };
+
+                let productsHTML = '';
+                const categoryOrder = ['inverter', 'panel', 'battery', 'controller'];
+
+                categoryOrder.forEach(cat => {
+                    const prods = grouped[cat];
+                    if (prods && prods.length > 0) {
+                        const headingText = modalCategoryHeadings[cat];
+                        productsHTML += `
+                            <div class="modal-category-group" data-category="${cat}">
+                                <h4 class="modal-category-title">${headingText}</h4>
+                                <div class="modal-category-products">
+                        `;
+                        prods.forEach(prod => {
+                            const specBadges = prod.specs.map(spec => `<span class="ds-spec-badge">${spec}</span>`).join('');
+                            productsHTML += `
+                                <div class="modal-product-card">
+                                    <div class="modal-product-info">
+                                        <h3>${prod.title}</h3>
+                                        <p>${prod.desc}</p>
+                                        <div class="datasheet-specs">
+                                            ${specBadges}
+                                        </div>
+                                    </div>
+                                    <a href="download.php?product=${prod.key}" class="btn-ds-download modal-download-btn" target="_blank" rel="noopener">
+                                        <span>${downloadText}</span>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                    </a>
+                                </div>
+                            `;
+                        });
+                        productsHTML += `
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                modalProductsGrid.innerHTML = productsHTML;
+
+                // Show Modal with body scroll lock
+                modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                
+                // Trigger reveal animation active state
+                setTimeout(() => {
+                    modal.classList.add('active');
+                }, 50);
             });
+        });
+
+        // Close Modal Helper
+        const closeModal = () => {
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = '';
+            }, 300);
+        };
+
+        // Close Event bindings
+        if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                closeModal();
+            }
         });
     }
 
