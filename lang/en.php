@@ -206,6 +206,79 @@ return [
     'ds_4_spec_1' => 'Tracking Efficiency: 99.0%',
     'ds_4_spec_2' => 'Warranty: 5 Years',
 
+    // Inverters
+    'ds_sungrow_inv_title' => 'Sungrow SG110CX Inverter (110kW)',
+    'ds_sungrow_inv_desc' => 'Multi-MPPT grid-tied string inverter with high yields, smart O&M, and reliable safety certifications.',
+    'ds_sungrow_inv_spec_1' => 'Max Efficiency: 98.7%',
+    'ds_sungrow_inv_spec_2' => 'Warranty: 10 Years',
+    
+    'ds_solis_inv_title' => 'Solis S5-GR3P20K Inverter (20kW)',
+    'ds_solis_inv_desc' => 'High frequency switching three-phase inverter, with dual MPPT design, grid-friendly reactive power compensation.',
+    'ds_solis_inv_spec_1' => 'Max Efficiency: 98.5%',
+    'ds_solis_inv_spec_2' => 'Warranty: 5 Years',
+
+    'ds_canadian_inv_title' => 'Canadian Solar CSI-50K Inverter (50kW)',
+    'ds_canadian_inv_desc' => 'Commercial utility-scale string inverter designed for optimized LCOE with active protection.',
+    'ds_canadian_inv_spec_1' => 'Max Efficiency: 98.8%',
+    'ds_canadian_inv_spec_2' => 'Warranty: 10 Years',
+
+    'ds_powersun_inv_title' => 'Power & Sun PS-INV Inverter (10kW)',
+    'ds_powersun_inv_desc' => 'Robust off-grid solar inverter with built-in solar controller and battery priority management.',
+    'ds_powersun_inv_spec_1' => 'Max Efficiency: 97.8%',
+    'ds_powersun_inv_spec_2' => 'Warranty: 5 Years',
+
+    // Solar Panels
+    'ds_trina_panel_title' => 'Trina Solar Vertex S+ (440W+)',
+    'ds_trina_panel_desc' => 'Bifacial dual-glass monocrystalline solar module with ultra-high power, low degradation, and long reliability.',
+    'ds_trina_panel_spec_1' => 'Module Efficiency: 22.0%',
+    'ds_trina_panel_spec_2' => 'Warranty: 25 Years',
+
+    'ds_longi_panel_title' => 'LONGi Hi-MO 6 Explorer (580W+)',
+    'ds_longi_panel_desc' => 'Next-generation HPBC cell technology panel with premium aesthetics, exceptional efficiency, and low temperature coefficient.',
+    'ds_longi_panel_spec_1' => 'Module Efficiency: 22.5%',
+    'ds_longi_panel_spec_2' => 'Warranty: 25 Years',
+
+    'ds_jinko_panel_title' => 'Jinko Solar Tiger Neo N-type (600W+)',
+    'ds_jinko_panel_desc' => 'High efficiency N-type cell technology panel with superior bifaciality, low LID, and great performance in desert heat.',
+    'ds_jinko_panel_spec_1' => 'Module Efficiency: 22.2%',
+    'ds_jinko_panel_spec_2' => 'Warranty: 25 Years',
+
+    'ds_ja_panel_title' => 'JA Solar DeepBlue 3.0 (550W+)',
+    'ds_ja_panel_desc' => 'Monocrystalline solar module assembled with multi-busbar PERC cells, providing higher power output and lower cost.',
+    'ds_ja_panel_spec_1' => 'Module Efficiency: 21.3%',
+    'ds_ja_panel_spec_2' => 'Warranty: 25 Years',
+
+    // Batteries
+    'ds_canadian_bat_title' => 'Canadian Solar EP Cube ESS (10kWh)',
+    'ds_canadian_bat_desc' => 'Flexible residential LFP storage system with smart energy manager, integrated hybrid inverter, and sleek modular setup.',
+    'ds_canadian_bat_spec_1' => 'Capacity: 10 - 20 kWh',
+    'ds_canadian_bat_spec_2' => 'Warranty: 10 Years',
+
+    'ds_solis_bat_title' => 'Solis Flexi-One Battery (5kWh)',
+    'ds_solis_bat_desc' => 'Scalable lithium iron phosphate battery module with active safety BMS and integration with hybrid inverters.',
+    'ds_solis_bat_spec_1' => 'Capacity: 5.12 kWh',
+    'ds_solis_bat_spec_2' => 'Warranty: 10 Years',
+
+    'ds_deye_bat_title' => 'Deye BOS-G High Voltage Battery (5kWh)',
+    'ds_deye_bat_desc' => 'High-voltage modular LiFePO4 battery system featuring dynamic charge regulation, smart BMS, and robust cycle life.',
+    'ds_deye_bat_spec_1' => 'Capacity: Up to 61.4 kWh',
+    'ds_deye_bat_spec_2' => 'Warranty: 10 Years',
+
+    'ds_jebel_bat_title' => 'Jebel J-LIPO Wall-Mount (5kWh)',
+    'ds_jebel_bat_desc' => 'Heavy-duty wall-mounted deep-cycle LiFePO4 battery pack engineered for extreme Oman heat backup cycles.',
+    'ds_jebel_bat_spec_1' => 'Capacity: 5.12 kWh',
+    'ds_jebel_bat_spec_2' => 'Warranty: 10 Years',
+
+    'ds_longi_bat_title' => 'LONGi Solar-Home Battery (15kWh)',
+    'ds_longi_bat_desc' => 'High-density smart home backup battery pack featuring automated thermal regulation and high cycle life.',
+    'ds_longi_bat_spec_1' => 'Capacity: 15 kWh',
+    'ds_longi_bat_spec_2' => 'Warranty: 10 Years',
+
+    'ds_powersun_bat_title' => 'Power & Sun ESS Storage Rack (5kWh)',
+    'ds_powersun_bat_desc' => 'Industrial-grade LFP telecom-spec energy storage module with high discharge capabilities and rack integration.',
+    'ds_powersun_bat_spec_1' => 'Capacity: 5.12 kWh',
+    'ds_powersun_bat_spec_2' => 'Warranty: 5 Years',
+
     // Footer
     'foot_copy' => '&copy; 2026 ' . $c['address_1'] . '.<br>Powering the Future.',
     'foot_loc_title' => 'Our Location',

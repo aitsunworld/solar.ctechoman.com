@@ -117,51 +117,89 @@ document.addEventListener('DOMContentLoaded', () => {
         HVAC: isArabic ? "تكييف وتدفئة" : "HVAC & Heavy Loads",
         General: isArabic ? "أجهزة عامة ومعيشة" : "General & Living",
         Luxury: isArabic ? "رفاهية ومسابح" : "Villa & Luxury Load",
-        Security: isArabic ? "أنظمة الأمان والذكية" : "Security & Smart Home"
+        Security: isArabic ? "أنظمة الأمان والذكية" : "Security & Smart Home",
+        IT: isArabic ? "تكنولوجيا المعلومات" : "IT & Servers",
+        Lighting: isArabic ? "الإضاءة" : "Lighting System",
+        Office: isArabic ? "المكتب" : "Office Equipment",
+        Cooling: isArabic ? "تبريد" : "Cooling & Chillers",
+        Machinery: isArabic ? "آلات ومعدات" : "Heavy Machinery",
+        Ventilation: isArabic ? "تهوية" : "Ventilation System"
     };
 
-    // Render Appliance Registry dynamically
     // Render Appliance Registry dynamically
     function initApplianceSizer() {
         if (!applianceInputs || !window.SolarCalculatorEngine) return;
 
         const appliances = window.SolarCalculatorEngine.APPLIANCES;
+        const selectedPropType = propType.value || 'residential';
         
-        // Setup initial default quantities
-        appliances.forEach(app => {
+        // Filter appliances by selected property type (Residential, Commercial, Industrial)
+        const filteredAppliances = appliances.filter(app => app.property_type === selectedPropType);
+
+        // Setup initial default quantities for this group if not set
+        filteredAppliances.forEach(app => {
             if (applianceQuantities[app.id] === undefined) {
                 applianceQuantities[app.id] = app.default_qty || 0;
             }
         });
 
-        // Generate Category Filter Bar HTML
+        // Banner to indicate active category and inform the user
+        const typeLabels = {
+            residential: isArabic ? 'سكني' : 'Residential',
+            commercial: isArabic ? 'تجاري' : 'Commercial',
+            industrial: isArabic ? 'صناعي' : 'Industrial'
+        };
+        const infoMessage = isArabic 
+            ? `💡 خيارات الأجهزة تتغير تلقائياً بناءً على نوع العقار المحدد: <strong>${typeLabels[selectedPropType]}</strong>. يمكنك تغيير نوع العقار من القائمة بالأسفل.`
+            : `💡 Equipment options automatically change based on selected property type: <strong>${typeLabels[selectedPropType].toUpperCase()}</strong>. You can change it using the dropdown below.`;
+
+        // Generate Category Filter Bar dynamically based on categories in the filtered list
+        const uniqueCategories = [...new Set(filteredAppliances.map(app => app.category))];
+        
         let html = `
+            <div class="appliance-info-banner" style="margin-bottom: 1.25rem; padding: 0.8rem 1rem; background: rgba(58, 141, 204, 0.08); border-left: 4px solid var(--color-primary); border-radius: 8px; font-size: 0.85rem; color: #1e4b6e; display: flex; align-items: center; gap: 8px;">
+                <span>${infoMessage}</span>
+            </div>
             <div class="appliance-filter-bar">
                 <button type="button" class="filter-tab active" data-category="all">
                     <span>${isArabic ? 'الكل' : 'All'}</span>
                 </button>
-                <button type="button" class="filter-tab" data-category="HVAC">
-                    <span>${isArabic ? 'تكييف وتدفئة' : 'HVAC'}</span>
+        `;
+
+        uniqueCategories.forEach(cat => {
+            const label = categoryLabels[cat] || cat;
+            html += `
+                <button type="button" class="filter-tab" data-category="${cat}">
+                    <span>${label}</span>
                 </button>
-                <button type="button" class="filter-tab" data-category="Kitchen">
-                    <span>${isArabic ? 'المطبخ' : 'Kitchen'}</span>
-                </button>
-                <button type="button" class="filter-tab" data-category="General">
-                    <span>${isArabic ? 'المعيشة' : 'Living'}</span>
-                </button>
-                <button type="button" class="filter-tab" data-category="Luxury">
-                    <span>${isArabic ? 'الرفاهية' : 'Luxury'}</span>
-                </button>
+            `;
+        });
+
+        html += `
             </div>
             <div class="appliance-grid">
         `;
 
-        appliances.forEach(app => {
+        filteredAppliances.forEach(app => {
             const name = isArabic ? app.name_ar : app.name_en;
             const currentQty = applianceQuantities[app.id];
             const activeClass = currentQty > 0 ? ' active-card' : '';
             const disabledAttr = currentQty === 0 ? 'disabled' : '';
             
+            // Format power value: show kW if 1000W or higher, and support ranges
+            let powerText = "";
+            if (app.min_w >= 1000) {
+                powerText = `${app.min_w / 1000}kW`;
+                if (app.min_w !== app.max_w) {
+                    powerText += ` - ${app.max_w / 1000}kW`;
+                }
+            } else {
+                powerText = `${app.min_w}W`;
+                if (app.min_w !== app.max_w) {
+                    powerText += ` - ${app.max_w}W`;
+                }
+            }
+
             // Calculate dynamic load contribution
             const kwhDaily = ((app.min_w * app.hours * currentQty) / 1000).toFixed(1);
             const loadText = currentQty > 0 
@@ -179,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="appliance-body">
                         <h4>${name}</h4>
                         <div class="appliance-specs-badges">
-                            <span class="spec-badge power">${app.min_w}W</span>
+                            <span class="spec-badge power">${powerText}</span>
                             <span class="spec-badge hours">${app.hours}h/d</span>
                         </div>
                         <div class="appliance-live-load" id="load-val-${app.id}">${loadText}</div>
@@ -213,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 cards.forEach(card => {
                     if (selectedCategory === 'all' || card.dataset.category === selectedCategory) {
                         card.style.display = 'flex';
-                        // Add smooth fade-in and scale animation
                         card.style.opacity = '0';
                         card.style.transform = 'scale(0.95)';
                         setTimeout(() => {
@@ -289,6 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function getApplianceSVG(id) {
         const svgStyle = 'width: 24px; height: 24px; transition: stroke 0.3s ease;';
         const SVGs = {
+            // Residential
             ac_1ton: `
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
                     <rect x="2" y="5" width="20" height="9" rx="2"></rect>
@@ -374,6 +412,144 @@ document.addEventListener('DOMContentLoaded', () => {
                     <circle cx="8" cy="7.5" r="1.5"></circle>
                     <path d="M13 8h4a2 2 0 0 1 2 2v5a2 2 0 0 1-4 0v-2a1 1 0 0 0-1-1h-1"></path>
                     <path d="M17 14h2"></path>
+                </svg>
+            `,
+            // Commercial
+            com_ducted_ac: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="2" y="4" width="20" height="10" rx="2"></rect>
+                    <path d="M2 9h20M6 14v2m12-2v2"></path>
+                    <circle cx="8" cy="6.5" r="1"></circle>
+                    <circle cx="16" cy="6.5" r="1"></circle>
+                    <path d="M7 18c1.5 1.5 3 2 5 2s3.5-.5 5-2" stroke-dasharray="2 2"></path>
+                </svg>
+            `,
+            com_server_rack: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="2" y="2" width="20" height="8" rx="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                    <line x1="20" y1="6" x2="16" y2="6"></line>
+                    <line x1="20" y1="18" x2="16" y2="18"></line>
+                </svg>
+            `,
+            com_led_lighting: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .3 2.2 1.5 3.5.7.8 1.2 1.5 1.5 2.5"></path>
+                    <path d="M9 18h6M10 21h4"></path>
+                    <line x1="12" y1="2" x2="12" y2="3"></line>
+                    <line x1="20" y1="8" x2="22" y2="8"></line>
+                    <line x1="2" y1="8" x2="4" y2="8"></line>
+                </svg>
+            `,
+            com_copier: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                    <rect x="6" y="14" width="12" height="8" rx="1"></rect>
+                    <path d="M16 9V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v5"></path>
+                </svg>
+            `,
+            com_display_fridge: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="5" y="2" width="14" height="20" rx="2"></rect>
+                    <line x1="12" y1="2" x2="12" y2="22"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <path d="M10 7v3M14 15v3"></path>
+                </svg>
+            `,
+            com_cctv: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+            `,
+            com_workstation: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="2" y="3" width="20" height="12" rx="2"></rect>
+                    <line x1="12" y1="15" x2="12" y2="21"></line>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                </svg>
+            `,
+            com_water_dispenser: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="6" y="2" width="12" height="17" rx="3"></rect>
+                    <path d="M9 19v3M15 19v3M12 6v6M10 8h4M9 15c.5.5 1 .8 1.5.8s1-.3 1.5-.8"></path>
+                </svg>
+            `,
+            com_sliding_door: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="2" y="3" width="20" height="18" rx="2"></rect>
+                    <line x1="12" y1="3" x2="12" y2="21"></line>
+                    <path d="M7 8h2M15 8h2M7 12h2M15 12h2"></path>
+                </svg>
+            `,
+            com_adv_signage: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                    <path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path>
+                </svg>
+            `,
+            // Industrial
+            ind_compressor: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <line x1="12" y1="2" x2="12" y2="22"></line>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                </svg>
+            `,
+            ind_chiller: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <path d="M12 2v20M17 5H7M17 19H7M21 12H3"></path>
+                </svg>
+            `,
+            ind_water_pump: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <circle cx="12" cy="12" r="7"></circle>
+                    <circle cx="12" cy="12" r="2.5"></circle>
+                    <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9l-2.1 2.1M7 17l-2.1 2.1"></path>
+                </svg>
+            `,
+            ind_molding_mach: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                    <line x1="9" y1="3" x2="9" y2="21"></line>
+                    <line x1="15" y1="3" x2="15" y2="21"></line>
+                </svg>
+            `,
+            ind_gantry_crane: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <path d="M20 21V4H4v17M12 4v8M12 12a3 3 0 0 1-3 3"></path>
+                </svg>
+            `,
+            ind_exhaust_fan: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2a10 10 0 0 0 0 20M2 12a10 10 0 0 0 20 0"></path>
+                </svg>
+            `,
+            ind_welding_mach: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                </svg>
+            `,
+            ind_conveyor: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+                    <circle cx="8" cy="12" r="2"></circle>
+                    <circle cx="16" cy="12" r="2"></circle>
+                </svg>
+            `,
+            ind_cnc_machine: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="3" y="3" width="18" height="12" rx="2"></rect>
+                    <line x1="6" y1="15" x2="6" y2="21"></line>
+                    <line x1="18" y1="15" x2="18" y2="21"></line>
+                </svg>
+            `,
+            ind_induction_furnace: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"></path>
                 </svg>
             `
         };
@@ -490,7 +666,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Bind Core Inputs
     if (billSlider) billSlider.addEventListener('input', calculateSolar);
-    if (propType) propType.addEventListener('change', calculateSolar);
+    if (propType) {
+        propType.addEventListener('change', () => {
+            if (activeSizerMode === 'appliances') {
+                initApplianceSizer();
+            }
+            calculateSolar();
+        });
+    }
     if (loc) loc.addEventListener('change', calculateSolar);
 
     // Lazy-init calculator when it scrolls into view (eliminates main-thread blocking on load)
@@ -679,6 +862,35 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             formFeedback.style.display = 'none';
         }, 8000);
+    }
+
+    // --- 7. Product Datasheet Center dynamic category filters ---
+    const dsFilterTabs = document.querySelectorAll('.ds-filter-tab');
+    const dsCards = document.querySelectorAll('.datasheet-card');
+
+    if (dsFilterTabs.length > 0 && dsCards.length > 0) {
+        dsFilterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                dsFilterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const selectedCategory = tab.dataset.category;
+                dsCards.forEach(card => {
+                    if (selectedCategory === 'all' || card.dataset.category === selectedCategory) {
+                        card.style.display = 'flex';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            card.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
     }
 
 });

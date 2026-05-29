@@ -75,6 +75,243 @@ $products = [
             ['Warranty', '5 Years Certified'],
         ]
     ],
+    // Sungrow Inverter
+    'sungrow_sg110cx' => [
+        'title' => $lang['ds_sungrow_inv_title'] ?? 'Sungrow SG110CX Inverter',
+        'desc' => $lang['ds_sungrow_inv_desc'] ?? 'Multi-MPPT grid-tied string inverter.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Max. Input Voltage', '1100 V'],
+            ['MPPT Number', '9'],
+            ['Rated AC Output Power', '110 kW'],
+            ['Max. Efficiency', '98.7%'],
+            ['European Efficiency', '98.5%'],
+            ['Grid Standards', 'DCRP Approved'],
+            ['Cooling Method', 'Smart Forced Air Cooling'],
+            ['Protection Rating', 'IP66 Waterproof'],
+            ['Standard Warranty', '10 Years'],
+        ]
+    ],
+    // Solis Inverter
+    'solis_s5' => [
+        'title' => $lang['ds_solis_inv_title'] ?? 'Solis S5-GR3P20K Inverter',
+        'desc' => $lang['ds_solis_inv_desc'] ?? 'High frequency three-phase inverter.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Max. Input Voltage', '1100 V'],
+            ['Rated AC Output Power', '20 kW'],
+            ['MPPT Number', '2'],
+            ['Max. Efficiency', '98.5%'],
+            ['European Efficiency', '98.0%'],
+            ['Grid Standards', 'DCRP Oman Compliant'],
+            ['Cooling Method', 'Natural Convection'],
+            ['Protection Rating', 'IP66 Waterproof'],
+            ['Standard Warranty', '5 Years'],
+        ]
+    ],
+    // Canadian Inverter
+    'canadian_solar_inv' => [
+        'title' => $lang['ds_canadian_inv_title'] ?? 'Canadian Solar CSI-50K Inverter',
+        'desc' => $lang['ds_canadian_inv_desc'] ?? 'Commercial string inverter.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Max. Input Voltage', '1000 V'],
+            ['Rated AC Output Power', '50 kW'],
+            ['MPPT Number', '4'],
+            ['Max. Efficiency', '98.8%'],
+            ['European Efficiency', '98.3%'],
+            ['Grid Standards', 'APSR / DCRP Oman Approved'],
+            ['Cooling Method', 'Intelligent Fan Cooling'],
+            ['Protection Rating', 'IP65 Waterproof'],
+            ['Standard Warranty', '10 Years'],
+        ]
+    ],
+    // Power & Sun Inverter
+    'power_sun_inv' => [
+        'title' => $lang['ds_powersun_inv_title'] ?? 'Power & Sun PS-INV-10K Inverter',
+        'desc' => $lang['ds_powersun_inv_desc'] ?? 'Robust off-grid solar inverter.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Rated Output Power', '10 kW'],
+            ['System Battery Voltage', '48 VDC'],
+            ['Built-in MPPT Controller', '120 A / 150 VDC'],
+            ['Conversion Efficiency', '93%'],
+            ['Output Waveform', 'Pure Sine Wave'],
+            ['Output Voltage', '220VAC / 230VAC'],
+            ['Protection Features', 'Over-temp, Short-circuit, Overload'],
+            ['Standard Warranty', '5 Years'],
+        ]
+    ],
+    // Trina Solar Panel
+    'trina_vertex' => [
+        'title' => $lang['ds_trina_panel_title'] ?? 'Trina Solar Vertex S+ (440W+)',
+        'desc' => $lang['ds_trina_panel_desc'] ?? 'Bifacial dual-glass monocrystalline solar module.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Nominal Max. Power', '440W - 450W'],
+            ['Module Efficiency', '22.0%'],
+            ['Opt. Operating Voltage', '44.0 V'],
+            ['Opt. Operating Current', '10.01 A'],
+            ['Operating Temp.', '-40C to +85C'],
+            ['Max. System Voltage', '1500 V (IEC)'],
+            ['Glass thickness', '1.6mm + 1.6mm Dual Glass'],
+            ['Wind / Snow Load', '2400 Pa / 5400 Pa'],
+            ['Performance Warranty', '25 Years Linear'],
+        ]
+    ],
+    // LONGi Panel
+    'longi_himo6' => [
+        'title' => $lang['ds_longi_panel_title'] ?? 'LONGi Hi-MO 6 Explorer (580W+)',
+        'desc' => $lang['ds_longi_panel_desc'] ?? 'Next-generation HPBC cell technology panel.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Nominal Max. Power', '580W - 590W'],
+            ['Module Efficiency', '22.5%'],
+            ['Opt. Operating Voltage', '44.5 V'],
+            ['Opt. Operating Current', '13.04 A'],
+            ['Operating Temp.', '-40C to +85C'],
+            ['Max. System Voltage', '1500 V (IEC/UL)'],
+            ['Cell Type', 'HPBC Monocrystalline'],
+            ['Temp. Coefficient', '-0.29% / C'],
+            ['Performance Warranty', '25 Years Linear'],
+        ]
+    ],
+    // Jinko Panel
+    'jinko_tiger' => [
+        'title' => $lang['ds_jinko_panel_title'] ?? 'Jinko Solar Tiger Neo N-type (600W+)',
+        'desc' => $lang['ds_jinko_panel_desc'] ?? 'High efficiency N-type cell technology panel.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Nominal Max. Power', '600W - 610W'],
+            ['Module Efficiency', '22.2%'],
+            ['Opt. Operating Voltage', '42.2 V'],
+            ['Opt. Operating Current', '14.22 A'],
+            ['Operating Temp.', '-40C to +85C'],
+            ['Max. System Voltage', '1500 V (IEC)'],
+            ['Bifaciality Rate', '80% (+- 5%)'],
+            ['Temp. Coefficient', '-0.30% / C'],
+            ['Performance Warranty', '25 Years Linear'],
+        ]
+    ],
+    // JA Solar Panel
+    'ja_solar_blue' => [
+        'title' => $lang['ds_ja_panel_title'] ?? 'JA Solar DeepBlue 3.0 (550W+)',
+        'desc' => $lang['ds_ja_panel_desc'] ?? 'Monocrystalline multi-busbar PERC panel.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Nominal Max. Power', '550W - 560W'],
+            ['Module Efficiency', '21.3%'],
+            ['Opt. Operating Voltage', '41.9 V'],
+            ['Opt. Operating Current', '13.11 A'],
+            ['Operating Temp.', '-40C to +85C'],
+            ['Max. System Voltage', '1500 V (IEC)'],
+            ['Cell Arrangement', '144 (6 x 24)'],
+            ['Wind / Snow Load', '2400 Pa / 5400 Pa'],
+            ['Performance Warranty', '25 Years Linear'],
+        ]
+    ],
+    // Canadian Solar Battery
+    'canadian_solar_battery' => [
+        'title' => $lang['ds_canadian_bat_title'] ?? 'Canadian Solar EP Cube ESS',
+        'desc' => $lang['ds_canadian_bat_desc'] ?? 'Flexible LFP storage system.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Usable Capacity', '9.9 kWh - 19.9 kWh'],
+            ['Battery Chemistry', 'LiFePO4 (LFP)'],
+            ['Nominal Output Power', '7.6 kW (Grid-tied)'],
+            ['Max. Output Power', '10.2 kW (Off-grid peak)'],
+            ['Round Trip Efficiency', '>= 95%'],
+            ['Cooling Method', 'Natural Convection'],
+            ['Protection Rating', 'IP65 Waterproof (Outdoor)'],
+            ['Dimensions', '600 x 950 x 220 mm'],
+            ['Standard Warranty', '10 Years'],
+        ]
+    ],
+    // Solis Battery
+    'solis_flexi' => [
+        'title' => $lang['ds_solis_bat_title'] ?? 'Solis Flexi-One Battery (5.12kWh)',
+        'desc' => $lang['ds_solis_bat_desc'] ?? 'Lithium iron phosphate battery module.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Battery Capacity', '5.12 kWh'],
+            ['Nominal Voltage', '51.2 VDC'],
+            ['Usable Capacity', '4.6 kWh (90% DoD)'],
+            ['Battery Chemistry', 'LiFePO4 (LFP)'],
+            ['Max. Charge Current', '50 A'],
+            ['Max. Discharge Current', '80 A'],
+            ['Active Protection', 'Smart BMS System'],
+            ['Cooling Method', 'Natural Convection'],
+            ['Standard Warranty', '10 Years'],
+        ]
+    ],
+    // Deye Battery
+    'deye_bos_g' => [
+        'title' => $lang['ds_deye_bat_title'] ?? 'Deye BOS-G High Voltage Battery',
+        'desc' => $lang['ds_deye_bat_desc'] ?? 'High voltage LFP storage battery system.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Module Capacity', '5.12 kWh'],
+            ['System Voltage Range', '120V - 750V (Modular)'],
+            ['Battery Chemistry', 'LiFePO4 (LFP)'],
+            ['Recommended DoD', '90%'],
+            ['Max. Charge/Discharge', '100 A'],
+            ['BMS Communication', 'CAN2.0 / RS485'],
+            ['Thermal Regulation', 'Self-heating & Air cooling'],
+            ['Cycle Life', '>= 6000 cycles (25C)'],
+            ['Standard Warranty', '10 Years'],
+        ]
+    ],
+    // Jebel Battery
+    'jebel_battery' => [
+        'title' => $lang['ds_jebel_bat_title'] ?? 'Jebel J-LIPO Battery (5kWh)',
+        'desc' => $lang['ds_jebel_bat_desc'] ?? 'Wall-mounted heavy-duty LiFePO4 battery pack.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Battery Capacity', '5.12 kWh'],
+            ['Nominal Voltage', '51.2 VDC'],
+            ['Usable Capacity', '4.6 kWh (90% DoD)'],
+            ['Max. Continuous Charge', '100 A'],
+            ['Max. Continuous Discharge', '100 A'],
+            ['Battery Chemistry', 'LiFePO4 (LFP)'],
+            ['Operating Temp.', '-10C to +60C (Extreme Heat spec)'],
+            ['Cycle Life', '>= 5500 cycles (25C)'],
+            ['Standard Warranty', '10 Years'],
+        ]
+    ],
+    // LONGi Battery
+    'longi_battery' => [
+        'title' => $lang['ds_longi_bat_title'] ?? 'LONGi Solar-Home Battery (15kWh)',
+        'desc' => $lang['ds_longi_bat_desc'] ?? 'High-density LFP home backup battery pack.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Battery Capacity', '15.0 kWh'],
+            ['Nominal Voltage', '51.2 V'],
+            ['Usable Capacity', '13.5 kWh'],
+            ['Max. Continuous Output', '7.5 kW'],
+            ['Peak Output Power', '10.0 kW (10s)'],
+            ['Battery Chemistry', 'LiFePO4 (LFP)'],
+            ['Operating Temp.', '-20C to +55C'],
+            ['Protection Rating', 'IP65 Water/Dust proof'],
+            ['Standard Warranty', '10 Years'],
+        ]
+    ],
+    // Power & Sun Battery
+    'power_sun_ess' => [
+        'title' => $lang['ds_powersun_bat_title'] ?? 'Power & Sun ESS Rack Battery (5.12kWh)',
+        'desc' => $lang['ds_powersun_bat_desc'] ?? 'Industrial LFP storage rack module.',
+        'specs' => [
+            ['Parameter', 'Value'],
+            ['Battery Capacity', '5.12 kWh'],
+            ['Nominal Voltage', '51.2 VDC'],
+            ['Usable Capacity', '4.1 kWh (80% DoD)'],
+            ['Battery Chemistry', 'LiFePO4 (LFP)'],
+            ['Max. Continuous Charge', '50 A'],
+            ['Max. Continuous Discharge', '50 A'],
+            ['Form Factor', 'Standard 19-inch 3U Rackmount'],
+            ['Cooling Method', 'Passive Cooling'],
+            ['Standard Warranty', '5 Years'],
+        ]
+    ],
 ];
 
 // Fallback if product not found

@@ -41,24 +41,42 @@
 
   // ─── APPLIANCE DEFINITION REGISTRY (BOTTOM-UP ELECTRICAL LOAD SCHEDULE) ─────
   const APPLIANCES = [
-    // HVAC
-    { id: "ac_1ton", category: "HVAC", name_en: "AC 1 ton", name_ar: "مكيف 1 طن", min_w: 1200, max_w: 1500, hours: 8.0, default_qty: 1 },
-    { id: "ac_2ton", category: "HVAC", name_en: "AC 2 ton", name_ar: "مكيف 2 طن", min_w: 2400, max_w: 3000, hours: 8.0, default_qty: 1 },
-    { id: "water_heater", category: "HVAC", name_en: "Water Heater", name_ar: "سخان مياه", min_w: 1500, max_w: 2000, hours: 3.0, default_qty: 0 },
+    // Residential Category
+    { id: "ac_1ton", property_type: "residential", category: "HVAC", name_en: "AC 1 ton", name_ar: "مكيف 1 طن", min_w: 1200, max_w: 1500, hours: 8.0, default_qty: 1 },
+    { id: "ac_2ton", property_type: "residential", category: "HVAC", name_en: "AC 2 ton", name_ar: "مكيف 2 طن", min_w: 2400, max_w: 3000, hours: 8.0, default_qty: 1 },
+    { id: "water_heater", property_type: "residential", category: "HVAC", name_en: "Water Heater", name_ar: "سخان مياه", min_w: 1500, max_w: 2000, hours: 3.0, default_qty: 0 },
+    { id: "refrigerator", property_type: "residential", category: "Kitchen", name_en: "Refrigerator", name_ar: "ثلاجة", min_w: 150, max_w: 300, hours: 24.0, default_qty: 1 },
+    { id: "freezer", property_type: "residential", category: "Kitchen", name_en: "Freezer", name_ar: "فريزر", min_w: 200, max_w: 400, hours: 24.0, default_qty: 0 },
+    { id: "washing_machine", property_type: "residential", category: "Kitchen", name_en: "Washing Machine", name_ar: "غسالة ملابس", min_w: 500, max_w: 1000, hours: 1.0, default_qty: 0 },
+    { id: "microwave", property_type: "residential", category: "Kitchen", name_en: "Microwave", name_ar: "مايكرويف", min_w: 1000, max_w: 1500, hours: 0.5, default_qty: 0 },
+    { id: "tv", property_type: "residential", category: "General", name_en: "TV", name_ar: "تلفاز", min_w: 80, max_w: 150, hours: 6.0, default_qty: 1 },
+    { id: "led_lights", property_type: "residential", category: "General", name_en: "LED Lights (Set of 10)", name_ar: "أضواء LED (طقم 10)", min_w: 50, max_w: 100, hours: 6.0, default_qty: 1 },
+    { id: "water_pump", property_type: "residential", category: "Luxury", name_en: "Water Pump", name_ar: "مضخة مياه", min_w: 750, max_w: 1500, hours: 2.0, default_qty: 0 },
+    { id: "ev_charger", property_type: "residential", category: "Luxury", name_en: "EV Charger", name_ar: "شاحن سيارة كهربائية", min_w: 3600, max_w: 7200, hours: 4.0, default_qty: 0 },
 
-    // Kitchen
-    { id: "refrigerator", category: "Kitchen", name_en: "Refrigerator", name_ar: "ثلاجة", min_w: 150, max_w: 300, hours: 24.0, default_qty: 1 },
-    { id: "freezer", category: "Kitchen", name_en: "Freezer", name_ar: "فريزر", min_w: 200, max_w: 400, hours: 24.0, default_qty: 0 },
-    { id: "washing_machine", category: "Kitchen", name_en: "Washing Machine", name_ar: "غسالة ملابس", min_w: 500, max_w: 1000, hours: 1.0, default_qty: 0 },
-    { id: "microwave", category: "Kitchen", name_en: "Microwave", name_ar: "مايكرويف", min_w: 1000, max_w: 1500, hours: 0.5, default_qty: 0 },
+    // Commercial Category
+    { id: "com_ducted_ac", property_type: "commercial", category: "HVAC", name_en: "Commercial Ducted/Standing AC", name_ar: "مكيف مركزي/عمودي تجاري", min_w: 4000, max_w: 6000, hours: 11.0, default_qty: 1 },
+    { id: "com_server_rack", property_type: "commercial", category: "IT", name_en: "Network Rack Server", name_ar: "خادم شبكة (سيرفر)", min_w: 500, max_w: 1200, hours: 24.0, default_qty: 0 },
+    { id: "com_led_lighting", property_type: "commercial", category: "Lighting", name_en: "Commercial LED Lighting Panels", name_ar: "ألواح إضاءة LED تجارية (100 لوح)", min_w: 1500, max_w: 1500, hours: 11.0, default_qty: 1 },
+    { id: "com_copier", property_type: "commercial", category: "Office", name_en: "Heavy-Duty Office Copier/Printer", name_ar: "آلة تصوير/طابعة مكتبية شديدة التحمل", min_w: 750, max_w: 750, hours: 3.0, default_qty: 0 },
+    { id: "com_display_fridge", property_type: "commercial", category: "Cooling", name_en: "Commercial Display Refrigerator", name_ar: "ثلاجة عرض تجارية", min_w: 800, max_w: 1200, hours: 24.0, default_qty: 1 },
+    { id: "com_cctv", property_type: "commercial", category: "Security", name_en: "CCTV Security System & NVR", name_ar: "نظام أمني وكاميرات مراقبة", min_w: 200, max_w: 400, hours: 24.0, default_qty: 1 },
+    { id: "com_workstation", property_type: "commercial", category: "Office", name_en: "Desktop Workstations", name_ar: "أجهزة كمبيوتر مكتبية (PC)", min_w: 200, max_w: 200, hours: 8.0, default_qty: 2 },
+    { id: "com_water_dispenser", property_type: "commercial", category: "Kitchen", name_en: "Commercial Water Dispenser", name_ar: "براد مياه تجاري", min_w: 500, max_w: 500, hours: 10.0, default_qty: 0 },
+    { id: "com_sliding_door", property_type: "commercial", category: "General", name_en: "Automatic Sliding Glass Doors", name_ar: "أبواب زجاجية منزلقة أوتوماتيكية", min_w: 150, max_w: 150, hours: 11.0, default_qty: 0 },
+    { id: "com_adv_signage", property_type: "commercial", category: "Lighting", name_en: "LED Advertising Signage & Lightboxes", name_ar: "لوحة إعلانات LED مضيئة", min_w: 300, max_w: 800, hours: 11.0, default_qty: 0 },
 
-    // General
-    { id: "tv", category: "General", name_en: "TV", name_ar: "تلفاز", min_w: 80, max_w: 150, hours: 6.0, default_qty: 1 },
-    { id: "led_lights", category: "General", name_en: "LED Lights (Set of 10)", name_ar: "أضواء LED (طقم 10)", min_w: 50, max_w: 100, hours: 6.0, default_qty: 1 },
-
-    // Luxury
-    { id: "water_pump", category: "Luxury", name_en: "Water Pump", name_ar: "مضخة مياه", min_w: 750, max_w: 1500, hours: 2.0, default_qty: 0 },
-    { id: "ev_charger", category: "Luxury", name_en: "EV Charger", name_ar: "شاحن سيارة كهربائية", min_w: 3600, max_w: 7200, hours: 4.0, default_qty: 0 }
+    // Industrial Category
+    { id: "ind_compressor", property_type: "industrial", category: "Machinery", name_en: "Industrial Air Compressor", name_ar: "ضاغط هواء صناعي", min_w: 15000, max_w: 37000, hours: 12.0, default_qty: 1 },
+    { id: "ind_chiller", property_type: "industrial", category: "Cooling", name_en: "Industrial Water-Cooled Chiller", name_ar: "مبرد مياه صناعي مبرد بالماء", min_w: 50000, max_w: 150000, hours: 20.0, default_qty: 0 },
+    { id: "ind_water_pump", property_type: "industrial", category: "Machinery", name_en: "Three-Phase Water/Fluid Pump", name_ar: "مضخة مياه ثلاثية الطور (20 حصان)", min_w: 15000, max_w: 15000, hours: 8.0, default_qty: 1 },
+    { id: "ind_molding_mach", property_type: "industrial", category: "Machinery", name_en: "Plastic Injection Molding Machine", name_ar: "آلة تشكيل البلاستيك بالحقن", min_w: 30000, max_w: 75000, hours: 20.0, default_qty: 0 },
+    { id: "ind_gantry_crane", property_type: "industrial", category: "Machinery", name_en: "Industrial Overhead Gantry Crane", name_ar: "رافعة علوية صناعية", min_w: 5000, max_w: 15000, hours: 3.0, default_qty: 0 },
+    { id: "ind_exhaust_fan", property_type: "industrial", category: "Ventilation", name_en: "Industrial Exhaust/Ventilation Fan", name_ar: "مروحة تهوية وعادم صناعية", min_w: 3000, max_w: 7500, hours: 18.0, default_qty: 2 },
+    { id: "ind_welding_mach", property_type: "industrial", category: "Machinery", name_en: "Industrial Rectifier Welding Machine", name_ar: "آلة لحام صناعية", min_w: 8000, max_w: 12000, hours: 5.0, default_qty: 0 },
+    { id: "ind_conveyor", property_type: "industrial", category: "Machinery", name_en: "Assembly Line Conveyor System", name_ar: "نظام سير ناقل لخط التجميع", min_w: 4000, max_w: 11000, hours: 12.0, default_qty: 1 },
+    { id: "ind_cnc_machine", property_type: "industrial", category: "Machinery", name_en: "Heavy-Duty CNC Milling/Lathe Machine", name_ar: "آلة خرط وتفريز CNC ثقيلة", min_w: 11000, max_w: 22000, hours: 10.0, default_qty: 0 },
+    { id: "ind_induction_furnace", property_type: "industrial", category: "Machinery", name_en: "Small Industrial Induction Furnace", name_ar: "فرن حث صناعي صغير", min_w: 50000, max_w: 100000, hours: 8.0, default_qty: 0 }
   ];
 
   // ─── SOLAR ESTIMATION ENGINE ────────────────────────────────────────────────
@@ -173,6 +191,7 @@
     let totalMaxKwhDaily = 0;
 
     APPLIANCES.forEach(spec => {
+      if (spec.property_type !== prop) return;
       const qty = parseInt(applianceSelections[spec.id]) || 0;
       if (qty > 0) {
         const applianceMinWatts = spec.min_w * qty;
