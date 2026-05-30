@@ -110,7 +110,7 @@ $lang = require_once "lang/{$active_lang}.php";
   <!-- Navigation -->
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
-      <a href="#" class="logo">
+      <a href="index.php" class="logo">
         <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC Logo" width="160" height="48" fetchpriority="high" loading="eager" decoding="async">
       </a>
       <div class="nav-links">
@@ -329,7 +329,7 @@ $lang = require_once "lang/{$active_lang}.php";
         <h2><?= $lang['gal_title'] ?></h2>
         <p class="text-muted"><?= $lang['gal_desc'] ?></p>
       </div>
-      <a href="#projects" class="btn btn-dark-green"><?= $lang['gal_btn'] ?></a>
+      <a href="#contact" class="btn btn-dark-green"><?= $lang['gal_btn'] ?></a>
     </div>
 
     <div class="gallery-grid reveal delay-100">
