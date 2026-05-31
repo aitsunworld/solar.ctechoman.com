@@ -250,7 +250,11 @@
       }
     };
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> e3227bd (feat: update datasheet URLs and implement contact-based download flow for unavailable links)
   // Expose to window globally
   window.SolarCalculatorEngine = {
     calculate: calculateSolarResults,

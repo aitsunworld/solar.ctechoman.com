@@ -15,19 +15,19 @@
 // Official manufacturer datasheet URLs per product key
 $official_urls = [
     // Huawei — direct PDF
-    'huawei_sun2000'        => 'https://solar.huawei.com/en/download?p=/~/media/Solar/attachment/pdf/ee/datasheet/SUN2000-50KTL-M3.pdf',
+    'huawei_sun2000'        => 'https://solar.huawei.com/admin/asset/v1/pro/view/2d71dbdf468d4a1688883119fcdf576b.pdf',
 
     // Sungrow — support search for SG110CX
     'sungrow_sg110cx'       => 'https://support.sungrowpower.com/search#q=SG110CX&t=All',
 
     // Solis — download centre
-    'solis_s5'              => 'https://www.solisinverters.com/download.html',
-    'solis_flexi'           => 'https://www.solisinverters.com/download.html',
+    'solis_s5'              => 'https://www.solisinverters.com/service/',
+    'solis_flexi'           => 'https://www.solisinverters.com/service/',
 
-    // Canadian Solar — download centre
-    'canadian_solar'        => 'https://www.csisolar.com/download-center/',
-    'canadian_solar_inv'    => 'https://www.csisolar.com/download-center/',
-    'canadian_solar_battery'=> 'https://www.epcube.com/support/',
+    // Canadian Solar — specific direct PDF (panel) and portals (inverter, battery)
+    'canadian_solar'        => 'https://static.csisolar.com/wp-content/uploads/2020/10/07090707/CS-Datasheet-BiHiKu7_CS7N-MB-AG_v2.51_EN-33mm-frame-594-pcs-package.pdf',
+    'canadian_solar_inv'    => 'https://www.csisolar.com/downloads/',
+    'canadian_solar_battery'=> 'https://epcube.com/en-US/support/document',
 
     // Deye — download portals
     'deye_hybrid'           => 'https://www.deyeinverter.com/download/',
@@ -37,15 +37,15 @@ $official_urls = [
     'power_sun_inv'         => 'https://powernsun.com/',
     'power_sun_ess'         => 'https://powernsun.com/',
 
-    // Trina Solar — downloads
-    'trina_vertex'          => 'https://www.trinasolar.com/en-glb/resources/downloads',
+    // Trina Solar — specific direct PDF
+    'trina_vertex'          => 'https://static.trinasolar.com/sites/default/files/Datasheet_Vertex%20S%2B_NEG9R.28_EN_2024_C_web.pdf',
 
     // LONGi — document centre
-    'longi_himo6'           => 'https://www.longi.com/en/document/',
-    'longi_battery'         => 'https://www.longi.com/en/document/',
+    'longi_himo6'           => 'https://www.longi.com/en/download/',
+    'longi_battery'         => 'https://www.longi.com/en/download/',
 
-    // Jinko Solar — download centre
-    'jinko_tiger'           => 'https://www.jinkosolar.com/en/site/download',
+    // Jinko Solar — specific product page
+    'jinko_tiger'           => 'https://www.jinkosolar.eu/en/product/tiger-neo-n-type-72hl4-bdv/',
 
     // JA Solar — product downloads
     'ja_solar_blue'         => 'https://www.jasolar.com/html/en/serve/download/',
@@ -54,7 +54,7 @@ $official_urls = [
     'jebel_battery'         => 'https://jebel.ae/solar-battery/',
 
     // Concept — internal product; link to main corporate site
-    'concept_mppt'          => 'https://www.ctechoman.com/',
+    'concept_mppt'          => 'https://ctechoman.com/',
 ];
 
 $product_key = trim($_GET['product'] ?? '');
