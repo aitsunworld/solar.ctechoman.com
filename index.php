@@ -1068,8 +1068,8 @@ $lang = require_once "lang/{$active_lang}.php";
     };
   </script>
 
-  <script src="calculator-engine.js?v=3.1" defer></script>
-  <script src="script.js?v=3.1" defer></script>
+  <script src="calculator-engine.js?v=3.2" defer></script>
+  <script src="script.js?v=3.2" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>
