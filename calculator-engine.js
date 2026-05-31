@@ -248,7 +248,9 @@
         inverterRecommendationKw: Math.max(1.5, inverterSizeKw),
         batteryRecommendationKwh: Math.max(2.4, batteryBackupKwh)
       }
-
+    };
+  }
+  
   // Expose to window globally
   window.SolarCalculatorEngine = {
     calculate: calculateSolarResults,
