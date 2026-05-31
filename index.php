@@ -47,9 +47,9 @@ $lang = require_once "lang/{$active_lang}.php";
   <link rel="dns-prefetch" href="https://images.unsplash.com">
 
   <!-- Preload LCP hero images -->
-  <link rel="preload" as="image" href="hero-slide-1.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="hero-slide-2.webp">
-  <link rel="preload" as="image" href="hero-slide-3.webp">
+  <link rel="preload" as="image" href="hero-slide-1.svg" fetchpriority="high">
+  <link rel="preload" as="image" href="hero-slide-2.svg">
+  <link rel="preload" as="image" href="hero-slide-3.svg">
 
   <!-- Synchronous Google Fonts stylesheet -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap">
@@ -111,7 +111,7 @@ $lang = require_once "lang/{$active_lang}.php";
               </div>
             </div>
             <div class="hero-visual">
-              <img src="hero-slide-1.webp" alt="Solar Energy Oman" class="hero-img" width="500" height="500"
+              <img src="hero-slide-1.svg" alt="Solar Energy Oman" class="hero-img" width="500" height="500"
                 fetchpriority="high" loading="eager" decoding="async">
             </div>
           </div>
@@ -128,7 +128,7 @@ $lang = require_once "lang/{$active_lang}.php";
               </div>
             </div>
             <div class="hero-visual">
-              <img src="hero-slide-2.webp" alt="Villa Solar Installation" class="hero-img" width="500" height="500"
+              <img src="hero-slide-2.svg" alt="Villa Solar Installation" class="hero-img" width="500" height="500"
                 loading="lazy" decoding="async">
             </div>
           </div>
@@ -145,7 +145,7 @@ $lang = require_once "lang/{$active_lang}.php";
               </div>
             </div>
             <div class="hero-visual">
-              <img src="hero-slide-3.webp" alt="Commercial Solar Plant" class="hero-img" width="500" height="500"
+              <img src="hero-slide-3.svg" alt="Commercial Solar Plant" class="hero-img" width="500" height="500"
                 loading="lazy" decoding="async">
             </div>
           </div>
@@ -1106,8 +1106,8 @@ $lang = require_once "lang/{$active_lang}.php";
     };
   </script>
 
-  <script src="calculator-engine.js?v=3.2" defer></script>
-  <script src="script.js?v=3.2" defer></script>
+  <script src="calculator-engine.js?v=3.3" defer></script>
+  <script src="script.js?v=3.3" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>
@@ -1122,11 +1122,11 @@ $lang = require_once "lang/{$active_lang}.php";
       // Inject chatbot CSS
       var css = document.createElement('link');
       css.rel = 'stylesheet';
-      css.href = 'chatbot.css?v=3.1';
+      css.href = 'chatbot.css?v=3.3';
       document.head.appendChild(css);
       // Inject chatbot JS
       var js = document.createElement('script');
-      js.src = 'chatbot.js?v=3.1';
+      js.src = 'chatbot.js?v=3.3';
       js.defer = true;
       document.body.appendChild(js);
     }
@@ -1135,7 +1135,7 @@ $lang = require_once "lang/{$active_lang}.php";
       if (analyticsLoaded) return;
       analyticsLoaded = true;
       var js = document.createElement('script');
-      js.src = 'analytics.js?v=3.1';
+      js.src = 'analytics.js?v=3.3';
       js.defer = true;
       document.body.appendChild(js);
     }

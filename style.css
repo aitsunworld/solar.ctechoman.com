@@ -2274,10 +2274,10 @@ footer {
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
 }
 
-  /* Calculator Overlay */
-  .calculator-section {
-    margin-top: -100px; /* Overlaps hero perfectly on desktop */
-  }
+/* Calculator Overlay */
+.calculator-section {
+  margin-top: -100px; /* Overlaps hero perfectly on desktop */
+}
 
   .calculator-wrapper {
     display: grid;
