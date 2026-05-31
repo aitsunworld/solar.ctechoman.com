@@ -19,6 +19,68 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- 1b. Hero Slider ---
+    const heroSlider = document.getElementById('hero-slider');
+    if (heroSlider) {
+        const slides = heroSlider.querySelectorAll('.hero-slide');
+        const sliderNav = heroSlider.querySelectorAll('.slider-item');
+        const slidesWrapper = heroSlider.querySelector('.hero-slides');
+        let currentSlide = 0;
+        let sliderInterval;
+        let isAnimating = false;
+
+        function goToSlide(slideIndex) {
+            if (isAnimating || slideIndex === currentSlide) return;
+            isAnimating = true;
+
+            const totalSlides = slides.length;
+            const nextIndex = (slideIndex + totalSlides) % totalSlides;
+
+            // Update slides
+            slides[currentSlide].classList.remove('active');
+            slides[nextIndex].classList.add('active');
+
+            // Update nav
+            sliderNav[currentSlide].classList.remove('active');
+            sliderNav[nextIndex].classList.add('active');
+
+            // Shift wrapper
+            slidesWrapper.style.transform = `translate3d(-${nextIndex * 33.333}%, 0, 0)`;
+
+            currentSlide = nextIndex;
+
+            setTimeout(() => { isAnimating = false; }, 700);
+        }
+
+        // Click handlers for nav
+        sliderNav.forEach((nav, index) => {
+            nav.addEventListener('click', () => {
+                goToSlide(index);
+                resetInterval();
+            });
+        });
+
+        // Auto slide
+        function nextSlide() {
+            goToSlide(currentSlide + 1);
+        }
+
+        function startSlider() {
+            sliderInterval = setInterval(nextSlide, 4000);
+        }
+
+        function resetInterval() {
+            clearInterval(sliderInterval);
+            startSlider();
+        }
+
+        // Pause on hover
+        heroSlider.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+        heroSlider.addEventListener('mouseleave', startSlider);
+
+        startSlider();
+    }
+
     // --- 2. Navbar Scroll Style Trigger ---
     const navbar = document.getElementById('navbar');
     if (navbar) {

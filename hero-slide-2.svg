@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0f2fe;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#bae6fd;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="solarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a8dcc;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:0.7" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Villa building silhouette -->
+  <g transform="translate(80,150)">
+    <!-- Building -->
+    <rect x="0" y="0" width="180" height="180" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2" />
+    
+    <!-- Roof -->
+    <polygon points="0,0 180,0 220,-40 100,-60 -20,-40" fill="#94a3b8" />
+    
+    <!-- Windows -->
+    <rect x="20" y="30" width="40" height="40" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1" />
+    <rect x="70" y="30" width="40" height="40" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1" />
+    <rect x="120" y="30" width="40" height="40" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1" />
+    <rect x="20" y="90" width="40" height="40" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1" />
+    <rect x="70" y="90" width="40" height="40" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1" />
+    <rect x="120" y="90" width="40" height="40" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1" />
+    <rect x="20" y="140" width="140" height="30" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1" />
+    
+    <!-- Door -->
+    <rect x="70" y="140" width="40" height="40" fill="#cbd5e1" />
+  </g>
+  
+  <!-- Solar panels on roof -->
+  <g transform="translate(280,100)">
+    <rect x="0" y="0" width="180" height="120" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" />
+    <!-- Panel cells -->
+    <g stroke="#cbd5e1" stroke-width="1">
+      <line x1="30" y1="0" x2="30" y2="120" />
+      <line x1="60" y1="0" x2="60" y2="120" />
+      <line x1="90" y1="0" x2="90" y2="120" />
+      <line x1="120" y1="0" x2="120" y2="120" />
+      <line x1="150" y1="0" x2="150" y2="120" />
+      <line x1="0" y1="30" x2="180" y2="30" />
+      <line x1="0" y1="60" x2="180" y2="60" />
+      <line x1="0" y1="90" x2="180" y2="90" />
+    </g>
+    
+    <!-- Sun icons -->
+    <circle cx="215" cy="25" r="30" fill="#fbbf24" opacity="0.8" />
+    <g stroke="#fbbf24" stroke-width="3">
+      <line x1="215" y1="5" x2="215" y2="0" />
+      <line x1="215" y1="45" x2="215" y2="50" />
+      <line x1="195" y1="15" x2="190" y2="10" />
+      <line x1="240" y1="35" x2="245" y2="40" />
+    </g>
+  </g>
+  
+  <!-- Sky gradient overlay -->
+  <rect x="150" y="250" width="200" height="150" fill="url(#skyGrad)" rx="100" opacity="0.5" />
+</svg>

@@ -12,6 +12,12 @@ return [
     'hero_desc' => 'Reduce your electricity bills to zero with the most reliable solar panels and renewable energy systems in the Sultanate.',
     'hero_btn' => 'Get a Quote',
     'hero_btn_video' => 'Watch Video',
+    // Hero Slide 2
+    'hero_2_title' => 'Power Your Villa With Clean Solar Energy',
+    'hero_2_desc' => 'Reduce electricity costs and increase property value with smart solar solutions.',
+    // Hero Slide 3
+    'hero_3_title' => 'Commercial & Industrial Solar Systems',
+    'hero_3_desc' => 'Scalable solar infrastructure for businesses, factories and large facilities.',
 
     // Calculator
     'calc_title' => 'Smart Calculator',

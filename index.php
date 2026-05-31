@@ -46,15 +46,16 @@ $lang = require_once "lang/{$active_lang}.php";
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://images.unsplash.com">
 
-  <!-- Preload LCP hero image and nav logo -->
-  <link rel="preload" as="image" href="lightbulb.webp" fetchpriority="high">
-  <link rel="preload" as="image" href="https://www.ctechoman.com/public/logo.webp">
+  <!-- Preload LCP hero images -->
+  <link rel="preload" as="image" href="hero-slide-1.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="hero-slide-2.webp">
+  <link rel="preload" as="image" href="hero-slide-3.webp">
 
   <!-- Synchronous Google Fonts stylesheet -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap">
 
   <!-- Synchronous Main Stylesheet (prevents FOUC and layout shift) -->
-  <link rel="stylesheet" href="style.css?v=3.2">
+  <link rel="stylesheet" href="style.css?v=3.3">
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -95,38 +96,75 @@ $lang = require_once "lang/{$active_lang}.php";
 
   <main id="main-content">
 
-  <!-- Hero Section -->
-  <section class="hero container">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <h1><?= $lang['hero_title'] ?></h1>
-        <p><?= $lang['hero_desc'] ?></p>
-
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
-
+  <!-- Hero Section - Slider -->
+  <section class="hero container" id="hero-slider">
+    <div class="hero-slider-wrapper">
+      <div class="hero-slides">
+        <!-- Slide 1 -->
+        <div class="hero-slide active" data-slide="1">
+          <div class="hero-grid">
+            <div class="hero-text">
+              <h1><?= $lang['hero_title'] ?></h1>
+              <p><?= $lang['hero_desc'] ?></p>
+              <div class="hero-actions">
+                <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
+              </div>
+            </div>
+            <div class="hero-visual">
+              <img src="hero-slide-1.webp" alt="Solar Energy Oman" class="hero-img" width="500" height="500"
+                fetchpriority="high" loading="eager" decoding="async">
+            </div>
+          </div>
         </div>
 
-        <div class="hero-slider-nav">
-          <div class="slider-item active">
-            <span class="slider-num">1.</span>
-            <div class="slider-line"></div>
+        <!-- Slide 2 -->
+        <div class="hero-slide" data-slide="2">
+          <div class="hero-grid">
+            <div class="hero-text">
+              <h1><?= $lang['hero_2_title'] ?></h1>
+              <p><?= $lang['hero_2_desc'] ?></p>
+              <div class="hero-actions">
+                <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
+              </div>
+            </div>
+            <div class="hero-visual">
+              <img src="hero-slide-2.webp" alt="Villa Solar Installation" class="hero-img" width="500" height="500"
+                loading="lazy" decoding="async">
+            </div>
           </div>
-          <div class="slider-item">
-            <span class="slider-num">2.</span>
-            <div class="slider-line"></div>
-          </div>
-          <div class="slider-item">
-            <span class="slider-num">3.</span>
-            <div class="slider-line"></div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hero-slide" data-slide="3">
+          <div class="hero-grid">
+            <div class="hero-text">
+              <h1><?= $lang['hero_3_title'] ?></h1>
+              <p><?= $lang['hero_3_desc'] ?></p>
+              <div class="hero-actions">
+                <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
+              </div>
+            </div>
+            <div class="hero-visual">
+              <img src="hero-slide-3.webp" alt="Commercial Solar Plant" class="hero-img" width="500" height="500"
+                loading="lazy" decoding="async">
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="hero-visual">
-        <div class="lightning-bg"></div>
-        <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500"
-          fetchpriority="high" loading="eager" decoding="async">
+    <div class="hero-slider-nav">
+      <div class="slider-item active" data-slide="1">
+        <span class="slider-num">1.</span>
+        <div class="slider-line"></div>
+      </div>
+      <div class="slider-item" data-slide="2">
+        <span class="slider-num">2.</span>
+        <div class="slider-line"></div>
+      </div>
+      <div class="slider-item" data-slide="3">
+        <span class="slider-num">3.</span>
+        <div class="slider-line"></div>
       </div>
     </div>
   </section>
