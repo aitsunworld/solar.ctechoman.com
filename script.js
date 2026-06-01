@@ -897,6 +897,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Reset to default flagship brand view + toggle controls
                     if (brandToggleWrapper) brandToggleWrapper.style.display = 'block';
                     
+                    if (expandableGrid) {
+                        expandableGrid.style.maxHeight = '';
+                        expandableGrid.style.overflow = '';
+                        expandableGrid.style.opacity = '';
+                    }
+
                     // Collapse or keep accordion in its native state
                     const isExpanded = expandableGrid && expandableGrid.classList.contains('expanded');
                     
@@ -918,6 +924,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Filtering: show matches cross-catalog, hide toggle button, force grid visible
                     if (brandToggleWrapper) brandToggleWrapper.style.display = 'none';
                     
+                    if (expandableGrid) {
+                        expandableGrid.style.maxHeight = 'none';
+                        expandableGrid.style.overflow = 'visible';
+                        expandableGrid.style.opacity = '1';
+                    }
+
                     dsCards.forEach(card => {
                         const categories = (card.dataset.category || '').split(' ');
                         if (categories.includes(selectedCategory)) {
@@ -945,8 +957,8 @@ document.addEventListener('DOMContentLoaded', () => {
             brandToggleBtn.classList.toggle('expanded', isExpanded);
             
             // Translations
-            const labelShow = isArabic ? "عرض جميع العلامات التجارية" : "View All Brands";
-            const labelHide = isArabic ? "عرض أقل" : "Show Less";
+            const labelShow = isArabic ? "عرض جميع العلامات التجارية ↓" : "View All Brands ↓";
+            const labelHide = isArabic ? "إظهار أقل ↑" : "Show Less ↑";
             
             const btnSpan = brandToggleBtn.querySelector('span');
             if (btnSpan) btnSpan.textContent = isExpanded ? labelHide : labelShow;
