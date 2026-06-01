@@ -1195,4 +1195,70 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ==========================================
+    // Hero Slider Implementation
+    // ==========================================
+    const heroTrack = document.getElementById('hero-slider-track');
+    const heroNavItems = document.querySelectorAll('.hero-slider-nav .slider-item');
+    
+    if (heroTrack && heroNavItems.length > 0) {
+        let currentSlide = 0;
+        const totalSlides = heroNavItems.length;
+        let slideInterval;
+
+        const updateSlider = (index) => {
+            // Ensure index is within bounds
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            
+            currentSlide = index;
+            
+            // Calculate translation percentage based on number of slides. 
+            // e.g., 3 slides = 33.3333% per slide. So slide 1 is 0, slide 2 is -33.3333%, slide 3 is -66.6666%
+            const translateValue = -(currentSlide * (100 / totalSlides));
+            heroTrack.style.transform = `translate3d(${translateValue}%, 0, 0)`;
+            
+            // Update active state on pagination indicators
+            heroNavItems.forEach(item => item.classList.remove('active'));
+            const activeIndicator = document.querySelector(`.hero-slider-nav .slider-item[data-slide-index="${currentSlide}"]`);
+            if (activeIndicator) {
+                activeIndicator.classList.add('active');
+            }
+        };
+
+        const nextSlide = () => {
+            updateSlider(currentSlide + 1);
+        };
+
+        const startSlider = () => {
+            stopSlider(); // Ensure no duplicates
+            slideInterval = setInterval(nextSlide, 5000);
+        };
+
+        const stopSlider = () => {
+            if (slideInterval) clearInterval(slideInterval);
+        };
+
+        // Attach click listeners to pagination dots
+        heroNavItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const index = parseInt(e.currentTarget.getAttribute('data-slide-index'), 10);
+                if (!isNaN(index)) {
+                    updateSlider(index);
+                    startSlider(); // Reset the timer on manual navigation
+                }
+            });
+        });
+
+        // Pause on hover
+        const heroVisual = document.getElementById('hero-slider-visual');
+        if (heroVisual) {
+            heroVisual.addEventListener('mouseenter', stopSlider);
+            heroVisual.addEventListener('mouseleave', startSlider);
+        }
+
+        // Initialize slider
+        startSlider();
+    }
+
 });

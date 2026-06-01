@@ -154,25 +154,37 @@ $lang = require_once "lang/{$active_lang}.php";
         </div>
 
         <div class="hero-slider-nav">
-          <div class="slider-item active">
+          <div class="slider-item active" data-slide-index="0">
             <span class="slider-num">1.</span>
             <div class="slider-line"></div>
           </div>
-          <div class="slider-item">
+          <div class="slider-item" data-slide-index="1">
             <span class="slider-num">2.</span>
             <div class="slider-line"></div>
           </div>
-          <div class="slider-item">
+          <div class="slider-item" data-slide-index="2">
             <span class="slider-num">3.</span>
             <div class="slider-line"></div>
           </div>
         </div>
       </div>
 
-      <div class="hero-visual">
+      <div class="hero-visual" id="hero-slider-visual">
         <div class="lightning-bg"></div>
-        <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500"
-          fetchpriority="high" loading="eager" decoding="async">
+        <div class="hero-slider-track" id="hero-slider-track">
+          <div class="hero-slide">
+            <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500"
+              fetchpriority="high" loading="eager" decoding="async">
+          </div>
+          <div class="hero-slide">
+            <img src="hero-villa.webp" alt="Residential Villa Solar Panels" class="lightbulb-img" width="500" height="500"
+              loading="lazy" decoding="async">
+          </div>
+          <div class="hero-slide">
+            <img src="hero-commercial.webp" alt="Commercial Industrial Solar Panels" class="lightbulb-img" width="500" height="500"
+              loading="lazy" decoding="async">
+          </div>
+        </div>
       </div>
     </div>
   </section>
