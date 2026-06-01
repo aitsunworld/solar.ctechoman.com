@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const uniqueCategories = [...new Set(filteredAppliances.map(app => app.category))];
         
         let html = `
-            <div class="appliance-info-banner" style="margin-bottom: 1.25rem; padding: 0.8rem 1rem; background: rgba(58, 141, 204, 0.08); border-left: 4px solid var(--color-primary); border-radius: 8px; font-size: 0.85rem; color: #1e4b6e; display: flex; align-items: center; gap: 8px;">
+            <div class="appliance-info-banner">
                 <span>${infoMessage}</span>
             </div>
             <div class="appliance-filter-bar">
