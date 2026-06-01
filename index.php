@@ -624,7 +624,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
 
       <!-- Deye Brand -->
-      <div class="datasheet-card brand-card" data-category="inverter battery" data-brand="deye">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="inverter battery" data-brand="deye">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/deye.png" alt="Deye" class="brand-logo-img" loading="lazy">
@@ -662,7 +662,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Trina Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="trina">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="trina">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/trina_solar.svg" alt="Trina Solar" class="brand-logo-img" loading="lazy">
@@ -681,7 +681,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- LONGi Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel battery" data-brand="longi">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel battery" data-brand="longi">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/longi.svg" alt="LONGi" class="brand-logo-img" loading="lazy">
@@ -700,7 +700,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Jinko Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="jinko">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="jinko">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/jinko_solar.png" alt="Jinko Solar" class="brand-logo-img" loading="lazy">
@@ -719,7 +719,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- JA Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="ja">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="ja">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/ja_solar.svg" alt="JA Solar" class="brand-logo-img" loading="lazy">
@@ -738,7 +738,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Jebel Brand -->
-      <div class="datasheet-card brand-card" data-category="battery" data-brand="jebel">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="battery" data-brand="jebel">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/jebel.png" alt="Jebel" class="brand-logo-img" loading="lazy">
@@ -777,7 +777,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Trina Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="trina">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="trina">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/trina_solar.svg" alt="Trina Solar" class="brand-logo-img" loading="lazy">
@@ -796,7 +796,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- LONGi Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel battery" data-brand="longi">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel battery" data-brand="longi">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/longi.svg" alt="LONGi" class="brand-logo-img" loading="lazy">
@@ -815,7 +815,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Jinko Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="jinko">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="jinko">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/jinko_solar.png" alt="Jinko Solar" class="brand-logo-img" loading="lazy">
@@ -834,7 +834,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- JA Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="ja">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="ja">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/ja_solar.svg" alt="JA Solar" class="brand-logo-img" loading="lazy">
@@ -853,7 +853,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Jebel Brand -->
-      <div class="datasheet-card brand-card" data-category="battery" data-brand="jebel">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="battery" data-brand="jebel">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/jebel.png" alt="Jebel" class="brand-logo-img" loading="lazy">
@@ -873,7 +873,7 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
 
       <!-- Trina Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="trina">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="trina">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/trina_solar.svg" alt="Trina Solar" class="brand-logo-img" loading="lazy">
@@ -892,7 +892,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- LONGi Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel battery" data-brand="longi">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel battery" data-brand="longi">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/longi.svg" alt="LONGi" class="brand-logo-img" loading="lazy">
@@ -911,7 +911,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Jinko Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="jinko">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="jinko">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/jinko_solar.png" alt="Jinko Solar" class="brand-logo-img" loading="lazy">
@@ -930,7 +930,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- JA Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="ja">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="ja">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/ja_solar.svg" alt="JA Solar" class="brand-logo-img" loading="lazy">
@@ -949,7 +949,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Jebel Brand -->
-      <div class="datasheet-card brand-card" data-category="battery" data-brand="jebel">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="battery" data-brand="jebel">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/jebel.png" alt="Jebel" class="brand-logo-img" loading="lazy">
@@ -969,7 +969,7 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
 
       <!-- LONGi Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel battery" data-brand="longi">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel battery" data-brand="longi">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/longi.svg" alt="LONGi" class="brand-logo-img" loading="lazy">
@@ -988,7 +988,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Jinko Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="jinko">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="jinko">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/jinko_solar.png" alt="Jinko Solar" class="brand-logo-img" loading="lazy">
@@ -1007,7 +1007,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- JA Solar Brand -->
-      <div class="datasheet-card brand-card" data-category="panel" data-brand="ja">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="ja">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/ja_solar.svg" alt="JA Solar" class="brand-logo-img" loading="lazy">
@@ -1026,7 +1026,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <!-- Jebel Brand -->
-      <div class="datasheet-card brand-card" data-category="battery" data-brand="jebel">
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="battery" data-brand="jebel">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/jebel.png" alt="Jebel" class="brand-logo-img" loading="lazy">
@@ -1043,7 +1043,7 @@ $lang = require_once "lang/{$active_lang}.php";
           </svg>
         </button>
       </div>
-    </div> <!-- Close expandable-brand-grid -->
+    </div> <!-- Close unified datasheet-grid -->
 
     <!-- Centered Glassy Accordion Toggle Button -->
     <div class="brand-toggle-wrapper" style="text-align: center; margin-top: 2rem;">
@@ -1405,7 +1405,7 @@ $lang = require_once "lang/{$active_lang}.php";
   </script>
 
 <script src="calculator-engine.js?v=3.7"></script>
-  <script src="script.js?v=4.3" defer></script>
+  <script src="script.js?v=4.4" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>

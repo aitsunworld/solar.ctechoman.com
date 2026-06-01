@@ -881,9 +881,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 7. Product Datasheet Center dynamic category filters & Accordion ---
     const dsFilterTabs = document.querySelectorAll('.ds-filter-tab');
     const dsCards = document.querySelectorAll('.datasheet-card');
-    const expandableGrid = document.getElementById('expandable-brands');
     const brandToggleBtn = document.getElementById('brand-toggle-btn');
     const brandToggleWrapper = document.querySelector('.brand-toggle-wrapper');
+    const datasheetGrid = document.querySelector('.datasheet-grid');
+    const extraCards = document.querySelectorAll('.extra-brand');
+    let isBrandsExpanded = false;
  
     if (dsFilterTabs.length > 0 && dsCards.length > 0) {
         dsFilterTabs.forEach(tab => {
@@ -897,24 +899,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Reset to default flagship brand view + toggle controls
                     if (brandToggleWrapper) brandToggleWrapper.style.display = 'block';
                     
-                    if (expandableGrid) {
-                        expandableGrid.style.maxHeight = '';
-                        expandableGrid.style.overflow = '';
-                        expandableGrid.style.opacity = '';
-                        expandableGrid.style.marginTop = '';
-                    }
-
-                    // Collapse or keep accordion in its native state
-                    const isExpanded = expandableGrid && expandableGrid.classList.contains('expanded');
-                    
                     dsCards.forEach(card => {
-                        // Check if card is inside expandable grid
-                        const inExpandable = card.closest('.expandable-brand-grid');
-                        if (inExpandable) {
-                            // If accordion is expanded, show it; otherwise hide it
-                            card.style.display = 'flex';
-                            card.style.opacity = isExpanded ? '1' : '0';
-                            card.style.transform = 'scale(1)';
+                        const isExtra = card.classList.contains('extra-brand');
+                        if (isExtra && !isBrandsExpanded) {
+                            card.style.display = 'none';
+                            card.style.opacity = '0';
                         } else {
                             card.style.display = 'flex';
                             card.style.opacity = '1';
@@ -922,16 +911,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     });
                 } else {
-                    // Filtering: show matches cross-catalog, hide toggle button, force grid visible
+                    // Filtering: show matches cross-catalog, hide toggle button
                     if (brandToggleWrapper) brandToggleWrapper.style.display = 'none';
                     
-                    if (expandableGrid) {
-                        expandableGrid.style.maxHeight = 'none';
-                        expandableGrid.style.overflow = 'visible';
-                        expandableGrid.style.opacity = '1';
-                        expandableGrid.style.marginTop = window.innerWidth >= 768 ? '1.5rem' : '1.25rem';
-                    }
-
                     dsCards.forEach(card => {
                         const categories = (card.dataset.category || '').split(' ');
                         if (categories.includes(selectedCategory)) {
@@ -953,17 +935,82 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Toggle button handler
-    if (brandToggleBtn && expandableGrid) {
+    if (brandToggleBtn && datasheetGrid && extraCards.length > 0) {
         brandToggleBtn.addEventListener('click', () => {
-            const isExpanded = expandableGrid.classList.toggle('expanded');
-            brandToggleBtn.classList.toggle('expanded', isExpanded);
+            isBrandsExpanded = !isBrandsExpanded;
+            brandToggleBtn.classList.toggle('expanded', isBrandsExpanded);
             
             // Translations
-            const labelShow = isArabic ? "عرض جميع العلامات التجارية ↓" : "View All Brands ↓";
-            const labelHide = isArabic ? "إظهار أقل ↑" : "Show Less ↑";
+            const labelShow = isArabic ? "??? ???? ???????? ???????? ?" : "View All Brands ?";
+            const labelHide = isArabic ? "????? ??? ?" : "Show Less ?";
             
             const btnSpan = brandToggleBtn.querySelector('span');
-            if (btnSpan) btnSpan.textContent = isExpanded ? labelHide : labelShow;
+            if (btnSpan) btnSpan.textContent = isBrandsExpanded ? labelHide : labelShow;
+
+            if (isBrandsExpanded) {
+                // Expand
+                const collapsedHeight = datasheetGrid.offsetHeight;
+                
+                extraCards.forEach(card => {
+                    card.style.display = 'flex';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(10px)';
+                    card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                });
+
+                const expandedHeight = datasheetGrid.scrollHeight;
+
+                datasheetGrid.style.overflow = 'hidden';
+                datasheetGrid.style.maxHeight = collapsedHeight + 'px';
+                datasheetGrid.style.transition = 'max-height 0.4s ease-out';
+
+                void datasheetGrid.offsetHeight; // Force reflow
+
+                datasheetGrid.style.maxHeight = expandedHeight + 'px';
+
+                setTimeout(() => {
+                    extraCards.forEach(card => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    });
+                }, 50);
+
+                setTimeout(() => {
+                    datasheetGrid.style.maxHeight = 'none';
+                    datasheetGrid.style.overflow = 'visible';
+                }, 400);
+
+            } else {
+                // Collapse
+                const currentHeight = datasheetGrid.offsetHeight;
+                
+                datasheetGrid.style.overflow = 'hidden';
+                datasheetGrid.style.maxHeight = currentHeight + 'px';
+                datasheetGrid.style.transition = 'max-height 0.4s ease-out';
+                
+                extraCards.forEach(card => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(10px)';
+                });
+
+                void datasheetGrid.offsetHeight;
+
+                extraCards.forEach(card => card.style.display = 'none');
+                const collapsedHeight = datasheetGrid.scrollHeight;
+                extraCards.forEach(card => card.style.display = 'flex');
+
+                datasheetGrid.style.maxHeight = collapsedHeight + 'px';
+
+                setTimeout(() => {
+                    extraCards.forEach(card => {
+                        card.style.display = 'none';
+                        card.style.transform = '';
+                        card.style.opacity = '';
+                    });
+                    datasheetGrid.style.maxHeight = 'none';
+                    datasheetGrid.style.overflow = 'visible';
+                }, 400);
+            }
         });
     }
 

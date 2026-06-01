@@ -2126,12 +2126,7 @@ footer {
   }
 
   /* Datasheets */
-  .datasheet-grid, .expandable-brand-grid.expanded {
-    grid-template-columns: repeat(4, 1fr);
-    display: grid;
-    gap: 1.5rem;
-    align-items: stretch;
-  }
+  .datasheet-grid, 
   .datasheet-card.brand-card {
     height: 100%;
   }
@@ -2213,6 +2208,9 @@ footer {
    ========================================================================== */
 
 @media (min-width: 1024px) {
+  .datasheet-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
   h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
   h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
 
@@ -2408,10 +2406,7 @@ footer {
   }
 
   /* Datasheets */
-  .datasheet-grid, .expandable-brand-grid.expanded {
-    grid-template-columns: repeat(4, 1fr);
-    align-items: stretch;
-  }
+  .datasheet-grid, 
   .datasheet-card.brand-card {
     height: 100%;
     padding: 2.25rem 2rem 2rem 2rem;
@@ -2930,40 +2925,20 @@ footer {
    ========================================================================== */
 
 /* Brand Grid Accordion */
-.expandable-brand-grid {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, margin-top 0.4s ease;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-}
 
-.expandable-brand-grid.expanded {
-  opacity: 1;
-  margin-top: 1.5rem;
-  max-height: 2500px; /* High enough to contain the remaining 6 brand cards */
-}
+
+
 
 /* On desktop, keep grid layouts working perfectly for both grids */
 @media (min-width: 768px) {
-  .expandable-brand-grid.expanded {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    align-items: stretch;
-  }
+  
 }
 
 @media (min-width: 1024px) {
-  .expandable-brand-grid.expanded {
-    display: grid;
+  .datasheet-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    align-items: stretch;
   }
+  
 }
 
 /* Toggle button styling */
