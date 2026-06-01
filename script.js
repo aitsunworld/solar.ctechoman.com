@@ -266,63 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         });
-
-        // Bind interactive Qty controls
-        applianceInputs.addEventListener('click', (e) => {
-            const btn = e.target.closest('.qty-btn');
-            if (!btn) return;
-
-            const appId = btn.dataset.id;
-            const appSpec = appliances.find(a => a.id === appId);
-            if (!appSpec) return;
-
-            let qty = applianceQuantities[appId] || 0;
-
-            if (btn.classList.contains('plus')) {
-                qty = Math.min(99, qty + 1);
-            } else if (btn.classList.contains('minus')) {
-                qty = Math.max(0, qty - 1);
-            }
-
-            applianceQuantities[appId] = qty;
-            
-            // Live DOM updates
-            const qtyText = document.getElementById(`qty-${appId}`);
-            if (qtyText) qtyText.textContent = qty;
-
-            const badge = document.getElementById(`badge-${appId}`);
-            if (badge) {
-                if (qty > 0) {
-                    badge.textContent = qty;
-                    badge.style.display = 'flex';
-                } else {
-                    badge.style.display = 'none';
-                }
-            }
-
-            const kwhDaily = ((appSpec.min_w * appSpec.hours * qty) / 1000).toFixed(1);
-            const loadValText = document.getElementById(`load-val-${appId}`);
-            if (loadValText) {
-                loadValText.textContent = qty > 0 
-                    ? (isArabic ? `الاستهلاك: ${kwhDaily} ك.و/يوم` : `Load: ${kwhDaily} kWh/d`)
-                    : '';
-            }
-
-            // Live visual feedback: toggle active-card and disable/enable minus button
-            const card = btn.closest('.appliance-item');
-            if (card) {
-                const minusBtn = card.querySelector('.qty-btn.minus');
-                if (qty > 0) {
-                    card.classList.add('active-card');
-                    if (minusBtn) minusBtn.removeAttribute('disabled');
-                } else {
-                    card.classList.remove('active-card');
-                    if (minusBtn) minusBtn.setAttribute('disabled', 'true');
-                }
-            }
-
-            calculateSolar();
-        });
     }
 
     function getApplianceSVG(id) {
@@ -689,6 +632,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     if (loc) loc.addEventListener('change', calculateSolar);
+
+    // Bind interactive Qty controls (once globally to prevent event listener duplicate binding / leakage)
+    if (applianceInputs) {
+        applianceInputs.addEventListener('click', (e) => {
+            const btn = e.target.closest('.qty-btn');
+            if (!btn) return;
+
+            const appId = btn.dataset.id;
+            const appliances = window.SolarCalculatorEngine ? window.SolarCalculatorEngine.APPLIANCES : [];
+            const appSpec = appliances.find(a => a.id === appId);
+            if (!appSpec) return;
+
+            let qty = applianceQuantities[appId] || 0;
+
+            if (btn.classList.contains('plus')) {
+                qty = Math.min(99, qty + 1);
+            } else if (btn.classList.contains('minus')) {
+                qty = Math.max(0, qty - 1);
+            }
+
+            applianceQuantities[appId] = qty;
+            
+            // Live DOM updates
+            const qtyText = document.getElementById(`qty-${appId}`);
+            if (qtyText) qtyText.textContent = qty;
+
+            const badge = document.getElementById(`badge-${appId}`);
+            if (badge) {
+                if (qty > 0) {
+                    badge.textContent = qty;
+                    badge.style.display = 'flex';
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+
+            const kwhDaily = ((appSpec.min_w * appSpec.hours * qty) / 1000).toFixed(1);
+            const loadValText = document.getElementById(`load-val-${appId}`);
+            if (loadValText) {
+                loadValText.textContent = qty > 0 
+                    ? (isArabic ? `الاستهلاك: ${kwhDaily} ك.و/يوم` : `Load: ${kwhDaily} kWh/d`)
+                    : '';
+            }
+
+            // Live visual feedback: toggle active-card and disable/enable minus button
+            const card = btn.closest('.appliance-item');
+            if (card) {
+                const minusBtn = card.querySelector('.qty-btn.minus');
+                if (qty > 0) {
+                    card.classList.add('active-card');
+                    if (minusBtn) minusBtn.removeAttribute('disabled');
+                } else {
+                    card.classList.remove('active-card');
+                    if (minusBtn) minusBtn.setAttribute('disabled', 'true');
+                }
+            }
+
+            calculateSolar();
+        });
+    }
 
     // Lazy-init calculator when it scrolls into view (eliminates main-thread blocking on load)
     let calculatorInitialized = false;
