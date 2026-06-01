@@ -1942,14 +1942,10 @@ footer {
     -webkit-backdrop-filter: blur(10px);
   }
 
-  /* Re-enable hero fade-in on tablet+ */
-  .js-enabled .hero-text {
-    opacity: 0;
-    animation: heroFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
-  }
+  /* Hero fade-in disabled for immediate visibility - no FOUC */
+  .js-enabled .hero-text,
   .js-enabled .hero-visual {
-    opacity: 0;
-    animation: heroFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+    opacity: 1;
   }
 
   /* Re-enable cloud animations on tablet+ */

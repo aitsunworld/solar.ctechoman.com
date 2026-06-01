@@ -51,10 +51,7 @@ $official_urls = [
     'ja_solar_blue'         => 'https://www.jasolar.com/html/en/serve/download/',
 
     // Jebel — product page with download buttons
-    'jebel_battery'         => 'https://jebel.ae/solar-battery/',
-
-    // Concept — internal product; link to main corporate site
-    'concept_mppt'          => 'https://ctechoman.com/',
+    'jebel_battery'         => 'https://jebel.ae/solar-battery/'
 ];
 
 $product_key = trim($_GET['product'] ?? '');

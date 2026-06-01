@@ -672,6 +672,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             billInputs.style.display = 'none';
             applianceInputs.style.display = 'block';
+            
+            initApplianceSizer(); // Re-render in case property type was changed
             calculateSolar();
         });
     }
@@ -993,10 +995,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'ja_solar_blue':         'https://www.jasolar.com/html/en/serve/download/',
 
         // Jebel — product page with built-in download buttons
-        'jebel_battery':         'https://jebel.ae/solar-battery/',
-
-        // Concept — internal product (no external manufacturer PDF)
-        'concept_mppt':          'https://ctechoman.com/'
+        'jebel_battery':         'https://jebel.ae/solar-battery/'
     };
 
     const modal = document.getElementById('brand-datasheet-modal');
