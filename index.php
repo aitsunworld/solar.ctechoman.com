@@ -181,7 +181,7 @@ $lang = require_once "lang/{$active_lang}.php";
               loading="lazy" decoding="async">
           </div>
           <div class="hero-slide">
-            <img src="hero-commercial.webp?v=3.9" alt="Commercial Industrial Solar Panels" class="lightbulb-img" width="500" height="500"
+            <img src="hero-commercial.webp?v=3.10" alt="Commercial Industrial Solar Panels" class="lightbulb-img" width="500" height="500"
               loading="lazy" decoding="async">
           </div>
         </div>
