@@ -901,6 +901,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         expandableGrid.style.maxHeight = '';
                         expandableGrid.style.overflow = '';
                         expandableGrid.style.opacity = '';
+                        expandableGrid.style.marginTop = '';
                     }
 
                     // Collapse or keep accordion in its native state
@@ -928,6 +929,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         expandableGrid.style.maxHeight = 'none';
                         expandableGrid.style.overflow = 'visible';
                         expandableGrid.style.opacity = '1';
+                        expandableGrid.style.marginTop = window.innerWidth >= 768 ? '1.5rem' : '1.25rem';
                     }
 
                     dsCards.forEach(card => {
