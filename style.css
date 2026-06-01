@@ -2376,7 +2376,7 @@ footer {
 
   .calculator-wrapper {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    grid-template-columns: 1fr 1.5fr;
     gap: 5rem;
     padding: 4rem;
   }
@@ -2393,7 +2393,6 @@ footer {
   /* Appliance Grid Sizer desktop view */
   #appliance-inputs-container {
     padding-right: 0.75rem;
-    height: 520px;
   }
 
   .appliance-grid {
