@@ -625,14 +625,30 @@ input[type="range"]::-webkit-slider-thumb {
    ========================================================================== */
 
 #appliance-inputs-container {
-  max-height: none;
-  overflow-y: visible;
-  padding-right: 0;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
   margin-bottom: 1.25rem;
   width: 100%;
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(58, 141, 204, 0.25) rgba(0, 0, 0, 0.02);
+}
+
+#appliance-inputs-container::-webkit-scrollbar {
+  width: 5px;
+}
+#appliance-inputs-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+}
+#appliance-inputs-container::-webkit-scrollbar-thumb {
+  background: rgba(58, 141, 204, 0.2);
+  border-radius: 10px;
+}
+#appliance-inputs-container::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
 }
 
 .appliance-filter-bar {
@@ -2376,27 +2392,7 @@ footer {
 
   /* Appliance Grid Sizer desktop view */
   #appliance-inputs-container {
-    max-height: 520px;
-    overflow-y: auto;
     padding-right: 0.75rem;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-  }
-
-  #appliance-inputs-container::-webkit-scrollbar {
-    width: 5px;
-  }
-  #appliance-inputs-container::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.02);
-  }
-  #appliance-inputs-container::-webkit-scrollbar-thumb {
-    background: rgba(58, 141, 204, 0.2);
-    border-radius: 10px;
-  }
-  #appliance-inputs-container::-webkit-scrollbar-thumb:hover {
-    background: var(--color-primary);
   }
 
   .appliance-grid {
