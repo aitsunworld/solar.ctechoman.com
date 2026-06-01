@@ -542,7 +542,8 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
 
     <div class="datasheet-grid">
-      <!-- Huawei Brand -->
+
+  <!-- Huawei Brand -->
       <div class="datasheet-card brand-card" data-category="inverter" data-brand="huawei">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -561,7 +562,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </button>
       </div>
 
-      <!-- Sungrow Brand -->
+  <!-- Sungrow Brand -->
       <div class="datasheet-card brand-card" data-category="inverter" data-brand="sungrow">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -580,7 +581,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </button>
       </div>
 
-      <!-- Solis Brand -->
+  <!-- Solis Brand -->
       <div class="datasheet-card brand-card" data-category="inverter battery" data-brand="solis">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -599,7 +600,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </button>
       </div>
 
-      <!-- Canadian Solar Brand -->
+  <!-- Canadian Solar Brand -->
       <div class="datasheet-card brand-card" data-category="inverter panel battery" data-brand="canadian">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -617,13 +618,8 @@ $lang = require_once "lang/{$active_lang}.php";
           </svg>
         </button>
       </div>
-    </div> <!-- Close datasheet-grid for flagship brands -->
 
-    <!-- Expandable brand grid for remaining brands -->
-    <div class="expandable-brand-grid" id="expandable-brands">
-
-
-      <!-- Deye Brand -->
+  <!-- Deye Brand -->
       <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="inverter battery" data-brand="deye">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -642,8 +638,8 @@ $lang = require_once "lang/{$active_lang}.php";
         </button>
       </div>
 
-      <!-- Power & Sun Brand -->
-      <div class="datasheet-card brand-card" data-category="inverter battery" data-brand="powersun">
+  <!-- Power & Sun Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="inverter battery" data-brand="powersun">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
           <img src="brands/power_sun.png" alt="Power & Sun" class="brand-logo-img" loading="lazy">
@@ -661,7 +657,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </button>
       </div>
 
-      <!-- Trina Solar Brand -->
+  <!-- Trina Solar Brand -->
       <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="trina">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -680,7 +676,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </button>
       </div>
 
-      <!-- LONGi Solar Brand -->
+  <!-- LONGi Solar Brand -->
       <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel battery" data-brand="longi">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -699,7 +695,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </button>
       </div>
 
-      <!-- Jinko Solar Brand -->
+  <!-- Jinko Solar Brand -->
       <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="jinko">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -718,7 +714,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </button>
       </div>
 
-      <!-- JA Solar Brand -->
+  <!-- JA Solar Brand -->
       <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="ja">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -737,7 +733,7 @@ $lang = require_once "lang/{$active_lang}.php";
         </button>
       </div>
 
-      <!-- Jebel Brand -->
+  <!-- Jebel Brand -->
       <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="battery" data-brand="jebel">
         <div class="brand-card-accent"></div>
         <div class="brand-logo-wrapper">
@@ -755,297 +751,10 @@ $lang = require_once "lang/{$active_lang}.php";
           </svg>
         </button>
       </div>
-    </div>
 
-      <!-- Power & Sun Brand -->
-      <div class="datasheet-card brand-card" data-category="inverter battery" data-brand="powersun">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/power_sun.png" alt="Power & Sun" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>Power & Sun</h3>
-          <p><?= $lang['brand_powersun_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
       </div>
 
-      <!-- Trina Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="trina">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/trina_solar.svg" alt="Trina Solar" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>Trina Solar</h3>
-          <p><?= $lang['brand_trina_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- LONGi Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel battery" data-brand="longi">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/longi.svg" alt="LONGi" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>LONGi</h3>
-          <p><?= $lang['brand_longi_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Jinko Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="jinko">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/jinko_solar.png" alt="Jinko Solar" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>Jinko Solar</h3>
-          <p><?= $lang['brand_jinko_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- JA Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="ja">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/ja_solar.svg" alt="JA Solar" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>JA Solar</h3>
-          <p><?= $lang['brand_ja_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Jebel Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="battery" data-brand="jebel">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/jebel.png" alt="Jebel" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>Jebel</h3>
-          <p><?= $lang['brand_jebel_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-      <!-- Trina Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="trina">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/trina_solar.svg" alt="Trina Solar" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>Trina Solar</h3>
-          <p><?= $lang['brand_trina_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- LONGi Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel battery" data-brand="longi">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/longi.svg" alt="LONGi" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>LONGi</h3>
-          <p><?= $lang['brand_longi_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Jinko Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="jinko">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/jinko_solar.png" alt="Jinko Solar" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>Jinko Solar</h3>
-          <p><?= $lang['brand_jinko_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- JA Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="ja">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/ja_solar.svg" alt="JA Solar" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>JA Solar</h3>
-          <p><?= $lang['brand_ja_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Jebel Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="battery" data-brand="jebel">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/jebel.png" alt="Jebel" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>Jebel</h3>
-          <p><?= $lang['brand_jebel_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-      <!-- LONGi Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel battery" data-brand="longi">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/longi.svg" alt="LONGi" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>LONGi</h3>
-          <p><?= $lang['brand_longi_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Jinko Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="jinko">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/jinko_solar.png" alt="Jinko Solar" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>Jinko Solar</h3>
-          <p><?= $lang['brand_jinko_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- JA Solar Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="ja">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/ja_solar.svg" alt="JA Solar" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>JA Solar</h3>
-          <p><?= $lang['brand_ja_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Jebel Brand -->
-      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="battery" data-brand="jebel">
-        <div class="brand-card-accent"></div>
-        <div class="brand-logo-wrapper">
-          <img src="brands/jebel.png" alt="Jebel" class="brand-logo-img" loading="lazy">
-        </div>
-        <div class="brand-content">
-          <h3>Jebel</h3>
-          <p><?= $lang['brand_jebel_tag'] ?></p>
-        </div>
-        <button type="button" class="btn-brand-explore">
-          <span><?= $lang['brand_btn_explore'] ?></span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </button>
-      </div>
-    </div> <!-- Close unified datasheet-grid -->
-
-    <!-- Centered Glassy Accordion Toggle Button -->
+      <!-- Centered Glassy Accordion Toggle Button -->
     <div class="brand-toggle-wrapper" style="text-align: center; margin-top: 2rem;">
       <button type="button" id="brand-toggle-btn" class="btn btn-secondary">
         <span><?= $lang['brand_toggle_show'] ?></span>
@@ -1405,7 +1114,7 @@ $lang = require_once "lang/{$active_lang}.php";
   </script>
 
 <script src="calculator-engine.js?v=3.7"></script>
-  <script src="script.js?v=4.4" defer></script>
+  <script src="script.js?v=4.5" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>
