@@ -1032,29 +1032,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         `;
                         prods.forEach(prod => {
                             const specBadges = prod.specs.map(spec => `<span class="ds-spec-badge">${spec}</span>`).join('');
-                            // Use official manufacturer URL; fall back to # if missing
-                            const localPdf = prod.localPdf || datasheets/.pdf;
-                            const downloadText = isArabic ? "????? ???? ????????" : "View Datasheet";
+                            const localPdf = prod.localPdf || `datasheets/${prod.key}.pdf`;
+                            const downloadText = isArabic ? "تنزيل ورقة البيانات" : "View Datasheet";
 
-                            let btnHTML = 
-                                <a href="#" class="btn-ds-download modal-download-btn pdf-viewer-trigger" data-pdf-url="" data-product="" data-brand="">
-                                    <span></span>
+                            let btnHTML = `
+                                <a href="#" class="btn-ds-download modal-download-btn pdf-viewer-trigger" data-pdf-url="${localPdf}" data-product="${prod.title}" data-brand="${brandData.name}">
+                                    <span>${downloadText}</span>
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                         <polyline points="7 10 12 15 17 10"></polyline>
                                         <line x1="12" y1="15" x2="12" y2="3"></line>
                                     </svg>
                                 </a>
-                            ;" class="btn-ds-download modal-download-btn" target="_blank" rel="noopener noreferrer">
-                                        <span>${downloadText}</span>
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                            <polyline points="7 10 12 15 17 10"></polyline>
-                                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                                        </svg>
-                                    </a>
-                                `;
-                            }
+                            `;
 
                             productsHTML += `
                                 <div class="modal-product-card">
@@ -1094,7 +1084,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 timestamp: new Date().toISOString()
                             });
                         } else {
-                            console.log([Datasheet Tracking] View -  ());
+                            console.log(`[Datasheet Tracking] View - ${prodTitle} (${brandName})`);
                         }
                         
                         // Populate modal details
@@ -1119,8 +1109,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const notesField = document.getElementById('lead-notes');
                                 if (notesField) {
                                     notesField.value = isArabic
-                                        ? ??????? ??? ??? ????? ?????:  ().
-                                        : Hi, I would like to request pricing and availability for:  ().;
+                                        ? `مرحباً، أود طلب أسعار لمنتج: ${prodTitle} (${brandName}).`
+                                        : `Hi, I would like to request pricing and availability for: ${prodTitle} (${brandName}).`;
                                 }
                                 
                                 setTimeout(() => {
