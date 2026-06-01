@@ -957,46 +957,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Official manufacturer datasheet URLs — replaces generated download.php PDFs entirely.
     // Each key maps to the most direct official source available for that product.
-    window.OFFICIAL_DATASHEET_URLS = {
-        // Huawei — direct PDF from solar.huawei.com
-        'huawei_sun2000':        'https://solar.huawei.com/admin/asset/v1/pro/view/2d71dbdf468d4a1688883119fcdf576b.pdf',
-
-        // Sungrow — official support portal search result for SG110CX
-        'sungrow_sg110cx':       'https://support.sungrowpower.com/search#q=SG110CX&t=All',
-
-        // Solis — official service portal
-        'solis_s5':              'https://www.solisinverters.com/service/',
-        'solis_flexi':           'https://www.solisinverters.com/service/',
-
-        // Canadian Solar — specific direct PDF (panel) and portals (inverter, battery)
-        'canadian_solar':        'https://static.csisolar.com/wp-content/uploads/2020/10/07090707/CS-Datasheet-BiHiKu7_CS7N-MB-AG_v2.51_EN-33mm-frame-594-pcs-package.pdf',
-        'canadian_solar_inv':    'https://www.csisolar.com/downloads/',
-        'canadian_solar_battery':'https://epcube.com/en-US/support/document',
-
-        // Deye — download portal for inverter & BOS-G battery
-        'deye_hybrid':           'https://www.deyeinverter.com/download/',
-        'deye_bos_g':            'https://deyeess.com/downloads/',
-
-        // Power & Sun — brand website
-        'power_sun_inv':         'https://powernsun.com/',
-        'power_sun_ess':         'https://powernsun.com/',
-
-        // Trina Solar — specific direct PDF
-        'trina_vertex':          'https://static.trinasolar.com/sites/default/files/Datasheet_Vertex%20S%2B_NEG9R.28_EN_2024_C_web.pdf',
-
-        // LONGi — document download centre
-        'longi_himo6':           'https://www.longi.com/en/download/',
-        'longi_battery':         'https://www.longi.com/en/download/',
-
-        // Jinko Solar — specific product page
-        'jinko_tiger':           'https://www.jinkosolar.eu/en/product/tiger-neo-n-type-72hl4-bdv/',
-
-        // JA Solar — product downloads
-        'ja_solar_blue':         'https://www.jasolar.com/html/en/serve/download/',
-
-        // Jebel — product page with built-in download buttons
-        'jebel_battery':         'https://jebel.ae/solar-battery/'
-    };
 
     const modal = document.getElementById('brand-datasheet-modal');
     const modalCloseBtn = document.getElementById('ds-modal-close-btn');
@@ -1073,25 +1033,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         prods.forEach(prod => {
                             const specBadges = prod.specs.map(spec => `<span class="ds-spec-badge">${spec}</span>`).join('');
                             // Use official manufacturer URL; fall back to # if missing
-                            const officialUrl = window.OFFICIAL_DATASHEET_URLS[prod.key] || '#';
-                            const isUnavailable = !officialUrl || officialUrl === '#' || officialUrl.endsWith('powernsun.com/') || officialUrl.includes('ctechoman.com');
-                            
-                            let btnHTML = '';
-                            if (isUnavailable) {
-                                const contactText = isArabic ? "طلب ورقة البيانات" : "Request Datasheet";
-                                btnHTML = `
-                                    <a href="#contact" class="btn-ds-download btn-ds-contact modal-download-btn" data-product-title="${prod.title}" data-brand-name="${brandData.name}">
-                                        <span>${contactText}</span>
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                            <polyline points="7 10 12 15 17 10"></polyline>
-                                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                                        </svg>
-                                    </a>
-                                `;
-                            } else {
-                                btnHTML = `
-                                    <a href="${officialUrl}" class="btn-ds-download modal-download-btn" target="_blank" rel="noopener noreferrer">
+                            const localPdf = prod.localPdf || datasheets/.pdf;
+                            const downloadText = isArabic ? "????? ???? ????????" : "View Datasheet";
+
+                            let btnHTML = 
+                                <a href="#" class="btn-ds-download modal-download-btn pdf-viewer-trigger" data-pdf-url="" data-product="" data-brand="">
+                                    <span></span>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                </a>
+                            ;" class="btn-ds-download modal-download-btn" target="_blank" rel="noopener noreferrer">
                                         <span>${downloadText}</span>
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -1124,38 +1078,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 modalProductsGrid.innerHTML = productsHTML;
 
-                // Bind click listener on all newly rendered Contact fallback buttons
-                modalProductsGrid.querySelectorAll('.btn-ds-contact').forEach(btn => {
+                // Bind click listener on PDF Viewer triggers
+                modalProductsGrid.querySelectorAll('.pdf-viewer-trigger').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.preventDefault();
+                        const pdfUrl = btn.dataset.pdfUrl;
+                        const prodTitle = btn.dataset.product;
+                        const brandName = btn.dataset.brand;
                         
-                        const prodTitle = btn.dataset.productTitle;
-                        const brandName = btn.dataset.brandName;
-                        
-                        // 1. Close the modal
-                        closeModal();
-                        
-                        // 2. Scroll smoothly to contact form
-                        const contactSec = document.getElementById('contact');
-                        if (contactSec) {
-                            contactSec.scrollIntoView({ behavior: 'smooth' });
+                        // Analytics Tracking
+                        if (window.SolarAnalytics) {
+                            window.SolarAnalytics.track('datasheet_view', {
+                                product: prodTitle,
+                                brand: brandName,
+                                timestamp: new Date().toISOString()
+                            });
+                        } else {
+                            console.log([Datasheet Tracking] View -  ());
                         }
                         
-                        // 3. Populate lead notes form field
-                        const notesField = document.getElementById('lead-notes');
-                        if (notesField) {
-                            notesField.value = isArabic
-                                ? `مرحباً، أود طلب ورقة البيانات الفنية الرسمية لمنتج: ${prodTitle} (${brandName}).`
-                                : `Hi, I would like to request the official product datasheet for: ${prodTitle} (${brandName}).`;
+                        // Populate modal details
+                        document.getElementById('pdf-modal-title').textContent = prodTitle;
+                        document.getElementById('pdf-modal-brand').textContent = brandName;
+                        document.getElementById('pdf-viewer-frame').src = pdfUrl;
+                        
+                        // Configure Pricing Button inside the PDF modal
+                        const pricingBtn = document.getElementById('pdf-request-pricing-btn');
+                        if (pricingBtn) {
+                            // remove old listeners
+                            const newPricingBtn = pricingBtn.cloneNode(true);
+                            pricingBtn.parentNode.replaceChild(newPricingBtn, pricingBtn);
+                            
+                            newPricingBtn.addEventListener('click', () => {
+                                document.getElementById('pdf-viewer-modal').style.display = 'none';
+                                document.body.style.overflow = '';
+                                
+                                const contactSec = document.getElementById('contact');
+                                if (contactSec) contactSec.scrollIntoView({ behavior: 'smooth' });
+                                
+                                const notesField = document.getElementById('lead-notes');
+                                if (notesField) {
+                                    notesField.value = isArabic
+                                        ? ??????? ??? ??? ????? ?????:  ().
+                                        : Hi, I would like to request pricing and availability for:  ().;
+                                }
+                                
+                                setTimeout(() => {
+                                    const nameField = document.getElementById('lead-name');
+                                    if (nameField) nameField.focus();
+                                }, 800);
+                            });
                         }
                         
-                        // 4. Focus on name field with short delay for smooth scroll transition
-                        const nameField = document.getElementById('lead-name');
-                        if (nameField) {
-                            setTimeout(() => {
-                                nameField.focus();
-                            }, 800);
-                        }
+                        // Close underlying brand modal and open PDF modal
+                        document.getElementById('brand-datasheet-modal').classList.remove('active');
+                        setTimeout(() => {
+                            document.getElementById('brand-datasheet-modal').style.display = 'none';
+                            
+                            const pdfModal = document.getElementById('pdf-viewer-modal');
+                            pdfModal.style.display = 'flex';
+                            setTimeout(() => pdfModal.classList.add('active'), 50);
+                        }, 300);
                     });
                 });
 
@@ -1183,6 +1166,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close Event bindings
         if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+
+        const pdfModalCloseBtn = document.getElementById('pdf-modal-close-btn');
+        if (pdfModalCloseBtn) {
+            pdfModalCloseBtn.addEventListener('click', () => {
+                const pdfModal = document.getElementById('pdf-viewer-modal');
+                if (pdfModal) {
+                    pdfModal.classList.remove('active');
+                    setTimeout(() => {
+                        pdfModal.style.display = 'none';
+                        document.getElementById('pdf-viewer-frame').src = '';
+                        document.body.style.overflow = '';
+                    }, 300);
+                }
+            });
+        }
+
         
         modal.addEventListener('click', (e) => {
             if (e.target === modal) closeModal();

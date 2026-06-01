@@ -3053,3 +3053,75 @@ footer {
 }
 
 
+
+/* ==========================================
+   PDF Viewer Modal Styles
+   ========================================== */
+#pdf-viewer-modal .ds-modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+#pdf-viewer-modal .ds-modal-header {
+  background: white;
+  border-bottom: 1px solid var(--border-light);
+  padding: 1.5rem 2rem 1rem;
+}
+
+#pdf-viewer-modal .ds-modal-header h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.5rem;
+  color: var(--text-dark);
+}
+
+#pdf-viewer-modal .ds-modal-header p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+#pdf-viewer-modal .ds-modal-body {
+  background: var(--bg-light);
+  min-height: 50vh;
+}
+
+#pdf-viewer-modal .pdf-modal-footer {
+  background: var(--surface-light);
+  border-top: 1px solid var(--border-light);
+  padding: 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+#pdf-viewer-modal .pdf-modal-footer p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 1rem;
+}
+
+#pdf-viewer-modal .pdf-modal-footer .btn {
+  font-size: 1rem;
+  padding: 0.6rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(10, 37, 64, 0.15);
+  transition: all 0.3s ease;
+}
+
+#pdf-viewer-modal .pdf-modal-footer .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(10, 37, 64, 0.25);
+}
+
+@media (min-width: 768px) {
+  #pdf-viewer-modal .pdf-modal-footer {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.25rem 2rem;
+    text-align: left;
+  }
+}

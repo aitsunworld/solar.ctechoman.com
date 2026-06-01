@@ -99,8 +99,8 @@ $lang = require_once "lang/{$active_lang}.php";
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=3.7" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=3.7"></noscript>
+  <link rel="preload" as="style" href="style.css?v=4.0" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=4.0"></noscript>
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -655,10 +655,7 @@ $lang = require_once "lang/{$active_lang}.php";
           </svg>
         </button>
       </div>
-    </div> <!-- Close datasheet-grid for flagship brands -->
 
-    <!-- Expandable brand grid for remaining brands -->
-    <div class="expandable-brand-grid" id="expandable-brands">
       <!-- Trina Solar Brand -->
       <div class="datasheet-card brand-card" data-category="panel" data-brand="trina">
         <div class="brand-card-accent"></div>
@@ -753,7 +750,11 @@ $lang = require_once "lang/{$active_lang}.php";
           </svg>
         </button>
       </div>
-    </div> <!-- Close expandable-brand-grid -->
+    </div>
+    </div> <!-- Close datasheet-grid for flagship brands -->
+
+    <!-- Expandable brand grid for remaining brands -->
+    <div class="expandable-brand-grid" id="expandable-brands"> <!-- Close expandable-brand-grid -->
 
     <!-- Centered Glassy Accordion Toggle Button -->
     <div class="brand-toggle-wrapper" style="text-align: center; margin-top: 2rem;">
@@ -786,7 +787,26 @@ $lang = require_once "lang/{$active_lang}.php";
     </div>
   </section>
 
-  <!-- Process -->
+  
+    <!-- Embedded PDF Viewer Modal -->
+    <div id="pdf-viewer-modal" class="ds-modal-overlay" aria-hidden="true" style="display: none;">
+      <div class="ds-modal-content" style="max-width: 900px; height: 90vh; display: flex; flex-direction: column;">
+        <button type="button" class="ds-modal-close" id="pdf-modal-close-btn" aria-label="Close">&times;</button>
+        <div class="ds-modal-header" style="padding-bottom: 1rem;">
+          <h3 id="pdf-modal-title">Product Datasheet</h3>
+          <p class="text-muted" id="pdf-modal-brand"></p>
+        </div>
+        <div class="ds-modal-body" style="flex: 1; padding: 0; position: relative;">
+          <iframe id="pdf-viewer-frame" style="width: 100%; height: 100%; border: none; background: #fff;"></iframe>
+        </div>
+        <div class="pdf-modal-footer" style="padding: 1.5rem; background: #f8fafc; border-top: 1px solid #e2e8f0; text-align: center;">
+          <p style="margin-bottom: 1rem; font-weight: 600; color: #1e293b;">Would you like our team to send pricing and availability?</p>
+          <button type="button" id="pdf-request-pricing-btn" class="btn btn-primary" style="padding: 0.75rem 2rem;">Yes, Request Pricing</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process -->
   <section id="process" class="container section-padding">
     <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto;">
       <h2><?= $lang['proc_title'] ?></h2>
@@ -1003,7 +1023,7 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/huawei.svg',
         tagline: `<?= addslashes($lang['brand_huawei_tag']) ?>`,
         products: [
-          { key: 'huawei_sun2000', category: 'inverter', title: `<?= addslashes($lang['ds_1_title']) ?>`, desc: `<?= addslashes($lang['ds_1_desc']) ?>`, specs: [`<?= addslashes($lang['ds_1_spec_1']) ?>`, `<?= addslashes($lang['ds_1_spec_2']) ?>`] }
+          { key: 'huawei_sun2000', category: 'inverter', title: `<?= addslashes($lang['ds_1_title']) ?>`, desc: `<?= addslashes($lang['ds_1_desc']) ?>`, specs: [`<?= addslashes($lang['ds_1_spec_1']) ?>`, `<?= addslashes($lang['ds_1_spec_2']) ?>`] , localPdf: 'datasheets/huawei_sun2000.pdf' } 
         ]
       },
       sungrow: {
@@ -1011,7 +1031,7 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/sungrow.png',
         tagline: `<?= addslashes($lang['brand_sungrow_tag']) ?>`,
         products: [
-          { key: 'sungrow_sg110cx', category: 'inverter', title: `<?= addslashes($lang['ds_sungrow_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_sungrow_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_sungrow_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_sungrow_inv_spec_2']) ?>`] }
+          { key: 'sungrow_sg110cx', category: 'inverter', title: `<?= addslashes($lang['ds_sungrow_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_sungrow_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_sungrow_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_sungrow_inv_spec_2']) ?>`] , localPdf: 'datasheets/sungrow_sg110cx.pdf' } 
         ]
       },
       solis: {
@@ -1019,8 +1039,8 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/solis.png',
         tagline: `<?= addslashes($lang['brand_solis_tag']) ?>`,
         products: [
-          { key: 'solis_s5', category: 'inverter', title: `<?= addslashes($lang['ds_solis_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_solis_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_solis_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_solis_inv_spec_2']) ?>`] },
-          { key: 'solis_flexi', category: 'battery', title: `<?= addslashes($lang['ds_solis_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_solis_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_solis_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_solis_bat_spec_2']) ?>`] }
+          { key: 'solis_s5', category: 'inverter', title: `<?= addslashes($lang['ds_solis_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_solis_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_solis_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_solis_inv_spec_2']) ?>`] , localPdf: 'datasheets/solis_s5.pdf' } ,
+          { key: 'solis_flexi', category: 'battery', title: `<?= addslashes($lang['ds_solis_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_solis_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_solis_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_solis_bat_spec_2']) ?>`] , localPdf: 'datasheets/solis_flexi.pdf' } 
         ]
       },
       canadian: {
@@ -1028,9 +1048,9 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/canadian_solar.png',
         tagline: `<?= addslashes($lang['brand_canadian_tag']) ?>`,
         products: [
-          { key: 'canadian_solar', category: 'panel', title: `<?= addslashes($lang['ds_2_title']) ?>`, desc: `<?= addslashes($lang['ds_2_desc']) ?>`, specs: [`<?= addslashes($lang['ds_2_spec_1']) ?>`, `<?= addslashes($lang['ds_2_spec_2']) ?>`] },
-          { key: 'canadian_solar_inv', category: 'inverter', title: `<?= addslashes($lang['ds_canadian_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_canadian_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_canadian_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_canadian_inv_spec_2']) ?>`] },
-          { key: 'canadian_solar_battery', category: 'battery', title: `<?= addslashes($lang['ds_canadian_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_canadian_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_canadian_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_canadian_bat_spec_2']) ?>`] }
+          { key: 'canadian_solar', category: 'panel', title: `<?= addslashes($lang['ds_2_title']) ?>`, desc: `<?= addslashes($lang['ds_2_desc']) ?>`, specs: [`<?= addslashes($lang['ds_2_spec_1']) ?>`, `<?= addslashes($lang['ds_2_spec_2']) ?>`] , localPdf: 'datasheets/canadian_solar.pdf' } ,
+          { key: 'canadian_solar_inv', category: 'inverter', title: `<?= addslashes($lang['ds_canadian_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_canadian_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_canadian_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_canadian_inv_spec_2']) ?>`] , localPdf: 'datasheets/canadian_solar_inv.pdf' } ,
+          { key: 'canadian_solar_battery', category: 'battery', title: `<?= addslashes($lang['ds_canadian_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_canadian_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_canadian_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_canadian_bat_spec_2']) ?>`] , localPdf: 'datasheets/canadian_solar_battery.pdf' } 
         ]
       },
       deye: {
@@ -1038,8 +1058,8 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/deye.png',
         tagline: `<?= addslashes($lang['brand_deye_tag']) ?>`,
         products: [
-          { key: 'deye_hybrid', category: 'inverter', title: `<?= addslashes($lang['ds_3_title']) ?>`, desc: `<?= addslashes($lang['ds_3_desc']) ?>`, specs: [`<?= addslashes($lang['ds_3_spec_1']) ?>`, `<?= addslashes($lang['ds_3_spec_2']) ?>`] },
-          { key: 'deye_bos_g', category: 'battery', title: `<?= addslashes($lang['ds_deye_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_deye_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_deye_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_deye_bat_spec_2']) ?>`] }
+          { key: 'deye_hybrid', category: 'inverter', title: `<?= addslashes($lang['ds_3_title']) ?>`, desc: `<?= addslashes($lang['ds_3_desc']) ?>`, specs: [`<?= addslashes($lang['ds_3_spec_1']) ?>`, `<?= addslashes($lang['ds_3_spec_2']) ?>`] , localPdf: 'datasheets/deye_hybrid.pdf' } ,
+          { key: 'deye_bos_g', category: 'battery', title: `<?= addslashes($lang['ds_deye_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_deye_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_deye_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_deye_bat_spec_2']) ?>`] , localPdf: 'datasheets/deye_bos_g.pdf' } 
         ]
       },
       powersun: {
@@ -1047,8 +1067,8 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/power_sun.png',
         tagline: `<?= addslashes($lang['brand_powersun_tag']) ?>`,
         products: [
-          { key: 'power_sun_inv', category: 'inverter', title: `<?= addslashes($lang['ds_powersun_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_powersun_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_powersun_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_powersun_inv_spec_2']) ?>`] },
-          { key: 'power_sun_ess', category: 'battery', title: `<?= addslashes($lang['ds_powersun_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_powersun_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_powersun_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_powersun_bat_spec_2']) ?>`] }
+          { key: 'power_sun_inv', category: 'inverter', title: `<?= addslashes($lang['ds_powersun_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_powersun_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_powersun_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_powersun_inv_spec_2']) ?>`] , localPdf: 'datasheets/power_sun_inv.pdf' } ,
+          { key: 'power_sun_ess', category: 'battery', title: `<?= addslashes($lang['ds_powersun_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_powersun_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_powersun_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_powersun_bat_spec_2']) ?>`] , localPdf: 'datasheets/power_sun_ess.pdf' } 
         ]
       },
       trina: {
@@ -1056,7 +1076,7 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/trina_solar.svg',
         tagline: `<?= addslashes($lang['brand_trina_tag']) ?>`,
         products: [
-          { key: 'trina_vertex', category: 'panel', title: `<?= addslashes($lang['ds_trina_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_trina_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_trina_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_trina_panel_spec_2']) ?>`] }
+          { key: 'trina_vertex', category: 'panel', title: `<?= addslashes($lang['ds_trina_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_trina_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_trina_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_trina_panel_spec_2']) ?>`] , localPdf: 'datasheets/trina_vertex.pdf' } 
         ]
       },
       longi: {
@@ -1064,8 +1084,8 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/longi.svg',
         tagline: `<?= addslashes($lang['brand_longi_tag']) ?>`,
         products: [
-          { key: 'longi_himo6', category: 'panel', title: `<?= addslashes($lang['ds_longi_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_longi_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_longi_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_longi_panel_spec_2']) ?>`] },
-          { key: 'longi_battery', category: 'battery', title: `<?= addslashes($lang['ds_longi_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_longi_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_longi_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_longi_bat_spec_2']) ?>`] }
+          { key: 'longi_himo6', category: 'panel', title: `<?= addslashes($lang['ds_longi_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_longi_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_longi_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_longi_panel_spec_2']) ?>`] , localPdf: 'datasheets/longi_himo6.pdf' } ,
+          { key: 'longi_battery', category: 'battery', title: `<?= addslashes($lang['ds_longi_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_longi_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_longi_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_longi_bat_spec_2']) ?>`] , localPdf: 'datasheets/longi_battery.pdf' } 
         ]
       },
       jinko: {
@@ -1073,7 +1093,7 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/jinko_solar.png',
         tagline: `<?= addslashes($lang['brand_jinko_tag']) ?>`,
         products: [
-          { key: 'jinko_tiger', category: 'panel', title: `<?= addslashes($lang['ds_jinko_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_jinko_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_jinko_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_jinko_panel_spec_2']) ?>`] }
+          { key: 'jinko_tiger', category: 'panel', title: `<?= addslashes($lang['ds_jinko_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_jinko_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_jinko_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_jinko_panel_spec_2']) ?>`] , localPdf: 'datasheets/jinko_tiger.pdf' } 
         ]
       },
       ja: {
@@ -1081,7 +1101,7 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/ja_solar.svg',
         tagline: `<?= addslashes($lang['brand_ja_tag']) ?>`,
         products: [
-          { key: 'ja_solar_blue', category: 'panel', title: `<?= addslashes($lang['ds_ja_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_ja_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_ja_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_ja_panel_spec_2']) ?>`] }
+          { key: 'ja_solar_blue', category: 'panel', title: `<?= addslashes($lang['ds_ja_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_ja_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_ja_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_ja_panel_spec_2']) ?>`] , localPdf: 'datasheets/ja_solar_blue.pdf' } 
         ]
       },
       jebel: {
@@ -1089,14 +1109,14 @@ $lang = require_once "lang/{$active_lang}.php";
         logo: 'brands/jebel.png',
         tagline: `<?= addslashes($lang['brand_jebel_tag']) ?>`,
         products: [
-          { key: 'jebel_battery', category: 'battery', title: `<?= addslashes($lang['ds_jebel_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_jebel_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_jebel_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_jebel_bat_spec_2']) ?>`] }
+          { key: 'jebel_battery', category: 'battery', title: `<?= addslashes($lang['ds_jebel_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_jebel_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_jebel_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_jebel_bat_spec_2']) ?>`] , localPdf: 'datasheets/jebel_battery.pdf' } 
         ]
       }
     };
   </script>
 
 <script src="calculator-engine.js?v=3.7"></script>
-  <script src="script.js?v=3.7" defer></script>
+  <script src="script.js?v=4.0" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>
