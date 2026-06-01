@@ -395,7 +395,7 @@ h4 { font-size: 1.05rem; }
 
 .lightbulb-img {
   max-height: 160px;
-  width: 85%;
+  width: 75%;
   object-fit: contain;
 }
 
@@ -2306,10 +2306,10 @@ footer {
     height: 350px;
   }
   .lightbulb-img {
-    max-height: none;
-    max-width: 85%;
-    animation: float 6s ease-in-out infinite;
-  }
+      max-height: none;
+      max-width: 75%;
+      animation: float 6s ease-in-out infinite;
+    }
 
   /* Calculator Overlay */
   .calculator-section {

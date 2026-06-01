@@ -81,8 +81,8 @@ $lang = require_once "lang/{$active_lang}.php";
      h4{font-size:1.05rem;font-weight:900;line-height:1.2;color:#0d1014}
      .hero-text p{font-size:1rem;color:#64748B;margin-bottom:1.5rem;font-weight:500}
 .hero-actions{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem;align-items:center;width:100%}
-      .hero-visual{width:100%;height:180px;display:flex;justify-content:center;align-items:center;position:relative;overflow:hidden;opacity:1}
-      .lightbulb-img{max-height:160px;width:auto;filter:drop-shadow(0 10px 20px rgba(0,0,0,.1))}
+      .hero-visual{width:100%;height:180px;display:flex;justify-content:flex-start;align-items:center;position:relative;overflow:hidden;opacity:1}
+      .lightbulb-img{max-height:160px;width:auto;}
       .text-muted{color:#64748B}
       .bg-blobs{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
       .blob-1,.blob-2{position:absolute;width:200px;height:200px;background:#F1F5F9;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;opacity:.2}
@@ -170,19 +170,18 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <div class="hero-visual" id="hero-slider-visual">
-        <div class="lightning-bg"></div>
         <div class="hero-slider-track" id="hero-slider-track">
           <div class="hero-slide">
             <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500"
-              fetchpriority="high" loading="eager" decoding="async">
+              fetchpriority="high" loading="eager" decoding="async" style="mix-blend-mode: darken;">
           </div>
           <div class="hero-slide">
             <img src="hero-villa.webp" alt="Residential Villa Solar Panels" class="lightbulb-img" width="500" height="500"
-              loading="lazy" decoding="async">
+              loading="lazy" decoding="async" style="mix-blend-mode: darken;">
           </div>
           <div class="hero-slide">
             <img src="hero-commercial.webp?v=3.11" alt="Commercial Industrial Solar Panels" class="lightbulb-img" width="500" height="500"
-              loading="lazy" decoding="async">
+              loading="lazy" decoding="async" style="mix-blend-mode: darken;">
           </div>
         </div>
       </div>
@@ -742,6 +741,32 @@ $lang = require_once "lang/{$active_lang}.php";
         <div class="brand-content">
           <h3>Jebel</h3>
           <p><?= $lang['brand_jebel_tag'] ?></p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span><?= $lang['brand_btn_explore'] ?></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Concept Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="controller" data-brand="concept">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <div class="brand-logo-icon" style="height: 38px; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: var(--color-primary);">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            <span style="margin-left: 10px; font-weight: 700; font-size: 1.25rem; color: var(--color-text-dark);">Concept</span>
+          </div>
+        </div>
+        <div class="brand-content">
+          <h3>Concept</h3>
+          <p>Concept Technologies LLC</p>
         </div>
         <button type="button" class="btn-brand-explore">
           <span><?= $lang['brand_btn_explore'] ?></span>

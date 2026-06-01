@@ -1262,10 +1262,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index >= totalSlides) index = 0;
             
             currentSlide = index;
-            
             // Calculate translation percentage based on number of slides. 
-            // e.g., 3 slides = 33.3333% per slide. So slide 1 is 0, slide 2 is -33.3333%, slide 3 is -66.6666%
-            const translateValue = -(currentSlide * (100 / totalSlides));
+            const isRTL = document.documentElement.getAttribute('dir') === 'rtl' || document.body.getAttribute('dir') === 'rtl';
+            const percent = currentSlide * (100 / totalSlides);
+            const translateValue = isRTL ? percent : -percent;
             heroTrack.style.transform = `translate3d(${translateValue}%, 0, 0)`;
             
             // Update active state on pagination indicators
