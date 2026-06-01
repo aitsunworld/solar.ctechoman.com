@@ -1255,6 +1255,33 @@ document.addEventListener('DOMContentLoaded', () => {
         if (heroVisual) {
             heroVisual.addEventListener('mouseenter', stopSlider);
             heroVisual.addEventListener('mouseleave', startSlider);
+            
+            // Touch swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            heroVisual.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+                stopSlider();
+            }, {passive: true});
+            
+            heroVisual.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                startSlider();
+            }, {passive: true});
+            
+            const handleSwipe = () => {
+                const swipeThreshold = 50;
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Swipe left -> next slide
+                    nextSlide();
+                }
+                if (touchEndX > touchStartX + swipeThreshold) {
+                    // Swipe right -> prev slide
+                    updateSlider(currentSlide - 1);
+                }
+            }
         }
 
         // Initialize slider

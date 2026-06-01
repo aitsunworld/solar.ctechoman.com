@@ -2298,7 +2298,7 @@ footer {
 
   .hero-visual {
     height: 500px;
-    overflow: visible;
+    overflow: hidden;
   }
   .lightning-bg {
     width: 350px;
