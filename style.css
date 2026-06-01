@@ -380,6 +380,8 @@ h4 { font-size: 1.05rem; }
   align-items: center;
   position: relative;
   overflow: hidden;
+  background-color: #FFFFFF;
+  border-radius: 1.5rem;
 }
 
 .lightning-bg {
@@ -393,8 +395,9 @@ h4 { font-size: 1.05rem; }
 
 .lightbulb-img {
   max-height: 160px;
-  width: auto;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+  width: 85%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .hero-slider-track {
@@ -2300,6 +2303,7 @@ footer {
   .hero-visual {
     height: 500px;
     overflow: hidden;
+    background-color: transparent; /* Seamless on desktop */
   }
   .lightning-bg {
     width: 350px;
@@ -2307,7 +2311,7 @@ footer {
   }
   .lightbulb-img {
     max-height: none;
-    max-width: 100%;
+    max-width: 85%;
     animation: float 6s ease-in-out infinite;
   }
 
