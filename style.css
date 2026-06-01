@@ -584,6 +584,10 @@ input[type="range"]::-webkit-slider-thumb {
   text-align: end;
 }
 
+.calc-form {
+  min-width: 0;
+}
+
 /* Dropdowns Forms */
 .calc-form select {
   width: 100%;
