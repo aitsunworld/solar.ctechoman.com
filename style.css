@@ -653,13 +653,12 @@ input[type="range"]::-webkit-slider-thumb {
 
 .appliance-filter-bar {
   display: flex;
-  gap: 0.25rem;
+  flex-wrap: wrap;
+  gap: 0.35rem;
   margin-bottom: 1.25rem;
   background: var(--color-accent-light);
-  padding: 0.25rem;
+  padding: 0.35rem;
   border-radius: 1rem;
-  overflow-x: auto;
-  scrollbar-width: none;
   border: 1px solid rgba(0, 0, 0, 0.03);
   width: 100%;
   max-width: 100%;
@@ -2376,7 +2375,7 @@ footer {
 
   .calculator-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
     gap: 5rem;
     padding: 4rem;
   }
@@ -2393,6 +2392,7 @@ footer {
   /* Appliance Grid Sizer desktop view */
   #appliance-inputs-container {
     padding-right: 0.75rem;
+    height: 520px;
   }
 
   .appliance-grid {
