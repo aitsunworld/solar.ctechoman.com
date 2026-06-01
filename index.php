@@ -99,8 +99,8 @@ $lang = require_once "lang/{$active_lang}.php";
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=3.5" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=3.5"></noscript>
+  <link rel="preload" as="style" href="style.css?v=3.6" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=3.6"></noscript>
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -1095,8 +1095,8 @@ $lang = require_once "lang/{$active_lang}.php";
     };
   </script>
 
-<script src="calculator-engine.js?v=3.5"></script>
-  <script src="script.js?v=3.5" defer></script>
+<script src="calculator-engine.js?v=3.6"></script>
+  <script src="script.js?v=3.6" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>
