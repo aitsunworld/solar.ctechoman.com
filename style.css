@@ -397,7 +397,6 @@ h4 { font-size: 1.05rem; }
   max-height: 160px;
   width: 85%;
   object-fit: contain;
-  mix-blend-mode: multiply;
 }
 
 .hero-slider-track {
