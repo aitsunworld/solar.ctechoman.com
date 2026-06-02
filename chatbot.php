@@ -200,6 +200,62 @@ function handleLeadSubmit($data) {
     }
 }
 
+// Smart localized safety fallback for Omani solar market when API key is missing or offline
+function getSmartFallbackReply($prompt, $lang) {
+    $promptLower = mb_strtolower($prompt, 'UTF-8');
+    $isAr = ($lang === 'ar');
+
+    $costKeys = ['cost', 'price', 'how much', 'expensive', 'afford', 'omr', 'pricing', 'سعر', 'تكلفة', 'كم', 'ريال', 'غالي'];
+    $saveKeys = ['save', 'saving', 'roi', 'return', 'payback', 'benefit', 'electricity bill', 'وفر', 'توفير', 'عائد', 'ربح', 'فاتورة'];
+    $instKeys = ['install', 'installation', 'how long', 'process', 'steps', 'setup', 'time', 'تركيب', 'كيف', 'خطوات', 'مدة', 'وقت'];
+
+    $matchedCost = false;
+    foreach ($costKeys as $key) {
+        if (strpos($promptLower, $key) !== false) {
+            $matchedCost = true;
+            break;
+        }
+    }
+
+    $matchedSave = false;
+    foreach ($saveKeys as $key) {
+        if (strpos($promptLower, $key) !== false) {
+            $matchedSave = true;
+            break;
+        }
+    }
+
+    $matchedInst = false;
+    foreach ($instKeys as $key) {
+        if (strpos($promptLower, $key) !== false) {
+            $matchedInst = true;
+            break;
+        }
+    }
+
+    if ($matchedCost) {
+        return $isAr 
+            ? "☀️ **تكاليف أنظمة الطاقة الشمسية في سلطنة عُمان:**\n\nتتراوح تكلفة التركيب السكني النموذجي بين **1,500 إلى 4,500 ريال عُماني** حسب حجم الفيلا واستهلاك الكهرباء.\n\n• نظام 3 كيلوواط (مناسب للمنازل الصغيرة): ~1,500 ريال عُماني\n• نظام 5 كيلوواط (متوسط): ~2,500 ريال عُماني\n• نظام 10 كيلوواط (فلل كبيرة): ~4,500 ريال عُماني\n\nتتضمن التكلفة الألواح عالية الكفاءة والعاكس الذكي مع ضمان لمدة 25 سنة. هل ترغب في جدولة مسح ميداني مجاني لمنزلك لتحديد التكلفة الدقيقة؟"
+            : "☀️ **Solar System Costs in Oman:**\n\nA typical residential solar installation in Oman ranges from **OMR 1,500 to OMR 4,500** depending on system capacity:\n\n• 3kW System (small villa): ~OMR 1,500\n• 5kW System (average villa): ~OMR 2,500\n• 10kW System (large villa): ~OMR 4,500\n\nThese estimates include premium Tier-1 solar panels, smart inverter, structural framing, and grid integration. Would you like to schedule a free site survey to get an exact quote?";
+    }
+
+    if ($matchedSave) {
+        return $isAr 
+            ? "💰 **التوفير وعائد الاستثمار في عُمان:**\n\nتتيح لك أنظمة الطاقة الشمسية توفير ما بين **40 إلى 120 ريال عُماني شهرياً** على فاتورة الكهرباء:\n\n• **فترة استرداد رأس المال:** بين 4 إلى 6 سنوات فقط.\n• **عمر النظام التشغيلي:** أكثر من 25 عاماً (مما يعني 20 عاماً من الكهرباء المجانية!).\n• **عائد الاستثمار:** يتراوح بين 200% إلى 400% على المدى الطويل.\n\nيمكننا تحويل منزلك بالكامل إلى الطاقة النظيفة. هل ترغب في التحدث إلى مهندس مختص لحساب نسبة التوفير الدقيقة لك؟"
+            : "💰 **Solar Savings & Payback in Oman:**\n\nMost homeowners in Oman save between **OMR 40 to OMR 120 per month** on their electricity bills after going solar:\n\n• **Payback Period:** Typically 4 to 6 years.\n• **System Lifespan:** 25+ years (meaning 20 years of 100% free electricity!).\n• **Total Return on Investment (ROI):** 200% to 400% over the system life.\n\nWould you like to schedule a quick call with one of our energy consultants to run a detailed savings forecast for your property?";
+    }
+
+    if ($matchedInst) {
+        return $isAr 
+            ? "⚡ **خطوات تركيب النظام والجدول الزمني:**\n\nنقوم بإدارة عملية التركيب بالكامل في 3 خطوات بسيطة وسريعة:\n\n1. **المسح الميداني والتصميم (يومان):** نقوم بزيارة موقعك وتصميم أفضل تخطيط للألواح مجاناً.\n2. **الموافقات الرسمية (1-2 أسبوع):** نقوم بتأمين كافة الموافقات من هيئة تنظيم الخدمات العامة (APSR) والبلدية.\n3. **التركيب والتشغيل (3-5 أيام):** نقوم بتركيب النظام وربطه بالشبكة الحكومية للبدء في توفير فاتورتك!\n\nهل ترغب في جدولة الخطوة الأولى (المسح الميداني المجاني) هذا الأسبوع؟"
+            : "⚡ **Installation Process & Timeline in Oman:**\n\nWe manage the entire solar journey for you in 3 clear steps:\n\n1. **Site Survey & Design (2 days):** We conduct a free technical site analysis and create a custom layout design.\n2. **Permits & Approvals (1-2 weeks):** We secure all necessary grid-connection approvals from APSR and local authorities.\n3. **Installation & Commissioning (3-5 days):** Our certified engineers install the panels, configure the inverter, and activate net-metering!\n\nWould you like to schedule your free site survey this week to get started?";
+    }
+
+    return $isAr 
+        ? "مرحباً! أنا طارق، مستشار الطاقة الشمسية في كونسبت تكنولوجيز. يسعدني جداً الإجابة على أي استفسار لديك حول أنظمة الطاقة الشمسية، التكاليف في عُمان، أو كيفية خفض فاتورة الكهرباء الخاصة بك.\n\nأنصحك باستخدام حاسبتنا المتقدمة أعلى الصفحة أو جدولة زيارة ميدانية مجانية لمنزلك للحصول على تقرير دقيق ومخصص. كيف يمكنني مساعدتك اليوم؟"
+        : "Hello! I am Tariq, senior solar consultant at Concept Technologies LLC. I am here to help you with any questions regarding solar energy systems, OMR pricing in Oman, or reducing your electricity bill.\n\nI highly recommend using our advanced solar calculator at the top of this page or booking a free home site survey to get a precise solar layout report. How can I help you today?";
+}
+
 // ─── ACTION 2: DYNAMIC AI SALES ADVISOR (GROQ COMPATIBLE LLAMA-3.3) ─────────
 function handleAIChat($prompt, $lang, $calcContext) {
     if (empty($prompt)) {
@@ -207,13 +263,15 @@ function handleAIChat($prompt, $lang, $calcContext) {
         exit;
     }
 
-    // Safety fallback if key is not configured
-    if (GROQ_API_KEY === "YOUR_GROQ_API_KEY_HERE" || empty(GROQ_API_KEY)) {
-        $fallback = [
-            "ar" => "مرحباً! يبدو أنني أواجه مشكلة في الاتصال بالذكاء الاصطناعي حالياً. هل ترغب في معرفة المزيد عن تكاليف أنظمتنا أو حساب توفيرك الكهربائي؟",
-            "en" => "Hi! It seems my AI engine is currently offline. Would you like to check our system costs, compute your solar savings, or speak with an expert?"
-        ];
-        json_response(["status" => "ok", "reply" => $fallback[$lang] ?? $fallback["en"]]);
+    // Safety fallback if key is placeholder or invalid
+    $isPlaceholder = empty(GROQ_API_KEY) || 
+                     strpos(GROQ_API_KEY, "YOUR_") !== false || 
+                     strpos(GROQ_API_KEY, "gsk_5F6E8") !== false ||
+                     strlen(GROQ_API_KEY) < 20;
+
+    if ($isPlaceholder) {
+        $reply = getSmartFallbackReply($prompt, $lang);
+        json_response(["status" => "ok", "reply" => $reply]);
         exit;
     }
 
@@ -287,15 +345,20 @@ function handleAIChat($prompt, $lang, $calcContext) {
     $curlError = curl_error($ch);
     curl_close($ch);
 
-    if ($curlError) {
-        error_log("[SolarChatbot Proxy] Groq API error: " . $curlError);
-        json_response(["status" => "error", "message" => "AI engine unreachable"], 502);
+    if ($curlError || $httpCode !== 200) {
+        if ($curlError) {
+            error_log("[SolarChatbot Proxy] Groq API error: " . $curlError);
+        } else {
+            error_log("[SolarChatbot Proxy] Groq API returned error. HTTP Code: " . $httpCode . ", Payload: " . $response);
+        }
+        $reply = getSmartFallbackReply($prompt, $lang);
+        json_response(["status" => "ok", "reply" => $reply]);
         exit;
     }
 
     $resData = json_decode($response, true);
 
-    if ($httpCode === 200 && isset($resData['choices'][0]['message']['content'])) {
+    if (isset($resData['choices'][0]['message']['content'])) {
         $aiReply = $resData['choices'][0]['message']['content'];
         
         // Save the assistant's reply to the conversation memory
@@ -303,11 +366,8 @@ function handleAIChat($prompt, $lang, $calcContext) {
         
         json_response(["status" => "ok", "reply" => $aiReply]);
     } else {
-        error_log("[SolarChatbot Proxy] Groq API returned error. HTTP Code: " . $httpCode . ", Payload: " . $response);
-        json_response([
-            "status" => "error", 
-            "message" => "AI engine returned error code: " . $httpCode
-        ], $httpCode ?: 500);
+        $reply = getSmartFallbackReply($prompt, $lang);
+        json_response(["status" => "ok", "reply" => $reply]);
     }
 }
 
@@ -317,7 +377,6 @@ function handleAnalyticsLog($data) {
         json_response(["status" => "error", "message" => "Missing log data"], 400);
         exit;
     }
-
     $logFile = __DIR__ . "/analytics.log";
     
     // Mask customer IP ranges to enforce privacy guidelines

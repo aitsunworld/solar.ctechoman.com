@@ -107,8 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const resConnectedLoad = document.getElementById('res-connected-load');
     const resDailyConsumption = document.getElementById('res-daily-consumption');
 
-    let activeSizerMode = 'bill'; // 'bill' | 'appliances'
-    const applianceQuantities = {};
+    let activeSizerMode = 'appliances'; // 'bill' | 'appliances'
+    const applianceQuantities = {
+        residential: {},
+        commercial: {},
+        industrial: {}
+    };
 
     // Get active language context
     const isArabic = document.documentElement.lang === 'ar';
@@ -140,8 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Setup initial default quantities for this group if not set
         filteredAppliances.forEach(app => {
-            if (applianceQuantities[app.id] === undefined) {
-                applianceQuantities[app.id] = app.default_qty || 0;
+            if (applianceQuantities[selectedPropType][app.id] === undefined) {
+                applianceQuantities[selectedPropType][app.id] = app.default_qty || 0;
             }
         });
 
@@ -184,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         filteredAppliances.forEach(app => {
             const name = isArabic ? app.name_ar : app.name_en;
-            const currentQty = applianceQuantities[app.id];
+            const currentQty = applianceQuantities[selectedPropType][app.id];
             const activeClass = currentQty > 0 ? ' active-card' : '';
             const disabledAttr = currentQty === 0 ? 'disabled' : '';
             
@@ -202,8 +206,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Calculate dynamic load contribution
-            const kwhDaily = ((app.min_w * app.hours * currentQty) / 1000).toFixed(1);
+            // Calculate dynamic load contribution using average wattage to match sizer engine
+            const avgWatts = (app.min_w + app.max_w) / 2;
+            const kwhDaily = ((avgWatts * app.hours * currentQty) / 1000).toFixed(1);
             const loadText = currentQty > 0 
                 ? (isArabic ? `الاستهلاك: ${kwhDaily} كيلوواط/يوم` : `Load: ${kwhDaily} kWh/d`)
                 : '';
@@ -546,7 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
             result = window.SolarCalculatorEngine.calculate(monthlyBill, selectedPropType, selectedLocation);
             if (loadRecs) loadRecs.style.display = 'none';
         } else {
-            result = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities, selectedPropType, selectedLocation);
+            result = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities[selectedPropType], selectedPropType, selectedLocation);
             if (loadRecs) loadRecs.style.display = 'block';
 
             // Animate Inverter and Battery Specs
@@ -644,7 +649,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const appSpec = appliances.find(a => a.id === appId);
             if (!appSpec) return;
 
-            let qty = applianceQuantities[appId] || 0;
+            const selectedPropType = propType.value || 'residential';
+            let qty = applianceQuantities[selectedPropType][appId] || 0;
 
             if (btn.classList.contains('plus')) {
                 qty = Math.min(99, qty + 1);
@@ -652,7 +658,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 qty = Math.max(0, qty - 1);
             }
 
-            applianceQuantities[appId] = qty;
+            applianceQuantities[selectedPropType][appId] = qty;
             
             // Live DOM updates
             const qtyText = document.getElementById(`qty-${appId}`);
@@ -668,7 +674,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            const kwhDaily = ((appSpec.min_w * appSpec.hours * qty) / 1000).toFixed(1);
+            // Calculate dynamic load contribution using average wattage to match sizer engine
+            const avgWatts = (appSpec.min_w + appSpec.max_w) / 2;
+            const kwhDaily = ((avgWatts * appSpec.hours * qty) / 1000).toFixed(1);
             const loadValText = document.getElementById(`load-val-${appId}`);
             if (loadValText) {
                 loadValText.textContent = qty > 0 

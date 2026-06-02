@@ -149,15 +149,15 @@
 
       <div class="calc-form">
         <div class="calc-tabs" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-          <button id="tab-bill" class="calc-tab active" style="flex: 1; padding: 0.75rem; border: none; border-radius: var(--radius-pill); background: var(--color-primary); color: #fff; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-            Bill Estimator
-          </button>
-          <button id="tab-appliances" class="calc-tab" style="flex: 1; padding: 0.75rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: transparent; color: var(--color-text); font-weight: 600; cursor: pointer; transition: all 0.2s;">
+          <button id="tab-appliances" class="calc-tab active" style="flex: 1; padding: 0.75rem; border: none; border-radius: var(--radius-pill); background: var(--color-primary); color: #fff; font-weight: 600; cursor: pointer; transition: all 0.2s;">
             Appliance Auditor
+          </button>
+          <button id="tab-bill" class="calc-tab" style="flex: 1; padding: 0.75rem; border: 1.5px solid var(--color-border); border-radius: var(--radius-pill); background: transparent; color: var(--color-text); font-weight: 600; cursor: pointer; transition: all 0.2s;">
+            Bill Estimator
           </button>
         </div>
 
-        <div id="bill-inputs-container">
+        <div id="bill-inputs-container" style="display: none;">
           <h3 class="mb-3">Monthly Bill (OMR)</h3>
           <div class="slider-container">
             <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill (OMR)">
@@ -165,7 +165,7 @@
           </div>
         </div>
 
-        <div id="appliance-inputs-container" style="display: none; max-height: 480px; overflow-y: auto; padding-right: 0.5rem; margin-bottom: 1.5rem; text-align: start;">
+        <div id="appliance-inputs-container" style="max-height: 480px; overflow-y: auto; padding-right: 0.5rem; margin-bottom: 1.5rem; text-align: start;">
           <!-- Appliances rendered dynamically via Javascript for multi-language SSOT support -->
         </div>
 

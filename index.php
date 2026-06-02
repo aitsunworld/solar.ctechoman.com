@@ -48,7 +48,7 @@ $lang = require_once "lang/{$active_lang}.php";
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Preload LCP hero image and nav logo -->
-  <link rel="preload" as="image" href="lightbulb.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="lightbulb.png" fetchpriority="high">
   <link rel="preload" as="image" href="https://www.ctechoman.com/public/logo.webp">
 
 <!-- CRITICAL INLINE CSS: Only what's needed for above-fold render -->
@@ -172,16 +172,16 @@ $lang = require_once "lang/{$active_lang}.php";
       <div class="hero-visual" id="hero-slider-visual">
         <div class="hero-slider-track" id="hero-slider-track">
           <div class="hero-slide">
-            <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500"
-              fetchpriority="high" loading="eager" decoding="async" style="mix-blend-mode: darken;">
+            <img src="lightbulb.png" alt="Renewable Energy" class="lightbulb-img" width="500" height="500"
+              fetchpriority="high" loading="eager" decoding="async" style="mix-blend-mode: multiply;">
           </div>
           <div class="hero-slide">
-            <img src="hero-villa.webp" alt="Residential Villa Solar Panels" class="lightbulb-img" width="500" height="500"
-              loading="lazy" decoding="async" style="mix-blend-mode: darken;">
+            <img src="hero-villa.png" alt="Residential Villa Solar Panels" class="lightbulb-img" width="500" height="500"
+              loading="lazy" decoding="async" style="mix-blend-mode: multiply;">
           </div>
           <div class="hero-slide">
-            <img src="hero-commercial.webp?v=3.11" alt="Commercial Industrial Solar Panels" class="lightbulb-img" width="500" height="500"
-              loading="lazy" decoding="async" style="mix-blend-mode: darken;">
+            <img src="hero-commercial.png" alt="Commercial Industrial Solar Panels" class="lightbulb-img" width="500" height="500"
+              loading="lazy" decoding="async" style="mix-blend-mode: multiply;">
           </div>
         </div>
       </div>
@@ -243,15 +243,15 @@ $lang = require_once "lang/{$active_lang}.php";
 
       <div class="calc-form">
         <div class="calc-tabs">
-          <button id="tab-bill" class="calc-tab active">
-            <?= $active_lang === 'ar' ? 'تقدير الفاتورة' : 'Bill Estimator' ?>
-          </button>
-          <button id="tab-appliances" class="calc-tab">
+          <button id="tab-appliances" class="calc-tab active">
             <?= $active_lang === 'ar' ? 'مدقق الأجهزة' : 'Appliance Auditor' ?>
+          </button>
+          <button id="tab-bill" class="calc-tab">
+            <?= $active_lang === 'ar' ? 'تقدير الفاتورة' : 'Bill Estimator' ?>
           </button>
         </div>
 
-        <div id="bill-inputs-container">
+        <div id="bill-inputs-container" style="display: none;">
           <h3 class="mb-3"><?= $lang['calc_monthly_bill'] ?></h3>
           <div class="slider-container">
             <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="<?= $lang['calc_monthly_bill'] ?>">
@@ -259,7 +259,7 @@ $lang = require_once "lang/{$active_lang}.php";
           </div>
         </div>
 
-        <div id="appliance-inputs-container" style="display: none;">
+        <div id="appliance-inputs-container">
           <!-- Appliances rendered dynamically via Javascript for multi-language SSOT support -->
         </div>
 
