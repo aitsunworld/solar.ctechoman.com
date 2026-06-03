@@ -1,10 +1,14 @@
-# verify_all.py
 import os
+import sys
 import time
 import json
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+
+# Ensure UTF-8 output on Windows terminal
+if sys.version_info >= (3, 7):
+    sys.stdout.reconfigure(encoding='utf-8')
 
 ARTIFACT_DIR = r"C:\Users\Dell\.gemini\antigravity-ide\brain\16a35125-41a5-485d-b60a-4c70ddba3d7a"
 
@@ -34,6 +38,11 @@ def run_verification():
         driver.set_window_size(1280, 1024)
         driver.get(en_url)
         time.sleep(2)
+        
+        # Scroll to calculator to trigger lazy load observer
+        calculator = driver.find_element(By.ID, "calculator")
+        driver.execute_script("arguments[0].scrollIntoView(true);", calculator)
+        time.sleep(1)
         
         # Check Console Errors
         console_logs = driver.get_log('browser')
@@ -131,6 +140,15 @@ def run_verification():
         driver.save_screenshot(os.path.join(ARTIFACT_DIR, "step_5_bill_input_en.png"))
         print("Captured Step 5: Bill Slider (EN)")
         
+        # Debug journey styles in the DOM
+        journey_display = driver.execute_script("return window.getComputedStyle(document.getElementById('residential-discovery-journey')).display;")
+        panel5_display = driver.execute_script("return window.getComputedStyle(document.getElementById('discovery-panel-5')).display;")
+        panel5_opacity = driver.execute_script("return window.getComputedStyle(document.getElementById('discovery-panel-5')).opacity;")
+        rect_journey = driver.execute_script("return document.getElementById('residential-discovery-journey').getBoundingClientRect();")
+        rect_panel5 = driver.execute_script("return document.getElementById('discovery-panel-5').getBoundingClientRect();")
+        print(f"DEBUG Step 5 styles: journey={journey_display}, panel5={panel5_display}, panel5_opacity={panel5_opacity}")
+        print(f"DEBUG Step 5 rects: journey={rect_journey}, panel5={rect_panel5}")
+        
         # Enter a deviating bill manually to test calibration warning (>15%)
         # Default estimated bill should be around 50-80 OMR, let's set slider to 400 OMR
         bill_slider = driver.find_element(By.ID, "discovery-bill-slider")
@@ -140,14 +158,26 @@ def run_verification():
         # Click enter bill manually (triggers calibration)
         enter_bill_btn = driver.find_element(By.ID, "btn-calibrate-bill")
         driver.execute_script("arguments[0].click();", enter_bill_btn)
-        time.sleep(1.5) # Wait for calibration simulation delay (1000ms)
+        time.sleep(2.5) # Wait for calibration simulation delay (1000ms + buffer)
         
         # 6. Step 6: Calibration Results
         panel6 = driver.find_element(By.ID, "discovery-panel-6")
+        status_msg = driver.find_element(By.ID, "calibration-status-message").text
         warning_box = driver.find_element(By.ID, "calibration-warning-box")
         warning_displayed = warning_box.is_displayed()
+        warning_text = warning_box.text
+        success_box = driver.find_element(By.ID, "calibration-success-box")
+        success_displayed = success_box.is_displayed()
+        success_text = success_box.text
+        
         driver.save_screenshot(os.path.join(ARTIFACT_DIR, "step_6_calibration_en.png"))
-        print(f"Captured Step 6: Calibration Warning (EN) = {warning_displayed}")
+        
+        # Clean non-ascii emojis
+        clean_status = status_msg.encode('ascii', 'ignore').decode('ascii')
+        clean_warning = warning_text.encode('ascii', 'ignore').decode('ascii')
+        clean_success = success_text.encode('ascii', 'ignore').decode('ascii')
+        
+        print(f"Captured Step 6: Status={clean_status}, Warning Displayed={warning_displayed} ('{clean_warning}'), Success Displayed={success_displayed} ('{clean_success}')")
         report.append({
             "check": "Calibration logic warning triggers on >15% variance (EN)",
             "passed": panel6.is_displayed() and warning_displayed
@@ -156,7 +186,7 @@ def run_verification():
         # Navigate to Step 7: Reveal final dashboard
         goto7_btn = driver.find_element(By.ID, "btn-goto-step7")
         driver.execute_script("arguments[0].click();", goto7_btn)
-        time.sleep(1.2)
+        time.sleep(1.5)
         
         # 7. Step 7: Reveal personalized dashboard
         panel7 = driver.find_element(By.ID, "discovery-panel-7")
@@ -167,11 +197,16 @@ def run_verification():
         monthly_cons_val = driver.find_element(By.ID, "db-val-monthly-cons").text
         daily_cons_val = driver.find_element(By.ID, "db-val-daily-cons").text
         rec_size_val = driver.find_element(By.ID, "db-val-rec-size").text
-        monthly_prod_val = driver.find_element(By.ID, "db-val-monthly-prod").text
         monthly_sav_val = driver.find_element(By.ID, "db-val-monthly-sav").text
         yearly_sav_val = driver.find_element(By.ID, "db-val-yearly-sav").text
-        payback_val = driver.find_element(By.ID, "db-val-payback").text
         lifetime_sav_val = driver.find_element(By.ID, "db-val-lifetime-sav").text
+        
+        reduction_pct = driver.find_element(By.ID, "db-val-reduction-pct").text
+        payback_roi = driver.find_element(By.ID, "db-val-payback-roi").text
+        install_cost = driver.find_element(By.ID, "db-val-install-cost").text
+        panel_count = driver.find_element(By.ID, "db-val-panel-count").text
+        inverter_size = driver.find_element(By.ID, "db-val-inverter-size").text
+        battery_size = driver.find_element(By.ID, "db-val-battery-size").text
         
         energy_score = driver.find_element(By.ID, "score-energy-label").text
         suitability_score = driver.find_element(By.ID, "score-suitability-label").text
@@ -182,12 +217,34 @@ def run_verification():
         print("Captured Step 7: Dashboard (EN)")
         print(f"Metrics: Monthly Cons={monthly_cons_val}, Solar Size={rec_size_val}, Monthly Sav={monthly_sav_val}")
         print(f"Scores: Energy Score={energy_score}, Suitability={suitability_score}, CO2={co2_val}, Trees={trees_val}")
+        print(f"Debug Detail Metrics: reduction_pct='{reduction_pct}', payback_roi='{payback_roi}', install_cost='{install_cost}', panel_count='{panel_count}', inverter_size='{inverter_size}', battery_size='{battery_size}'")
         
+        cond_panel7 = panel7.is_displayed()
+        cond_lead_form = lead_form.is_displayed()
+        cond_dashboard = dashboard.is_displayed()
+        cond_monthly = "kWh" in monthly_cons_val
+        cond_rec = "kW" in rec_size_val
+        cond_sav = "OMR" in monthly_sav_val
+        cond_energy = "%" in energy_score
+        cond_suit = len(suitability_score) > 0
+        cond_co2 = "Tons" in co2_val
+        cond_red = "%" in reduction_pct
+        cond_panels = "Panels" in panel_count
+        cond_inv = "kW" in inverter_size
+        cond_bat = "kWh" in battery_size
+        
+        print(f"Dashboard conditions: panel7={cond_panel7}, lead_form={cond_lead_form}, dashboard={cond_dashboard}")
+        print(f"Metric conditions: monthly={cond_monthly}, rec={cond_rec}, sav={cond_sav}, energy={cond_energy}, suit={cond_suit}, co2={cond_co2}")
+        print(f"Detail conditions: red={cond_red}, panels={cond_panels}, inv={cond_inv}, bat={cond_bat}")
+        
+        step7_passed = cond_panel7 and cond_lead_form and cond_dashboard and \
+                       cond_monthly and cond_rec and cond_sav and \
+                       cond_energy and cond_suit and cond_co2 and \
+                       cond_red and cond_panels and cond_inv and cond_bat
+                       
         report.append({
             "check": "Dashboard elements and gamified scores rendered correctly (EN)",
-            "passed": panel7.is_displayed() and lead_form.is_displayed() and dashboard.is_displayed() and \
-                      "kWh" in monthly_cons_val and "kW" in rec_size_val and "OMR" in monthly_sav_val and \
-                      "%" in energy_score and len(suitability_score) > 0 and "Tons" in co2_val
+            "passed": step7_passed
         })
         
         # Verify Commercial mode restores standard tabs and layout
@@ -206,7 +263,6 @@ def run_verification():
             "check": "Switching to Commercial mode restores standard layouts (EN)",
             "passed": standard_inputs.is_displayed() and standard_results.is_displayed() and is_journey_hidden
         })
-
     except Exception as e:
         print(f"Error during English verification: {e}")
         report.append({
@@ -225,6 +281,11 @@ def run_verification():
     try:
         driver.get(ar_url)
         time.sleep(2)
+        
+        # Scroll to calculator to trigger lazy load observer
+        calculator = driver.find_element(By.ID, "calculator")
+        driver.execute_script("arguments[0].scrollIntoView(true);", calculator)
+        time.sleep(1)
         
         # Check Console Errors
         console_logs = driver.get_log('browser')
@@ -296,7 +357,7 @@ def run_verification():
         
         enter_bill_btn = driver.find_element(By.ID, "btn-calibrate-bill")
         driver.execute_script("arguments[0].click();", enter_bill_btn)
-        time.sleep(1.5)
+        time.sleep(2.5)
         
         # 6. Step 6: Calibration Results (AR)
         driver.save_screenshot(os.path.join(ARTIFACT_DIR, "step_6_calibration_ar.png"))

@@ -247,86 +247,132 @@ $lang = require_once "lang/{$active_lang}.php";
 
         <div id="residential-discovery-results" style="display: none;">
           <div class="discovery-dashboard">
-            <h3 class="mb-3"><?= $active_lang === 'ar' ? 'تقرير تحليل الطاقة لمنزلك' : 'Your Home Energy Assessment' ?></h3>
-            <div class="discovery-grid">
-              <div class="discovery-metric-card">
-                <span class="metric-label"><?= $lang['db_daily_cons'] ?></span>
-                <strong class="metric-val text-eco" id="db-val-daily-cons">0 kWh/day</strong>
-              </div>
-              <div class="discovery-metric-card">
-                <span class="metric-label"><?= $lang['db_monthly_cons'] ?></span>
-                <strong class="metric-val" id="db-val-monthly-cons">0 kWh/month</strong>
-              </div>
-              <div class="discovery-metric-card">
-                <span class="metric-label"><?= $lang['db_rec_size'] ?></span>
-                <strong class="metric-val text-eco" id="db-val-rec-size">0 kW</strong>
-              </div>
-              <div class="discovery-metric-card">
-                <span class="metric-label"><?= $lang['db_monthly_prod'] ?></span>
-                <strong class="metric-val" id="db-val-monthly-prod">0 kWh</strong>
-              </div>
-              <div class="discovery-metric-card">
-                <span class="metric-label"><?= $lang['db_monthly_sav'] ?></span>
-                <strong class="metric-val text-eco" id="db-val-monthly-sav">0 OMR</strong>
-              </div>
-              <div class="discovery-metric-card">
-                <span class="metric-label"><?= $lang['db_yearly_sav'] ?></span>
-                <strong class="metric-val text-eco" id="db-val-yearly-sav">0 OMR</strong>
-              </div>
-              <div class="discovery-metric-card">
-                <span class="metric-label"><?= $lang['db_payback'] ?></span>
-                <strong class="metric-val" id="db-val-payback">0 Years</strong>
-              </div>
-              <div class="discovery-metric-card highlight-lifetime">
-                <span class="metric-label"><?= $lang['db_lifetime_sav'] ?></span>
-                <strong class="metric-val text-eco" id="db-val-lifetime-sav">0 OMR</strong>
-              </div>
-            </div>
-
-            <!-- Gamification Section -->
-            <div class="gamification-section mt-4">
-              <div class="game-score-card">
-                <div class="game-score-header">
-                  <span>⚡ <?= $lang['score_energy_ind'] ?></span>
-                  <strong id="score-energy-label">Good</strong>
+            <h3 class="mb-4 text-center" style="font-weight: 800; font-size: 1.6rem; color: #0d1014;"><?= $active_lang === 'ar' ? 'تقرير تحليل الطاقة لمنزلك' : 'Your Home Energy Assessment' ?></h3>
+            
+            <!-- Category 1: Financial Benefits & Savings (Show First) -->
+            <div class="dashboard-section mb-4" style="background: rgba(250, 250, 250, 0.5); padding: 1.25rem; border-radius: 16px; border: 1px solid rgba(0, 0, 0, 0.03);">
+              <h4 class="section-title-discovery mb-3" style="font-weight: 800; font-size: 1.15rem; color: #0d1014; display: flex; align-items: center; gap: 8px;">
+                <span>💰</span> <?= $active_lang === 'ar' ? 'الفوائد المالية والتوفير' : 'Financial Benefits & Savings' ?>
+              </h4>
+              <div class="discovery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $lang['db_monthly_sav'] ?></span>
+                  <strong class="metric-val text-eco" id="db-val-monthly-sav" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0 OMR</strong>
                 </div>
-                <div class="progress-bar-wrapper">
-                  <div class="progress-bar-fill fill-energy" id="score-energy-fill" style="width: 0%;"></div>
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $lang['db_yearly_sav'] ?></span>
+                  <strong class="metric-val text-eco" id="db-val-yearly-sav" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0 OMR</strong>
                 </div>
-              </div>
-
-              <div class="game-score-card">
-                <div class="game-score-header">
-                  <span>🏠 <?= $lang['score_suitability'] ?></span>
-                  <strong id="score-suitability-label">A</strong>
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $active_lang === 'ar' ? 'نسبة خفض فاتورة الكهرباء' : 'Electricity Cost Reduction' ?></span>
+                  <strong class="metric-val text-eco" id="db-val-reduction-pct" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0%</strong>
                 </div>
-                <div class="suitability-badges" id="suitability-badge-container">
-                  <span class="suit-badge" data-score="C">C</span>
-                  <span class="suit-badge" data-score="B">B</span>
-                  <span class="suit-badge" data-score="A">A</span>
-                  <span class="suit-badge" data-score="A+">A+</span>
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $lang['db_payback'] ?> / <?= $active_lang === 'ar' ? 'عائد الاستثمار (ROI)' : 'ROI' ?></span>
+                  <strong class="metric-val" id="db-val-payback-roi" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 Years / 0%</strong>
                 </div>
-              </div>
-
-              <div class="game-score-card green-impact-card">
-                <div class="game-score-header">
-                  <span>🌱 <?= $lang['score_green_impact'] ?></span>
+                <div class="discovery-metric-card highlight-lifetime" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(62, 182, 73, 0.15);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #166534; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;"><?= $lang['db_lifetime_sav'] ?></span>
+                  <strong class="metric-val text-eco" id="db-val-lifetime-sav" style="font-size: 1.35rem; font-weight: 900; color: #15803d;">0 OMR</strong>
                 </div>
-                <div class="green-metrics">
-                  <div class="green-sub">
-                    <span id="score-co2-val">0.0</span>
-                    <small><?= $lang['green_co2'] ?></small>
-                  </div>
-                  <div class="green-sub">
-                    <span id="score-trees-val">0</span>
-                    <small><?= $lang['green_trees'] ?></small>
-                  </div>
-                </div>
-                <div class="animated-green-bar">
-                  <div class="green-leaf-progress" id="green-progress-bar" style="width: 0%;"></div>
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $active_lang === 'ar' ? 'التكلفة التقديرية لتوريد وتركيب النظام' : 'Est. Installation Cost' ?></span>
+                  <strong class="metric-val" id="db-val-install-cost" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 OMR</strong>
                 </div>
               </div>
             </div>
+
+            <!-- Category 2: Home Energy Consumption & Independence (Show Second) -->
+            <div class="dashboard-section mb-4" style="background: rgba(250, 250, 250, 0.5); padding: 1.25rem; border-radius: 16px; border: 1px solid rgba(0, 0, 0, 0.03);">
+              <h4 class="section-title-discovery mb-3" style="font-weight: 800; font-size: 1.15rem; color: #0d1014; display: flex; align-items: center; gap: 8px;">
+                <span>⚡</span> <?= $active_lang === 'ar' ? 'استهلاك الطاقة والاستقلالية' : 'Energy Consumption & Independence' ?>
+              </h4>
+              <div class="discovery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $lang['db_daily_cons'] ?></span>
+                  <strong class="metric-val" id="db-val-daily-cons" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 kWh/day</strong>
+                </div>
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $lang['db_monthly_cons'] ?></span>
+                  <strong class="metric-val" id="db-val-monthly-cons" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 kWh/month</strong>
+                </div>
+              </div>
+              <div class="gamification-section">
+                <div class="game-score-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <div class="game-score-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <span style="font-size: 0.88rem; color: #0d1014; font-weight: 700;"><?= $lang['score_energy_ind'] ?></span>
+                    <strong id="score-energy-label" style="font-size: 0.95rem; color: #3eb649; font-weight: 800;">0% (Average)</strong>
+                  </div>
+                  <div class="progress-bar-wrapper" style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 100px; overflow: hidden;">
+                    <div class="progress-bar-fill fill-energy" id="score-energy-fill" style="width: 0%; height: 100%; background: #3eb649; border-radius: 100px; transition: width 0.8s ease-out-back;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Category 3: Environmental Impact (Show Third) -->
+            <div class="dashboard-section mb-4" style="background: rgba(250, 250, 250, 0.5); padding: 1.25rem; border-radius: 16px; border: 1px solid rgba(0, 0, 0, 0.03);">
+              <h4 class="section-title-discovery mb-3" style="font-weight: 800; font-size: 1.15rem; color: #0d1014; display: flex; align-items: center; gap: 8px;">
+                <span>🌱</span> <?= $active_lang === 'ar' ? 'الأثر البيئي' : 'Environmental Impact' ?>
+              </h4>
+              <div class="gamification-section">
+                <div class="game-score-card green-impact-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.02); display: flex; flex-direction: column; gap: 12px;">
+                  <div class="green-metrics" style="display: flex; justify-content: space-around; text-align: center;">
+                    <div class="green-sub" style="display: flex; flex-direction: column; gap: 4px;">
+                      <span id="score-co2-val" style="font-size: 1.6rem; font-weight: 900; color: #059669;">0.0</span>
+                      <small style="font-size: 0.78rem; color: #64748B; font-weight: 600;"><?= $active_lang === 'ar' ? 'طن ثاني أكسيد الكربون المتجنب سنوياً' : 'CO₂ avoided per year (Tons)' ?></small>
+                    </div>
+                    <div class="green-sub" style="display: flex; flex-direction: column; gap: 4px;">
+                      <span id="score-trees-val" style="font-size: 1.6rem; font-weight: 900; color: #059669;">0</span>
+                      <small style="font-size: 0.78rem; color: #64748B; font-weight: 600;"><?= $lang['green_trees'] ?></small>
+                    </div>
+                  </div>
+                  <div class="animated-green-bar" style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 100px; overflow: hidden; position: relative;">
+                    <div class="green-leaf-progress" id="green-progress-bar" style="width: 0%; height: 100%; background: #059669; border-radius: 100px; transition: width 0.8s ease-out;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Category 4: Technical Specifications & Suitability (Show Last) -->
+            <div class="dashboard-section mb-4" style="background: rgba(250, 250, 250, 0.5); padding: 1.25rem; border-radius: 16px; border: 1px solid rgba(0, 0, 0, 0.03);">
+              <h4 class="section-title-discovery mb-3" style="font-weight: 800; font-size: 1.15rem; color: #0d1014; display: flex; align-items: center; gap: 8px;">
+                <span>🔧</span> <?= $active_lang === 'ar' ? 'المواصفات الفنية والملاءمة' : 'Technical Specifications & Suitability' ?>
+              </h4>
+              <div class="discovery-grid mb-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $lang['db_rec_size'] ?></span>
+                  <strong class="metric-val text-eco" id="db-val-rec-size" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0 kW</strong>
+                </div>
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $active_lang === 'ar' ? 'عدد الألواح المقدر' : 'Required Panel Count' ?></span>
+                  <strong class="metric-val" id="db-val-panel-count" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 Panels</strong>
+                </div>
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $active_lang === 'ar' ? 'حجم العاكس الموصى به' : 'Recommended Inverter Size' ?></span>
+                  <strong class="metric-val" id="db-val-inverter-size" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 kW</strong>
+                </div>
+                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
+                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;"><?= $active_lang === 'ar' ? 'سعة البطارية الموصى بها' : 'Recommended Battery Size' ?></span>
+                  <strong class="metric-val text-eco" id="db-val-battery-size" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0 kWh</strong>
+                </div>
+              </div>
+              <div class="gamification-section">
+                <div class="game-score-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.02); display: flex; justify-content: space-between; align-items: center;">
+                  <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <span style="font-size: 0.88rem; color: #0d1014; font-weight: 700;">🏠 <?= $lang['score_suitability'] ?></span>
+                    <strong id="score-suitability-label" style="font-size: 1.25rem; font-weight: 900; color: #3eb649;">A</strong>
+                  </div>
+                  <div class="suitability-badges" id="suitability-badge-container" style="display: flex; gap: 6px;">
+                    <span class="suit-badge" data-score="C" style="padding: 4px 10px; border-radius: 6px; font-weight: 700; background: #f1f5f9; color: #94a3b8; font-size: 0.85rem; border: 1px solid rgba(0, 0, 0, 0.03);">C</span>
+                    <span class="suit-badge" data-score="B" style="padding: 4px 10px; border-radius: 6px; font-weight: 700; background: #f1f5f9; color: #94a3b8; font-size: 0.85rem; border: 1px solid rgba(0, 0, 0, 0.03);">B</span>
+                    <span class="suit-badge" data-score="A" style="padding: 4px 10px; border-radius: 6px; font-weight: 700; background: #f1f5f9; color: #94a3b8; font-size: 0.85rem; border: 1px solid rgba(0, 0, 0, 0.03);">A</span>
+                    <span class="suit-badge" data-score="A+" style="padding: 4px 10px; border-radius: 6px; font-weight: 700; background: #f1f5f9; color: #94a3b8; font-size: 0.85rem; border: 1px solid rgba(0, 0, 0, 0.03);">A+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -431,10 +477,6 @@ $lang = require_once "lang/{$active_lang}.php";
               <div class="solar-value-wrapper">
                 <div class="solar-kw-value" id="reveal-solar-kw">0.0 kW</div>
                 <div class="solar-panels-count" id="reveal-solar-panels">0 Panels</div>
-              </div>
-              <div class="solar-cost-wrapper mt-3">
-                <span class="cost-label"><?= $active_lang === 'ar' ? 'التكلفة التقديرية لتوريد وتركيب النظام:' : 'Estimated system installation cost:' ?></span>
-                <strong class="cost-value" id="reveal-solar-cost">0 OMR</strong>
               </div>
               <p class="text-muted mt-3" style="font-size: 0.9rem;">
                 <?= $active_lang === 'ar' ? 'حجم النظام المقترح كافٍ لتلبية وتغطية كامل احتياجاتك من الطاقة.' : 'This recommended solar system size is configured to generate enough electricity for your home.' ?>

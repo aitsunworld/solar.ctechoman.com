@@ -1687,23 +1687,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const monthlyProduction = (result.systemSizeKw * yieldKwh) / 12;
         const lifetimeSavings = result.yearlySavingsOmr * 25;
 
+        // Calculate Cost Reduction %
+        const reductionPct = Math.round((result.monthlySavingsOmr / (result.inputs.monthlyBill || 50)) * 100);
+        
+        // Calculate ROI %
+        const avgCost = (result.costRange.min + result.costRange.max) / 2;
+        const roiPct = avgCost > 0 ? ((result.yearlySavingsOmr / avgCost) * 100).toFixed(1) : 0;
+        const paybackRoiText = `${result.paybackYears} ${isArabic ? 'سنوات' : 'Years'} / ${roiPct}% ${isArabic ? 'عائد' : 'ROI'}`;
+
+        // Calculate Technical specs
+        const inverterSize = result.loadSizing ? result.loadSizing.inverterRecommendationKw : Math.max(1.5, parseFloat((result.systemSizeKw * 0.95).toFixed(1)));
+        const batterySize = result.loadSizing ? result.loadSizing.batteryRecommendationKwh : Math.max(2.4, parseFloat((result.systemSizeKw * 1.5).toFixed(1)));
+
         const dbDaily = document.getElementById('db-val-daily-cons');
         const dbMonthly = document.getElementById('db-val-monthly-cons');
         const dbRecSize = document.getElementById('db-val-rec-size');
-        const dbMonthlyProd = document.getElementById('db-val-monthly-prod');
         const dbMonthlySav = document.getElementById('db-val-monthly-sav');
         const dbYearlySav = document.getElementById('db-val-yearly-sav');
-        const dbPayback = document.getElementById('db-val-payback');
         const dbLifetime = document.getElementById('db-val-lifetime-sav');
+        
+        // New elements
+        const dbReduction = document.getElementById('db-val-reduction-pct');
+        const dbPaybackRoi = document.getElementById('db-val-payback-roi');
+        const dbInstallCost = document.getElementById('db-val-install-cost');
+        const dbPanelCount = document.getElementById('db-val-panel-count');
+        const dbInverterSize = document.getElementById('db-val-inverter-size');
+        const dbBatterySize = document.getElementById('db-val-battery-size');
 
         if (dbDaily) animateValue(dbDaily, 0, dailyConsumption, 1000, "", " kWh/day");
         if (dbMonthly) animateValue(dbMonthly, 0, monthlyConsumption, 1000, "", " kWh/month");
         if (dbRecSize) animateValue(dbRecSize, 0, result.systemSizeKw, 1000, "", " kW");
-        if (dbMonthlyProd) animateValue(dbMonthlyProd, 0, monthlyProduction, 1000, "", " kWh");
         if (dbMonthlySav) animateValue(dbMonthlySav, 0, result.monthlySavingsOmr, 1000, "", " OMR");
         if (dbYearlySav) animateValue(dbYearlySav, 0, result.yearlySavingsOmr, 1000, "", " OMR");
-        if (dbPayback) animateValue(dbPayback, 0, result.paybackYears, 1000, "", isArabic ? " سنوات" : " Years");
         if (dbLifetime) animateValue(dbLifetime, 0, lifetimeSavings, 1000, "", " OMR");
+        
+        if (dbReduction) animateValue(dbReduction, 0, reductionPct, 1000, "", "%");
+        if (dbPaybackRoi) dbPaybackRoi.textContent = paybackRoiText;
+        if (dbInstallCost) dbInstallCost.textContent = result.costRange.formatted;
+        if (dbPanelCount) animateValue(dbPanelCount, 0, result.panelCount, 1000, "", isArabic ? " لوح" : " Panels");
+        if (dbInverterSize) animateValue(dbInverterSize, 0, inverterSize, 1000, "", " kW");
+        if (dbBatterySize) animateValue(dbBatterySize, 0, batterySize, 1000, "", " kWh");
 
         // Energy Independence
         const indScore = Math.min(100, Math.round((monthlyProduction / monthlyConsumption) * 100));
