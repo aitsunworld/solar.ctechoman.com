@@ -1,0 +1,1479 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <!-- JS class signal FIRST for no-FOUC -->
+  <script>document.documentElement.classList.add('js-enabled');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>كونسيبت للتكنولوجيا ش.م.م - حلول الطاقة الشمسية المتميزة</title>
+  <meta name="description" content="حلول طاقة شمسية نظيفة ومستدامة لعمان بواسطة كونسيبت للتكنولوجيا. خفض فواتيرك إلى الصفر باستخدام أنظمتنا الذكية.">
+  <meta property="og:title" content="كونسيبت للتكنولوجيا ش.م.م - حلول الطاقة الشمسية المتميزة">
+  <meta property="og:description" content="حلول طاقة شمسية نظيفة ومستدامة لعمان. زد من قيمة عقارك وتخلص من فواتير الكهرباء.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://solar.ctechoman.com">
+  <meta property="og:image" content="https://www.ctechoman.com/public/logo.webp">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" href="https://www.ctechoman.com/public/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://www.ctechoman.com/public/apple-touch-icon-114x114-precomposed.png">
+
+  <!-- DNS Prefetch for external domains -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Preload LCP hero image and nav logo -->
+  <link rel="preload" as="image" href="lightbulb.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="https://www.ctechoman.com/public/logo.webp">
+
+<!-- CRITICAL INLINE CSS: Only what's needed for above-fold render -->
+   <style>
+     *{margin:0;padding:0;box-sizing:border-box}
+     html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
+     body{font-family:'Outfit','Tajawal','Noto Sans Arabic','Segoe UI',Arial,sans-serif;color:#0d1014;background-color:#FAFAFA;line-height:1.6;overflow-x:hidden;width:100%;font-size:.95rem}
+     img{max-width:100%;height:auto;display:block}
+     .navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.75rem 0;background:rgba(255,255,255,.97);border-bottom:1px solid rgba(0,0,0,.05);box-shadow:0 1px 6px rgba(0,0,0,.06)}
+     .nav-container{display:flex;justify-content:space-between;align-items:center}
+     .container{width:100%;max-width:1300px;margin:0 auto;padding-left:1rem;padding-right:1rem}
+     .logo img{height:32px;width:auto}
+     .mobile-menu-btn{display:flex;flex-direction:column;justify-content:space-between;width:30px;height:20px;background:none;border:none;cursor:pointer;z-index:1001}
+     .mobile-menu-btn span{display:block;width:100%;height:3px;background:#0d1014;border-radius:2px}
+     .nav-links{position:fixed;top:60px;left:-100%;width:100%;height:calc(100vh - 60px);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:3rem 2rem;gap:2rem;transition:left .3s ease-in-out;overflow-y:auto}
+     .nav-links.active{left:0}
+     [dir=rtl] .nav-links{left:auto;right:-100%;transition:right .3s ease-in-out}
+     [dir=rtl] .nav-links.active{right:0}
+     .nav-link{color:#0d1014;text-decoration:none;font-weight:700;font-size:1.1rem;width:100%;text-align:center;padding:.75rem 0;border-bottom:1px solid #E2E8F0}
+     .lang-btn{background:#F1F5F9;border:none;color:#64748B;cursor:pointer;font-weight:700;font-size:1rem;padding:.5rem 1.5rem;border-radius:100px}
+     .btn{display:inline-flex;align-items:center;justify-content:center;padding:.85rem 2rem;font-weight:700;border-radius:100px;text-decoration:none;cursor:pointer;border:none;font-size:.95rem;text-align:center;min-height:48px;width:100%}
+     .btn-primary{background:#0d1014;color:#fff}
+     .btn-hero-primary{background:#3a8dcc;color:#fff}
+     .hero{min-height:auto;padding-top:80px;padding-bottom:2rem;display:flex;align-items:center}
+     .hero-grid{display:flex;flex-direction:column;gap:1.5rem;width:100%}
+     .hero-text{text-align:center;opacity:1}
+     h1{font-size:1.85rem;font-weight:900;line-height:1.2;color:#0d1014}
+     h2{font-size:1.45rem;font-weight:900;line-height:1.2;color:#0d1014}
+     h3{font-size:1.2rem;font-weight:900;line-height:1.2;color:#0d1014}
+     h4{font-size:1.05rem;font-weight:900;line-height:1.2;color:#0d1014}
+     .hero-text p{font-size:1rem;color:#64748B;margin-bottom:1.5rem;font-weight:500}
+.hero-actions{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem;align-items:center;width:100%}
+      .hero-visual{width:100%;height:180px;display:flex;justify-content:flex-start;align-items:center;position:relative;overflow:hidden;opacity:1}
+      .lightbulb-img{max-height:160px;width:auto;}
+      .text-muted{color:#64748B}
+      .bg-blobs{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+      .blob-1,.blob-2{position:absolute;width:200px;height:200px;background:#F1F5F9;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;opacity:.2}
+      .blob-1{top:-10%;left:-10%}.blob-2{bottom:10%;right:-5%}
+      /* Prevent FOUC: keep hero visible until styles load */
+      .js-enabled .hero-text,.js-enabled .hero-visual{opacity:1}
+      /* Reveal elements - hidden until active */
+      .js-enabled .reveal{opacity:0;transform:translate3d(0,15px,0)}
+      .js-enabled .reveal.active{opacity:1;transform:translate3d(0,0,0)}
+    </style>
+
+  <!-- Non-blocking Google Fonts (avoids render-blocking) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
+
+  <!-- Main stylesheet: load non-blocking, apply after fonts -->
+  <link rel="preload" as="style" href="style.css?v=4.0" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=4.0"></noscript>
+  <!-- chatbot.css injected lazily by JS below, not here -->
+</head>
+
+<body>
+
+  <!-- Organic Background Blobs -->
+  <div class="bg-blobs">
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.php" class="logo">
+        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC Logo" width="160" height="48" fetchpriority="high" loading="eager" decoding="async">
+      </a>
+      <div class="nav-links">
+        <a href="#calculator" class="nav-link">الحاسبة</a>
+        <a href="#benefits" class="nav-link">الفوائد</a>
+        <a href="#process" class="nav-link">آلية العمل</a>
+        
+          <a href="?lang=en" class="lang-btn" style="text-decoration:none;">English</a>
+        
+        <a href="#contact" class="btn btn-primary">احصل على تسعيرة</a>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1>كم تبلغ حاجة منزلك من الطاقة الشمسية؟</h1>
+        <p>اكتشف حجم نظام الطاقة الشمسية المثالي لمنزلك وتعرف على قيمة المبالغ التي يمكنك توفيرها شهرياً.</p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-hero-primary">احصل على تسعيرة</a>
+
+        </div>
+
+        <div class="hero-slider-nav">
+          <div class="slider-item active" data-slide-index="0">
+            <span class="slider-num">1.</span>
+            <div class="slider-line"></div>
+          </div>
+          <div class="slider-item" data-slide-index="1">
+            <span class="slider-num">2.</span>
+            <div class="slider-line"></div>
+          </div>
+          <div class="slider-item" data-slide-index="2">
+            <span class="slider-num">3.</span>
+            <div class="slider-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" id="hero-slider-visual">
+        <div class="hero-slider-track" id="hero-slider-track">
+          <div class="hero-slide">
+            <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500"
+              fetchpriority="high" loading="eager" decoding="async" style="mix-blend-mode: darken;">
+          </div>
+          <div class="hero-slide">
+            <img src="hero-villa.webp" alt="Residential Villa Solar Panels" class="lightbulb-img" width="500" height="500"
+              loading="lazy" decoding="async" style="mix-blend-mode: darken;">
+          </div>
+          <div class="hero-slide">
+            <img src="hero-commercial.webp?v=3.11" alt="Commercial Industrial Solar Panels" class="lightbulb-img" width="500" height="500"
+              loading="lazy" decoding="async" style="mix-blend-mode: darken;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solar Calculator -->
+  <section id="calculator" class="calculator-section container reveal">
+    <div class="calculator-wrapper">
+      <div class="calc-info">
+        <h2>كم تبلغ حاجة منزلك من الطاقة الشمسية؟</h2>
+        
+          <p class="section-subtitle text-muted mb-3" id="calc-subtitle" style="font-weight: 500; font-size: 1.1rem; line-height: 1.5;">اكتشف حجم نظام الطاقة الشمسية المثالي لمنزلك وتعرف على قيمة المبالغ التي يمكنك توفيرها شهرياً.</p>
+        
+        <p class="text-muted" id="calc-description">حدد الأجهزة المنزلية التي تستخدمها في منزلك ودع حاسبتنا الذكية تقدّر استهلاكك الإجمالي للطاقة، وحجم نظام الطاقة الشمسية الموصى به، والتوفير المالي المتوقع، والفوائد البيئية — كل ذلك في بضع دقائق فقط.</p>
+
+        <div id="standard-calc-results">
+          <div class="results-grid mt-4">
+            <div class="result-box">
+              <span class="result-label">حجم النظام</span>
+              <strong class="result-value text-eco" id="res-size" dir="ltr">0 kW</strong>
+            </div>
+            <div class="result-box">
+              <span class="result-label">عدد الألواح</span>
+              <strong class="result-value" id="res-panels" dir="ltr">0</strong>
+            </div>
+            <div class="result-box">
+              <span class="result-label">التكلفة</span>
+              <strong class="result-value" id="res-cost" dir="ltr">0 OMR</strong>
+            </div>
+            <div class="result-box highlight">
+              <span class="result-label">التوفير السنوي</span>
+              <strong class="result-value" id="res-savings" dir="ltr">0 OMR</strong>
+            </div>
+          </div>
+          <button id="calc-explain-btn" class="btn btn-secondary mt-3">
+            ✨ اشرح لي النتائج بمستشار الذكاء الاصطناعي
+          </button>
+          <p class="mt-3 text-muted" style="font-size: 0.8rem;">* تقريبات مبنية على متوسطات عمان (0.020 ريال/كيلووات).</p>
+
+          <div id="load-recommendations" style="display: none;">
+            <h4 class="recs-title">توصيات النظام المتقدمة</h4>
+            <div class="recs-grid">
+              <div class="result-box load-box">
+                <span class="result-label">إجمالي الحمل المتصل</span>
+                <strong class="result-value" id="res-connected-load">0 W</strong>
+              </div>
+              <div class="result-box consumption-box">
+                <span class="result-label">الاستهلاك اليومي المقدر</span>
+                <strong class="result-value" id="res-daily-consumption">0 kWh/day</strong>
+              </div>
+              <div class="result-box inverter-box">
+                <span class="result-label">حجم العاكس المقترح</span>
+                <strong class="result-value" id="res-inverter">0 kW</strong>
+              </div>
+              <div class="result-box battery-box">
+                <span class="result-label">سعة البطارية المقترحة</span>
+                <strong class="result-value text-eco" id="res-battery">0 kWh</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="residential-discovery-results" style="display: none;">
+          <div class="discovery-dashboard">
+            <h3 class="mb-3">تقرير تحليل الطاقة لمنزلك</h3>
+            <div class="discovery-grid">
+              <div class="discovery-metric-card">
+                <span class="metric-label">الاستهلاك اليومي للطاقة</span>
+                <strong class="metric-val text-eco" id="db-val-daily-cons">0 kWh/day</strong>
+              </div>
+              <div class="discovery-metric-card">
+                <span class="metric-label">الاستهلاك الشهري للطاقة</span>
+                <strong class="metric-val" id="db-val-monthly-cons">0 kWh/month</strong>
+              </div>
+              <div class="discovery-metric-card">
+                <span class="metric-label">حجم نظام الطاقة الشمسية الموصى به</span>
+                <strong class="metric-val text-eco" id="db-val-rec-size">0 kW</strong>
+              </div>
+              <div class="discovery-metric-card">
+                <span class="metric-label">إنتاج النظام الشهري المقدر</span>
+                <strong class="metric-val" id="db-val-monthly-prod">0 kWh</strong>
+              </div>
+              <div class="discovery-metric-card">
+                <span class="metric-label">التوفير الشهري المقدر</span>
+                <strong class="metric-val text-eco" id="db-val-monthly-sav">0 OMR</strong>
+              </div>
+              <div class="discovery-metric-card">
+                <span class="metric-label">التوفير السنوي المقدر</span>
+                <strong class="metric-val text-eco" id="db-val-yearly-sav">0 OMR</strong>
+              </div>
+              <div class="discovery-metric-card">
+                <span class="metric-label">فترة استرداد رأس المال</span>
+                <strong class="metric-val" id="db-val-payback">0 Years</strong>
+              </div>
+              <div class="discovery-metric-card highlight-lifetime">
+                <span class="metric-label">إجمالي التوفير (على مدى 25 عاماً)</span>
+                <strong class="metric-val text-eco" id="db-val-lifetime-sav">0 OMR</strong>
+              </div>
+            </div>
+
+            <!-- Gamification Section -->
+            <div class="gamification-section mt-4">
+              <div class="game-score-card">
+                <div class="game-score-header">
+                  <span>⚡ مؤشر الاستقلال عن الشبكة</span>
+                  <strong id="score-energy-label">Good</strong>
+                </div>
+                <div class="progress-bar-wrapper">
+                  <div class="progress-bar-fill fill-energy" id="score-energy-fill" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <div class="game-score-card">
+                <div class="game-score-header">
+                  <span>🏠 مستوى ملاءمة الطاقة الشمسية</span>
+                  <strong id="score-suitability-label">A</strong>
+                </div>
+                <div class="suitability-badges" id="suitability-badge-container">
+                  <span class="suit-badge" data-score="C">C</span>
+                  <span class="suit-badge" data-score="B">B</span>
+                  <span class="suit-badge" data-score="A">A</span>
+                  <span class="suit-badge" data-score="A+">A+</span>
+                </div>
+              </div>
+
+              <div class="game-score-card green-impact-card">
+                <div class="game-score-header">
+                  <span>🌱 الأثر البيئي الأخضر</span>
+                </div>
+                <div class="green-metrics">
+                  <div class="green-sub">
+                    <span id="score-co2-val">0.0</span>
+                    <small>تجنب انبعاثات ثاني أكسيد الكربون سنوياً</small>
+                  </div>
+                  <div class="green-sub">
+                    <span id="score-trees-val">0</span>
+                    <small>ما يعادل عدد الأشجار المزروعة</small>
+                  </div>
+                </div>
+                <div class="animated-green-bar">
+                  <div class="green-leaf-progress" id="green-progress-bar" style="width: 0%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-form">
+        <div id="standard-calc-inputs">
+          <div class="calc-tabs">
+            <button id="tab-bill" class="calc-tab active">
+              تقدير الفاتورة
+            </button>
+            <button id="tab-appliances" class="calc-tab">
+              مدقق الأجهزة
+            </button>
+          </div>
+
+          <div id="bill-inputs-container">
+            <h3 class="mb-3">الفاتورة الشهرية (عُماني)</h3>
+            <div class="slider-container">
+              <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="الفاتورة الشهرية (عُماني)">
+              <div class="slider-value"><span id="bill-display">50</span></div>
+            </div>
+          </div>
+
+          <div id="appliance-inputs-container" style="display: none;">
+            <!-- Appliances rendered dynamically via Javascript for multi-language SSOT support -->
+          </div>
+        </div>
+
+        <div id="residential-discovery-journey" style="display: none;">
+          <!-- Wizard Navigation & Steps -->
+          <div class="discovery-steps-progress mb-4">
+            <div class="step-dot active" data-step="1" title="تحديد الأجهزة">1</div>
+            <div class="step-dot" data-step="2" title="تحديد الكميات">2</div>
+            <div class="step-dot" data-step="3" title="الاستهلاك المقدر">3</div>
+            <div class="step-dot" data-step="4" title="حجم النظام المقترح">4</div>
+            <div class="step-dot" data-step="5" title="الفاتورة الشهرية">5</div>
+            <div class="step-dot" data-step="6" title="معايرة النتائج">6</div>
+            <div class="step-dot" data-step="7" title="لوحة التحكم المخصصة">7</div>
+          </div>
+
+          <!-- Panel 1: Select Appliances (Step 1) -->
+          <div class="discovery-step-panel" id="discovery-panel-1">
+            <h3 class="mb-2">الخطوة 1: اختر الأجهزة المنزلية</h3>
+            <p class="text-muted mb-3" style="font-size: 0.88rem;">
+              اختر الأجهزة المستخدمة في منزلك من خلال النقر عليها لتحديدها.
+            </p>
+            <div id="discovery-appliance-selection-grid" class="appliance-selection-grid">
+              <!-- Rendered dynamically in script.js (toggle cards) -->
+            </div>
+            <div class="step-actions mt-3">
+              <button type="button" class="btn btn-primary w-100" id="btn-goto-step2">
+                التالي: تحديد الكميات ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel 2: Enter Quantity (Step 2) -->
+          <div class="discovery-step-panel" id="discovery-panel-2" style="display: none;">
+            <h3 class="mb-2">الخطوة 2: حدد كميات الأجهزة</h3>
+            <p class="text-muted mb-3" style="font-size: 0.88rem;">
+              اضبط الكمية المناسبة لكل جهاز من الأجهزة المحددة.
+            </p>
+            <div id="discovery-appliance-qty-grid" class="appliance-qty-grid">
+              <!-- Rendered dynamically in script.js (counters) -->
+            </div>
+            <div class="step-actions mt-3" style="display: flex; gap: 0.75rem;">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step1" style="flex: 1; min-width: 80px;">
+                ⬅ الأجهزة
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-goto-step3" style="flex: 2;">
+                التالي: الاستهلاك المقدر ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel 3: Show Estimated Monthly Consumption (Step 3) -->
+          <div class="discovery-step-panel" id="discovery-panel-3" style="display: none;">
+            <h3 class="mb-2">الخطوة 3: الاستهلاك الشهري المقدر</h3>
+            <div class="consumption-reveal-zone text-center py-4">
+              <div class="animated-gauge-wrapper">
+                <div class="gauge-value" id="reveal-consumption-value">0 kWh</div>
+                <div class="gauge-label">شهرياً</div>
+              </div>
+              <p class="text-muted mt-3" style="font-size: 0.9rem;">
+                بناءً على اختيار الأجهزة المنزلية، هذا هو تقدير استهلاكك الشهري التقريبي للكهرباء.
+              </p>
+            </div>
+            <div class="step-actions mt-3" style="display: flex; gap: 0.75rem;">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step2" style="flex: 1; min-width: 80px;">
+                ⬅ الكميات
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-goto-step4" style="flex: 2;">
+                التالي: حجم نظام الطاقة الشمسية ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel 4: Show Recommended Solar Size (Step 4) -->
+          <div class="discovery-step-panel" id="discovery-panel-4" style="display: none;">
+            <h3 class="mb-2">الخطوة 4: حجم النظام الشمسي الموصى به</h3>
+            <div class="solar-reveal-zone text-center py-4">
+              <div class="solar-value-wrapper">
+                <div class="solar-kw-value" id="reveal-solar-kw">0.0 kW</div>
+                <div class="solar-panels-count" id="reveal-solar-panels">0 Panels</div>
+              </div>
+              <div class="solar-cost-wrapper mt-3">
+                <span class="cost-label">التكلفة التقديرية لتوريد وتركيب النظام:</span>
+                <strong class="cost-value" id="reveal-solar-cost">0 OMR</strong>
+              </div>
+              <p class="text-muted mt-3" style="font-size: 0.9rem;">
+                حجم النظام المقترح كافٍ لتلبية وتغطية كامل احتياجاتك من الطاقة.
+              </p>
+            </div>
+            <div class="step-actions mt-3" style="display: flex; gap: 0.75rem;">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step3" style="flex: 1; min-width: 80px;">
+                ⬅ الاستهلاك
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-goto-step5" style="flex: 2;">
+                التالي: معايرة الفاتورة ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel 5: Ask for average electricity bill (Step 5) -->
+          <div class="discovery-step-panel" id="discovery-panel-5" style="display: none;">
+            <h3 class="mb-2">هل تعرف متوسط فاتورة الكهرباء الشهرية الخاصة بك؟</h3>
+            <p class="text-muted mb-4" style="font-size: 0.88rem;">
+              إدخال فاتورتك الفعلية يساعدنا في معايرة الحسابات وتطابقها مع الواقع بدقة أكبر.
+            </p>
+            <div class="calibration-choice-zone">
+              <div class="form-group mb-3">
+                <label for="discovery-bill-slider" class="form-label font-weight-bold mb-2">
+                  متوسط الفاتورة الكهربائية الشهرية (ريال عُماني):
+                </label>
+                <div class="slider-container">
+                  <input type="range" id="discovery-bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Calibration Slider">
+                  <div class="slider-value"><span id="discovery-bill-display">50</span> OMR</div>
+                </div>
+              </div>
+              <div class="calibration-actions mt-3" style="display: flex; gap: 0.75rem;">
+                <button type="button" class="btn btn-secondary" id="btn-skip-calibration" style="flex: 1;">
+                  تجاوز ومتابعة
+                </button>
+                <button type="button" class="btn btn-primary" id="btn-calibrate-bill" style="flex: 1;">
+                  أدخل قيمة الفاتورة يدوياً
+                </button>
+              </div>
+            </div>
+            <div class="step-actions mt-4">
+              <button type="button" class="btn btn-text-secondary" id="btn-back-to-step4">
+                ⬅ العودة لحجم النظام
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel 6: Calibrate results (Step 6) -->
+          <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
+            <h3 class="mb-2">الخطوة 6: معايرة وتحسين البيانات</h3>
+            <div class="calibration-checking-zone text-center py-4">
+              <div class="calibration-animation-wrapper">
+                <div class="scanning-circle"></div>
+                <div class="calibration-status-text mt-3" id="calibration-status-message">
+                  جاري مقارنة استهلاك الأجهزة مع فاتورة الكهرباء...
+                </div>
+              </div>
+              
+              <div class="calibration-feedback mt-4 alert alert-warning" id="calibration-warning-box" style="display: none;">
+                ⚠️ لقد لاحظنا وجود اختلاف بين تقدير استهلاك الأجهزة وسجل فواتيرك، وقمنا بتعديل التقدير لتحسين الدقة.
+              </div>
+              <div class="calibration-feedback mt-4 alert alert-success" id="calibration-success-box" style="display: none;">
+                ✅ تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.
+              </div>
+            </div>
+            <div class="step-actions mt-3" style="display: flex; gap: 0.75rem;">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step5" style="flex: 1; min-width: 80px;">
+                ⬅ تعديل الفاتورة
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-goto-step7" style="flex: 2;">
+                عرض التقرير النهائي لوحة التحكم ➔
+              </button>
+            </div>
+          </div>
+
+          <!-- Panel 7: Reveal personalized dashboard (Step 7) / Lead capture form -->
+          <div class="discovery-step-panel" id="discovery-panel-7" style="display: none;">
+            <div class="assessment-lead-card">
+              <h3 class="mb-2">احصل على تقييم مخصص لمنزلك بالطاقة الشمسية</h3>
+              <p class="text-muted mb-4" style="font-size: 0.88rem;">
+                احصل على تقرير فني واقتصادي مخصص لمنزلك بالكامل مجاناً مع مهندس من فريقنا.
+              </p>
+              
+              <form id="discovery-lead-form" class="discovery-form">
+                <input type="hidden" name="action" value="submit_lead">
+                <input type="hidden" name="lang" value="ar">
+                <input type="hidden" name="property_type" value="residential">
+                <input type="hidden" name="location" id="disc-lead-loc">
+                <input type="hidden" name="monthly_bill" id="disc-lead-bill">
+                <input type="hidden" name="honeypot" tabindex="-1" autocomplete="off">
+
+                <div class="form-group mb-3">
+                  <input type="text" id="disc-lead-name" name="name" required placeholder="الاسم الكامل *" class="form-control-discovery" aria-label="Full Name">
+                </div>
+                <div class="form-group mb-3">
+                  <input type="tel" id="disc-lead-phone" name="phone" required placeholder="رقم الهاتف (الواتساب) *" class="form-control-discovery" aria-label="Phone Number">
+                </div>
+                <div class="form-group mb-3">
+                  <input type="email" id="disc-lead-email" name="email" required placeholder="البريد الإلكتروني *" class="form-control-discovery" aria-label="Email Address">
+                </div>
+                <div class="form-group mb-3">
+                  <textarea id="disc-lead-notes" name="message" rows="2" placeholder="ملاحظات إضافية (اختياري)..." class="form-control-discovery textarea-discovery" aria-label="Additional Notes"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100" id="btn-submit-discovery">
+                  <span>تأكيد وحجز موعد تقييم 🚀</span>
+                  <span class="spinner" style="display: none; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;"></span>
+                </button>
+              </form>
+              <div id="discovery-form-feedback" class="mt-3 text-center" style="display: none; padding: 0.85rem 1rem; border-radius: 30px; font-weight: 600;"></div>
+            </div>
+
+            <div class="step-actions mt-4 text-center">
+              <button type="button" class="btn btn-text-secondary" id="btn-reset-discovery">
+                🔄 إعادة تشغيل الحاسبة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <select id="property-type" aria-label="سكني">
+            <option value="residential">سكني</option>
+            <option value="commercial">تجاري</option>
+            <option value="industrial">صناعي</option>
+          </select>
+
+          <select id="location" aria-label="مسقط">
+            <option value="muscat">مسقط</option>
+            <option value="dhofar">ظفار</option>
+            <option value="batinah">الباطنة</option>
+            <option value="other">أخرى</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section id="benefits" class="benefits container section-padding">
+    <div class="section-title reveal">
+      <h2>لماذا الطاقة الشمسية؟</h2>
+      <p class="section-subtitle">إنه أكثر من مجرد توفير للمال. إنه ترقية لأسلوب الحياة.</p>
+    </div>
+
+    <div class="staggered-grid">
+      <div class="benefit-card reveal">
+        <div class="icon-blob">💰</div>
+        <h3>صفر فواتير</h3>
+        <p class="text-muted">تخلص من تكاليف الكهرباء الشهرية بشكل دائم واحم نفسك من ارتفاع التعرفة.</p>
+      </div>
+
+      <div class="benefit-card reveal delay-100">
+        <div class="icon-blob" style="background: #E0F2FE; color: #3a8dcc;">🌍</div>
+        <h3>تأثير بيئي</h3>
+        <p class="text-muted">قلل من بصمتك الكربونية بشكل كبير وساهم في مستقبل مستدام لعُمان.</p>
+      </div>
+
+      <div class="benefit-card reveal delay-200">
+        <div class="icon-blob" style="background: #F1F5F9; color: #444444;">📈</div>
+        <h3>قيمة العقار</h3>
+        <p class="text-muted">المنازل المجهزة بالألواح الشمسية تباع بشكل أسرع وبسعر أعلى في السوق.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="container section-padding">
+    <div class="cta-banner reveal">
+      <div class="cta-content">
+        <span class="cta-pre">هل تبحث عن مُركّب؟</span>
+        <h2>نحن مُركّبون عالميون لمضخات الألواح<br>الشمسية وأضواء الشوارع</h2>
+        <div class="cta-actions">
+          <a href="#contact" class="btn btn-hero-primary">اتصل بنا</a>
+          <a href="tel:+968 92315949" class="cta-hotline">
+            <span class="hotline-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                </path>
+              </svg>
+            </span>
+            +968 92315949
+          </a>
+        </div>
+      </div>
+      <div class="cta-visual">
+        <img src="img2.webp" alt="Solar Installation" width="480" height="360" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="projects" class="container section-padding gallery-section">
+    <div class="gallery-header reveal">
+      <div class="gallery-title-area">
+        <span class="gallery-pre"><span class="pre-icon">❖</span> أحدث المشاريع <span
+            class="dot"></span></span>
+        <h2>الطاقة الشمسية تحتضن المستقبل</h2>
+        <p class="text-muted">الطاقة الشمسية هي مصدر طاقة مستدام يُستمد من أشعة الشمس، ويُستخدم في تطبيقات مختلفة لتقليل الانبعاثات الكربونية.</p>
+      </div>
+      <a href="#contact" class="btn btn-dark-green">عرض المزيد &laquo;</a>
+    </div>
+
+    <div class="gallery-grid reveal delay-100">
+      <div class="gallery-col">
+        <div class="gallery-item tall">
+          <img
+            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70&fm=webp"
+            alt="Solar Project 1" width="400" height="534" loading="lazy" decoding="async">
+        </div>
+        <div class="gallery-item short">
+          <img
+            src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70&fm=webp"
+            alt="Solar Project 2" width="400" height="267" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="gallery-col">
+        <div class="gallery-item short">
+          <img
+            src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70&fm=webp"
+            alt="Solar Project 3" width="400" height="267" loading="lazy" decoding="async">
+        </div>
+        <div class="gallery-item tall">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1679917152396-4b18accacb9d?q=70&w=400&fm=webp&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Solar Project 4" width="400" height="534" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="gallery-col">
+        <div class="gallery-item tall">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1682148205811-e8a8ce759f4b?q=70&w=400&fm=webp&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Solar Project 5" width="400" height="534" loading="lazy" decoding="async">
+        </div>
+        <div class="gallery-item short">
+          <img
+            src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=70&fm=webp"
+            alt="Solar Project 6" width="400" height="267" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section id="why-choose-us" class="container section-padding">
+    <div class="section-title reveal">
+      <span class="section-eyebrow">دع الطاقة الخضراء تضيء المستقبل</span>
+      <h2>لماذا تختارنا</h2>
+    </div>
+
+    <div class="choose-us-grid">
+      <div class="choose-col left-col">
+        <div class="choose-item reveal delay-100">
+          <div class="choose-text">
+            <h3>شهادة الآيزو 2008:2015 و DCRP</h3>
+            <p class="text-muted">شركة معتمدة، مدعومة بخدمات وتصنيع احترافي.</p>
+          </div>
+          <div class="choose-icon">🏅</div>
+        </div>
+        <div class="choose-item reveal delay-200">
+          <div class="choose-text">
+            <h3>أكثر من 30 عامًا من الخبرة</h3>
+            <p class="text-muted">رائد بخبرة تفوق 30 عامًا في التركيبات التكنولوجية والهندسة.</p>
+          </div>
+          <div class="choose-icon">🏆</div>
+        </div>
+        <div class="choose-item reveal delay-300">
+          <div class="choose-text">
+            <h3>أكثر من 10,000 قاعدة تثبيت</h3>
+            <p class="text-muted">يمتد تركيزنا في السوق على مجموعة واسعة من أنواع المشاريع.</p>
+          </div>
+          <div class="choose-icon">⚡</div>
+        </div>
+      </div>
+
+      <div class="choose-center reveal" style="position: relative;">
+        <img src="solar_panel.webp" alt="Solar Panel" width="300" height="338" loading="lazy" decoding="async"
+          style="width: 100%; max-width: 300px; position: relative; z-index: 2;">
+
+        <img src="cloud1.webp" class="cloud-anim cloud-1" alt="" role="presentation" width="120" height="60" loading="lazy">
+        <img src="cloud2.webp" class="cloud-anim cloud-2" alt="" role="presentation" width="120" height="60" loading="lazy">
+      </div>
+
+      <div class="choose-col right-col">
+        <div class="choose-item reveal delay-100">
+          <div class="choose-icon">☀️</div>
+          <div class="choose-text">
+            <h3>تم تركيب أنظمة كهروضوئية بسعات مختلفة</h3>
+            <p class="text-muted">تم تسليم الأنظمة لقطاعات الاتصالات والنفط والغاز والوزارات.</p>
+          </div>
+        </div>
+        <div class="choose-item reveal delay-200">
+          <div class="choose-icon">👨‍🔬</div>
+          <div class="choose-text">
+            <h3>خبراء حقيقيون في هذا المجال</h3>
+            <p class="text-muted">أنت تضمن الحصول على نظام الطاقة الذي تم اختياره وتركيبه من قبل خبراء حقيقيين.</p>
+          </div>
+        </div>
+        <div class="choose-item reveal delay-300">
+          <div class="choose-icon">🇴🇲</div>
+          <div class="choose-text">
+            <h3>شركة مملوكة عمانية 100٪</h3>
+            <p class="text-muted">جزء من مجموعة بهوان، تأسست عام 1947.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trusted Brands & Products -->
+  <section id="partners" class="partners-section text-center reveal" style="text-align: center;">
+    <div class="logo-wall-section">
+      <div class="logo-wall-header">
+        <span class="logo-wall-eyebrow">دع الطاقة الخضراء تضيء المستقبل</span>
+        <h2 class="logo-wall-title">العلامات التجارية والمنتجات الموثوقة</h2>
+        <p class="logo-wall-subtitle">ماركات الطاقة الشمسية المتميزة التي نقوم بتركيبها في جميع أنحاء عمان.</p>
+      </div>
+
+      <!-- Row 1: scrolls LEFT -->
+      <div class="logo-row-wrapper">
+        <div class="logo-row logo-row--left">
+          
+            <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/deye.png" alt="Deye" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
+          
+        </div>
+      </div>
+
+      <!-- Row 2: scrolls RIGHT -->
+      <div class="logo-row-wrapper">
+        <div class="logo-row logo-row--right">
+          
+            <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/deye.png" alt="Deye" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
+          
+        </div>
+      </div>
+
+      <!-- Row 3: scrolls LEFT -->
+      <div class="logo-row-wrapper">
+        <div class="logo-row logo-row--left logo-row--slow">
+          
+            <div class="logo-item"><img src="brands/solis.png" alt="Solis" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/power_sun.png" alt="Power &amp; Sun" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/canadian_solar.png" alt="Canadian Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/huawei.svg" alt="Huawei" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/trina_solar.svg" alt="Trina Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jebel.png" alt="Jebel" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/sungrow.png" alt="Sungrow" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/deye.png" alt="Deye" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/longi.svg" alt="LONGi" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/ja_solar.svg" alt="JA Solar" width="120" height="38" loading="lazy"></div>
+            <div class="logo-item"><img src="brands/jinko_solar.png" alt="Jinko Solar" width="120" height="38" loading="lazy"></div>
+          
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Technical Resources / Datasheet Download Center -->
+  <section id="datasheets" class="datasheet-section container reveal section-padding">
+    <div class="section-title reveal">
+      <span class="section-eyebrow">الموارد الفنية</span>
+      <h2>مركز تحميل ورقة البيانات</h2>
+      <p class="section-subtitle">قم بتنزيل المواصفات الفنية الرسمية والكتالوجات لمعداتنا الشمسية المتميزة المعتمدة من مجلس DCRP.</p>
+    </div>
+
+    <!-- Product Category Switcher Tab Bar -->
+    <div class="datasheet-filter-bar reveal">
+      <button type="button" class="ds-filter-tab active" data-category="all">الكل</button>
+      <button type="button" class="ds-filter-tab" data-category="inverter">العواكس</button>
+      <button type="button" class="ds-filter-tab" data-category="panel">الألواح الشمسية</button>
+      <button type="button" class="ds-filter-tab" data-category="battery">البطاريات</button>
+      <button type="button" class="ds-filter-tab" data-category="controller">منظمات الشحن</button>
+    </div>
+
+    <div class="datasheet-grid">
+
+  <!-- Huawei Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter" data-brand="huawei">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/huawei.svg" alt="Huawei" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Huawei</h3>
+          <p>الرائد العالمي في العواكس الذكية وإلكترونيات الطاقة الرقمية المتقدمة.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Sungrow Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter" data-brand="sungrow">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/sungrow.png" alt="Sungrow" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Sungrow</h3>
+          <p>العلامة التجارية الأكثر موثوقية لعواكس الطاقة الشمسية متعددة المداخل.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Solis Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter battery" data-brand="solis">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/solis.png" alt="Solis" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Solis</h3>
+          <p>عواكس ذكية مبتكرة وأنظمة تخزين طاقة منزلية مرنة عالية الكفاءة.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Canadian Solar Brand -->
+      <div class="datasheet-card brand-card" data-category="inverter panel battery" data-brand="canadian">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/canadian_solar.png" alt="Canadian Solar" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Canadian Solar</h3>
+          <p>أكبر مصنعي الألواح عالمياً، وعواكس تجارية هجينة، ومكعبات تخزين منزلية.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Deye Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="inverter battery" data-brand="deye">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/deye.png" alt="Deye" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Deye</h3>
+          <p>بطاريات الجهد العالي وعواكس هجينة ذكية للأنظمة المستقلة والمتصلة.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Power & Sun Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="inverter battery" data-brand="powersun">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/power_sun.png" alt="Power & Sun" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Power & Sun</h3>
+          <p>بطاريات خادم الاتصالات وحوامل التخزين، وعواكس هجينة مدمجة متينة.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Trina Solar Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="trina">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/trina_solar.svg" alt="Trina Solar" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Trina Solar</h3>
+          <p>ألواح شمسية ثنائية الزجاج أحادية البلورة مصممة لتحمل الأحمال الصحراوية القصوى.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- LONGi Solar Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel battery" data-brand="longi">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/longi.svg" alt="LONGi" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>LONGi</h3>
+          <p>خلايا HPBC المتطورة لتقديم أعلى كفاءة، وبطاريات تخزين منزلية ذكية آمنة.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Jinko Solar Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="jinko">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/jinko_solar.png" alt="Jinko Solar" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Jinko Solar</h3>
+          <p>ألواح N-type ثنائية الوجه متميزة ومعامل تراجع حراري منخفض في الصيف.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- JA Solar Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="panel" data-brand="ja">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/ja_solar.svg" alt="JA Solar" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>JA Solar</h3>
+          <p>ألواح أحادية البلورة بتقنية PERC وخلايا نواقل متعددة لإنتاج طاقة مستقر.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Jebel Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="battery" data-brand="jebel">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <img src="brands/jebel.png" alt="Jebel" class="brand-logo-img" loading="lazy">
+        </div>
+        <div class="brand-content">
+          <h3>Jebel</h3>
+          <p>أنظمة بطاريات LiFePO4 متينة تثبت على الحائط ومخصصة لمقاومة حرارة عُمان.</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+  <!-- Concept Brand -->
+      <div class="datasheet-card brand-card extra-brand" style="display: none;" data-category="controller" data-brand="concept">
+        <div class="brand-card-accent"></div>
+        <div class="brand-logo-wrapper">
+          <div class="brand-logo-icon" style="height: 38px; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 32px; height: 32px; color: var(--color-primary);">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            <span style="margin-left: 10px; font-weight: 700; font-size: 1.25rem; color: var(--color-text-dark);">Concept</span>
+          </div>
+        </div>
+        <div class="brand-content">
+          <h3>Concept</h3>
+          <p>Concept Technologies LLC</p>
+        </div>
+        <button type="button" class="btn-brand-explore">
+          <span>عرض المنتجات</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      </div>
+
+      <!-- Centered Glassy Accordion Toggle Button -->
+    <div class="brand-toggle-wrapper" style="text-align: center; margin-top: 2rem;">
+      <button type="button" id="brand-toggle-btn" class="btn btn-secondary">
+        <span>عرض جميع العلامات التجارية</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 0.5rem; transition: transform 0.3s ease;">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Premium Brand Explorer Modal -->
+    <div id="brand-datasheet-modal" class="ds-modal-overlay" aria-hidden="true" style="display: none;">
+      <div class="ds-modal-content">
+        <button type="button" class="ds-modal-close" id="ds-modal-close-btn" aria-label="إغلاق">&times;</button>
+        <div class="ds-modal-header">
+          <div class="ds-modal-brand-logo-wrapper" id="modal-logo-container">
+            <!-- Brand Logo rendered dynamically -->
+          </div>
+          <h3 id="modal-brand-title">Brand Products</h3>
+          <p id="modal-brand-tagline" class="text-muted"></p>
+        </div>
+        <div class="ds-modal-body">
+          <h4 class="modal-body-title">المنتجات المتاحة وأوراق البيانات</h4>
+          <div id="modal-products-grid" class="modal-products-grid">
+            <!-- Dynamically populated via Javascript -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+    <!-- Embedded PDF Viewer Modal -->
+    <div id="pdf-viewer-modal" class="ds-modal-overlay" aria-hidden="true" style="display: none;">
+      <div class="ds-modal-content" style="max-width: 900px; height: 90vh; display: flex; flex-direction: column;">
+        <button type="button" class="ds-modal-close" id="pdf-modal-close-btn" aria-label="Close">&times;</button>
+        <div class="ds-modal-header" style="padding-bottom: 1rem;">
+          <h3 id="pdf-modal-title">Product Datasheet</h3>
+          <p class="text-muted" id="pdf-modal-brand"></p>
+        </div>
+        <div class="ds-modal-body" style="flex: 1; padding: 0; position: relative;">
+          <iframe id="pdf-viewer-frame" style="width: 100%; height: 100%; border: none; background: #fff;"></iframe>
+        </div>
+        <div class="pdf-modal-footer" style="padding: 1.5rem; background: #f8fafc; border-top: 1px solid #e2e8f0; text-align: center;">
+          <p style="margin-bottom: 1rem; font-weight: 600; color: #1e293b;">Would you like our team to send pricing and availability?</p>
+          <button type="button" id="pdf-request-pricing-btn" class="btn btn-primary" style="padding: 0.75rem 2rem;">Yes, Request Pricing</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Process -->
+  <section id="process" class="container section-padding">
+    <div class="section-title text-center reveal" style="margin: 0 auto 4rem auto;">
+      <h2>رحلة سلسة</h2>
+    </div>
+
+    <div class="process-flow">
+      <div class="flow-step reveal">
+        <div class="flow-number">1</div>
+        <h3>استشارة</h3>
+        <p class="text-muted">تقييم الموقع والطاقة.</p>
+      </div>
+      <div class="flow-step reveal delay-100">
+        <div class="flow-number">2</div>
+        <h3>تصميم</h3>
+        <p class="text-muted">هندسة مخصصة.</p>
+      </div>
+      <div class="flow-step reveal delay-200">
+        <div class="flow-number">3</div>
+        <h3>تركيب</h3>
+        <p class="text-muted">إعداد احترافي.</p>
+      </div>
+      <div class="flow-step reveal delay-300">
+        <div class="flow-number">4</div>
+        <h3>تفعيل</h3>
+        <p class="text-muted">قم بتشغيل التوفير.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="container section-padding testimonials-section">
+    <div class="section-title text-center reveal">
+      <h2>قصص نجاح العملاء</h2>
+      <p class="text-muted mt-2">موثوق به من قبل أصحاب المنازل والشركات في جميع أنحاء عمان.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="text-muted testimonial-quote">"لقد فاقت كونسيبت للتكنولوجيا توقعاتنا. فاتورة الكهرباء لدينا اختفت تقريبًا منذ التثبيت!"</p>
+        </div>
+        <div class="testimonial-user">
+          <div class="testimonial-avatar avatar-primary">SA</div>
+          <div>
+            <h3 class="testimonial-name">سعيد الراشدي</h3>
+            <span class="testimonial-role">صاحب منزل، مسقط</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal delay-100">
+        <div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="text-muted testimonial-quote">"فريق محترف وتنفيذ خالٍ من العيوب. تظهر خبرة أكثر من 30 عامًا حقًا في جودة هندستهم."</p>
+        </div>
+        <div class="testimonial-user">
+          <div class="testimonial-avatar avatar-accent">MA</div>
+          <div>
+            <h3 class="testimonial-name">محمد البلوشي</h3>
+            <span class="testimonial-role">عميل تجاري، صحار</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal delay-200">
+        <div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="text-muted testimonial-quote">"كانت العملية بأكملها من الاستشارة إلى التفعيل سلسة تمامًا. أوصي بهم بشدة لأي شخص يبحث عن الطاقة الشمسية."</p>
+        </div>
+        <div class="testimonial-user">
+          <div class="testimonial-avatar avatar-dark">FA</div>
+          <div>
+            <h3 class="testimonial-name">فاطمة الحارثي</h3>
+            <span class="testimonial-role">صاحبة منزل، صلالة</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ & Contact Split -->
+  <section id="contact" class="container section-padding">
+    <div class="split-section">
+      <div class="faq-section reveal">
+        <h2 class="mb-4">أسئلة شائعة</h2>
+        <div class="accordion">
+          
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span><?= $faq['q'] ?></span>
+                <span class="icon">+</span>
+              </button>
+              <div class="accordion-content">
+                <div class="content-inner"><?= $faq['a'] ?></div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+
+      <div class="contact-form reveal delay-200">
+        <h3 class="mb-4">طلب استشارة مجانية</h3>
+        
+        <form id="native-lead-form" method="POST">
+          <input type="hidden" name="action" value="submit_lead">
+          <input type="hidden" name="lang" value="ar">
+          
+          <div class="form-group">
+            <label for="lead-name">الاسم الكامل *</label>
+            <input type="text" id="lead-name" name="name" required placeholder="أدخل اسمك الكامل" aria-label="Full Name">
+          </div>
+
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="lead-phone">رقم الهاتف (واتساب) *</label>
+              <input type="tel" id="lead-phone" name="phone" required placeholder="968 XXXXXXXX" aria-label="Phone Number">
+            </div>
+            <div class="form-group">
+              <label for="lead-email">البريد الإلكتروني *</label>
+              <input type="email" id="lead-email" name="email" required placeholder="example@domain.com" aria-label="Email Address">
+            </div>
+          </div>
+
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="lead-gov">المحافظة *</label>
+              <select id="lead-gov" name="governorate" required aria-label="Governorate">
+                <option value="muscat">مسقط</option>
+                <option value="dhofar">ظفار</option>
+                <option value="batinah">الباطنة</option>
+                <option value="dakhiliyah">الداخلية</option>
+                <option value="other">أخرى</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="lead-prop">نوع العقار *</label>
+              <select id="lead-prop" name="property_type" required aria-label="Property Type">
+                <option value="residential">سكني</option>
+                <option value="commercial">تجاري</option>
+                <option value="industrial">صناعي</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="lead-bill">متوسط الفاتورة الكهربائية (ريال) *</label>
+              <input type="number" id="lead-bill" name="monthly_bill" required min="10" max="5000" value="50" aria-label="Electricity Bill">
+            </div>
+            <div class="form-group">
+              <label for="lead-consult">نوع الاستشارة *</label>
+              <select id="lead-consult" name="consultation_type" required aria-label="Consultation Type">
+                <option value="site_survey">معاينة موقع مجانية</option>
+                <option value="video_call">استشارة بالفيديو عن بعد</option>
+                <option value="office">زيارة مكتب كونسيبت</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lead-notes">ملاحظات إضافية (اختياري)</label>
+            <textarea id="lead-notes" name="message" rows="3" placeholder="تحدث إلينا عن احتياجاتك المحددة..." aria-label="Additional Notes"></textarea>
+          </div>
+
+          <!-- Anti-Spam HoneyPot -->
+          <div style="display: none;">
+            <input type="text" name="honeypot" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn btn-primary submit-btn">
+            <span>تأكيد وحجز الاستشارة 🚀</span>
+            <span class="spinner"></span>
+          </button>
+
+          <div id="form-feedback" class="mt-3 text-center" style="display: none;"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col" style="display: flex; flex-direction: column; justify-content: center;">
+        <img src="https://www.ctechoman.com/public/logo.webp" alt="Concept Technologies LLC" width="160" height="50"
+          loading="lazy" decoding="async"
+          style="height: 50px; width: auto; max-width: 200px; margin-bottom: 1.5rem;">
+        <p class="text-muted">&copy; 2026 Concept Technologies LLC.<br>Powering the Future.</p>
+      </div>
+      <div class="footer-col">
+        <h3>موقعنا</h3>
+        <p class="text-muted">Concept Technologies LLC<br>P.O. Box 1375, Postal Code 130<br>Sultanate of Oman<br>Saturday to Thursday 9am - 7pm</p>
+      </div>
+      <div class="footer-col">
+        <h3>راسلنا</h3>
+        <p class="text-muted"><a href="mailto:solar@conceptgrps.com">solar@conceptgrps.com</a><br>Fax No : 00968 24497752</p>
+      </div>
+      <div class="footer-col">
+        <h3>اتصل بنا</h3>
+        <p class="text-muted"><a href="tel:+96824497742">+968 24497742</a><br><a href="tel:+96892315949">+968 92315949</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <script>
+    window.BrandProductsData = {
+      huawei: {
+        name: 'Huawei',
+        logo: 'brands/huawei.svg',
+        tagline: `<?= addslashes($lang['brand_huawei_tag']) ?>`,
+        products: [
+          { key: 'huawei_sun2000', category: 'inverter', title: `<?= addslashes($lang['ds_1_title']) ?>`, desc: `<?= addslashes($lang['ds_1_desc']) ?>`, specs: [`<?= addslashes($lang['ds_1_spec_1']) ?>`, `<?= addslashes($lang['ds_1_spec_2']) ?>`] , localPdf: 'datasheets/huawei_sun2000.pdf' } 
+        ]
+      },
+      sungrow: {
+        name: 'Sungrow',
+        logo: 'brands/sungrow.png',
+        tagline: `<?= addslashes($lang['brand_sungrow_tag']) ?>`,
+        products: [
+          { key: 'sungrow_sg110cx', category: 'inverter', title: `<?= addslashes($lang['ds_sungrow_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_sungrow_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_sungrow_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_sungrow_inv_spec_2']) ?>`] , localPdf: 'datasheets/sungrow_sg110cx.pdf' } 
+        ]
+      },
+      solis: {
+        name: 'Solis',
+        logo: 'brands/solis.png',
+        tagline: `<?= addslashes($lang['brand_solis_tag']) ?>`,
+        products: [
+          { key: 'solis_s5', category: 'inverter', title: `<?= addslashes($lang['ds_solis_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_solis_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_solis_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_solis_inv_spec_2']) ?>`] , localPdf: 'datasheets/solis_s5.pdf' } ,
+          { key: 'solis_flexi', category: 'battery', title: `<?= addslashes($lang['ds_solis_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_solis_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_solis_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_solis_bat_spec_2']) ?>`] , localPdf: 'datasheets/solis_flexi.pdf' } 
+        ]
+      },
+      canadian: {
+        name: 'Canadian Solar',
+        logo: 'brands/canadian_solar.png',
+        tagline: `<?= addslashes($lang['brand_canadian_tag']) ?>`,
+        products: [
+          { key: 'canadian_solar', category: 'panel', title: `<?= addslashes($lang['ds_2_title']) ?>`, desc: `<?= addslashes($lang['ds_2_desc']) ?>`, specs: [`<?= addslashes($lang['ds_2_spec_1']) ?>`, `<?= addslashes($lang['ds_2_spec_2']) ?>`] , localPdf: 'datasheets/canadian_solar.pdf' } ,
+          { key: 'canadian_solar_inv', category: 'inverter', title: `<?= addslashes($lang['ds_canadian_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_canadian_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_canadian_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_canadian_inv_spec_2']) ?>`] , localPdf: 'datasheets/canadian_solar_inv.pdf' } ,
+          { key: 'canadian_solar_battery', category: 'battery', title: `<?= addslashes($lang['ds_canadian_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_canadian_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_canadian_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_canadian_bat_spec_2']) ?>`] , localPdf: 'datasheets/canadian_solar_battery.pdf' } 
+        ]
+      },
+      deye: {
+        name: 'Deye',
+        logo: 'brands/deye.png',
+        tagline: `<?= addslashes($lang['brand_deye_tag']) ?>`,
+        products: [
+          { key: 'deye_hybrid', category: 'inverter', title: `<?= addslashes($lang['ds_3_title']) ?>`, desc: `<?= addslashes($lang['ds_3_desc']) ?>`, specs: [`<?= addslashes($lang['ds_3_spec_1']) ?>`, `<?= addslashes($lang['ds_3_spec_2']) ?>`] , localPdf: 'datasheets/deye_hybrid.pdf' } ,
+          { key: 'deye_bos_g', category: 'battery', title: `<?= addslashes($lang['ds_deye_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_deye_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_deye_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_deye_bat_spec_2']) ?>`] , localPdf: 'datasheets/deye_bos_g.pdf' } 
+        ]
+      },
+      powersun: {
+        name: 'Power & Sun',
+        logo: 'brands/power_sun.png',
+        tagline: `<?= addslashes($lang['brand_powersun_tag']) ?>`,
+        products: [
+          { key: 'power_sun_inv', category: 'inverter', title: `<?= addslashes($lang['ds_powersun_inv_title']) ?>`, desc: `<?= addslashes($lang['ds_powersun_inv_desc']) ?>`, specs: [`<?= addslashes($lang['ds_powersun_inv_spec_1']) ?>`, `<?= addslashes($lang['ds_powersun_inv_spec_2']) ?>`] , localPdf: 'datasheets/power_sun_inv.pdf' } ,
+          { key: 'power_sun_ess', category: 'battery', title: `<?= addslashes($lang['ds_powersun_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_powersun_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_powersun_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_powersun_bat_spec_2']) ?>`] , localPdf: 'datasheets/power_sun_ess.pdf' } 
+        ]
+      },
+      trina: {
+        name: 'Trina Solar',
+        logo: 'brands/trina_solar.svg',
+        tagline: `<?= addslashes($lang['brand_trina_tag']) ?>`,
+        products: [
+          { key: 'trina_vertex', category: 'panel', title: `<?= addslashes($lang['ds_trina_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_trina_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_trina_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_trina_panel_spec_2']) ?>`] , localPdf: 'datasheets/trina_vertex.pdf' } 
+        ]
+      },
+      longi: {
+        name: 'LONGi',
+        logo: 'brands/longi.svg',
+        tagline: `<?= addslashes($lang['brand_longi_tag']) ?>`,
+        products: [
+          { key: 'longi_himo6', category: 'panel', title: `<?= addslashes($lang['ds_longi_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_longi_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_longi_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_longi_panel_spec_2']) ?>`] , localPdf: 'datasheets/longi_himo6.pdf' } ,
+          { key: 'longi_battery', category: 'battery', title: `<?= addslashes($lang['ds_longi_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_longi_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_longi_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_longi_bat_spec_2']) ?>`] , localPdf: 'datasheets/longi_battery.pdf' } 
+        ]
+      },
+      jinko: {
+        name: 'Jinko Solar',
+        logo: 'brands/jinko_solar.png',
+        tagline: `<?= addslashes($lang['brand_jinko_tag']) ?>`,
+        products: [
+          { key: 'jinko_tiger', category: 'panel', title: `<?= addslashes($lang['ds_jinko_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_jinko_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_jinko_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_jinko_panel_spec_2']) ?>`] , localPdf: 'datasheets/jinko_tiger.pdf' } 
+        ]
+      },
+      ja: {
+        name: 'JA Solar',
+        logo: 'brands/ja_solar.svg',
+        tagline: `<?= addslashes($lang['brand_ja_tag']) ?>`,
+        products: [
+          { key: 'ja_solar_blue', category: 'panel', title: `<?= addslashes($lang['ds_ja_panel_title']) ?>`, desc: `<?= addslashes($lang['ds_ja_panel_desc']) ?>`, specs: [`<?= addslashes($lang['ds_ja_panel_spec_1']) ?>`, `<?= addslashes($lang['ds_ja_panel_spec_2']) ?>`] , localPdf: 'datasheets/ja_solar_blue.pdf' } 
+        ]
+      },
+      jebel: {
+        name: 'Jebel',
+        logo: 'brands/jebel.png',
+        tagline: `<?= addslashes($lang['brand_jebel_tag']) ?>`,
+        products: [
+          { key: 'jebel_battery', category: 'battery', title: `<?= addslashes($lang['ds_jebel_bat_title']) ?>`, desc: `<?= addslashes($lang['ds_jebel_bat_desc']) ?>`, specs: [`<?= addslashes($lang['ds_jebel_bat_spec_1']) ?>`, `<?= addslashes($lang['ds_jebel_bat_spec_2']) ?>`] , localPdf: 'datasheets/jebel_battery.pdf' } 
+        ]
+      }
+    };
+  </script>
+
+<script src="calculator-engine.js?v=3.7"></script>
+  <script src="script.js?v=4.5" defer></script>
+
+  <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
+  <script>
+  (function() {
+    'use strict';
+    var chatbotLoaded = false;
+    var analyticsLoaded = false;
+
+    function loadChatbot() {
+      if (chatbotLoaded) return;
+      chatbotLoaded = true;
+      // Inject chatbot CSS
+      var css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = 'chatbot.css?v=3.1';
+      document.head.appendChild(css);
+      // Inject chatbot JS
+      var js = document.createElement('script');
+      js.src = 'chatbot.js?v=3.1';
+      js.defer = true;
+      document.body.appendChild(js);
+    }
+
+    function loadAnalytics() {
+      if (analyticsLoaded) return;
+      analyticsLoaded = true;
+      var js = document.createElement('script');
+      js.src = 'analytics.js?v=3.1';
+      js.defer = true;
+      document.body.appendChild(js);
+    }
+
+    // Strategy: load both after idle, but load chatbot immediately on any interaction
+    var interactionEvents = ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'];
+    function onFirstInteraction() {
+      interactionEvents.forEach(function(e) {
+        window.removeEventListener(e, onFirstInteraction, { passive: true });
+      });
+      loadChatbot();
+      loadAnalytics();
+    }
+
+    interactionEvents.forEach(function(e) {
+      window.addEventListener(e, onFirstInteraction, { passive: true, once: true });
+    });
+
+    // Idle fallback: load everything after 4 seconds regardless
+    if (typeof requestIdleCallback === 'function') {
+      requestIdleCallback(function() {
+        loadChatbot();
+        loadAnalytics();
+      }, { timeout: 4000 });
+    } else {
+      setTimeout(function() {
+        loadChatbot();
+        loadAnalytics();
+      }, 4000);
+    }
+  })();
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+

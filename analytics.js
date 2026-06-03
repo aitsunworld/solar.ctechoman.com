@@ -65,7 +65,7 @@
 
     // 3. Beacon: only for high-value events (not every micro-interaction)
     const beaconEvents = ["lead_submitted", "calculator_change", "session_end", "form_abandoned"];
-    if (navigator.sendBeacon && beaconEvents.includes(eventName)) {
+    if (navigator.sendBeacon && beaconEvents.includes(eventName) && window.location.protocol.startsWith('http')) {
       const blob = new Blob([JSON.stringify({ action: "analytics_log", data: payload })], {
         type: "application/json"
       });
