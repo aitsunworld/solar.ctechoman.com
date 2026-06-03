@@ -18,9 +18,7 @@ def run_detailed_audit():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     
-    cwd = os.getcwd()
-    file_path = os.path.join(cwd, "preview.html")
-    url = "file://" + file_path.replace("\\", "/")
+    url = "http://localhost:8000/preview.html"
     
     driver = webdriver.Chrome(options=options)
     

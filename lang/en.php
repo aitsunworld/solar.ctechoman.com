@@ -8,8 +8,9 @@ return [
     'nav_benefits' => 'Benefits',
     'nav_process' => 'Process',
     'nav_quote' => 'Get a Quote',
-    'hero_title' => 'Premium Solar Energy Solutions for Oman',
-    'hero_desc' => 'Reduce your electricity bills to zero with the most reliable solar panels and renewable energy systems in the Sultanate.',
+    'hero_title' => 'How Much Solar Does Your Home Need?',
+    'hero_desc' => 'Discover your ideal solar system size and see how much you could save every month.',
+    'hero_support' => 'Select the appliances you use at home and let our smart calculator estimate your energy consumption, recommended solar system size, potential savings, and environmental benefits — all in just a few minutes.',
     'hero_btn' => 'Get a Quote',
     'hero_btn_video' => 'Watch Video',
 

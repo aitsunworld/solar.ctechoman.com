@@ -146,11 +146,11 @@ $lang = require_once "lang/{$active_lang}.php";
     <div class="hero-grid">
       <div class="hero-text">
         <h1><?= $lang['hero_title'] ?></h1>
-        <p><?= $lang['hero_desc'] ?></p>
+        <p style="font-size: 1.25rem; font-weight: 700; color: var(--color-primary); margin-top: 1rem; margin-bottom: 1rem; text-align: inherit;"><?= $lang['hero_desc'] ?></p>
+        <p style="font-size: 1rem; color: var(--color-text-muted); margin-bottom: 2rem; text-align: inherit;"><?= $lang['hero_support'] ?></p>
 
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
-
+          <a href="#calculator" class="btn btn-hero-primary"><?= $active_lang === 'ar' ? 'ابدأ بحساب استهلاكك 🚀' : 'Start Sizing Now 🚀' ?></a>
         </div>
 
         <div class="hero-slider-nav">
@@ -190,95 +190,466 @@ $lang = require_once "lang/{$active_lang}.php";
 
   <!-- Solar Calculator -->
   <section id="calculator" class="calculator-section container reveal">
-    <div class="calculator-wrapper">
-      <div class="calc-info">
-        <h2><?= $lang['calc_title'] ?></h2>
-        <p class="text-muted"><?= $lang['calc_desc'] ?></p>
-
-        <div class="results-grid mt-4">
-          <div class="result-box">
-            <span class="result-label"><?= $lang['calc_sys_size'] ?></span>
-            <strong class="result-value text-eco" id="res-size" dir="ltr">0 kW</strong>
+    <div class="wizard-container">
+      
+      <!-- Wizard Progress Header -->
+      <div class="wizard-progress-bar-container">
+        <!-- Desktop progress line and nodes -->
+        <div class="wizard-steps-indicators">
+          <div class="wizard-indicator active" data-step="1">
+            <span class="step-num">1</span>
+            <span class="step-label"><?= $active_lang === 'ar' ? 'العقار' : 'Type' ?></span>
           </div>
-          <div class="result-box">
-            <span class="result-label"><?= $lang['calc_est_panels'] ?></span>
-            <strong class="result-value" id="res-panels" dir="ltr">0</strong>
+          <div class="wizard-indicator" data-step="2">
+            <span class="step-num">2</span>
+            <span class="step-label"><?= $active_lang === 'ar' ? 'الموقع' : 'Location' ?></span>
           </div>
-          <div class="result-box">
-            <span class="result-label"><?= $lang['calc_est_cost'] ?></span>
-            <strong class="result-value" id="res-cost" dir="ltr">0 OMR</strong>
+          <div class="wizard-indicator" data-step="3">
+            <span class="step-num">3</span>
+            <span class="step-label"><?= $active_lang === 'ar' ? 'الأجهزة' : 'Appliances' ?></span>
           </div>
-          <div class="result-box highlight">
-            <span class="result-label"><?= $lang['calc_yearly_savings'] ?></span>
-            <strong class="result-value" id="res-savings" dir="ltr">0 OMR</strong>
+          <div class="wizard-indicator" data-step="4">
+            <span class="step-num">4</span>
+            <span class="step-label"><?= $active_lang === 'ar' ? 'الاستهلاك' : 'Load' ?></span>
+          </div>
+          <div class="wizard-indicator" data-step="5">
+            <span class="step-num">5</span>
+            <span class="step-label"><?= $active_lang === 'ar' ? 'الفاتورة' : 'Bill' ?></span>
+          </div>
+          <div class="wizard-indicator" data-step="6">
+            <span class="step-num">6</span>
+            <span class="step-label"><?= $active_lang === 'ar' ? 'التوصية' : 'System' ?></span>
+          </div>
+          <div class="wizard-indicator" data-step="7">
+            <span class="step-num">7</span>
+            <span class="step-label"><?= $active_lang === 'ar' ? 'لوحة التحكم' : 'Savings' ?></span>
+          </div>
+          <div class="wizard-indicator" data-step="8">
+            <span class="step-num">8</span>
+            <span class="step-label"><?= $active_lang === 'ar' ? 'التأكيد' : 'Contact' ?></span>
           </div>
         </div>
-        <button id="calc-explain-btn" class="btn btn-secondary mt-3">
-          ✨ <?= $active_lang === 'ar' ? 'اشرح لي النتائج بمستشار الذكاء الاصطناعي' : 'Explain results with AI Advisor' ?>
+        
+        <!-- Mobile active step status -->
+        <div class="wizard-mobile-status">
+          <span class="mobile-step-text"><?= $active_lang === 'ar' ? 'الخطوة 1 من 8: نوع العقار' : 'Step 1 of 8: Property Type' ?></span>
+          <div class="mobile-progress-line"><div class="mobile-progress-fill" style="width: 12.5%;"></div></div>
+        </div>
+      </div>
+
+      <!-- Wizard Steps Panels -->
+      <div class="wizard-steps-panels">
+        
+        <!-- Step 1: Property Type -->
+        <div class="wizard-step active" id="wizard-step-1">
+          <div class="step-header">
+            <h3><?= $active_lang === 'ar' ? 'اختر نوع العقار الخاص بك' : 'Select Your Property Type' ?></h3>
+            <p class="text-muted"><?= $active_lang === 'ar' ? 'تتغير خيارات الأجهزة والحسابات بناءً على نوع العقار.' : 'Calculations and appliance sizers will customize for your property type.' ?></p>
+          </div>
+          <div class="property-grid">
+            <div class="property-card active" data-value="residential">
+              <div class="card-icon">🏡</div>
+              <h4><?= $active_lang === 'ar' ? 'منزل سكني' : 'Residential Villa' ?></h4>
+              <p><?= $active_lang === 'ar' ? 'فلل، شقق، ومنازل سكنية' : 'Villas, townhouses, and residential homes' ?></p>
+            </div>
+            <div class="property-card" data-value="commercial">
+              <div class="card-icon">🏢</div>
+              <h4><?= $active_lang === 'ar' ? 'مبنى تجاري' : 'Commercial Business' ?></h4>
+              <p><?= $active_lang === 'ar' ? 'مكاتب، معارض، ومحلات تجارية' : 'Offices, retail spaces, and clinics' ?></p>
+            </div>
+            <div class="property-card" data-value="industrial">
+              <div class="card-icon">🏭</div>
+              <h4><?= $active_lang === 'ar' ? 'منشأة صناعية' : 'Industrial Facility' ?></h4>
+              <p><?= $active_lang === 'ar' ? 'مصانع، مستودعات، وورش كبرى' : 'Factories, cold storage, and warehouses' ?></p>
+            </div>
+          </div>
+          <!-- Hidden select to bind to legacy script -->
+          <div style="display: none;">
+            <select id="property-type">
+              <option value="residential" selected>Residential</option>
+              <option value="commercial">Commercial</option>
+              <option value="industrial">Industrial</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Step 2: Location -->
+        <div class="wizard-step" id="wizard-step-2">
+          <div class="step-header">
+            <h3><?= $active_lang === 'ar' ? 'أين يقع عقارك في سلطنة عُمان؟' : 'Where is Your Property Located?' ?></h3>
+            <p class="text-muted"><?= $active_lang === 'ar' ? 'نحتاج لتحديد الموقع الجغرافي لحساب معدل سطوع الشمس بدقة.' : 'We use solar irradiation yield data specific to Omani governorates.' ?></p>
+          </div>
+          <div class="location-grid">
+            <div class="location-card active" data-value="muscat">
+              <div class="location-icon">📍</div>
+              <h4><?= $lang['calc_loc_muscat'] ?></h4>
+              <span class="yield-badge"><?= $active_lang === 'ar' ? 'إنتاجية 1700' : '1700 kWh/kW' ?></span>
+            </div>
+            <div class="location-card" data-value="batinah">
+              <div class="location-icon">📍</div>
+              <h4><?= $lang['calc_loc_batinah'] ?></h4>
+              <span class="yield-badge"><?= $active_lang === 'ar' ? 'إنتاجية 1700' : '1700 kWh/kW' ?></span>
+            </div>
+            <div class="location-card" data-value="dhofar">
+              <div class="location-icon">📍</div>
+              <h4><?= $lang['calc_loc_dhofar'] ?></h4>
+              <span class="yield-badge"><?= $active_lang === 'ar' ? 'إنتاجية 1445' : '1445 kWh/kW' ?></span>
+            </div>
+            <div class="location-card" data-value="dakhiliyah">
+              <div class="location-icon">📍</div>
+              <h4><?= $active_lang === 'ar' ? 'الداخلية' : 'Al Dakhiliyah' ?></h4>
+              <span class="yield-badge"><?= $active_lang === 'ar' ? 'إنتاجية 1750' : '1750 kWh/kW' ?></span>
+            </div>
+            <div class="location-card" data-value="other">
+              <div class="location-icon">📍</div>
+              <h4><?= $lang['calc_loc_other'] ?></h4>
+              <span class="yield-badge"><?= $active_lang === 'ar' ? 'إنتاجية 1650' : '1650 kWh/kW' ?></span>
+            </div>
+          </div>
+          <!-- Hidden select to bind to legacy script -->
+          <div style="display: none;">
+            <select id="location">
+              <option value="muscat" selected>Muscat</option>
+              <option value="batinah">Al Batinah</option>
+              <option value="dhofar">Dhofar</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Step 3: Appliance Selection -->
+        <div class="wizard-step" id="wizard-step-3">
+          <div class="step-header">
+            <h3><?= $active_lang === 'ar' ? 'اختر الأجهزة المستعملة ومعدل الاستخدام' : 'Select Appliances & Daily Usage' ?></h3>
+            <p class="text-muted"><?= $active_lang === 'ar' ? 'أضف الأجهزة التي تستخدمها بانتظام لتوليد تقدير دقيق للاستهلاك.' : 'Add quantity and customize usage for your core appliances to estimate energy load.' ?></p>
+          </div>
+          
+          <div id="appliance-inputs-container">
+            <!-- Dynamically populated by JS (initApplianceSizer) -->
+          </div>
+        </div>
+
+        <!-- Step 4: Consumption Analysis -->
+        <div class="wizard-step" id="wizard-step-4">
+          <div class="step-header">
+            <h3><?= $active_lang === 'ar' ? 'تحليل استهلاك الطاقة والتحميل' : 'Energy Load & Consumption Analysis' ?></h3>
+            <p class="text-muted"><?= $active_lang === 'ar' ? 'إليك تفاصيل الاحتياجات الكهربائية لعقارك بناءً على الأجهزة المحددة.' : 'Here is the electrical demand profile calculated from your appliance choices.' ?></p>
+          </div>
+          
+          <div class="analysis-grid">
+            <div class="analysis-stats">
+              <div class="stat-box">
+                <span class="stat-label"><?= $active_lang === 'ar' ? 'إجمالي الحمل المتصل' : 'Total Connected Load' ?></span>
+                <strong class="stat-value" id="res-connected-load">0 kW</strong>
+                <span class="stat-sub"><?= $active_lang === 'ar' ? 'أقصى طاقة استيعابية متزامنة' : 'Peak power demand capacity' ?></span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label"><?= $active_lang === 'ar' ? 'الاستهلاك اليومي المقدر' : 'Estimated Daily Consumption' ?></span>
+                <strong class="stat-value" id="res-daily-consumption">0 kWh/day</strong>
+                <span class="stat-sub"><?= $active_lang === 'ar' ? 'معدل استهلاك الطاقة اليومي' : 'Average daily energy usage' ?></span>
+              </div>
+              <div class="stat-box">
+                <span class="stat-label"><?= $active_lang === 'ar' ? 'الاستهلاك الشهري المقدر' : 'Estimated Monthly Consumption' ?></span>
+                <strong class="stat-value" id="res-monthly-consumption">0 kWh/month</strong>
+                <span class="stat-sub"><?= $active_lang === 'ar' ? 'استهلاك الطاقة خلال 30 يوماً' : 'Estimated usage over 30 days' ?></span>
+              </div>
+            </div>
+            
+            <div class="category-breakdown-card">
+              <h4><?= $active_lang === 'ar' ? 'توزيع الاستهلاك حسب الفئة' : 'Load Distribution by Category' ?></h4>
+              <div id="category-chart-bars" class="chart-bars-container">
+                <!-- Populated dynamically in JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Bill Verification -->
+        <div class="wizard-step" id="wizard-step-5">
+          <div class="step-header">
+            <h3><?= $active_lang === 'ar' ? 'التحقق من الفاتورة الفعلية' : 'Verify with Actual Electricity Bill' ?></h3>
+            <p class="text-muted"><?= $active_lang === 'ar' ? 'مقارنة استهلاك الأجهزة مع فاتورتك الحقيقية لضمان دقة توصية النظام.' : 'Compare sizer consumption with your actual bill to optimize solar recommendations.' ?></p>
+          </div>
+          
+          <div class="bill-verification-wrapper">
+            <div class="bill-tabs">
+              <button type="button" class="bill-tab active" data-mode="manual"><?= $active_lang === 'ar' ? 'إدخال يدوي للفاتورة' : 'Manual Bill Entry' ?></button>
+              <button type="button" class="bill-tab" data-mode="upload"><?= $active_lang === 'ar' ? 'رفع ملف الفاتورة' : 'Upload Digital Bill' ?></button>
+            </div>
+            
+            <!-- Manual Bill Container -->
+            <div id="bill-verification-manual" class="bill-panel active">
+              <h4><?= $active_lang === 'ar' ? 'كم تبلغ فاتورة الكهرباء الشهرية المعتادة؟' : 'What is your average monthly electricity bill?' ?></h4>
+              <div class="slider-container mt-4">
+                <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Slider">
+                <div class="slider-value-display">
+                  <span id="bill-display">50</span> <span class="currency">OMR</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Upload Bill Container -->
+            <div id="bill-verification-upload" class="bill-panel">
+              <div class="bill-upload-zone" id="bill-upload-zone">
+                <div class="upload-icon">📄</div>
+                <p class="upload-text"><?= $active_lang === 'ar' ? 'قم بسحب وإفلات فاتورة الكهرباء هنا (PDF أو صورة)' : 'Drag and drop your electricity bill here (PDF/Image)' ?></p>
+                <span class="upload-or"><?= $active_lang === 'ar' ? 'أو' : 'OR' ?></span>
+                <button type="button" class="btn btn-secondary btn-upload-file"><?= $active_lang === 'ar' ? 'تصفح الملفات' : 'Browse Files' ?></button>
+                <input type="file" id="bill-file-input" accept="image/*,application/pdf" style="display: none;">
+              </div>
+              <div id="upload-status" class="upload-status" style="display: none;">
+                <div class="spinner-circle"></div>
+                <p id="upload-status-text"><?= $active_lang === 'ar' ? 'جاري قراءة الفاتورة وتحليل الاستهلاك...' : 'Analyzing bill statement metrics...' ?></p>
+              </div>
+            </div>
+            
+            <!-- Variance Warning Banner -->
+            <div id="bill-variance-warning" class="variance-alert-banner" style="display: none;">
+              <span class="alert-icon">⚠️</span>
+              <div class="alert-body">
+                <h5 id="variance-title"><?= $active_lang === 'ar' ? 'تم اكتشاف تباين في الاستهلاك' : 'Consumption Variance Detected' ?></h5>
+                <p id="variance-desc"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6: Solar Recommendation -->
+        <div class="wizard-step" id="wizard-step-6">
+          <div class="step-header">
+            <h3><?= $active_lang === 'ar' ? 'نظام الطاقة الشمسية المقترح لعقارك' : 'Your Recommended Solar System' ?></h3>
+            <p class="text-muted"><?= $active_lang === 'ar' ? 'تم حساب سعة النظام المثالية لتغطية استهلاكك بنسبة تصل إلى 100٪.' : 'Optimal system dimensioning to cover up to 100% of your energy footprint.' ?></p>
+          </div>
+          
+          <div class="recommendations-grid">
+            <div class="recs-card main-recs">
+              <div class="recs-icon">☀️</div>
+              <div class="recs-info-text">
+                <span class="recs-label"><?= $lang['calc_sys_size'] ?></span>
+                <strong class="recs-value text-eco" id="res-size">0 kW</strong>
+                <span class="recs-desc"><?= $active_lang === 'ar' ? 'السعة الكلية المقترحة للألواح' : 'Recommended peak solar capacity' ?></span>
+              </div>
+            </div>
+            
+            <div class="recs-card">
+              <div class="recs-icon">⚙️</div>
+              <div class="recs-info-text">
+                <span class="recs-label"><?= $lang['calc_est_panels'] ?></span>
+                <strong class="recs-value" id="res-panels">0</strong>
+                <span class="recs-desc"><?= $active_lang === 'ar' ? 'ألواح بقدرة 550 واط' : 'Premium 550W mono-PV panels' ?></span>
+              </div>
+            </div>
+
+            <div class="recs-card">
+              <div class="recs-icon">📐</div>
+              <div class="recs-info-text">
+                <span class="recs-label"><?= $active_lang === 'ar' ? 'مساحة السقف المطلوبة' : 'Roof Space Required' ?></span>
+                <strong class="recs-value" id="res-space">0 sqm</strong>
+                <span class="recs-desc"><?= $active_lang === 'ar' ? 'المساحة الصافية للألواح' : 'Unshaded roof area needed' ?></span>
+              </div>
+            </div>
+
+            <div class="recs-card">
+              <div class="recs-icon">🔌</div>
+              <div class="recs-info-text">
+                <span class="recs-label"><?= $active_lang === 'ar' ? 'حجم العاكس الذكي' : 'Recommended Inverter' ?></span>
+                <strong class="recs-value" id="res-inverter">0 kW</strong>
+                <span class="recs-desc"><?= $active_lang === 'ar' ? 'عاكس DCRP معتمد' : 'Oman DCRP approved string inverter' ?></span>
+              </div>
+            </div>
+
+            <div class="recs-card">
+              <div class="recs-icon">🔋</div>
+              <div class="recs-info-text">
+                <span class="recs-label"><?= $active_lang === 'ar' ? 'سعة تخزين البطارية' : 'Battery Storage' ?></span>
+                <strong class="recs-value text-eco" id="res-battery">0 kWh</strong>
+                <span class="recs-desc"><?= $active_lang === 'ar' ? 'لتخزين الكهرباء الاحتياطية' : 'Backup battery capacity (optional)' ?></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 7: Savings Dashboard & Gamification -->
+        <div class="wizard-step" id="wizard-step-7">
+          <div class="step-header">
+            <h3><?= $active_lang === 'ar' ? 'لوحة تحكم الأرباح والأثر البيئي' : 'Savings & Environmental Impact Dashboard' ?></h3>
+            <p class="text-muted"><?= $active_lang === 'ar' ? 'توفير مالي مضمون واستدامة بيئية حقيقية لعقارك في عمان.' : 'Financial freedom and sustainable footprint for your Oman property.' ?></p>
+          </div>
+          
+          <div class="dashboard-grid">
+            <!-- Left panel: Financial metrics -->
+            <div class="dashboard-card financials">
+              <h4><?= $active_lang === 'ar' ? 'الجدوى الاقتصادية للمشروع' : 'Financial Viability' ?></h4>
+              <div class="financials-grid">
+                <div class="fin-box highlight">
+                  <span class="fin-label"><?= $lang['calc_yearly_savings'] ?></span>
+                  <strong class="fin-value" id="res-savings">0 OMR</strong>
+                </div>
+                <div class="fin-box">
+                  <span class="fin-label"><?= $lang['calc_est_cost'] ?></span>
+                  <strong class="fin-value" id="res-cost">0 OMR</strong>
+                </div>
+                <div class="fin-box">
+                  <span class="fin-label"><?= $active_lang === 'ar' ? 'فترة استرداد رأس المال' : 'Payback Period' ?></span>
+                  <strong class="fin-value" id="res-payback">0 Years</strong>
+                </div>
+                <div class="fin-box">
+                  <span class="fin-label"><?= $active_lang === 'ar' ? 'العائد على الاستثمار' : 'Project ROI' ?></span>
+                  <strong class="fin-value" id="res-roi">0%</strong>
+                </div>
+              </div>
+              
+              <!-- 25 Years Cumulative Savings Meter -->
+              <div class="savings-meter-wrapper mt-4">
+                <div class="savings-meter-header">
+                  <span><?= $active_lang === 'ar' ? 'التوفير التراكمي خلال 25 سنة' : '25-Year Cumulative Savings' ?></span>
+                  <strong id="res-cumulative-savings">0 OMR</strong>
+                </div>
+                <div class="savings-meter-bar"><div class="savings-meter-fill" id="res-savings-fill" style="width: 100%;"></div></div>
+                <span class="savings-meter-note"><?= $active_lang === 'ar' ? '💡 العمر الافتراضي للألواح يصل إلى 25 سنة كأصل مدر للأرباح.' : '💡 Solar panels operate as a cash-generating asset for 25+ years.' ?></span>
+              </div>
+            </div>
+            
+            <!-- Right panel: Gamification widgets -->
+            <div class="dashboard-card environment">
+              <h4><?= $active_lang === 'ar' ? 'الأثر البيئي والتقييم الذكي' : 'Environmental & Suitability Score' ?></h4>
+              <div class="gamified-widgets">
+                <div class="gamified-widget suitability">
+                  <div class="widget-icon">⭐</div>
+                  <div class="widget-body">
+                    <span class="widget-label"><?= $active_lang === 'ar' ? 'معدل ملاءمة العقار للطاقة الشمسية' : 'Solar Suitability Score' ?></span>
+                    <strong class="widget-value" id="res-suitability-score">0/100</strong>
+                  </div>
+                </div>
+                <div class="gamified-widget independence">
+                  <div class="widget-icon">⚡</div>
+                  <div class="widget-body">
+                    <span class="widget-label"><?= $active_lang === 'ar' ? 'معدل الاستقلال عن الشبكة' : 'Energy Independence Score' ?></span>
+                    <strong class="widget-value" id="res-energy-independence">0%</strong>
+                  </div>
+                </div>
+                <div class="gamified-widget co2">
+                  <div class="widget-icon">🌱</div>
+                  <div class="widget-body">
+                    <span class="widget-label"><?= $active_lang === 'ar' ? 'خفض انبعاثات الكربون' : 'Carbon Reduction (CO₂)' ?></span>
+                    <strong class="widget-value" id="res-co2-offset">0 Tons/yr</strong>
+                  </div>
+                </div>
+                <div class="gamified-widget trees">
+                  <div class="widget-icon">🌳</div>
+                  <div class="widget-body">
+                    <span class="widget-label"><?= $active_lang === 'ar' ? 'يعادل زراعة أشجار' : 'Equivalent Trees Planted' ?></span>
+                    <strong class="widget-value" id="res-trees-offset">0 Trees</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-center mt-3">
+            <button id="calc-explain-btn" class="btn btn-secondary">
+              ✨ <?= $active_lang === 'ar' ? 'شرح تفصيلي للنتائج بالمستشار الذكي' : 'Explain results with AI Advisor' ?>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 8: Lead Capture Form -->
+        <div class="wizard-step" id="wizard-step-8">
+          <div class="step-header">
+            <h3><?= $active_lang === 'ar' ? 'طلب استشارة وتأكيد العرض المالي' : 'Confirm & Book Free Survey' ?></h3>
+            <p class="text-muted"><?= $active_lang === 'ar' ? 'احصل على مخطط هندسي مجاني لمنزلك وتأكيد التكلفة من مهندسينا.' : 'Request a free technical survey and custom engineering design from our team.' ?></p>
+          </div>
+          
+          <div class="lead-form-wrapper">
+            <form id="native-lead-form" method="POST">
+              <input type="hidden" name="action" value="submit_lead">
+              <input type="hidden" name="lang" value="<?= $active_lang ?>">
+              
+              <div class="form-group">
+                <label for="lead-name"><?= $active_lang === 'ar' ? 'الاسم الكامل' : 'Full Name' ?> *</label>
+                <input type="text" id="lead-name" name="name" required placeholder="<?= $active_lang === 'ar' ? 'أدخل اسمك الكامل' : 'Enter your full name' ?>" aria-label="Full Name">
+              </div>
+
+              <div class="form-row-grid">
+                <div class="form-group">
+                  <label for="lead-phone"><?= $active_lang === 'ar' ? 'رقم الهاتف (واتساب)' : 'Phone Number (WhatsApp)' ?> *</label>
+                  <input type="tel" id="lead-phone" name="phone" required placeholder="968 XXXXXXXX" aria-label="Phone Number">
+                </div>
+                <div class="form-group">
+                  <label for="lead-email"><?= $active_lang === 'ar' ? 'البريد الإلكتروني' : 'Email Address' ?> *</label>
+                  <input type="email" id="lead-email" name="email" required placeholder="example@domain.com" aria-label="Email Address">
+                </div>
+              </div>
+
+              <div class="form-row-grid" style="display: none;">
+                <!-- Sync selections automatically from step cards -->
+                <div class="form-group">
+                  <select id="lead-gov" name="governorate" aria-label="Governorate">
+                    <option value="muscat">Muscat</option>
+                    <option value="dhofar">Dhofar</option>
+                    <option value="batinah">Al Batinah</option>
+                    <option value="dakhiliyah">Dakhiliyah</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <select id="lead-prop" name="property_type" aria-label="Property Type">
+                    <option value="residential">Residential</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="industrial">Industrial</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row-grid">
+                <div class="form-group">
+                  <label for="lead-bill"><?= $active_lang === 'ar' ? 'متوسط الفاتورة الكهربائية (ريال)' : 'Average Electricity Bill (OMR)' ?> *</label>
+                  <input type="number" id="lead-bill" name="monthly_bill" required min="10" max="5000" value="50" aria-label="Electricity Bill" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="lead-consult"><?= $active_lang === 'ar' ? 'نوع الاستشارة' : 'Consultation Type' ?> *</label>
+                  <select id="lead-consult" name="consultation_type" required aria-label="Consultation Type">
+                    <option value="site_survey" selected><?= $active_lang === 'ar' ? 'معاينة موقع مجانية' : 'Free Site Survey' ?></option>
+                    <option value="video_call"><?= $active_lang === 'ar' ? 'استشارة بالفيديو عن بعد' : 'Online Video Call' ?></option>
+                    <option value="office"><?= $active_lang === 'ar' ? 'زيارة مكتب كونسيبت' : 'Office Consultation' ?></option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="lead-notes"><?= $active_lang === 'ar' ? 'ملاحظات إضافية (اختياري)' : 'Additional Notes (Optional)' ?></label>
+                <textarea id="lead-notes" name="message" rows="3" placeholder="<?= $active_lang === 'ar' ? 'تحدث إلينا عن احتياجاتك المحددة...' : 'Tell us about your specific solar needs...' ?>" aria-label="Additional Notes"></textarea>
+              </div>
+
+              <!-- Anti-Spam HoneyPot -->
+              <div style="display: none;">
+                <input type="text" name="honeypot" tabindex="-1" autocomplete="off">
+              </div>
+
+              <button type="submit" class="btn btn-primary submit-btn" style="min-height: 48px; border-radius: 100px; width: 100%;">
+                <span><?= $active_lang === 'ar' ? 'تأكيد وحجز الاستشارة 🚀' : 'Confirm & Book Consultation 🚀' ?></span>
+                <span class="spinner" style="display: none; width: 20px; height: 20px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; vertical-align: middle; margin-left: 10px;"></span>
+              </button>
+
+              <div id="form-feedback" class="mt-3 text-center" style="display: none;"></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Wizard Navigation Footer Controls -->
+      <div class="wizard-navigation-controls" style="display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem;">
+        <button type="button" id="wizard-back-btn" class="btn btn-secondary" style="display: none; flex: 1; max-width: 200px;">
+          <?= $active_lang === 'ar' ? '← السابق' : '← Back' ?>
         </button>
-        <p class="mt-3 text-muted" style="font-size: 0.8rem;"><?= $lang['calc_note'] ?></p>
-
-        <div id="load-recommendations" style="display: none;">
-          <h4 class="recs-title"><?= $active_lang === 'ar' ? 'توصيات النظام المتقدمة' : 'Advanced System Recommendations' ?></h4>
-          <div class="recs-grid">
-            <div class="result-box load-box">
-              <span class="result-label"><?= $active_lang === 'ar' ? 'إجمالي الحمل المتصل' : 'Total Connected Load' ?></span>
-              <strong class="result-value" id="res-connected-load">0 W</strong>
-            </div>
-            <div class="result-box consumption-box">
-              <span class="result-label"><?= $active_lang === 'ar' ? 'الاستهلاك اليومي المقدر' : 'Estimated Daily Consumption' ?></span>
-              <strong class="result-value" id="res-daily-consumption">0 kWh/day</strong>
-            </div>
-            <div class="result-box inverter-box">
-              <span class="result-label"><?= $active_lang === 'ar' ? 'حجم العاكس المقترح' : 'Recommended Inverter' ?></span>
-              <strong class="result-value" id="res-inverter">0 kW</strong>
-            </div>
-            <div class="result-box battery-box">
-              <span class="result-label"><?= $active_lang === 'ar' ? 'سعة البطارية المقترحة' : 'Battery Storage' ?></span>
-              <strong class="result-value text-eco" id="res-battery">0 kWh</strong>
-            </div>
-          </div>
-        </div>
+        <button type="button" id="wizard-next-btn" class="btn btn-primary" style="flex: 1; max-width: 200px; margin-left: auto;">
+          <?= $active_lang === 'ar' ? 'التالي 🚀' : 'Next 🚀' ?>
+        </button>
       </div>
 
-      <div class="calc-form">
-        <div class="calc-tabs">
-          <button id="tab-appliances" class="calc-tab active">
-            <?= $active_lang === 'ar' ? 'مدقق الأجهزة' : 'Appliance Auditor' ?>
-          </button>
-          <button id="tab-bill" class="calc-tab">
-            <?= $active_lang === 'ar' ? 'تقدير الفاتورة' : 'Bill Estimator' ?>
-          </button>
-        </div>
-
-        <div id="bill-inputs-container" style="display: none;">
-          <h3 class="mb-3"><?= $lang['calc_monthly_bill'] ?></h3>
-          <div class="slider-container">
-            <input type="range" id="bill-slider" min="10" max="1000" value="50" step="5" aria-label="<?= $lang['calc_monthly_bill'] ?>">
-            <div class="slider-value"><span id="bill-display">50</span></div>
-          </div>
-        </div>
-
-        <div id="appliance-inputs-container">
-          <!-- Appliances rendered dynamically via Javascript for multi-language SSOT support -->
-        </div>
-
-        <div class="form-row">
-          <select id="property-type" aria-label="<?= $lang['calc_prop_residential'] ?>">
-            <option value="residential"><?= $lang['calc_prop_residential'] ?></option>
-            <option value="commercial"><?= $lang['calc_prop_commercial'] ?></option>
-            <option value="industrial"><?= $lang['calc_prop_industrial'] ?></option>
-          </select>
-
-          <select id="location" aria-label="<?= $lang['calc_loc_muscat'] ?>">
-            <option value="muscat"><?= $lang['calc_loc_muscat'] ?></option>
-            <option value="dhofar"><?= $lang['calc_loc_dhofar'] ?></option>
-            <option value="batinah"><?= $lang['calc_loc_batinah'] ?></option>
-            <option value="other"><?= $lang['calc_loc_other'] ?></option>
-          </select>
-        </div>
-      </div>
     </div>
+  </section>
   </section>
 
   <!-- Benefits -->
@@ -822,9 +1193,12 @@ $lang = require_once "lang/{$active_lang}.php";
         <div class="ds-modal-body" style="flex: 1; padding: 0; position: relative;">
           <iframe id="pdf-viewer-frame" style="width: 100%; height: 100%; border: none; background: #fff;"></iframe>
         </div>
-        <div class="pdf-modal-footer" style="padding: 1.5rem; background: #f8fafc; border-top: 1px solid #e2e8f0; text-align: center;">
-          <p style="margin-bottom: 1rem; font-weight: 600; color: #1e293b;">Would you like our team to send pricing and availability?</p>
-          <button type="button" id="pdf-request-pricing-btn" class="btn btn-primary" style="padding: 0.75rem 2rem;">Yes, Request Pricing</button>
+        <div class="pdf-modal-footer" style="padding: 1.5rem; background: #f8fafc; border-top: 1px solid #e2e8f0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+          <p style="margin-bottom: 0.5rem; font-weight: 600; color: #1e293b;"><?= $active_lang === 'ar' ? 'هل تود الحصول على أسعار وتفاصيل توفر هذا المنتج؟' : 'Would you like our team to send pricing and availability?' ?></p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; width: 100%;">
+            <a href="#" id="pdf-download-official-btn" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 0.75rem 2rem; min-height: 48px; border: 1.5px solid var(--color-accent); background: transparent; color: var(--color-accent); font-weight: 700; border-radius: var(--radius-pill); text-decoration: none; display: inline-flex; align-items: center; justify-content: center;"><?= $active_lang === 'ar' ? 'رابط المواصفات الرسمي ↗' : 'Official Portal ↗' ?></a>
+            <button type="button" id="pdf-request-pricing-btn" class="btn btn-primary" style="padding: 0.75rem 2rem;"><?= $active_lang === 'ar' ? 'نعم، اطلب الأسعار' : 'Yes, Request Pricing' ?></button>
+          </div>
         </div>
       </div>
     </div>
