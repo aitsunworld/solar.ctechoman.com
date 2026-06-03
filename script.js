@@ -1399,18 +1399,30 @@ document.addEventListener('DOMContentLoaded', () => {
     function goToDiscoveryStep(step) {
         currentDiscoveryStep = step;
 
-        // Update progress dots
-        const dots = document.querySelectorAll('.discovery-steps-progress .step-dot');
-        dots.forEach(dot => {
-            const dotStep = parseInt(dot.dataset.step);
-            if (dotStep < step) {
-                dot.className = 'step-dot completed';
-            } else if (dotStep === step) {
-                dot.className = 'step-dot active';
+        // Update progress indicators (wrapper + inner dot)
+        const indicators = document.querySelectorAll('.discovery-steps-progress .step-indicator');
+        indicators.forEach(indicator => {
+            const indicatorStep = parseInt(indicator.dataset.step);
+            const dot = indicator.querySelector('.step-dot');
+            if (indicatorStep < step) {
+                indicator.className = 'step-indicator completed';
+                if (dot) dot.className = 'step-dot completed';
+            } else if (indicatorStep === step) {
+                indicator.className = 'step-indicator active';
+                if (dot) dot.className = 'step-dot active';
             } else {
-                dot.className = 'step-dot';
+                indicator.className = 'step-indicator';
+                if (dot) dot.className = 'step-dot';
             }
         });
+
+        // Update the filled progress line via CSS custom property (0% = step 1, 100% = step 7)
+        const progressBar = document.querySelector('.discovery-steps-progress');
+        if (progressBar) {
+            const progressPct = Math.max(0, ((step - 1) / 6) * 100);
+            progressBar.style.setProperty('--step-progress', progressPct + '%');
+        }
+
 
         // Hide all panels
         const panels = document.querySelectorAll('.discovery-step-panel');

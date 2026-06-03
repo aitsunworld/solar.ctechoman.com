@@ -99,8 +99,8 @@ $lang = require_once "lang/{$active_lang}.php";
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=4.1" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=4.1"></noscript>
+  <link rel="preload" as="style" href="style.css?v=5.0" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=5.0"></noscript>
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -404,14 +404,36 @@ $lang = require_once "lang/{$active_lang}.php";
         <div id="residential-discovery-journey" style="display: none;">
           <!-- Wizard Navigation & Steps -->
           <div class="discovery-steps-progress mb-4">
-            <div class="step-dot active" data-step="1" title="<?= $lang['step_title_1'] ?>">1</div>
-            <div class="step-dot" data-step="2" title="<?= $lang['step_title_2'] ?>">2</div>
-            <div class="step-dot" data-step="3" title="<?= $lang['step_title_3'] ?>">3</div>
-            <div class="step-dot" data-step="4" title="<?= $lang['step_title_4'] ?>">4</div>
-            <div class="step-dot" data-step="5" title="<?= $lang['step_title_5'] ?>">5</div>
-            <div class="step-dot" data-step="6" title="<?= $lang['step_title_6'] ?>">6</div>
-            <div class="step-dot" data-step="7" title="<?= $lang['step_title_7'] ?>">7</div>
+            <div class="step-indicator active" data-step="1">
+              <div class="step-dot" title="<?= $lang['step_title_1'] ?>"><span class="step-number">1</span></div>
+              <span class="step-label"><?= $active_lang === 'ar' ? 'الأجهزة' : 'Appliances' ?></span>
+            </div>
+            <div class="step-indicator" data-step="2">
+              <div class="step-dot" title="<?= $lang['step_title_2'] ?>"><span class="step-number">2</span></div>
+              <span class="step-label"><?= $active_lang === 'ar' ? 'الكميات' : 'Quantities' ?></span>
+            </div>
+            <div class="step-indicator" data-step="3">
+              <div class="step-dot" title="<?= $lang['step_title_3'] ?>"><span class="step-number">3</span></div>
+              <span class="step-label"><?= $active_lang === 'ar' ? 'الاستهلاك' : 'Consumption' ?></span>
+            </div>
+            <div class="step-indicator" data-step="4">
+              <div class="step-dot" title="<?= $lang['step_title_4'] ?>"><span class="step-number">4</span></div>
+              <span class="step-label"><?= $active_lang === 'ar' ? 'حجم الطاقة' : 'Solar Size' ?></span>
+            </div>
+            <div class="step-indicator" data-step="5">
+              <div class="step-dot" title="<?= $lang['step_title_5'] ?>"><span class="step-number">5</span></div>
+              <span class="step-label"><?= $active_lang === 'ar' ? 'الفاتورة' : 'Bill' ?></span>
+            </div>
+            <div class="step-indicator" data-step="6">
+              <div class="step-dot" title="<?= $lang['step_title_6'] ?>"><span class="step-number">6</span></div>
+              <span class="step-label"><?= $active_lang === 'ar' ? 'المعايرة' : 'Calibrate' ?></span>
+            </div>
+            <div class="step-indicator" data-step="7">
+              <div class="step-dot" title="<?= $lang['step_title_7'] ?>"><span class="step-number">7</span></div>
+              <span class="step-label"><?= $active_lang === 'ar' ? 'النتائج' : 'Results' ?></span>
+            </div>
           </div>
+
 
           <!-- Panel 1: Select Appliances (Step 1) -->
           <div class="discovery-step-panel" id="discovery-panel-1">
@@ -1473,7 +1495,7 @@ $lang = require_once "lang/{$active_lang}.php";
   </script>
 
 <script src="calculator-engine.js?v=3.7"></script>
-  <script src="script.js?v=4.6" defer></script>
+  <script src="script.js?v=5.0" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>
