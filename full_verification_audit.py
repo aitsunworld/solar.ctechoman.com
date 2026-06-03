@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
-ARTIFACT_DIR = r"C:\Users\Sagar\.gemini\antigravity-ide\brain\a6d54b4f-6860-4fb1-8499-2a6a2b6ba3ca"
+ARTIFACT_DIR = r"C:\Users\Dell\.gemini\antigravity-ide\brain\16a35125-41a5-485d-b60a-4c70ddba3d7a"
 
 def run_audit():
     options = Options()
@@ -157,6 +157,11 @@ def run_audit():
 
         # 8. Simulate qty click and verify state
         try:
+            # Switch to Appliance Auditor tab first
+            app_tab = driver.find_element(By.ID, "tab-appliances")
+            driver.execute_script("arguments[0].click();", app_tab)
+            time.sleep(1)
+
             # Find the first plus button and click it
             first_plus = driver.find_element(By.CSS_SELECTOR, ".qty-btn.plus")
             app_id = first_plus.get_attribute("data-id")
@@ -165,13 +170,13 @@ def run_audit():
             qty_before = driver.find_element(By.ID, f"qty-{app_id}").text
             
             # Click once
-            first_plus.click()
+            driver.execute_script("arguments[0].click();", first_plus)
             time.sleep(0.3)
             
             qty_after = driver.find_element(By.ID, f"qty-{app_id}").text
             
             # Click again
-            first_plus.click()
+            driver.execute_script("arguments[0].click();", first_plus)
             time.sleep(0.3)
             
             qty_after_2 = driver.find_element(By.ID, f"qty-{app_id}").text

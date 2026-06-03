@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resConnectedLoad = document.getElementById('res-connected-load');
     const resDailyConsumption = document.getElementById('res-daily-consumption');
 
-    let activeSizerMode = 'appliances'; // 'bill' | 'appliances'
+    let activeSizerMode = 'bill'; // 'bill' | 'appliances'
     const applianceQuantities = {
         residential: {},
         commercial: {},
@@ -206,9 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Calculate dynamic load contribution using average wattage to match sizer engine
-            const avgWatts = (app.min_w + app.max_w) / 2;
-            const kwhDaily = ((avgWatts * app.hours * currentQty) / 1000).toFixed(1);
+            // Calculate dynamic load contribution
+            const kwhDaily = ((app.min_w * app.hours * currentQty) / 1000).toFixed(1);
             const loadText = currentQty > 0 
                 ? (isArabic ? `الاستهلاك: ${kwhDaily} كيلوواط/يوم` : `Load: ${kwhDaily} kWh/d`)
                 : '';
@@ -273,20 +272,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     function getApplianceSVG(id) {
         const svgStyle = 'width: 24px; height: 24px; transition: stroke 0.3s ease;';
         const SVGs = {
             // Residential
-            window_ac: `
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
-                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                    <line x1="3" y1="9" x2="21" y2="9"></line>
-                    <line x1="3" y1="15" x2="21" y2="15"></line>
-                    <line x1="9" y1="9" x2="9" y2="21"></line>
-                    <line x1="15" y1="9" x2="15" y2="21"></line>
-                </svg>
-            `,
             ac_1ton: `
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
                     <rect x="2" y="5" width="20" height="9" rx="2"></rect>
@@ -301,6 +290,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <circle cx="8" cy="6.5" r="1"></circle>
                     <circle cx="16" cy="6.5" r="1"></circle>
                     <path d="M7 18c1.5 1.5 3 2 5 2s3.5-.5 5-2" stroke-dasharray="2 2"></path>
+                </svg>
+            `,
+            water_heater: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="6" y="2" width="12" height="17" rx="3"></rect>
+                    <path d="M9 19v3M15 19v3M12 6v6M10 8h4M9 15c.5.5 1 .8 1.5.8s1-.3 1.5-.8"></path>
                 </svg>
             `,
             refrigerator: `
@@ -328,10 +323,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <line x1="15" y1="6" x2="17" y2="6"></line>
                 </svg>
             `,
-            water_heater: `
+            microwave: `
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
-                    <rect x="6" y="2" width="12" height="17" rx="3"></rect>
-                    <path d="M9 19v3M15 19v3M12 6v6M10 8h4M9 15c.5.5 1 .8 1.5.8s1-.3 1.5-.8"></path>
+                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                    <rect x="5" y="7" width="10" height="10" rx="1"></rect>
+                    <circle cx="18" cy="8" r="1"></circle>
+                    <circle cx="18" cy="11" r="1"></circle>
+                    <line x1="17" y1="14" x2="19" y2="14"></line>
+                    <line x1="17" y1="16" x2="19" y2="16"></line>
                 </svg>
             `,
             tv: `
@@ -349,62 +348,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <line x1="2" y1="8" x2="4" y2="8"></line>
                 </svg>
             `,
-            ceiling_fan: `
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M12 9V2m0 10v7m-3-7H2m10 0h10M5.5 5.5l3.5 3.5m6 6l3.5 3.5m0-13l-3.5 3.5m-6 6l-3.5 3.5"></path>
-                </svg>
-            `,
-            microwave: `
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
-                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                    <rect x="5" y="7" width="10" height="10" rx="1"></rect>
-                    <circle cx="18" cy="8" r="1"></circle>
-                    <circle cx="18" cy="11" r="1"></circle>
-                    <line x1="17" y1="14" x2="19" y2="14"></line>
-                    <line x1="17" y1="16" x2="19" y2="16"></line>
-                </svg>
-            `,
-            electric_oven: `
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
-                    <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-                    <rect x="6" y="8" width="12" height="10" rx="1"></rect>
-                    <circle cx="6" cy="5.5" r="0.75"></circle>
-                    <circle cx="12" cy="5.5" r="0.75"></circle>
-                    <circle cx="18" cy="5.5" r="0.75"></circle>
-                    <line x1="6" y1="13" x2="18" y2="13"></line>
-                </svg>
-            `,
             water_pump: `
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
                     <circle cx="12" cy="12" r="7"></circle>
                     <circle cx="12" cy="12" r="2.5"></circle>
                     <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9l-2.1 2.1M7 17l-2.1 2.1"></path>
-                </svg>
-            `,
-            dishwasher: `
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
-                    <rect x="4" y="3" width="16" height="18" rx="2"></rect>
-                    <line x1="4" y1="7" x2="20" y2="7"></line>
-                    <circle cx="8" cy="5" r="1"></circle>
-                    <circle cx="16" cy="5" r="1"></circle>
-                    <path d="M8 12a4 4 0 0 1 8 0M6 17h12"></path>
-                </svg>
-            `,
-            desktop_pc: `
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
-                    <rect x="3" y="3" width="14" height="11" rx="2"></rect>
-                    <line x1="10" y1="14" x2="10" y2="18"></line>
-                    <line x1="7" y1="18" x2="13" y2="18"></line>
-                    <rect x="19" y="3" width="3" height="15" rx="1"></rect>
-                    <line x1="20" y1="6" x2="21" y2="6"></line>
-                </svg>
-            `,
-            laptop: `
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
-                    <rect x="3" y="4" width="18" height="12" rx="2"></rect>
-                    <line x1="2" y1="20" x2="22" y2="20"></line>
-                    <line x1="12" y1="16" x2="12" y2="20"></line>
                 </svg>
             `,
             ev_charger: `
@@ -589,458 +537,60 @@ document.addEventListener('DOMContentLoaded', () => {
         window.requestAnimationFrame(step);
     }
 
-    let currentStep = 1;
-    const totalSteps = 8;
-    
-    const nextBtn = document.getElementById('wizard-next-btn');
-    const backBtn = document.getElementById('wizard-back-btn');
-    const steps = document.querySelectorAll('.wizard-step');
-    const stepIndicators = document.querySelectorAll('.wizard-indicator');
-    const mobileStatus = document.querySelector('.mobile-step-text');
-    const mobileFill = document.querySelector('.mobile-progress-fill');
-
-    function updateWizardUI() {
-        steps.forEach((step, i) => {
-            if (i + 1 === currentStep) {
-                step.classList.add('active');
-                step.style.display = 'block';
-                step.style.opacity = '0';
-                step.style.transform = 'translateY(10px)';
-                step.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-                setTimeout(() => {
-                    step.style.opacity = '1';
-                    step.style.transform = 'translateY(0)';
-                }, 50);
-            } else {
-                step.classList.remove('active');
-                step.style.display = 'none';
-            }
-        });
-
-        stepIndicators.forEach((ind, i) => {
-            const stepNum = i + 1;
-            ind.classList.remove('active', 'completed');
-            if (stepNum === currentStep) {
-                ind.classList.add('active');
-            } else if (stepNum < currentStep) {
-                ind.classList.add('completed');
-            }
-        });
-
-        if (backBtn) {
-            backBtn.style.display = currentStep > 1 ? 'block' : 'none';
-        }
-
-        if (nextBtn) {
-            nextBtn.style.display = currentStep < 8 ? 'block' : 'none';
-        }
-
-        if (mobileStatus && mobileFill) {
-            const stepLabels = {
-                1: isArabic ? 'نوع العقار' : 'Property Type',
-                2: isArabic ? 'الموقع الجغرافي' : 'Location',
-                3: isArabic ? 'اختيار الأجهزة' : 'Appliance Selection',
-                4: isArabic ? 'تحليل الاستهلاك' : 'Consumption Analysis',
-                5: isArabic ? 'التحقق من الفاتورة' : 'Bill Verification',
-                6: isArabic ? 'توصيات النظام' : 'Solar Recommendation',
-                7: isArabic ? 'التوفير والأثر البيئي' : 'Savings Dashboard',
-                8: isArabic ? 'تأكيد وحجز موعد' : 'Lead Capture'
-            };
-            mobileStatus.textContent = isArabic
-                ? `الخطوة ${currentStep} من 8: ${stepLabels[currentStep]}`
-                : `Step ${currentStep} of 8: ${stepLabels[currentStep]}`;
-            mobileFill.style.width = `${(currentStep / 8) * 100}%`;
-        }
-
-        if (currentStep === 4) {
-            updateCategoryBreakdown();
-        }
-        
-        calculateSolar();
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            if (currentStep < totalSteps) {
-                currentStep++;
-                updateWizardUI();
-                // Smooth scroll to top of sizer on next step
-                const sizerEl = document.getElementById('calculator');
-                if (sizerEl) sizerEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    }
-
-    if (backBtn) {
-        backBtn.addEventListener('click', () => {
-            if (currentStep > 1) {
-                currentStep--;
-                updateWizardUI();
-                const sizerEl = document.getElementById('calculator');
-                if (sizerEl) sizerEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    }
-
-    // Property Card Click Handlers
-    const propertyCards = document.querySelectorAll('.property-card');
-    propertyCards.forEach(card => {
-        card.addEventListener('click', () => {
-            propertyCards.forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
-            
-            const val = card.dataset.value;
-            if (propType) {
-                propType.value = val;
-                propType.dispatchEvent(new Event('change'));
-            }
-            
-            const leadProp = document.getElementById('lead-prop');
-            if (leadProp) leadProp.value = val;
-
-            setTimeout(() => {
-                currentStep = 2;
-                updateWizardUI();
-            }, 300);
-        });
-    });
-
-    // Location Card Click Handlers
-    const locationCards = document.querySelectorAll('.location-card');
-    locationCards.forEach(card => {
-        card.addEventListener('click', () => {
-            locationCards.forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
-            
-            const val = card.dataset.value;
-            if (loc) {
-                loc.value = val;
-                loc.dispatchEvent(new Event('change'));
-            }
-            
-            const leadGov = document.getElementById('lead-gov');
-            if (leadGov) leadGov.value = val;
-
-            setTimeout(() => {
-                currentStep = 3;
-                updateWizardUI();
-            }, 300);
-        });
-    });
-
-    // Appliance Category Breakdown Calculator
-    function updateCategoryBreakdown() {
-        const selectedPropType = propType.value || 'residential';
-        const appliances = window.SolarCalculatorEngine ? window.SolarCalculatorEngine.APPLIANCES : [];
-        const chartContainer = document.getElementById('category-chart-bars');
-        if (!chartContainer) return;
-
-        const categoryKwh = {};
-        let totalKwh = 0;
-
-        appliances.forEach(spec => {
-            if (spec.property_type !== selectedPropType) return;
-            const qty = applianceQuantities[selectedPropType][spec.id] || 0;
-            if (qty > 0) {
-                const avgW = (spec.min_w + spec.max_w) / 2;
-                const kwh = (avgW * qty * spec.hours) / 1000;
-                categoryKwh[spec.category] = (categoryKwh[spec.category] || 0) + kwh;
-                totalKwh += kwh;
-            }
-        });
-
-        if (totalKwh === 0) {
-            chartContainer.innerHTML = `
-                <div style="text-align: center; padding: 2rem; color: var(--color-text-muted);">
-                    <p>${isArabic ? 'لم يتم تحديد أي أجهزة بعد. يرجى الرجوع وتحديد أجهزتك.' : 'No appliances selected yet. Please go back and select some.'}</p>
-                </div>
-            `;
-            return;
-        }
-
-        let html = '';
-        Object.keys(categoryKwh).forEach(cat => {
-            const kwh = categoryKwh[cat];
-            const pct = Math.round((kwh / totalKwh) * 100);
-            const label = categoryLabels[cat] || cat;
-            
-            html += `
-                <div class="chart-bar-item" style="margin-bottom: 1.25rem;">
-                    <div class="chart-bar-label" style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.35rem;">
-                        <span>${label}</span>
-                        <span>${kwh.toFixed(1)} kWh/day (${pct}%)</span>
-                    </div>
-                    <div class="chart-bar-track" style="height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; position: relative; width: 100%;">
-                        <div class="chart-bar-fill" style="width: ${pct}%; background: var(--color-primary); height: 100%; border-radius: 4px; transition: width 0.8s ease-in-out;"></div>
-                    </div>
-                </div>
-            `;
-        });
-        chartContainer.innerHTML = html;
-    }
-
-    // Step 5 Tab Switcher
-    const billTabs = document.querySelectorAll('.bill-tab');
-    const billPanels = document.querySelectorAll('.bill-panel');
-
-    billTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            billTabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-
-            const mode = tab.dataset.mode;
-            billVerificationMode = mode;
-
-            billPanels.forEach(panel => {
-                panel.classList.remove('active');
-                if (panel.id === `bill-verification-${mode}`) {
-                    panel.classList.add('active');
-                }
-            });
-            calculateSolar();
-        });
-    });
-
-    // Drag & Drop File Upload Engine
-    const uploadZone = document.getElementById('bill-upload-zone');
-    const fileInput = document.getElementById('bill-file-input');
-    const uploadStatus = document.getElementById('upload-status');
-    const uploadStatusText = document.getElementById('upload-status-text');
-
-    if (uploadZone && fileInput) {
-        uploadZone.addEventListener('click', () => fileInput.click());
-
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                handleUploadedFile(e.target.files[0]);
-            }
-        });
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            uploadZone.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                uploadZone.classList.add('dragover');
-            }, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            uploadZone.addEventListener(eventName, (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                uploadZone.classList.remove('dragover');
-            }, false);
-        });
-
-        uploadZone.addEventListener('drop', (e) => {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            if (files.length > 0) {
-                handleUploadedFile(files[0]);
-            }
-        }, false);
-    }
-
-    function handleUploadedFile(file) {
-        if (!uploadZone || !uploadStatus) return;
-
-        uploadZone.style.display = 'none';
-        uploadStatus.style.display = 'flex';
-        
-        if (uploadStatusText) {
-            uploadStatusText.textContent = isArabic
-                ? `جاري قراءة ملف: ${file.name} وتحليل الاستهلاك...`
-                : `Parsing file: ${file.name} for energy metrics...`;
-        }
-
-        setTimeout(() => {
-            const matched = file.name.match(/\d+/);
-            let parsedBillVal = 75;
-
-            if (matched) {
-                parsedBillVal = parseInt(matched[0]);
-                parsedBillVal = Math.max(10, Math.min(1000, parsedBillVal));
-            } else {
-                const selectedPropType = propType.value || 'residential';
-                const resultByLoad = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities[selectedPropType], selectedPropType, loc.value);
-                const avgKwh = resultByLoad.loadSizing.avgDailyKwh;
-                const tariff = window.SolarCalculatorEngine.TARIFFS[selectedPropType];
-                if (avgKwh > 0) {
-                    parsedBillVal = Math.round(avgKwh * 30 * tariff);
-                }
-            }
-
-            if (billSlider) {
-                billSlider.value = parsedBillVal;
-            }
-            if (billDisplay) {
-                billDisplay.textContent = parsedBillVal;
-            }
-
-            const leadBill = document.getElementById('lead-bill');
-            if (leadBill) leadBill.value = parsedBillVal;
-
-            uploadStatus.style.display = 'none';
-            uploadZone.style.display = 'flex';
-            
-            calculateSolar();
-        }, 1500);
-    }
-
     function calculateSolar() {
         if (!window.SolarCalculatorEngine) return;
 
         const selectedPropType = propType.value || 'residential';
         const selectedLocation = loc.value || 'muscat';
-        const tariff = window.SolarCalculatorEngine.TARIFFS[selectedPropType];
-        
-        const resultByLoad = window.SolarCalculatorEngine.calculateByLoad(
-            applianceQuantities[selectedPropType], 
-            selectedPropType, 
-            selectedLocation
-        );
+        let result = {};
 
-        const monthlyBill = parseFloat(billSlider.value);
-        if (billDisplay) billDisplay.textContent = Math.round(monthlyBill);
-
-        const leadBill = document.getElementById('lead-bill');
-        if (leadBill) leadBill.value = Math.round(monthlyBill);
-
-        const applianceMonthlyKwh = resultByLoad.loadSizing.avgDailyKwh * 30;
-        const billMonthlyKwh = monthlyBill / tariff;
-        
-        let result = resultByLoad;
-        let variance = 0;
-
-        if (applianceMonthlyKwh > 0) {
-            variance = Math.abs(applianceMonthlyKwh - billMonthlyKwh) / billMonthlyKwh;
-        }
-
-        const warningBanner = document.getElementById('bill-variance-warning');
-        const varianceDesc = document.getElementById('variance-desc');
-
-        if (variance > 0.15 && applianceMonthlyKwh > 0) {
-            if (warningBanner) warningBanner.style.display = 'flex';
-            
-            if (varianceDesc) {
-                const diffPct = Math.round(variance * 100);
-                const appBill = Math.round(applianceMonthlyKwh * tariff);
-                varianceDesc.innerHTML = isArabic
-                    ? `تقديرات الأجهزة تشير إلى فاتورة بقيمة <strong>${appBill} ريال</strong> (استهلاك ${Math.round(applianceMonthlyKwh)} ك.و.س)، لكن فاتورتك الفعلية هي <strong>${Math.round(monthlyBill)} ريال</strong> (استهلاك ${Math.round(billMonthlyKwh)} ك.و.س). التباين هو <strong>${diffPct}%</strong>. لقد قمنا بضبط مقترحات الطاقة الشمسية بناءً على فاتورتك الفعلية.`
-                    : `Appliance audit estimates a monthly bill of <strong>${appBill} OMR</strong> (${Math.round(applianceMonthlyKwh)} kWh), but your actual bill is <strong>${Math.round(monthlyBill)} OMR</strong> (${Math.round(billMonthlyKwh)} kWh). The variance is <strong>${diffPct}%</strong>. We optimized your solar size using your actual bill.`;
-            }
-
+        if (activeSizerMode === 'bill') {
+            const monthlyBill = parseFloat(billSlider.value);
+            billDisplay.textContent = monthlyBill;
             result = window.SolarCalculatorEngine.calculate(monthlyBill, selectedPropType, selectedLocation);
-            result.loadSizing = resultByLoad.loadSizing;
+            if (loadRecs) loadRecs.style.display = 'none';
         } else {
-            if (warningBanner) warningBanner.style.display = 'none';
+            result = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities[selectedPropType], selectedPropType, selectedLocation);
+            if (loadRecs) loadRecs.style.display = 'block';
+
+            // Animate Inverter and Battery Specs
+            if (resInverter && resBattery) {
+                animateValue(resInverter, 0, result.loadSizing.inverterRecommendationKw, 1000, "", " kW");
+                animateValue(resBattery, 0, result.loadSizing.batteryRecommendationKwh, 1000, "", " kWh");
+            }
+            // Animate Connected Load and Daily Consumption Specs
+            if (resConnectedLoad && resDailyConsumption) {
+                const peakLoad = result.loadSizing.peakLoadWatts;
+                if (peakLoad >= 1000) {
+                    animateValue(resConnectedLoad, 0, parseFloat((peakLoad / 1000).toFixed(2)), 1000, "", " kW");
+                } else {
+                    animateValue(resConnectedLoad, 0, peakLoad, 1000, "", " W");
+                }
+                animateValue(resDailyConsumption, 0, result.loadSizing.avgDailyKwh, 1000, "", " kWh/day");
+            }
         }
 
-        // 1. Update Load stats in Step 4
-        const peakLoad = resultByLoad.loadSizing.peakLoadWatts;
-        if (resConnectedLoad) {
-            if (peakLoad >= 1000) {
-                resConnectedLoad.textContent = `${(peakLoad / 1000).toFixed(1)} kW`;
+        // Animate primary results boxes
+        if (resSize && resPanels && resCost && resSavings) {
+            if (resSize.textContent === '0 kW') {
+                animateValue(resSize, 0, result.systemSizeKw, 1000, "", " kW");
+                animateValue(resPanels, 0, result.panelCount, 1000);
+                resCost.textContent = result.costRange.formatted;
+                animateValue(resSavings, 0, result.yearlySavingsOmr, 1000, "", " OMR");
             } else {
-                resConnectedLoad.textContent = `${peakLoad} W`;
+                resSize.textContent = result.systemSizeKw.toFixed(1) + ' kW';
+                resPanels.textContent = result.panelCount;
+                resCost.textContent = result.costRange.formatted;
+                resSavings.textContent = `${result.yearlySavingsOmr.toLocaleString()} OMR`;
             }
         }
-        if (resDailyConsumption) {
-            resDailyConsumption.textContent = `${resultByLoad.loadSizing.avgDailyKwh.toFixed(1)} kWh/day`;
-        }
-        const monthlyKwhEl = document.getElementById('res-monthly-consumption');
-        if (monthlyKwhEl) {
-            monthlyKwhEl.textContent = `${Math.round(applianceMonthlyKwh).toLocaleString()} kWh/month`;
-        }
 
-        // 2. Update Solar recommendations in Step 6
-        if (resSize) {
-            resSize.textContent = `${result.systemSizeKw.toFixed(1)} kW`;
-        }
-        if (resPanels) {
-            resPanels.textContent = `${result.panelCount}`;
-        }
-        const spaceEl = document.getElementById('res-space');
-        if (spaceEl) {
-            spaceEl.textContent = `${result.spaceRequiredSqm} sqm`;
-        }
-        if (resInverter) {
-            resInverter.textContent = `${result.loadSizing ? result.loadSizing.inverterRecommendationKw : Math.max(1.5, parseFloat((result.systemSizeKw * 0.9).toFixed(1)))} kW`;
-        }
-        if (resBattery) {
-            resBattery.textContent = `${result.loadSizing ? result.loadSizing.batteryRecommendationKwh : Math.max(2.4, parseFloat((result.systemSizeKw * 2).toFixed(1)))} kWh`;
-        }
-
-        // 3. Update Savings dashboard & gamification in Step 7
-        if (resCost) {
-            resCost.textContent = result.costRange.formatted;
-        }
-        if (resSavings) {
-            resSavings.textContent = `${result.yearlySavingsOmr.toLocaleString()} OMR`;
-        }
-        
-        const baseEpc = result.systemSizeKw * (window.SolarCalculatorEngine.COSTS[selectedPropType] || 380);
-        const paybackYears = baseEpc / Math.max(1, result.yearlySavingsOmr);
-        const roiVal = (result.yearlySavingsOmr / Math.max(1, baseEpc)) * 100;
-        
-        const paybackEl = document.getElementById('res-payback');
-        if (paybackEl) {
-            paybackEl.textContent = `${paybackYears.toFixed(1)} ${isArabic ? 'سنوات' : 'Years'}`;
-        }
-        const roiEl = document.getElementById('res-roi');
-        if (roiEl) {
-            roiEl.textContent = `${roiVal.toFixed(1)}%`;
-        }
-
-        const cumulativeSavings = result.yearlySavingsOmr * 25;
-        const cumSavingsEl = document.getElementById('res-cumulative-savings');
-        if (cumSavingsEl) {
-            cumSavingsEl.textContent = `${cumulativeSavings.toLocaleString()} OMR`;
-        }
-        const savingsFillEl = document.getElementById('res-savings-fill');
-        if (savingsFillEl) {
-            const savingsPercent = Math.min(100, (cumulativeSavings / 50000) * 100);
-            savingsFillEl.style.width = `${savingsPercent}%`;
-        }
-
-        const suitabilityScoreEl = document.getElementById('res-suitability-score');
-        if (suitabilityScoreEl) {
-            let baseScore = 70;
-            const yieldBonus = { muscat: 15, batinah: 15, dhofar: 5, dakhiliyah: 20, other: 10 };
-            baseScore += (yieldBonus[selectedLocation] || 10);
-            if (result.systemSizeKw > 5) baseScore += 10;
-            if (variance <= 0.15) baseScore += 9;
-            suitabilityScoreEl.textContent = `${Math.min(99, baseScore)}/100`;
-        }
-
-        const independenceScoreEl = document.getElementById('res-energy-independence');
-        if (independenceScoreEl) {
-            const solarYield = window.SolarCalculatorEngine.YIELDS[selectedLocation] || 1650;
-            const solarGenKwh = result.systemSizeKw * solarYield * 0.85;
-            const currentUsageKwh = Math.max(1, monthlyBill / tariff) * 12;
-            let indPct = Math.round((solarGenKwh / currentUsageKwh) * 100);
-            if (result.loadSizing && result.loadSizing.batteryRecommendationKwh > 5) {
-                indPct += 15;
-            }
-            independenceScoreEl.textContent = `${Math.min(100, Math.max(10, indPct))}%`;
-        }
-
-        const co2El = document.getElementById('res-co2-offset');
-        if (co2El) {
-            co2El.textContent = `${result.co2OffsetTons.toFixed(1)} ${isArabic ? 'طن/سنة' : 'Tons/yr'}`;
-        }
-
-        const treesEl = document.getElementById('res-trees-offset');
-        if (treesEl) {
-            const treesPlanted = Math.round(result.co2OffsetTons * 45);
-            treesEl.textContent = `${treesPlanted} ${isArabic ? 'شجرة' : 'Trees'}`;
-        }
-
+        // Send telemetry events
         if (window.SolarAnalytics) {
             window.SolarAnalytics.markCalculatorTouched();
             window.SolarAnalytics.track("calculator_change", {
                 sizer_mode: activeSizerMode,
-                monthly_bill: monthlyBill,
+                monthly_bill: activeSizerMode === 'bill' ? parseFloat(billSlider.value) : result.inputs.monthlyBill,
                 property_type: selectedPropType,
                 location: selectedLocation,
                 system_size_kw: result.systemSizeKw,
@@ -1050,11 +600,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Toggle Sizer Tabs
+    if (tabBill && tabAppliances) {
+        tabBill.addEventListener('click', () => {
+            activeSizerMode = 'bill';
+            tabBill.classList.add('active');
+            tabAppliances.classList.remove('active');
+
+            billInputs.style.display = 'block';
+            applianceInputs.style.display = 'none';
+            calculateSolar();
+        });
+
+        tabAppliances.addEventListener('click', () => {
+            activeSizerMode = 'appliances';
+            tabAppliances.classList.add('active');
+            tabBill.classList.remove('active');
+
+            billInputs.style.display = 'none';
+            applianceInputs.style.display = 'block';
+            
+            initApplianceSizer(); // Re-render in case property type was changed
+            calculateSolar();
+        });
+    }
+
     // Bind Core Inputs
     if (billSlider) billSlider.addEventListener('input', calculateSolar);
     if (propType) {
         propType.addEventListener('change', () => {
-            initApplianceSizer();
+            if (activeSizerMode === 'appliances') {
+                initApplianceSizer();
+            }
             calculateSolar();
         });
     }
@@ -1096,9 +673,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Calculate dynamic load contribution using average wattage to match sizer engine
-            const avgWatts = (appSpec.min_w + appSpec.max_w) / 2;
-            const kwhDaily = ((avgWatts * appSpec.hours * qty) / 1000).toFixed(1);
+            const kwhDaily = ((appSpec.min_w * appSpec.hours * qty) / 1000).toFixed(1);
             const loadValText = document.getElementById(`load-val-${appId}`);
             if (loadValText) {
                 loadValText.textContent = qty > 0 
@@ -1374,8 +949,8 @@ document.addEventListener('DOMContentLoaded', () => {
             brandToggleBtn.classList.toggle('expanded', isBrandsExpanded);
             
             // Translations
-            const labelShow = isArabic ? "عرض جميع العلامات التجارية" : "View All Brands";
-            const labelHide = isArabic ? "عرض أقل" : "Show Less";
+            const labelShow = isArabic ? "عرض جميع العلامات التجارية ▾" : "View All Brands ▾";
+            const labelHide = isArabic ? "عرض أقل ▴" : "Show Less ▴";
             
             const btnSpan = brandToggleBtn.querySelector('span');
             if (btnSpan) btnSpan.textContent = isBrandsExpanded ? labelHide : labelShow;
@@ -1530,7 +1105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const downloadText = isArabic ? "تنزيل ورقة البيانات" : "View Datasheet";
 
                             let btnHTML = `
-                                <a href="#" class="btn-ds-download modal-download-btn pdf-viewer-trigger" data-pdf-url="${localPdf}" data-product="${prod.title}" data-brand="${brandData.name}" data-product-key="${prod.key}">
+                                <a href="#" class="btn-ds-download modal-download-btn pdf-viewer-trigger" data-pdf-url="${localPdf}" data-product="${prod.title}" data-brand="${brandData.name}">
                                     <span>${downloadText}</span>
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -1585,13 +1160,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('pdf-modal-title').textContent = prodTitle;
                         document.getElementById('pdf-modal-brand').textContent = brandName;
                         document.getElementById('pdf-viewer-frame').src = pdfUrl;
-
-                        // Bind direct official download link
-                        const productKey = btn.dataset.productKey;
-                        const officialLinkBtn = document.getElementById('pdf-download-official-btn');
-                        if (officialLinkBtn && productKey) {
-                            officialLinkBtn.href = `download.php?product=${productKey}`;
-                        }
                         
                         // Configure Pricing Button inside the PDF modal
                         const pricingBtn = document.getElementById('pdf-request-pricing-btn');
