@@ -598,6 +598,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 yearly_savings_omr: result.yearlySavingsOmr
             });
         }
+
+        // Sync context to chatbot in real time
+        if (window.SolarChatbot) {
+            window.SolarChatbot.updateContext({
+                systemSize: result.systemSizeKw.toFixed(1),
+                panels: result.panelCount,
+                cost: result.costRange.formatted.replace(" OMR", ""),
+                monthlySavings: result.monthlySavingsOmr.toLocaleString(),
+                yearlySavings: result.yearlySavingsOmr.toLocaleString(),
+                payback: result.paybackYears.toFixed(1),
+                sizerMode: activeSizerMode
+            });
+        }
     }
 
     // Toggle Sizer Tabs
@@ -632,10 +645,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (activeSizerMode === 'appliances') {
                 initApplianceSizer();
             }
-            calculateSolar();
+            toggleSizerLayout();
         });
     }
-    if (loc) loc.addEventListener('change', calculateSolar);
+    if (loc) {
+        loc.addEventListener('change', () => {
+            const selectedPropType = propType ? propType.value : 'residential';
+            if (selectedPropType === 'residential') {
+                goToDiscoveryStep(currentDiscoveryStep);
+            } else {
+                calculateSolar();
+            }
+        });
+    }
 
     // Bind interactive Qty controls (once globally to prevent event listener duplicate binding / leakage)
     if (applianceInputs) {
@@ -705,7 +727,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (calculatorInitialized) return;
         calculatorInitialized = true;
         initApplianceSizer();
-        calculateSolar();
+        toggleSizerLayout();
     }
 
     const calcSection = document.getElementById('calculator');
@@ -1344,6 +1366,585 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initialize slider
         startSlider();
+    }
+
+    // ==========================================
+    // Residential Solar Discovery Experience (Wizard)
+    // ==========================================
+    let currentDiscoveryStep = 1;
+    let selectedAppliances = new Set();
+    let calibratedBillValue = null;
+
+    function toggleSizerLayout() {
+        const selectedPropType = propType ? propType.value : 'residential';
+        const standardInputs = document.getElementById('standard-calc-inputs');
+        const standardResults = document.getElementById('standard-calc-results');
+        const discoveryJourney = document.getElementById('residential-discovery-journey');
+        const discoveryResults = document.getElementById('residential-discovery-results');
+
+        if (selectedPropType === 'residential') {
+            if (standardInputs) standardInputs.style.display = 'none';
+            if (standardResults) standardResults.style.display = 'none';
+            if (discoveryJourney) discoveryJourney.style.display = 'block';
+            resetDiscoveryJourney();
+        } else {
+            if (discoveryJourney) discoveryJourney.style.display = 'none';
+            if (discoveryResults) discoveryResults.style.display = 'none';
+            if (standardInputs) standardInputs.style.display = 'block';
+            if (standardResults) standardResults.style.display = 'block';
+            calculateSolar();
+        }
+    }
+
+    function goToDiscoveryStep(step) {
+        currentDiscoveryStep = step;
+
+        // Update progress dots
+        const dots = document.querySelectorAll('.discovery-steps-progress .step-dot');
+        dots.forEach(dot => {
+            const dotStep = parseInt(dot.dataset.step);
+            if (dotStep < step) {
+                dot.className = 'step-dot completed';
+            } else if (dotStep === step) {
+                dot.className = 'step-dot active';
+            } else {
+                dot.className = 'step-dot';
+            }
+        });
+
+        // Hide all panels
+        const panels = document.querySelectorAll('.discovery-step-panel');
+        panels.forEach(p => p.style.display = 'none');
+
+        // Show active panel
+        const activePanel = document.getElementById(`discovery-panel-${step}`);
+        if (activePanel) {
+            activePanel.style.display = 'block';
+            activePanel.style.opacity = '0';
+            activePanel.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                activePanel.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                activePanel.style.opacity = '1';
+                activePanel.style.transform = 'translateY(0)';
+            }, 30);
+        }
+
+        // Handle panel-specific initializations
+        if (step === 1) {
+            renderDiscoveryApplianceSelectionGrid();
+            const discoveryResults = document.getElementById('residential-discovery-results');
+            if (discoveryResults) discoveryResults.style.display = 'none';
+        } else if (step === 2) {
+            renderDiscoveryApplianceQtyGrid();
+        } else if (step === 3) {
+            const result = window.SolarCalculatorEngine.calculateByLoad(
+                applianceQuantities.residential,
+                'residential',
+                loc.value
+            );
+            const monthlyConsumption = result.loadSizing.avgDailyKwh * 30;
+            const revealCons = document.getElementById('reveal-consumption-value');
+            if (revealCons) {
+                animateValue(revealCons, 0, monthlyConsumption, 1000, "", " kWh");
+            }
+        } else if (step === 4) {
+            const result = window.SolarCalculatorEngine.calculateByLoad(
+                applianceQuantities.residential,
+                'residential',
+                loc.value
+            );
+            const revealSolarKw = document.getElementById('reveal-solar-kw');
+            const revealSolarPanels = document.getElementById('reveal-solar-panels');
+            const revealSolarCost = document.getElementById('reveal-solar-cost');
+
+            if (revealSolarKw) animateValue(revealSolarKw, 0, result.systemSizeKw, 1000, "", " kW");
+            if (revealSolarPanels) animateValue(revealSolarPanels, 0, result.panelCount, 1000, "", isArabic ? " لوح" : " Panels");
+            if (revealSolarCost) revealSolarCost.textContent = result.costRange.formatted;
+        } else if (step === 5) {
+            const slider = document.getElementById('discovery-bill-slider');
+            const display = document.getElementById('discovery-bill-display');
+            if (slider && display) {
+                const result = window.SolarCalculatorEngine.calculateByLoad(
+                    applianceQuantities.residential,
+                    'residential',
+                    loc.value
+                );
+                const estimatedBill = Math.round(result.inputs.monthlyBill);
+                slider.value = Math.max(10, Math.min(1000, estimatedBill));
+                display.textContent = slider.value;
+            }
+        } else if (step === 6) {
+            const statusMsg = document.getElementById('calibration-status-message');
+            const warningBox = document.getElementById('calibration-warning-box');
+            const successBox = document.getElementById('calibration-success-box');
+            const btnGotoStep7 = document.getElementById('btn-goto-step7');
+
+            if (btnGotoStep7) btnGotoStep7.style.display = 'none';
+            if (warningBox) warningBox.style.display = 'none';
+            if (successBox) successBox.style.display = 'none';
+            if (statusMsg) statusMsg.textContent = isArabic ? "جاري مقارنة استهلاك الأجهزة مع فاتورة الكهرباء..." : "Comparing appliance usage with bill history...";
+
+            setTimeout(() => {
+                if (calibratedBillValue !== null) {
+                    const result = window.SolarCalculatorEngine.calculateByLoad(
+                        applianceQuantities.residential,
+                        'residential',
+                        loc.value
+                    );
+                    const loadConsumption = result.loadSizing.avgDailyKwh * 30;
+                    const billConsumption = calibratedBillValue / 0.020;
+                    const variance = Math.abs(billConsumption - loadConsumption) / loadConsumption;
+
+                    if (variance > 0.15) {
+                        if (warningBox) warningBox.style.display = 'block';
+                    } else {
+                        if (successBox) successBox.style.display = 'block';
+                    }
+                } else {
+                    if (successBox) {
+                        successBox.textContent = isArabic ? "تم التجاوز بنجاح. سيتم استخدام تقديرات استهلاك الأجهزة." : "Skipped successfully. Using appliance-derived estimates.";
+                        successBox.style.display = 'block';
+                    }
+                }
+                if (statusMsg) statusMsg.textContent = isArabic ? "اكتملت المعايرة!" : "Calibration completed!";
+                if (btnGotoStep7) btnGotoStep7.style.display = 'inline-block';
+            }, 1000);
+        } else if (step === 7) {
+            const discoveryResults = document.getElementById('residential-discovery-results');
+            if (discoveryResults) discoveryResults.style.display = 'block';
+
+            let finalResult;
+            if (calibratedBillValue !== null) {
+                finalResult = window.SolarCalculatorEngine.calculate(calibratedBillValue, 'residential', loc.value);
+            } else {
+                finalResult = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities.residential, 'residential', loc.value);
+            }
+
+            updateDiscoveryDashboard(finalResult);
+
+            const leadLoc = document.getElementById('disc-lead-loc');
+            const leadBill = document.getElementById('disc-lead-bill');
+            if (leadLoc) leadLoc.value = loc.value;
+            if (leadBill) leadBill.value = (calibratedBillValue !== null) ? calibratedBillValue : Math.round(finalResult.inputs.monthlyBill);
+
+            if (window.SolarChatbot) {
+                const yieldKwh = window.SolarCalculatorEngine.YIELDS[loc.value] || 1700;
+                window.SolarChatbot.updateContext({
+                    systemSize: finalResult.systemSizeKw.toFixed(1),
+                    panels: finalResult.panelCount,
+                    cost: finalResult.costRange.formatted.replace(" OMR", ""),
+                    monthlySavings: finalResult.monthlySavingsOmr.toLocaleString(),
+                    yearlySavings: finalResult.yearlySavingsOmr.toLocaleString(),
+                    payback: finalResult.paybackYears.toFixed(1),
+                    sizerMode: 'discovery'
+                });
+            }
+        }
+    }
+
+    function renderDiscoveryApplianceSelectionGrid() {
+        const grid = document.getElementById('discovery-appliance-selection-grid');
+        if (!grid || !window.SolarCalculatorEngine) return;
+
+        const appliances = window.SolarCalculatorEngine.APPLIANCES.filter(app => app.property_type === 'residential');
+        let html = '';
+
+        appliances.forEach(app => {
+            const name = isArabic ? app.name_ar : app.name_en;
+            const isSelected = selectedAppliances.has(app.id);
+            const selectedClass = isSelected ? ' selected' : '';
+
+            let powerText = "";
+            if (app.min_w >= 1000) {
+                powerText = `${app.min_w / 1000}kW`;
+            } else {
+                powerText = `${app.min_w}W`;
+            }
+
+            html += `
+                <div class="discovery-appliance-card${selectedClass}" data-id="${app.id}">
+                    <div class="card-icon-wrapper">
+                        ${getApplianceSVG(app.id)}
+                    </div>
+                    <h4>${name}</h4>
+                    <span class="card-spec">${powerText} • ${app.hours}h/d</span>
+                    <div class="card-checkbox-circle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            `;
+        });
+
+        grid.innerHTML = html;
+
+        grid.querySelectorAll('.discovery-appliance-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.dataset.id;
+                if (selectedAppliances.has(id)) {
+                    selectedAppliances.delete(id);
+                    card.classList.remove('selected');
+                    applianceQuantities.residential[id] = 0;
+                } else {
+                    selectedAppliances.add(id);
+                    card.classList.add('selected');
+                    const app = appliances.find(a => a.id === id);
+                    applianceQuantities.residential[id] = (app.default_qty || 1);
+                }
+            });
+        });
+    }
+
+    function renderDiscoveryApplianceQtyGrid() {
+        const grid = document.getElementById('discovery-appliance-qty-grid');
+        if (!grid || !window.SolarCalculatorEngine) return;
+
+        const appliances = window.SolarCalculatorEngine.APPLIANCES.filter(app => app.property_type === 'residential');
+        let html = '';
+        let hasSelected = false;
+
+        appliances.forEach(app => {
+            if (!selectedAppliances.has(app.id)) return;
+            hasSelected = true;
+
+            const name = isArabic ? app.name_ar : app.name_en;
+            const qty = applianceQuantities.residential[app.id] || 1;
+
+            html += `
+                <div class="discovery-qty-row" data-id="${app.id}">
+                    <div class="qty-row-info">
+                        <div class="qty-row-icon">
+                            ${getApplianceSVG(app.id)}
+                        </div>
+                        <div class="qty-row-text">
+                            <h4>${name}</h4>
+                            <small>${app.hours}h/d</small>
+                        </div>
+                    </div>
+                    <div class="qty-selector-pill">
+                        <button type="button" class="disc-qty-btn minus" data-id="${app.id}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </button>
+                        <span class="disc-qty-val" id="disc-qty-val-${app.id}">${qty}</span>
+                        <button type="button" class="disc-qty-btn plus" data-id="${app.id}">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+
+        if (!hasSelected) {
+            html = `<div class="text-center py-3 text-muted">${isArabic ? 'لم يتم تحديد أي أجهزة. يرجى العودة للخطوة السابقة.' : 'No appliances selected. Please go back.'}</div>`;
+        }
+
+        grid.innerHTML = html;
+
+        grid.querySelectorAll('.disc-qty-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = btn.dataset.id;
+                let qty = applianceQuantities.residential[id] || 1;
+                if (btn.classList.contains('plus')) {
+                    qty = Math.min(99, qty + 1);
+                } else if (btn.classList.contains('minus')) {
+                    qty = Math.max(1, qty - 1);
+                }
+                applianceQuantities.residential[id] = qty;
+                const qtyText = document.getElementById(`disc-qty-val-${id}`);
+                if (qtyText) qtyText.textContent = qty;
+            });
+        });
+    }
+
+    function resetDiscoveryJourney() {
+        selectedAppliances.clear();
+        calibratedBillValue = null;
+
+        const appliances = window.SolarCalculatorEngine ? window.SolarCalculatorEngine.APPLIANCES : [];
+        appliances.forEach(app => {
+            if (app.property_type === 'residential') {
+                applianceQuantities.residential[app.id] = app.default_qty || 0;
+                if (app.default_qty > 0) {
+                    selectedAppliances.add(app.id);
+                }
+            }
+        });
+
+        const leadForm = document.getElementById('discovery-lead-form');
+        if (leadForm) leadForm.reset();
+
+        const feedback = document.getElementById('discovery-form-feedback');
+        if (feedback) feedback.style.display = 'none';
+
+        goToDiscoveryStep(1);
+    }
+
+    function updateDiscoveryDashboard(result) {
+        const yieldKwh = window.SolarCalculatorEngine.YIELDS[loc.value] || 1700;
+        const monthlyConsumption = result.inputs.monthlyBill / (window.SolarCalculatorEngine.TARIFFS.residential);
+        const dailyConsumption = monthlyConsumption / 30;
+        const monthlyProduction = (result.systemSizeKw * yieldKwh) / 12;
+        const lifetimeSavings = result.yearlySavingsOmr * 25;
+
+        const dbDaily = document.getElementById('db-val-daily-cons');
+        const dbMonthly = document.getElementById('db-val-monthly-cons');
+        const dbRecSize = document.getElementById('db-val-rec-size');
+        const dbMonthlyProd = document.getElementById('db-val-monthly-prod');
+        const dbMonthlySav = document.getElementById('db-val-monthly-sav');
+        const dbYearlySav = document.getElementById('db-val-yearly-sav');
+        const dbPayback = document.getElementById('db-val-payback');
+        const dbLifetime = document.getElementById('db-val-lifetime-sav');
+
+        if (dbDaily) animateValue(dbDaily, 0, dailyConsumption, 1000, "", " kWh/day");
+        if (dbMonthly) animateValue(dbMonthly, 0, monthlyConsumption, 1000, "", " kWh/month");
+        if (dbRecSize) animateValue(dbRecSize, 0, result.systemSizeKw, 1000, "", " kW");
+        if (dbMonthlyProd) animateValue(dbMonthlyProd, 0, monthlyProduction, 1000, "", " kWh");
+        if (dbMonthlySav) animateValue(dbMonthlySav, 0, result.monthlySavingsOmr, 1000, "", " OMR");
+        if (dbYearlySav) animateValue(dbYearlySav, 0, result.yearlySavingsOmr, 1000, "", " OMR");
+        if (dbPayback) animateValue(dbPayback, 0, result.paybackYears, 1000, "", isArabic ? " سنوات" : " Years");
+        if (dbLifetime) animateValue(dbLifetime, 0, lifetimeSavings, 1000, "", " OMR");
+
+        // Energy Independence
+        const indScore = Math.min(100, Math.round((monthlyProduction / monthlyConsumption) * 100));
+        const scoreLabel = document.getElementById('score-energy-label');
+        const scoreFill = document.getElementById('score-energy-fill');
+        
+        let labelText = "";
+        if (indScore >= 91) {
+            labelText = isArabic ? "ممتاز" : "Excellent";
+        } else if (indScore >= 71) {
+            labelText = isArabic ? "جيد" : "Good";
+        } else if (indScore >= 41) {
+            labelText = isArabic ? "متوسط" : "Average";
+        } else {
+            labelText = isArabic ? "ضعيف" : "Poor";
+        }
+        if (scoreLabel) scoreLabel.textContent = `${indScore}% (${labelText})`;
+        if (scoreFill) scoreFill.style.width = `${indScore}%`;
+
+        // Solar Suitability
+        let yieldPoints = 2;
+        if (['muscat', 'batinah', 'dakhiliyah'].includes(loc.value)) yieldPoints = 3;
+        else if (loc.value === 'dhofar') yieldPoints = 1;
+
+        let spacePoints = 1;
+        if (result.spaceRequiredSqm <= 80) spacePoints = 3;
+        else if (result.spaceRequiredSqm <= 150) spacePoints = 2;
+
+        let consPoints = 2;
+        if (monthlyConsumption >= 500 && monthlyConsumption <= 3000) consPoints = 3;
+
+        const totalPoints = yieldPoints + spacePoints + consPoints;
+        let grade = "B";
+        if (totalPoints >= 9) grade = "A+";
+        else if (totalPoints >= 7) grade = "A";
+        else if (totalPoints >= 5) grade = "B";
+        else grade = "C";
+
+        const suitLabel = document.getElementById('score-suitability-label');
+        if (suitLabel) suitLabel.textContent = grade;
+
+        const suitBadges = document.querySelectorAll('.suit-badge');
+        suitBadges.forEach(badge => {
+            if (badge.dataset.score === grade) {
+                badge.classList.add('active');
+            } else {
+                badge.classList.remove('active');
+            }
+        });
+
+        // Green Impact
+        const co2Val = document.getElementById('score-co2-val');
+        const treesVal = document.getElementById('score-trees-val');
+        const greenProgress = document.getElementById('green-progress-bar');
+        
+        const trees = Math.round(result.co2OffsetTons * 16.5);
+        if (co2Val) animateValue(co2Val, 0, result.co2OffsetTons, 1000, "", " Tons");
+        if (treesVal) animateValue(treesVal, 0, trees, 1000);
+
+        const greenPct = Math.min(100, Math.round((result.co2OffsetTons / 30) * 100));
+        if (greenProgress) greenProgress.style.width = `${greenPct}%`;
+    }
+
+    // Step Actions Bindings
+    const btnGotoStep2 = document.getElementById('btn-goto-step2');
+    if (btnGotoStep2) {
+        btnGotoStep2.addEventListener('click', () => {
+            if (selectedAppliances.size === 0) {
+                alert(isArabic ? "يرجى تحديد جهاز واحد على الأقل للمتابعة." : "Please select at least one appliance to proceed.");
+                return;
+            }
+            goToDiscoveryStep(2);
+        });
+    }
+
+    const btnGotoStep3 = document.getElementById('btn-goto-step3');
+    if (btnGotoStep3) btnGotoStep3.addEventListener('click', () => goToDiscoveryStep(3));
+
+    const btnGotoStep4 = document.getElementById('btn-goto-step4');
+    if (btnGotoStep4) btnGotoStep4.addEventListener('click', () => goToDiscoveryStep(4));
+
+    const btnGotoStep5 = document.getElementById('btn-goto-step5');
+    if (btnGotoStep5) btnGotoStep5.addEventListener('click', () => goToDiscoveryStep(5));
+
+    const btnBackToStep1 = document.getElementById('btn-back-to-step1');
+    if (btnBackToStep1) btnBackToStep1.addEventListener('click', () => goToDiscoveryStep(1));
+
+    const btnBackToStep2 = document.getElementById('btn-back-to-step2');
+    if (btnBackToStep2) btnBackToStep2.addEventListener('click', () => goToDiscoveryStep(2));
+
+    const btnBackToStep3 = document.getElementById('btn-back-to-step3');
+    if (btnBackToStep3) btnBackToStep3.addEventListener('click', () => goToDiscoveryStep(3));
+
+    const btnBackToStep4 = document.getElementById('btn-back-to-step4');
+    if (btnBackToStep4) btnBackToStep4.addEventListener('click', () => goToDiscoveryStep(4));
+
+    const btnBackToStep5 = document.getElementById('btn-back-to-step5');
+    if (btnBackToStep5) btnBackToStep5.addEventListener('click', () => goToDiscoveryStep(5));
+
+    const btnCalibrateBill = document.getElementById('btn-calibrate-bill');
+    if (btnCalibrateBill) {
+        btnCalibrateBill.addEventListener('click', () => {
+            const slider = document.getElementById('discovery-bill-slider');
+            calibratedBillValue = slider ? parseFloat(slider.value) : 50;
+            goToDiscoveryStep(6);
+        });
+    }
+
+    const btnSkipCalibration = document.getElementById('btn-skip-calibration');
+    if (btnSkipCalibration) {
+        btnSkipCalibration.addEventListener('click', () => {
+            calibratedBillValue = null;
+            goToDiscoveryStep(6);
+        });
+    }
+
+    const btnGotoStep7 = document.getElementById('btn-goto-step7');
+    if (btnGotoStep7) btnGotoStep7.addEventListener('click', () => goToDiscoveryStep(7));
+
+    const btnResetDiscovery = document.getElementById('btn-reset-discovery');
+    if (btnResetDiscovery) btnResetDiscovery.addEventListener('click', resetDiscoveryJourney);
+
+    const discBillSlider = document.getElementById('discovery-bill-slider');
+    const discBillDisplay = document.getElementById('discovery-bill-display');
+    if (discBillSlider && discBillDisplay) {
+        discBillSlider.addEventListener('input', () => {
+            discBillDisplay.textContent = discBillSlider.value;
+        });
+    }
+
+    // Lead Form submission handler
+    const discoveryForm = document.getElementById('discovery-lead-form');
+    const discoveryFeedback = document.getElementById('discovery-form-feedback');
+
+    if (discoveryForm) {
+        discoveryForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Honeypot spam interceptor
+            const honeypot = discoveryForm.querySelector('input[name="honeypot"]').value;
+            if (honeypot) {
+                console.warn("[SolarLead] Spam submission detected via honeypot.");
+                return;
+            }
+
+            // Validate Phone Number
+            const phoneField = document.getElementById('disc-lead-phone');
+            const phoneValue = phoneField.value.trim().replace(/\D/g, "");
+            if (phoneValue.length < 8) {
+                showDiscoveryFormFeedback(
+                    isArabic ? "يرجى إدخال رقم هاتف عماني صالح يتكون من 8 أرقام على الأقل." : "Please enter a valid phone number with at least 8 digits.", 
+                    "error"
+                );
+                return;
+            }
+
+            const submitBtn = document.getElementById('btn-submit-discovery');
+            const spinner = submitBtn ? submitBtn.querySelector('.spinner') : null;
+
+            if (spinner) spinner.style.display = 'inline-block';
+            if (submitBtn) submitBtn.disabled = true;
+
+            const formData = new FormData(discoveryForm);
+            
+            let finalResult;
+            if (calibratedBillValue !== null) {
+                finalResult = window.SolarCalculatorEngine.calculate(calibratedBillValue, 'residential', loc.value);
+            } else {
+                finalResult = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities.residential, 'residential', loc.value);
+            }
+            formData.append('estimated_kw', finalResult.systemSizeKw);
+            formData.append('estimated_cost', finalResult.costRange.formatted);
+            formData.append('estimated_savings', finalResult.yearlySavingsOmr);
+            formData.append('sizer_mode', 'discovery');
+
+            fetch('chatbot.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (spinner) spinner.style.display = 'none';
+                if (submitBtn) submitBtn.disabled = false;
+
+                if (data.status === 'success') {
+                    showDiscoveryFormFeedback(
+                        isArabic 
+                          ? "شكراً لك! تم حجز تقييم الطاقة الشمسية الخاص بك بنجاح. سيتصل بك مهندسونا قريباً." 
+                          : "Thank you! Your solar assessment has been booked successfully. Our engineers will contact you shortly.", 
+                        "success"
+                    );
+                    discoveryForm.reset();
+
+                    if (window.SolarAnalytics) {
+                        window.SolarAnalytics.markFormSubmitted();
+                        window.SolarAnalytics.track("lead_submitted", {
+                            name: formData.get('name'),
+                            phone: formData.get('phone'),
+                            location: loc.value,
+                            property_type: "residential",
+                            system_size_kw: finalResult.systemSizeKw,
+                            enquiry_source: "discovery_assessment_form"
+                        });
+                    }
+                } else {
+                    showDiscoveryFormFeedback(
+                        data.message || (isArabic ? "فشل إرسال الطلب. يرجى إعادة المحاولة." : "Failed to submit. Please try again."),
+                        "error"
+                    );
+                }
+            })
+            .catch(err => {
+                if (spinner) spinner.style.display = 'none';
+                if (submitBtn) submitBtn.disabled = false;
+                console.error("[SolarLead] Discovery AJAX error:", err);
+                showDiscoveryFormFeedback(
+                    isArabic ? "فشل اتصال الشبكة. يرجى التحقق من اتصالك وإعادة المحاولة." : "Network connection failed. Please check your network and try again.",
+                    "error"
+                );
+            });
+        });
+    }
+
+    function showDiscoveryFormFeedback(msg, type) {
+        if (!discoveryFeedback) return;
+        discoveryFeedback.textContent = msg;
+        discoveryFeedback.style.display = 'block';
+        
+        if (type === 'success') {
+            discoveryFeedback.style.background = 'rgba(62, 182, 73, 0.15)';
+            discoveryFeedback.style.color = '#3eb649';
+            discoveryFeedback.style.border = '1px solid #3eb649';
+        } else {
+            discoveryFeedback.style.background = 'rgba(239, 68, 68, 0.15)';
+            discoveryFeedback.style.color = '#ef4444';
+            discoveryFeedback.style.border = '1px solid #ef4444';
+        }
+
+        setTimeout(() => {
+            discoveryFeedback.style.display = 'none';
+        }, 8000);
     }
 
 });

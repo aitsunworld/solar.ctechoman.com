@@ -320,6 +320,9 @@
     // Expose global window hooks for the page calculator to reach the widget
     window.SolarChatbot = {
       explainCalculatorResult: explainCalculatorResult,
+      updateContext: function (result) {
+        state.calculatorContext = result;
+      },
       open: openChat,
       close: closeChat
     };
