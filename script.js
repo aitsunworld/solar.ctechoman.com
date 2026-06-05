@@ -1508,27 +1508,42 @@ document.addEventListener('DOMContentLoaded', () => {
             const calAccuracy = document.getElementById('cal-val-accuracy');
             const calConfLevel = document.getElementById('cal-val-confidence-level');
 
+            // Insight and recommended action cards
+            const insightCard = document.getElementById('cal-insight-card');
+            const actionCard = document.getElementById('cal-action-card');
+            const insightDesc = document.getElementById('cal-insight-desc');
+            const actionDesc = document.getElementById('cal-action-desc');
+
             if (btnGotoStep7) btnGotoStep7.style.display = 'none';
             if (warningBox) warningBox.style.display = 'none';
             if (successBox) successBox.style.display = 'none';
-            if (statusMsg) statusMsg.textContent = isArabic ? "جاري مقارنة استهلاك الأجهزة مع فاتورة الكهرباء..." : "Comparing appliance usage with bill history...";
+            if (insightCard) insightCard.style.display = 'none';
+            if (actionCard) actionCard.style.display = 'none';
 
-            // Initialize progress ring & metrics
-            if (progressFill) progressFill.style.strokeDashoffset = 427.256;
-            if (confidencePct) confidencePct.textContent = "0%";
-            if (calScore) calScore.textContent = "-";
-            if (calBillMatch) calBillMatch.textContent = "0%";
-            if (calAccuracy) calAccuracy.textContent = "0%";
-            if (calConfLevel) calConfLevel.textContent = "-";
+            // Reset progress ring fill offset
+            const strokeCircumference = 427.256;
+            if (progressFill) progressFill.style.strokeDashoffset = strokeCircumference;
 
-            setTimeout(() => {
-                let confidence = 92;
-                let billMatchPct = 95;
-                let energyAccuracy = 98;
-                let scoreText = isArabic ? "تطابق ممتاز" : "Excellent Match";
-                let confidenceLevelText = isArabic ? "مرتفع جداً" : "Very High";
+            if (calibratedBillValue !== null) {
+                // Bill is entered - show transition scan animation
+                if (statusMsg) statusMsg.textContent = isArabic ? "جاري مقارنة استهلاك الأجهزة مع فاتورة الكهرباء..." : "Comparing appliance usage with bill history...";
+                
+                // Show "Analyzing..." during simulation to avoid user distrust of empty dashes or 0%
+                if (confidencePct) confidencePct.textContent = isArabic ? "جاري الحساب..." : "Calculating...";
+                if (calScore) calScore.textContent = isArabic ? "جاري التحليل..." : "Analyzing...";
+                if (calBillMatch) calBillMatch.textContent = isArabic ? "جاري التحليل..." : "Analyzing...";
+                if (calAccuracy) calAccuracy.textContent = isArabic ? "جاري التحليل..." : "Analyzing...";
+                if (calConfLevel) calConfLevel.textContent = isArabic ? "جاري التحليل..." : "Analyzing...";
 
-                if (calibratedBillValue !== null) {
+                setTimeout(() => {
+                    let confidence = 92;
+                    let billMatchPct = 95;
+                    let energyAccuracy = 98;
+                    let scoreText = isArabic ? "تطابق ممتاز" : "Excellent Match";
+                    let confidenceLevelText = isArabic ? "مرتفع جداً" : "Very High";
+                    let insightText = "";
+                    let actionText = "";
+
                     const result = window.SolarCalculatorEngine.calculateByLoad(
                         applianceQuantities.residential,
                         'residential',
@@ -1537,6 +1552,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const loadConsumption = result.loadSizing.avgDailyKwh * 30;
                     const billConsumption = calibratedBillValue / 0.020;
                     const variance = Math.abs(billConsumption - loadConsumption) / loadConsumption;
+                    const pctDiff = Math.round(variance * 100);
 
                     // Compute dynamic metrics based on variance
                     billMatchPct = Math.max(10, Math.round((1 - Math.min(1, variance)) * 100));
@@ -1547,39 +1563,85 @@ document.addEventListener('DOMContentLoaded', () => {
                         scoreText = isArabic ? "تطابق متفاوت" : "Diverging Match";
                         confidenceLevelText = isArabic ? "متوسط" : "Moderate";
                         if (warningBox) warningBox.style.display = 'block';
+                        
+                        if (isArabic) {
+                            insightText = `فاتورتك الفعلية تشير إلى استهلاك ${billConsumption > loadConsumption ? 'أعلى' : 'أقل'} بنسبة ${pctDiff}% من تقدير الأجهزة. يشير هذا إلى وجود أجهزة إضافية غير مدرجة أو استخدام مكثف للتكييف.`;
+                            actionText = "لقد قمنا بتعديل حجم النظام الشمسي الموصى به ليتناسب مع نمط استهلاكك الفعلي لضمان تغطية كاملة وتجنب أي عجز في الطاقة.";
+                        } else {
+                            insightText = `Your actual electricity bill indicates energy consumption is ${pctDiff}% ${billConsumption > loadConsumption ? 'higher' : 'lower'} than our appliance estimate. This suggests additional background loads or high air conditioning runtime.`;
+                            actionText = "We have dynamically scaled your recommended solar system size to match your actual consumption, ensuring optimal coverage and maximum grid independence.";
+                        }
                     } else {
                         scoreText = isArabic ? "تطابق ممتاز" : "Excellent Match";
                         confidenceLevelText = isArabic ? "مرتفع جداً" : "Very High";
                         if (successBox) successBox.style.display = 'block';
+                        
+                        if (isArabic) {
+                            insightText = `تطابق رائع! استهلاك الأجهزة المحددة يتطابق بشكل وثيق جداً (في حدود ${pctDiff}%) مع فاتورتك الكهربائية الفعلية.`;
+                            actionText = "نوصي بالاستمرار مع حجم النظام القياسي الموصى به. إن ملف استهلاكك مثالي لتثبيت نظام طاقة شمسية عالي الكفاءة.";
+                        } else {
+                            insightText = `Excellent calibration! Your selected appliance profile matches your actual monthly electricity bill very closely (within ${pctDiff}%).`;
+                            actionText = "We recommend proceeding with our standard solar package. Your energy usage profile is optimized for maximum ROI and immediate utility bill reduction.";
+                        }
                     }
-                } else {
-                    // Skipped calibration
-                    confidence = 85;
-                    billMatchPct = 80;
-                    energyAccuracy = 90;
-                    scoreText = isArabic ? "تقديري" : "Estimated Match";
-                    confidenceLevelText = isArabic ? "مرتفع" : "High";
-                    if (successBox) {
-                        successBox.textContent = isArabic ? "تم التجاوز بنجاح. سيتم استخدام تقديرات استهلاك الأجهزة." : "Skipped successfully. Using appliance-derived estimates.";
-                        successBox.style.display = 'block';
-                    }
+
+                    // Animate progress ring
+                    const offset = strokeCircumference - (confidence / 100) * strokeCircumference;
+                    if (progressFill) progressFill.style.strokeDashoffset = offset;
+
+                    // Animate metric text values
+                    if (confidencePct) animateValue(confidencePct, 0, confidence, 800, "", "%");
+                    if (calScore) calScore.textContent = scoreText;
+                    if (calBillMatch) animateValue(calBillMatch, 0, billMatchPct, 800, "", "%");
+                    if (calAccuracy) animateValue(calAccuracy, 0, energyAccuracy, 800, "", "%");
+                    if (calConfLevel) calConfLevel.textContent = confidenceLevelText;
+
+                    // Set dynamic texts and show cards
+                    if (insightDesc) insightDesc.textContent = insightText;
+                    if (actionDesc) actionDesc.textContent = actionText;
+                    if (insightCard) insightCard.style.display = 'block';
+                    if (actionCard) actionCard.style.display = 'block';
+
+                    if (statusMsg) statusMsg.textContent = isArabic ? "اكتملت المعايرة!" : "Calibration completed!";
+                    if (btnGotoStep7) btnGotoStep7.style.display = 'inline-block';
+                }, 1000);
+            } else {
+                // Bypassed (skipped) bill - load intelligent defaults synchronously
+                if (statusMsg) statusMsg.textContent = isArabic ? "اكتملت المعايرة!" : "Calibration completed!";
+                if (successBox) {
+                    successBox.textContent = isArabic ? "تم التجاوز بنجاح. سيتم استخدام تقديرات استهلاك الأجهزة." : "Skipped successfully. Using appliance-derived estimates.";
+                    successBox.style.display = 'block';
                 }
 
-                // Animate progress ring
-                const strokeCircumference = 427.256;
+                // Default ring animation
+                const confidence = 85;
                 const offset = strokeCircumference - (confidence / 100) * strokeCircumference;
                 if (progressFill) progressFill.style.strokeDashoffset = offset;
 
-                // Animate metric text values
-                if (confidencePct) animateValue(confidencePct, 0, confidence, 800, "", "%");
-                if (calScore) calScore.textContent = scoreText;
-                if (calBillMatch) animateValue(calBillMatch, 0, billMatchPct, 800, "", "%");
-                if (calAccuracy) animateValue(calAccuracy, 0, energyAccuracy, 800, "", "%");
-                if (calConfLevel) calConfLevel.textContent = confidenceLevelText;
+                // Displays intelligent defaults immediately to prevent showing 0% or empty dashes
+                if (confidencePct) confidencePct.textContent = isArabic ? "تقديري" : "Estimated";
+                if (calScore) calScore.textContent = isArabic ? "استخدام ملف الأجهزة" : "Using Appliance Profile";
+                if (calBillMatch) calBillMatch.textContent = isArabic ? "غير متوفر" : "Not Available";
+                if (calAccuracy) calAccuracy.textContent = isArabic ? "تقديري" : "Estimated";
+                if (calConfLevel) calConfLevel.textContent = isArabic ? "تقديري" : "Estimated";
 
-                if (statusMsg) statusMsg.textContent = isArabic ? "اكتملت المعايرة!" : "Calibration completed!";
+                let insightText = "";
+                let actionText = "";
+                if (isArabic) {
+                    insightText = "يتم استخدام تقدير الاستهلاك القياسي المستند إلى الأجهزة نظراً لتجاوز إدخال الفاتورة. نسبة الدقة ممتازة لتقديرات المباني السكنية المماثلة.";
+                    actionText = "تابع لمراجعة لوحة معلومات التوفير. ننصحك بالتحقق من فاتورتك لاحقاً مع مستشارينا لتأكيد القياسات الدقيقة قبل التثبيت.";
+                } else {
+                    insightText = "Using standard appliance-based load profile as bill input was bypassed. Sizing accuracy remains high for typical residential properties in your area.";
+                    actionText = "Proceed to view your savings dashboard. We suggest verifying with a physical electricity bill during our consultant's follow-up call to finalize system engineering.";
+                }
+
+                if (insightDesc) insightDesc.textContent = insightText;
+                if (actionDesc) actionDesc.textContent = actionText;
+                if (insightCard) insightCard.style.display = 'block';
+                if (actionCard) actionCard.style.display = 'block';
+
                 if (btnGotoStep7) btnGotoStep7.style.display = 'inline-block';
-            }, 1000);
+            }
         } else if (step === 7) {
             const discoveryResults = document.getElementById('residential-discovery-results');
             if (discoveryResults) discoveryResults.style.display = 'block';

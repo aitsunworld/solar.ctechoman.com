@@ -208,10 +208,10 @@ def run_verification():
         inverter_size = driver.find_element(By.ID, "db-val-inverter-size").text
         battery_size = driver.find_element(By.ID, "db-val-battery-size").text
         
-        energy_score = driver.find_element(By.ID, "score-energy-label").text
-        suitability_score = driver.find_element(By.ID, "score-suitability-label").text
-        co2_val = driver.find_element(By.ID, "score-co2-val").text
-        trees_val = driver.find_element(By.ID, "score-trees-val").text
+        energy_score = driver.find_element(By.ID, "score-energy-label").get_attribute("textContent").strip()
+        suitability_score = driver.find_element(By.ID, "score-suitability-label").get_attribute("textContent").strip()
+        co2_val = driver.find_element(By.ID, "score-co2-val").get_attribute("textContent").strip()
+        trees_val = driver.find_element(By.ID, "score-trees-val").get_attribute("textContent").strip()
         
         driver.save_screenshot(os.path.join(ARTIFACT_DIR, "step_7_dashboard_en.png"))
         print("Captured Step 7: Dashboard (EN)")

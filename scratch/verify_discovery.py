@@ -177,10 +177,10 @@ def run_verification():
         driver.save_screenshot(os.path.join(ARTIFACT_DIR, "step_7_dashboard.png"))
 
         # 10. Check gamification score updates
-        energy_score = driver.find_element(By.ID, "score-energy-label").text
-        suitability_score = driver.find_element(By.ID, "score-suitability-label").text
-        co2_val = driver.find_element(By.ID, "score-co2-val").text
-        trees_val = driver.find_element(By.ID, "score-trees-val").text
+        energy_score = driver.find_element(By.ID, "score-energy-label").get_attribute("textContent").strip()
+        suitability_score = driver.find_element(By.ID, "score-suitability-label").get_attribute("textContent").strip()
+        co2_val = driver.find_element(By.ID, "score-co2-val").get_attribute("textContent").strip()
+        trees_val = driver.find_element(By.ID, "score-trees-val").get_attribute("textContent").strip()
         
         report.append({
             "check": "Gamification scores calculated and rendered",

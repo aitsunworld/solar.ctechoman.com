@@ -334,7 +334,7 @@ return [
     'score_green_impact' => 'Green Impact',
     'green_co2' => 'CO₂ avoided per year',
     'green_trees' => 'Equivalent trees planted',
-    'lead_title_discovery' => 'Get My Personalized Solar Assessment',
+    'lead_title_discovery' => 'Get Your Personalized Solar Assessment',
     'lead_btn_discovery' => 'Confirm & Book Assessment',
 ];
 
