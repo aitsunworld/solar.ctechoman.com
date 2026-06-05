@@ -1382,22 +1382,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const discoveryJourney = document.getElementById('residential-discovery-journey');
         const discoveryResults = document.getElementById('residential-discovery-results');
         const calcWrapper = document.querySelector('.calculator-wrapper');
+        const calcInfo = document.querySelector('.calc-info');
 
         if (selectedPropType === 'residential') {
-            if (calcWrapper) calcWrapper.classList.add('residential-mode');
             if (standardInputs) standardInputs.style.display = 'none';
             if (standardResults) standardResults.style.display = 'none';
             if (discoveryJourney) discoveryJourney.style.display = 'block';
+            // Full-width single-column mode: hide left sidebar, make wizard full width
+            if (calcWrapper) calcWrapper.classList.add('residential-mode');
+            if (calcInfo) calcInfo.style.display = 'none';
             resetDiscoveryJourney();
         } else {
-            if (calcWrapper) calcWrapper.classList.remove('residential-mode');
             if (discoveryJourney) discoveryJourney.style.display = 'none';
             if (discoveryResults) discoveryResults.style.display = 'none';
+            // Restore 2-column layout for commercial/industrial
+            if (calcWrapper) calcWrapper.classList.remove('residential-mode');
+            if (calcInfo) calcInfo.style.display = '';
             if (standardInputs) standardInputs.style.display = 'block';
             if (standardResults) standardResults.style.display = 'block';
             calculateSolar();
         }
     }
+
 
     function goToDiscoveryStep(step) {
         currentDiscoveryStep = step;
@@ -1419,19 +1425,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Scroll active step into view on mobile
-        const activeIndicator = document.querySelector(`.discovery-steps-progress .step-indicator[data-step="${step}"]`);
-        if (activeIndicator && window.innerWidth < 768) {
-            activeIndicator.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-
-        // Update the filled progress line via CSS custom property (0 to 1 ratio)
+        // Update the filled progress line via CSS custom property (0% = step 1, 100% = step 7)
         const progressBar = document.querySelector('.discovery-steps-progress');
         if (progressBar) {
-            const progressRatio = Math.max(0, (step - 1) / 6);
-            progressBar.style.setProperty('--step-progress-ratio', progressRatio);
-            progressBar.style.setProperty('--step-progress', (progressRatio * 100) + '%');
+            const progressPct = Math.max(0, ((step - 1) / 6) * 100);
+            progressBar.style.setProperty('--step-progress', progressPct + '%');
         }
+
 
         // Hide all panels
         const panels = document.querySelectorAll('.discovery-step-panel');
@@ -1499,35 +1499,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const warningBox = document.getElementById('calibration-warning-box');
             const successBox = document.getElementById('calibration-success-box');
             const btnGotoStep7 = document.getElementById('btn-goto-step7');
-            
-            // New elements
-            const progressFill = document.getElementById('calibration-progress-fill');
-            const confidencePct = document.getElementById('calibration-confidence-pct');
-            const calScore = document.getElementById('cal-val-score');
-            const calBillMatch = document.getElementById('cal-val-bill-match');
-            const calAccuracy = document.getElementById('cal-val-accuracy');
-            const calConfLevel = document.getElementById('cal-val-confidence-level');
 
             if (btnGotoStep7) btnGotoStep7.style.display = 'none';
             if (warningBox) warningBox.style.display = 'none';
             if (successBox) successBox.style.display = 'none';
             if (statusMsg) statusMsg.textContent = isArabic ? "جاري مقارنة استهلاك الأجهزة مع فاتورة الكهرباء..." : "Comparing appliance usage with bill history...";
 
-            // Initialize progress ring & metrics
-            if (progressFill) progressFill.style.strokeDashoffset = 427.256;
-            if (confidencePct) confidencePct.textContent = "0%";
-            if (calScore) calScore.textContent = "-";
-            if (calBillMatch) calBillMatch.textContent = "0%";
-            if (calAccuracy) calAccuracy.textContent = "0%";
-            if (calConfLevel) calConfLevel.textContent = "-";
-
             setTimeout(() => {
-                let confidence = 92;
-                let billMatchPct = 95;
-                let energyAccuracy = 98;
-                let scoreText = isArabic ? "تطابق ممتاز" : "Excellent Match";
-                let confidenceLevelText = isArabic ? "مرتفع جداً" : "Very High";
-
                 if (calibratedBillValue !== null) {
                     const result = window.SolarCalculatorEngine.calculateByLoad(
                         applianceQuantities.residential,
@@ -1538,45 +1516,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     const billConsumption = calibratedBillValue / 0.020;
                     const variance = Math.abs(billConsumption - loadConsumption) / loadConsumption;
 
-                    // Compute dynamic metrics based on variance
-                    billMatchPct = Math.max(10, Math.round((1 - Math.min(1, variance)) * 100));
-                    energyAccuracy = Math.max(10, Math.round((1 - Math.min(1, variance * 0.8)) * 100));
-                    confidence = Math.max(10, Math.round(billMatchPct * 0.9 + 5));
-
                     if (variance > 0.15) {
-                        scoreText = isArabic ? "تطابق متفاوت" : "Diverging Match";
-                        confidenceLevelText = isArabic ? "متوسط" : "Moderate";
                         if (warningBox) warningBox.style.display = 'block';
                     } else {
-                        scoreText = isArabic ? "تطابق ممتاز" : "Excellent Match";
-                        confidenceLevelText = isArabic ? "مرتفع جداً" : "Very High";
                         if (successBox) successBox.style.display = 'block';
                     }
                 } else {
-                    // Skipped calibration
-                    confidence = 85;
-                    billMatchPct = 80;
-                    energyAccuracy = 90;
-                    scoreText = isArabic ? "تقديري" : "Estimated Match";
-                    confidenceLevelText = isArabic ? "مرتفع" : "High";
                     if (successBox) {
                         successBox.textContent = isArabic ? "تم التجاوز بنجاح. سيتم استخدام تقديرات استهلاك الأجهزة." : "Skipped successfully. Using appliance-derived estimates.";
                         successBox.style.display = 'block';
                     }
                 }
-
-                // Animate progress ring
-                const strokeCircumference = 427.256;
-                const offset = strokeCircumference - (confidence / 100) * strokeCircumference;
-                if (progressFill) progressFill.style.strokeDashoffset = offset;
-
-                // Animate metric text values
-                if (confidencePct) animateValue(confidencePct, 0, confidence, 800, "", "%");
-                if (calScore) calScore.textContent = scoreText;
-                if (calBillMatch) animateValue(calBillMatch, 0, billMatchPct, 800, "", "%");
-                if (calAccuracy) animateValue(calAccuracy, 0, energyAccuracy, 800, "", "%");
-                if (calConfLevel) calConfLevel.textContent = confidenceLevelText;
-
                 if (statusMsg) statusMsg.textContent = isArabic ? "اكتملت المعايرة!" : "Calibration completed!";
                 if (btnGotoStep7) btnGotoStep7.style.display = 'inline-block';
             }, 1000);

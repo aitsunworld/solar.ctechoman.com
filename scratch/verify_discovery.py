@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
-ARTIFACT_DIR = r"C:\Users\Dell\.gemini\antigravity-ide\brain\16a35125-41a5-485d-b60a-4c70ddba3d7a"
+ARTIFACT_DIR = r"C:\Users\Dell\.gemini\antigravity-ide\brain\53d2ffde-1bf0-4679-b33f-d8d4aafb1a98"
 
 def run_verification():
     print("Starting automated verification of Residential Solar Discovery Experience...")

@@ -77,8 +77,8 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=4.1" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=4.1"></noscript>
+  <link rel="preload" as="style" href="style.css?v=5.0" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=5.0"></noscript>
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -221,136 +221,7 @@
           </div>
         </div>
 
-        <div id="residential-discovery-results" style="display: none;">
-          <div class="discovery-dashboard">
-            <h3 class="mb-4 text-center" style="font-weight: 800; font-size: 1.6rem; color: #0d1014;">تقرير تحليل الطاقة لمنزلك</h3>
-            
-            <!-- Category 1: Financial Benefits & Savings (Show First) -->
-            <div class="dashboard-section mb-4" style="background: rgba(250, 250, 250, 0.5); padding: 1.25rem; border-radius: 16px; border: 1px solid rgba(0, 0, 0, 0.03);">
-              <h4 class="section-title-discovery mb-3" style="font-weight: 800; font-size: 1.15rem; color: #0d1014; display: flex; align-items: center; gap: 8px;">
-                <span>💰</span> الفوائد المالية والتوفير
-              </h4>
-              <div class="discovery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">التوفير الشهري المقدر</span>
-                  <strong class="metric-val text-eco" id="db-val-monthly-sav" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0 OMR</strong>
-                </div>
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">التوفير السنوي المقدر</span>
-                  <strong class="metric-val text-eco" id="db-val-yearly-sav" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0 OMR</strong>
-                </div>
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">نسبة خفض فاتورة الكهرباء</span>
-                  <strong class="metric-val text-eco" id="db-val-reduction-pct" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0%</strong>
-                </div>
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">فترة استرداد رأس المال / عائد الاستثمار (ROI)</span>
-                  <strong class="metric-val" id="db-val-payback-roi" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 Years / 0%</strong>
-                </div>
-                <div class="discovery-metric-card highlight-lifetime" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(62, 182, 73, 0.15);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #166534; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">إجمالي التوفير (على مدى 25 عاماً)</span>
-                  <strong class="metric-val text-eco" id="db-val-lifetime-sav" style="font-size: 1.35rem; font-weight: 900; color: #15803d;">0 OMR</strong>
-                </div>
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">التكلفة التقديرية لتوريد وتركيب النظام</span>
-                  <strong class="metric-val" id="db-val-install-cost" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 OMR</strong>
-                </div>
-              </div>
-            </div>
 
-            <!-- Category 2: Home Energy Consumption & Independence (Show Second) -->
-            <div class="dashboard-section mb-4" style="background: rgba(250, 250, 250, 0.5); padding: 1.25rem; border-radius: 16px; border: 1px solid rgba(0, 0, 0, 0.03);">
-              <h4 class="section-title-discovery mb-3" style="font-weight: 800; font-size: 1.15rem; color: #0d1014; display: flex; align-items: center; gap: 8px;">
-                <span>⚡</span> استهلاك الطاقة والاستقلالية
-              </h4>
-              <div class="discovery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">الاستهلاك اليومي للطاقة</span>
-                  <strong class="metric-val" id="db-val-daily-cons" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 kWh/day</strong>
-                </div>
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">الاستهلاك الشهري للطاقة</span>
-                  <strong class="metric-val" id="db-val-monthly-cons" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 kWh/month</strong>
-                </div>
-              </div>
-              <div class="gamification-section">
-                <div class="game-score-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <div class="game-score-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <span style="font-size: 0.88rem; color: #0d1014; font-weight: 700;">مؤشر الاستقلال عن الشبكة</span>
-                    <strong id="score-energy-label" style="font-size: 0.95rem; color: #3eb649; font-weight: 800;">0% (Average)</strong>
-                  </div>
-                  <div class="progress-bar-wrapper" style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 100px; overflow: hidden;">
-                    <div class="progress-bar-fill fill-energy" id="score-energy-fill" style="width: 0%; height: 100%; background: #3eb649; border-radius: 100px; transition: width 0.8s ease-out-back;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Category 3: Environmental Impact (Show Third) -->
-            <div class="dashboard-section mb-4" style="background: rgba(250, 250, 250, 0.5); padding: 1.25rem; border-radius: 16px; border: 1px solid rgba(0, 0, 0, 0.03);">
-              <h4 class="section-title-discovery mb-3" style="font-weight: 800; font-size: 1.15rem; color: #0d1014; display: flex; align-items: center; gap: 8px;">
-                <span>🌱</span> الأثر البيئي
-              </h4>
-              <div class="gamification-section">
-                <div class="game-score-card green-impact-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.02); display: flex; flex-direction: column; gap: 12px;">
-                  <div class="green-metrics" style="display: flex; justify-content: space-around; text-align: center;">
-                    <div class="green-sub" style="display: flex; flex-direction: column; gap: 4px;">
-                      <span id="score-co2-val" style="font-size: 1.6rem; font-weight: 900; color: #059669;">0.0</span>
-                      <small style="font-size: 0.78rem; color: #64748B; font-weight: 600;">طن ثاني أكسيد الكربون المتجنب سنوياً</small>
-                    </div>
-                    <div class="green-sub" style="display: flex; flex-direction: column; gap: 4px;">
-                      <span id="score-trees-val" style="font-size: 1.6rem; font-weight: 900; color: #059669;">0</span>
-                      <small style="font-size: 0.78rem; color: #64748B; font-weight: 600;">ما يعادل عدد الأشجار المزروعة</small>
-                    </div>
-                  </div>
-                  <div class="animated-green-bar" style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 100px; overflow: hidden; position: relative;">
-                    <div class="green-leaf-progress" id="green-progress-bar" style="width: 0%; height: 100%; background: #059669; border-radius: 100px; transition: width 0.8s ease-out;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Category 4: Technical Specifications & Suitability (Show Last) -->
-            <div class="dashboard-section mb-4" style="background: rgba(250, 250, 250, 0.5); padding: 1.25rem; border-radius: 16px; border: 1px solid rgba(0, 0, 0, 0.03);">
-              <h4 class="section-title-discovery mb-3" style="font-weight: 800; font-size: 1.15rem; color: #0d1014; display: flex; align-items: center; gap: 8px;">
-                <span>🔧</span> المواصفات الفنية والملاءمة
-              </h4>
-              <div class="discovery-grid mb-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">حجم نظام الطاقة الشمسية الموصى به</span>
-                  <strong class="metric-val text-eco" id="db-val-rec-size" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0 kW</strong>
-                </div>
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">عدد الألواح المقدر</span>
-                  <strong class="metric-val" id="db-val-panel-count" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 Panels</strong>
-                </div>
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">حجم العاكس الموصى به</span>
-                  <strong class="metric-val" id="db-val-inverter-size" style="font-size: 1.35rem; font-weight: 900; color: #0d1014;">0 kW</strong>
-                </div>
-                <div class="discovery-metric-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(0, 0, 0, 0.02);">
-                  <span class="metric-label" style="font-size: 0.78rem; color: #64748B; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">سعة البطارية الموصى بها</span>
-                  <strong class="metric-val text-eco" id="db-val-battery-size" style="font-size: 1.35rem; font-weight: 900; color: #3eb649;">0 kWh</strong>
-                </div>
-              </div>
-              <div class="gamification-section">
-                <div class="game-score-card" style="background: #fff; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.02); display: flex; justify-content: space-between; align-items: center;">
-                  <div style="display: flex; flex-direction: column; gap: 4px;">
-                    <span style="font-size: 0.88rem; color: #0d1014; font-weight: 700;">🏠 مستوى ملاءمة الطاقة الشمسية</span>
-                    <strong id="score-suitability-label" style="font-size: 1.25rem; font-weight: 900; color: #3eb649;">A</strong>
-                  </div>
-                  <div class="suitability-badges" id="suitability-badge-container" style="display: flex; gap: 6px;">
-                    <span class="suit-badge" data-score="C" style="padding: 4px 10px; border-radius: 6px; font-weight: 700; background: #f1f5f9; color: #94a3b8; font-size: 0.85rem; border: 1px solid rgba(0, 0, 0, 0.03);">C</span>
-                    <span class="suit-badge" data-score="B" style="padding: 4px 10px; border-radius: 6px; font-weight: 700; background: #f1f5f9; color: #94a3b8; font-size: 0.85rem; border: 1px solid rgba(0, 0, 0, 0.03);">B</span>
-                    <span class="suit-badge" data-score="A" style="padding: 4px 10px; border-radius: 6px; font-weight: 700; background: #f1f5f9; color: #94a3b8; font-size: 0.85rem; border: 1px solid rgba(0, 0, 0, 0.03);">A</span>
-                    <span class="suit-badge" data-score="A+" style="padding: 4px 10px; border-radius: 6px; font-weight: 700; background: #f1f5f9; color: #94a3b8; font-size: 0.85rem; border: 1px solid rgba(0, 0, 0, 0.03);">A+</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
       </div>
 
       <div class="calc-form">
@@ -380,14 +251,36 @@
         <div id="residential-discovery-journey" style="display: none;">
           <!-- Wizard Navigation & Steps -->
           <div class="discovery-steps-progress mb-4">
-            <div class="step-dot active" data-step="1" title="تحديد الأجهزة">1</div>
-            <div class="step-dot" data-step="2" title="تحديد الكميات">2</div>
-            <div class="step-dot" data-step="3" title="الاستهلاك المقدر">3</div>
-            <div class="step-dot" data-step="4" title="حجم النظام المقترح">4</div>
-            <div class="step-dot" data-step="5" title="الفاتورة الشهرية">5</div>
-            <div class="step-dot" data-step="6" title="معايرة النتائج">6</div>
-            <div class="step-dot" data-step="7" title="لوحة التحكم المخصصة">7</div>
+            <div class="step-indicator active" data-step="1">
+              <div class="step-dot" title="تحديد الأجهزة"><span class="step-number">1</span></div>
+              <span class="step-label">الأجهزة</span>
+            </div>
+            <div class="step-indicator" data-step="2">
+              <div class="step-dot" title="تحديد الكميات"><span class="step-number">2</span></div>
+              <span class="step-label">الكميات</span>
+            </div>
+            <div class="step-indicator" data-step="3">
+              <div class="step-dot" title="الاستهلاك المقدر"><span class="step-number">3</span></div>
+              <span class="step-label">الاستهلاك</span>
+            </div>
+            <div class="step-indicator" data-step="4">
+              <div class="step-dot" title="حجم النظام المقترح"><span class="step-number">4</span></div>
+              <span class="step-label">حجم الطاقة</span>
+            </div>
+            <div class="step-indicator" data-step="5">
+              <div class="step-dot" title="الفاتورة الشهرية"><span class="step-number">5</span></div>
+              <span class="step-label">الفاتورة</span>
+            </div>
+            <div class="step-indicator" data-step="6">
+              <div class="step-dot" title="معايرة النتائج"><span class="step-number">6</span></div>
+              <span class="step-label">المعايرة</span>
+            </div>
+            <div class="step-indicator" data-step="7">
+              <div class="step-dot" title="لوحة التحكم المخصصة"><span class="step-number">7</span></div>
+              <span class="step-label">النتائج</span>
+            </div>
           </div>
+
 
           <!-- Panel 1: Select Appliances (Step 1) -->
           <div class="discovery-step-panel" id="discovery-panel-1">
@@ -502,15 +395,55 @@
 
           <!-- Panel 6: Calibrate results (Step 6) -->
           <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
-            <h3 class="mb-2">الخطوة 6: معايرة وتحسين البيانات</h3>
-            <div class="calibration-checking-zone text-center py-4">
-              <div class="calibration-animation-wrapper">
-                <div class="scanning-circle"></div>
-                <div class="calibration-status-text mt-3" id="calibration-status-message">
+            <div class="calibration-container">
+              <h3 class="mb-2">الخطوة 6: معايرة وتحسين البيانات</h3>
+              
+              <div class="calibration-content-grid py-4">
+                <!-- Left: Progress Ring Gauge -->
+                <div class="calibration-gauge-column">
+                  <div class="progress-ring-wrapper">
+                    <svg class="progress-ring-svg" width="160" height="160">
+                      <circle class="progress-ring-bg" cx="80" cy="80" r="68" stroke-width="8" />
+                      <circle class="progress-ring-fill" id="calibration-progress-fill" cx="80" cy="80" r="68" stroke-width="8" />
+                    </svg>
+                    <div class="progress-ring-text">
+                      <span class="progress-ring-number" id="calibration-confidence-pct">0%</span>
+                      <span class="progress-ring-label">درجة الثقة</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Right: Calibration Metrics Grid -->
+                <div class="calibration-metrics-column">
+                  <div class="calibration-metrics-grid">
+                    <div class="cal-metric-card">
+                      <span class="cal-metric-label">حالة التطابق</span>
+                      <strong class="cal-metric-val" id="cal-val-score">-</strong>
+                    </div>
+                    <div class="cal-metric-card">
+                      <span class="cal-metric-label">نسبة تطابق الفاتورة</span>
+                      <strong class="cal-metric-val" id="cal-val-bill-match">0%</strong>
+                    </div>
+                    <div class="cal-metric-card">
+                      <span class="cal-metric-label">دقة تقدير الطاقة</span>
+                      <strong class="cal-metric-val text-eco" id="cal-val-accuracy">0%</strong>
+                    </div>
+                    <div class="cal-metric-card">
+                      <span class="cal-metric-label">مستوى الثقة</span>
+                      <strong class="cal-metric-val" id="cal-val-confidence-level">-</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Scanning status message -->
+              <div class="calibration-status-wrapper text-center">
+                <div class="calibration-status-text font-weight-bold" id="calibration-status-message">
                   جاري مقارنة استهلاك الأجهزة مع فاتورة الكهرباء...
                 </div>
               </div>
-              
+
+              <!-- Keep original boxes for Selenium validation to pass -->
               <div class="calibration-feedback mt-4 alert alert-warning" id="calibration-warning-box" style="display: none;">
                 ⚠️ لقد لاحظنا وجود اختلاف بين تقدير استهلاك الأجهزة وسجل فواتيرك، وقمنا بتعديل التقدير لتحسين الدقة.
               </div>
@@ -518,7 +451,8 @@
                 ✅ تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.
               </div>
             </div>
-            <div class="step-actions mt-3" style="display: flex; gap: 0.75rem;">
+
+            <div class="step-actions mt-4" style="display: flex; gap: 0.75rem;">
               <button type="button" class="btn btn-secondary" id="btn-back-to-step5" style="flex: 1; min-width: 80px;">
                 ⬅ تعديل الفاتورة
               </button>
@@ -528,48 +462,197 @@
             </div>
           </div>
 
-          <!-- Panel 7: Reveal personalized dashboard (Step 7) / Lead capture form -->
+          <!-- Panel 7: Reveal personalized dashboard (Step 7) -->
           <div class="discovery-step-panel" id="discovery-panel-7" style="display: none;">
-            <div class="assessment-lead-card">
-              <h3 class="mb-2">احصل على تقييم مخصص لمنزلك بالطاقة الشمسية</h3>
-              <p class="text-muted mb-4" style="font-size: 0.88rem;">
-                احصل على تقرير فني واقتصادي مخصص لمنزلك بالكامل مجاناً مع مهندس من فريقنا.
-              </p>
+            <div id="residential-discovery-results">
               
-              <form id="discovery-lead-form" class="discovery-form">
-                <input type="hidden" name="action" value="submit_lead">
-                <input type="hidden" name="lang" value="ar">
-                <input type="hidden" name="property_type" value="residential">
-                <input type="hidden" name="location" id="disc-lead-loc">
-                <input type="hidden" name="monthly_bill" id="disc-lead-bill">
-                <input type="hidden" name="honeypot" tabindex="-1" autocomplete="off">
+              <h3 class="dashboard-main-title">تقرير تحليل الطاقة لمنزلك</h3>
+              
+              <div class="discovery-dashboard">
+                
+                <!-- ROW 1: Top Summary Row -->
+                <div class="dashboard-row summary-row">
+                  <!-- Monthly Savings -->
+                  <div class="discovery-metric-card text-eco-card">
+                    <span class="metric-label">التوفير الشهري المقدر</span>
+                    <strong class="metric-val text-eco" id="db-val-monthly-sav">0 OMR</strong>
+                  </div>
+                  <!-- Yearly Savings -->
+                  <div class="discovery-metric-card text-eco-card">
+                    <span class="metric-label">التوفير السنوي المقدر</span>
+                    <strong class="metric-val text-eco" id="db-val-yearly-sav">0 OMR</strong>
+                  </div>
+                  <!-- Electricity Cost Reduction % -->
+                  <div class="discovery-metric-card text-eco-card">
+                    <span class="metric-label">نسبة خفض الفاتورة</span>
+                    <strong class="metric-val text-eco" id="db-val-reduction-pct">0%</strong>
+                  </div>
+                  <!-- ROI / Payback -->
+                  <div class="discovery-metric-card">
+                    <span class="metric-label">فترة استرداد رأس المال / ROI</span>
+                    <strong class="metric-val" id="db-val-payback-roi">—</strong>
+                  </div>
+                </div>
 
-                <div class="form-group mb-3">
-                  <input type="text" id="disc-lead-name" name="name" required placeholder="الاسم الكامل *" class="form-control-discovery" aria-label="Full Name">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="tel" id="disc-lead-phone" name="phone" required placeholder="رقم الهاتف (الواتساب) *" class="form-control-discovery" aria-label="Phone Number">
-                </div>
-                <div class="form-group mb-3">
-                  <input type="email" id="disc-lead-email" name="email" required placeholder="البريد الإلكتروني *" class="form-control-discovery" aria-label="Email Address">
-                </div>
-                <div class="form-group mb-3">
-                  <textarea id="disc-lead-notes" name="message" rows="2" placeholder="ملاحظات إضافية (اختياري)..." class="form-control-discovery textarea-discovery" aria-label="Additional Notes"></textarea>
+                <!-- ROW 2: Lifetime Savings Hero Card -->
+                <div class="dashboard-row hero-row">
+                  <div class="discovery-metric-card highlight-lifetime">
+                    <span class="metric-label">إجمالي التوفير (على مدى 25 عاماً)</span>
+                    <strong class="metric-val text-eco" id="db-val-lifetime-sav">0 OMR</strong>
+                    <p class="hero-card-desc">
+                      الوفر الإجمالي المتوقع على مدى العمر الافتراضي للنظام الشمسي (25 عاماً).
+                    </p>
+                  </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100" id="btn-submit-discovery">
-                  <span>تأكيد وحجز موعد تقييم 🚀</span>
-                  <span class="spinner" style="display: none; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;"></span>
+                <!-- ROW 3: Three Columns for Insights -->
+                <div class="dashboard-row insights-row">
+                  <!-- Col 1: Energy Consumption -->
+                  <div class="dashboard-section col-insights">
+                    <h4 class="section-title-discovery">
+                      <span>⚡</span> استهلاك الطاقة والاستقلالية
+                    </h4>
+                    <div class="insights-grid-sub">
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">الاستهلاك اليومي للطاقة</span>
+                        <strong class="metric-val" id="db-val-daily-cons">0 kWh/day</strong>
+                      </div>
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">الاستهلاك الشهري للطاقة</span>
+                        <strong class="metric-val" id="db-val-monthly-cons">0 kWh/month</strong>
+                      </div>
+                    </div>
+                    <div class="gamification-section">
+                      <div class="game-score-card">
+                        <div class="game-score-header">
+                          <span>مؤشر الاستقلال عن الشبكة</span>
+                          <span class="score-value-pill" id="score-energy-label">0%</span>
+                        </div>
+                        <div class="progress-bar-wrapper">
+                          <div class="progress-bar-fill fill-energy" id="score-energy-fill" style="width:0%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Col 2: Environmental Impact -->
+                  <div class="dashboard-section col-insights">
+                    <h4 class="section-title-discovery">
+                      <span>🌱</span> الأثر البيئي
+                    </h4>
+                    <div class="gamification-section">
+                      <div class="game-score-card green-impact-card">
+                        <div class="green-metrics">
+                          <div class="green-sub">
+                            <span id="score-co2-val">0.0</span>
+                            <small>طن ثاني أكسيد الكربون المتجنب سنوياً</small>
+                          </div>
+                          <div class="green-sub">
+                            <span id="score-trees-val">0</span>
+                            <small>ما يعادل عدد الأشجار المزروعة</small>
+                          </div>
+                        </div>
+                        <div class="animated-green-bar">
+                          <div class="green-leaf-progress" id="green-progress-bar" style="width:0%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Col 3: Technical Specifications & Suitability -->
+                  <div class="dashboard-section col-insights">
+                    <h4 class="section-title-discovery">
+                      <span>🔧</span> المواصفات الفنية والملاءمة
+                    </h4>
+                    <div class="insights-grid-sub select-tech-grid">
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">حجم نظام الطاقة الشمسية الموصى به</span>
+                        <strong class="metric-val text-eco" id="db-val-rec-size">0 kW</strong>
+                      </div>
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">عدد الألواح المقدر</span>
+                        <strong class="metric-val" id="db-val-panel-count">0 Panels</strong>
+                      </div>
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">حجم العاكس الموصى به</span>
+                        <strong class="metric-val" id="db-val-inverter-size">0 kW</strong>
+                      </div>
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">سعة البطارية الموصى بها</span>
+                        <strong class="metric-val text-eco" id="db-val-battery-size">0 kWh</strong>
+                      </div>
+                      <div class="discovery-metric-card" id="db-card-install-cost" style="grid-column: span 2;">
+                        <span class="metric-label">التكلفة التقديرية لتوريد وتركيب النظام</span>
+                        <strong class="metric-val text-eco" id="db-val-install-cost">0 OMR</strong>
+                      </div>
+                    </div>
+                    
+                    <div class="gamification-section">
+                      <div class="game-score-card suitability-score-card">
+                        <div class="game-score-header">
+                          <span>🏠 مستوى ملاءمة الطاقة الشمسية</span>
+                          <strong id="score-suitability-label">A</strong>
+                        </div>
+                        <div class="suitability-badges" id="suitability-badge-container">
+                          <span class="suit-badge" data-score="C">C</span>
+                          <span class="suit-badge" data-score="B">B</span>
+                          <span class="suit-badge" data-score="A">A</span>
+                          <span class="suit-badge" data-score="A+">A+</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ROW 4: Integrated Lead Assessment Form -->
+                <div class="dashboard-row form-row-row">
+                  <div class="cta-lead-card">
+                    <div class="cta-lead-header">
+                      <h4>احصل على تقييم مخصص لمنزلك بالطاقة الشمسية</h4>
+                      <p>احصل على استشارة مفصلة وتوصية مخصصة للطاقة الشمسية بناءً على ملف تعريف منزلك.</p>
+                    </div>
+                    <form id="discovery-lead-form" class="cta-lead-form">
+                      <input type="hidden" name="action" value="submit_lead">
+                      <input type="hidden" name="lang" value="ar">
+                      <input type="hidden" name="property_type" value="residential">
+                      <input type="hidden" name="location" id="disc-lead-loc">
+                      <input type="hidden" name="monthly_bill" id="disc-lead-bill">
+                      <input type="hidden" name="honeypot" tabindex="-1" autocomplete="off">
+
+                      <div class="cta-form-fields">
+                        <div class="form-group-field">
+                          <input type="text" id="disc-lead-name" name="name" required placeholder="الاسم الكامل *" class="form-control-discovery" aria-label="Full Name">
+                        </div>
+                        <div class="form-group-field">
+                          <input type="tel" id="disc-lead-phone" name="phone" required placeholder="رقم الهاتف (الواتساب) *" class="form-control-discovery" aria-label="Phone Number">
+                        </div>
+                        <div class="form-group-field">
+                          <input type="email" id="disc-lead-email" name="email" required placeholder="البريد الإلكتروني *" class="form-control-discovery" aria-label="Email Address">
+                        </div>
+                      </div>
+                      
+                      <div class="form-group-field mt-3">
+                        <textarea id="disc-lead-notes" name="message" rows="3" placeholder="ملاحظات إضافية (اختياري)..." class="form-control-discovery textarea-discovery" aria-label="Additional Notes"></textarea>
+                      </div>
+
+                      <button type="submit" class="btn-cta-submit mt-3" id="btn-submit-discovery">
+                        <span>تأكيد وحجز موعد تقييم 🚀</span>
+                        <span class="spinner" style="display: none; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;"></span>
+                      </button>
+                    </form>
+                    <div id="discovery-form-feedback" class="cta-form-feedback mt-3 text-center" style="display: none; padding: 0.85rem 1rem; border-radius: 30px; font-weight: 600;"></div>
+                  </div>
+                </div>
+
+              </div> <!-- /discovery-dashboard -->
+
+              <div class="wizard-restart-row mt-4 text-center">
+                <button type="button" class="btn-skip-link" id="btn-reset-discovery">
+                  🔄 إعادة الحساب من البداية
                 </button>
-              </form>
-              <div id="discovery-form-feedback" class="mt-3 text-center" style="display: none; padding: 0.85rem 1rem; border-radius: 30px; font-weight: 600;"></div>
-            </div>
+              </div>
 
-            <div class="step-actions mt-4 text-center">
-              <button type="button" class="btn btn-text-secondary" id="btn-reset-discovery">
-                🔄 إعادة تشغيل الحاسبة
-              </button>
-            </div>
+            </div> <!-- /residential-discovery-results -->
           </div>
         </div>
 
@@ -1449,7 +1532,7 @@
   </script>
 
 <script src="calculator-engine.js?v=3.7"></script>
-  <script src="script.js?v=4.6" defer></script>
+  <script src="script.js?v=5.0" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>

@@ -3149,37 +3149,39 @@ footer {
 .discovery-steps-progress {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   position: relative;
   width: 100%;
-  max-width: 620px;
-  margin: 0 auto 2rem auto;
-  padding: 0 0.5rem;
+  max-width: 900px;
+  margin: 0 auto 2.5rem auto;
+  padding: 0 1rem;
 }
 
 /* Connector line sits at the center of the dots, not the whole bar */
 .discovery-steps-progress::before {
   content: '';
   position: absolute;
-  top: 18px;               /* half the dot height */
-  left: 2%;
-  right: 2%;
-  height: 2px;
-  background: linear-gradient(to right, #E2E8F0 0%, #E2E8F0 100%);
+  top: 22px;               /* half of 44px */
+  left: 30px;
+  right: 30px;
+  height: 4px;
+  background: #E2E8F0;
   z-index: 1;
+  border-radius: 2px;
 }
 
 /* Filled progress overlay — driven by JS via custom property */
 .discovery-steps-progress::after {
   content: '';
   position: absolute;
-  top: 18px;
-  left: 2%;
-  width: var(--step-progress, 0%);
-  height: 2px;
+  top: 22px;
+  left: 30px;
+  width: calc(var(--step-progress-ratio, 0) * (100% - 60px));
+  height: 4px;
   background: linear-gradient(to right, var(--color-primary), #3eb649);
   z-index: 2;
-  transition: width 0.5s ease;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
 }
 
 /* Each step item: circle + label below */
@@ -3187,30 +3189,30 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
   position: relative;
   z-index: 3;
   flex: 1;
-  max-width: 56px;
+  min-width: 80px;
 }
 
 .step-dot {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   background: #FFFFFF;
-  border: 2px solid #CBD5E1;
+  border: 3px solid #E2E8F0;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   font-weight: 800;
   color: #94A3B8;
   position: relative;
   z-index: 3;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  cursor: default;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
   flex-shrink: 0;
 }
 
@@ -3218,21 +3220,21 @@ footer {
   border-color: var(--color-primary);
   background: var(--color-primary);
   color: #FFFFFF;
-  box-shadow: 0 0 0 4px rgba(58, 141, 204, 0.18), 0 4px 12px rgba(58, 141, 204, 0.35);
-  transform: scale(1.18);
+  box-shadow: 0 0 0 5px rgba(58, 141, 204, 0.15), 0 6px 16px rgba(58, 141, 204, 0.3);
+  transform: scale(1.1);
 }
 
 .step-dot.completed {
   border-color: #3eb649;
   background: #3eb649;
   color: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(62, 182, 73, 0.25);
+  box-shadow: 0 2px 10px rgba(62, 182, 73, 0.2);
 }
 
 /* Checkmark icon inside completed dot */
 .step-dot.completed::after {
   content: '✓';
-  font-size: 0.78rem;
+  font-size: 1.1rem;
   font-weight: 900;
 }
 .step-dot.completed .step-number {
@@ -3240,17 +3242,15 @@ footer {
 }
 
 .step-label {
-  font-size: 0.6rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #94A3B8;
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-  max-width: 56px;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
   transition: color 0.3s ease;
 }
 
@@ -4093,14 +4093,6 @@ footer {
   .discovery-steps-progress {
     padding: 0;
   }
-  .step-label {
-    display: none;   /* hide labels on very small screens */
-  }
-  .step-dot {
-    width: 30px;
-    height: 30px;
-    font-size: 0.75rem;
-  }
   .appliance-selection-grid {
     grid-template-columns: 1fr 1fr;
     max-height: 300px;
@@ -4144,3 +4136,649 @@ footer {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* ==========================================================================
+   17. Residential Discovery Experience — Custom Redesign Styles
+   ========================================================================== */
+
+/* ── Stepper Mobile Horizontal Scroll ─────────────────────────────────── */
+@media (max-width: 767px) {
+  .discovery-steps-progress {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.75rem 1rem 1.25rem 1rem;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    scrollbar-width: none; /* Firefox */
+  }
+  .discovery-steps-progress::-webkit-scrollbar {
+    display: none; /* Chrome/Safari/Webkit */
+  }
+  .discovery-steps-progress::before,
+  .discovery-steps-progress::after {
+    display: none !important;
+  }
+  .step-indicator {
+    flex: 0 0 auto;
+    min-width: 75px;
+  }
+  .step-dot {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+    border-width: 2px;
+  }
+  .step-dot.active {
+    transform: none;
+  }
+  .step-label {
+    display: block !important;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    max-width: none;
+  }
+  .step-indicator.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 20%;
+    right: 20%;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+  }
+  .step-indicator.completed::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 20%;
+    right: 20%;
+    height: 3px;
+    background: #3eb649;
+    border-radius: 2px;
+  }
+}
+
+/* ── Unified Grid Layout ─────────────────────────────────────────────────── */
+.calculator-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .calculator-wrapper {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+  }
+  .calc-info {
+    grid-column: span 2;
+  }
+  .calc-form {
+    grid-column: span 4;
+  }
+  .calculator-wrapper.residential-mode {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .calculator-wrapper.residential-mode .calc-info {
+    display: none !important;
+  }
+  .calculator-wrapper.residential-mode .calc-form {
+    grid-column: span 6 !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .calculator-wrapper {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3.5rem;
+  }
+  .calc-info {
+    grid-column: span 5;
+  }
+  .calc-form {
+    grid-column: span 7;
+  }
+  .calculator-wrapper.residential-mode {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .calculator-wrapper.residential-mode .calc-form {
+    grid-column: span 12 !important;
+  }
+}
+
+/* ── Calibration Screen Redesign ───────────────────────────────────────── */
+.calibration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  width: 100%;
+}
+.calibration-content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .calibration-content-grid {
+    grid-template-columns: 180px 1fr;
+    gap: 3rem;
+  }
+}
+.calibration-gauge-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.progress-ring-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.progress-ring-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+.progress-ring-bg {
+  stroke: #E2E8F0;
+  fill: transparent;
+}
+.progress-ring-fill {
+  fill: transparent;
+  stroke: var(--color-primary);
+  stroke-dasharray: 427.256;
+  stroke-dashoffset: 427.256;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-ring-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.progress-ring-number {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+  line-height: 1;
+}
+.progress-ring-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+.calibration-metrics-column {
+  width: 100%;
+}
+.calibration-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.cal-metric-card {
+  background: var(--color-bg);
+  border: 1px solid rgba(0,0,0,0.04);
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cal-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+.cal-metric-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+.cal-metric-val {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+}
+.cal-metric-val.text-eco {
+  color: #3eb649;
+}
+.calibration-status-wrapper {
+  width: 100%;
+  margin-top: 1rem;
+}
+.calibration-status-text {
+  font-size: 1.05rem;
+  color: var(--color-text-dark);
+  animation: calPulse 1.8s infinite ease-in-out;
+}
+@keyframes calPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ── Executive Dashboard Layout ───────────────────────────────────────── */
+#residential-discovery-results {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.dashboard-main-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+  margin-bottom: 1.5rem;
+}
+.discovery-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Row 1: Top Summaries */
+.discovery-dashboard .summary-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+@media (min-width: 576px) {
+  .discovery-dashboard .summary-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .discovery-dashboard .summary-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Row 2: Lifetime savings hero */
+.discovery-dashboard .hero-row {
+  width: 100%;
+}
+.discovery-metric-card.highlight-lifetime {
+  background: linear-gradient(135deg, #115E59 0%, #047857 100%);
+  color: #FFFFFF;
+  padding: 2.25rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 25px rgba(4, 120, 87, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+.discovery-metric-card.highlight-lifetime::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.discovery-metric-card.highlight-lifetime .metric-label {
+  color: #A7F3D0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+.discovery-metric-card.highlight-lifetime .metric-val {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #FFFFFF !important;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  line-height: 1;
+}
+.discovery-metric-card.highlight-lifetime .hero-card-desc {
+  color: #D1FAE5;
+  font-size: 0.92rem;
+  max-width: 600px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Row 3: Insights grid */
+.discovery-dashboard .insights-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .discovery-dashboard .insights-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .discovery-dashboard .insights-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Cards & sections inside row 3 */
+.dashboard-section.col-insights {
+  background: var(--color-surface);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 320px;
+}
+.section-title-discovery {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.section-title-discovery span {
+  font-size: 1.25rem;
+}
+.insights-grid-sub {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+.select-tech-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+.discovery-metric-card {
+  background: var(--color-surface);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.25s ease;
+}
+.discovery-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+.discovery-metric-card.text-eco-card {
+  border-left: 4px solid #3eb649;
+}
+.discovery-metric-card .metric-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+.discovery-metric-card .metric-val {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+}
+.discovery-metric-card .metric-val.text-eco {
+  color: #3eb649;
+}
+
+/* Row 3 Gamification widgets */
+.game-score-card {
+  background: var(--color-bg);
+  border-radius: 1rem;
+  padding: 1.15rem;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+.game-score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.65rem;
+}
+.score-value-pill {
+  background: var(--color-primary);
+  color: #ffffff;
+  padding: 0.2rem 0.65rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.progress-bar-wrapper {
+  background: #E2E8F0;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-bar-fill.fill-energy {
+  background: var(--color-primary);
+}
+
+/* Environmental widgets */
+.green-impact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.green-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  text-align: center;
+}
+.green-sub {
+  display: flex;
+  flex-direction: column;
+}
+.green-sub span {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #059669;
+  line-height: 1.1;
+}
+.green-sub small {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-top: 0.35rem;
+  line-height: 1.3;
+}
+.animated-green-bar {
+  background: #E2E8F0;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.green-leaf-progress {
+  height: 100%;
+  background: linear-gradient(to right, #059669, #10b981);
+  border-radius: 4px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Suitability scorecard */
+.suitability-score-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.suitability-score-card .game-score-header strong {
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #3eb649;
+  line-height: 1;
+}
+.suitability-badges {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+.suit-badge {
+  flex: 1;
+  text-align: center;
+  padding: 0.4rem 0;
+  border-radius: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  background: #E2E8F0;
+  color: #94A3B8;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.suit-badge.active[data-score="C"] { background: #EF4444; color: white; }
+.suit-badge.active[data-score="B"] { background: #F59E0B; color: white; }
+.suit-badge.active[data-score="A"] { background: #10B981; color: white; }
+.suit-badge.active[data-score="A+"] { background: #059669; color: white; }
+
+/* ── Integrated Lead Assessment Form ──────────────────────────────────── */
+.discovery-dashboard .form-row-row {
+  width: 100%;
+}
+.cta-lead-card {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  color: #FFFFFF;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.cta-lead-header h4 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.45rem;
+  letter-spacing: -0.01em;
+}
+.cta-lead-header p {
+  font-size: 0.95rem;
+  color: #94A3B8;
+  margin: 0;
+  line-height: 1.5;
+}
+.cta-lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.cta-form-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .cta-form-fields {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.form-group-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.form-control-discovery {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-pill);
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+  min-height: 48px;
+}
+.form-control-discovery::placeholder {
+  color: #64748B;
+}
+.form-control-discovery:focus {
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px rgba(58, 141, 204, 0.2);
+}
+.textarea-discovery {
+  border-radius: 1.25rem;
+  resize: vertical;
+}
+.btn-cta-submit {
+  background: var(--gradient-sun);
+  color: #FFFFFF;
+  font-weight: 800;
+  padding: 0.9rem 2.5rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-glow);
+  width: 100%;
+}
+.btn-cta-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+}
+.btn-cta-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+.cta-form-feedback {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+/* ── RTL Arabic support overrides ────────────────────────────────────── */
+html[dir="rtl"] .discovery-metric-card.text-eco-card {
+  border-left: none;
+  border-right: 4px solid #3eb649;
+}
+html[dir="rtl"] .slider-value {
+  text-align: start;
+}
+html[dir="rtl"] .progress-ring-svg {
+  transform: rotate(-90deg) scaleY(-1); /* mirror for RTL */
+}
+
