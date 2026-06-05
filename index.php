@@ -431,7 +431,7 @@ $lang = require_once "lang/{$active_lang}.php";
                       <circle class="progress-ring-fill" id="calibration-progress-fill" cx="80" cy="80" r="68" stroke-width="8" fill="none" />
                     </svg>
                     <div class="progress-ring-text">
-                      <span class="progress-ring-number" id="calibration-confidence-pct">0%</span>
+                      <span class="progress-ring-number" id="calibration-confidence-pct"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></span>
                       <span class="progress-ring-label"><?= $active_lang === 'ar' ? 'درجة الثقة' : 'Confidence' ?></span>
                     </div>
                   </div>
@@ -442,19 +442,19 @@ $lang = require_once "lang/{$active_lang}.php";
                   <div class="calibration-metrics-grid">
                     <div class="cal-metric-card">
                       <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'حالة التطابق' : 'Match Status' ?></span>
-                      <strong class="cal-metric-val" id="cal-val-score">-</strong>
+                      <strong class="cal-metric-val" id="cal-val-score"><?= $active_lang === 'ar' ? 'استخدام ملف الأجهزة' : 'Using Appliance Profile' ?></strong>
                     </div>
                     <div class="cal-metric-card">
                       <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'نسبة تطابق الفاتورة' : 'Bill Match %' ?></span>
-                      <strong class="cal-metric-val" id="cal-val-bill-match">0%</strong>
+                      <strong class="cal-metric-val" id="cal-val-bill-match"><?= $active_lang === 'ar' ? 'غير متوفر' : 'Not Available' ?></strong>
                     </div>
                     <div class="cal-metric-card">
                       <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'دقة تقدير الطاقة' : 'Energy Accuracy' ?></span>
-                      <strong class="cal-metric-val text-eco" id="cal-val-accuracy">0%</strong>
+                      <strong class="cal-metric-val text-eco" id="cal-val-accuracy"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
                     </div>
                     <div class="cal-metric-card">
                       <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'مستوى الثقة' : 'Confidence Level' ?></span>
-                      <strong class="cal-metric-val" id="cal-val-confidence-level">-</strong>
+                      <strong class="cal-metric-val" id="cal-val-confidence-level"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
                     </div>
                   </div>
                 </div>
@@ -463,7 +463,7 @@ $lang = require_once "lang/{$active_lang}.php";
               <!-- Scanning status message -->
               <div class="calibration-status-wrapper text-center">
                 <div class="calibration-status-text font-weight-bold" id="calibration-status-message">
-                  <?= $active_lang === 'ar' ? 'جاري مقارنة استهلاك الأجهزة مع فاتورة الكهرباء...' : 'Comparing appliance usage with bill history...' ?>
+                  <?= $active_lang === 'ar' ? 'اكتملت المعايرة!' : 'Calibration completed!' ?>
                 </div>
               </div>
 

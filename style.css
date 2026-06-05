@@ -3176,19 +3176,20 @@ footer {
 .discovery-steps-progress {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto 2.5rem auto;
-  padding: 0 1rem;
+  max-width: 100%;
+  margin: 0 auto 2rem auto;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  overflow: visible;
 }
 
 /* Connector line sits at the center of the dots, not the whole bar */
 .discovery-steps-progress::before {
   content: '';
   position: absolute;
-  top: 22px;               /* half of 44px */
+  top: 26px;               /* half of 44px dot + padding offset */
   left: 30px;
   right: 30px;
   height: 4px;
@@ -3201,7 +3202,7 @@ footer {
 .discovery-steps-progress::after {
   content: '';
   position: absolute;
-  top: 22px;
+  top: 26px;
   left: 30px;
   width: calc(var(--step-progress-ratio, 0) * (100% - 60px));
   height: 4px;
@@ -3216,11 +3217,12 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   position: relative;
   z-index: 3;
   flex: 1;
-  min-width: 80px;
+  min-width: 0;
+  padding: 0 2px;
 }
 
 .step-dot {
@@ -3269,15 +3271,17 @@ footer {
 }
 
 .step-label {
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #94A3B8;
   text-align: center;
   text-transform: none;
   letter-spacing: 0.01em;
-  line-height: 1.3;
-  white-space: nowrap;
+  line-height: 1.25;
+  white-space: normal;
+  word-break: break-word;
   overflow: visible;
+  max-width: 72px;
   transition: color 0.3s ease;
 }
 
@@ -4215,11 +4219,12 @@ footer {
   }
   .step-label {
     display: block !important;
-    font-size: 0.7rem;
-    white-space: nowrap;
+    font-size: 0.65rem;
+    white-space: normal;
     overflow: visible;
-    text-overflow: clip;
-    max-width: none;
+    word-break: break-word;
+    max-width: 60px;
+    text-overflow: unset;
   }
   .step-indicator.active::after {
     content: '';
@@ -4532,7 +4537,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  min-height: 320px;
+  min-height: auto;
 }
 .section-title-discovery {
   font-size: var(--fs-section-title);
@@ -4901,9 +4906,11 @@ html[dir="rtl"] .calibration-action-card {
 /* Step Labels Tablet Wrap (Issue 3) */
 @media (min-width: 768px) and (max-width: 1023px) {
   .step-label {
+    font-size: 0.72rem !important;
     white-space: normal !important;
-    word-wrap: break-word !important;
-    max-width: 90px !important;
+    word-break: break-word !important;
+    max-width: 64px !important;
+    overflow: visible !important;
   }
 }
 
@@ -4917,15 +4924,17 @@ html[dir="rtl"] .calibration-action-card {
 
 .discovery-qty-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
   background: var(--color-surface);
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 1rem;
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-3) var(--space-4);
   box-shadow: var(--shadow-soft);
   transition: all 0.2s ease;
-  min-height: 72px;
+  min-height: 64px;
+  gap: var(--space-3);
 }
 
 .discovery-qty-row:hover {
@@ -4974,14 +4983,15 @@ html[dir="rtl"] .calibration-action-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 140px; /* Locked width between 120px-160px */
-  height: 40px; /* Equal height controls */
+  width: 130px;
+  height: 40px;
   background: #F8FAFC;
-  border: 1px solid #E2E8F0;
+  border: 1.5px solid #E2E8F0;
   border-radius: var(--radius-pill);
   padding: 4px;
   box-sizing: border-box;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .disc-qty-btn {
@@ -5024,37 +5034,24 @@ html[dir="rtl"] .qty-row-info {
   flex-direction: row;
 }
 
-/* Tablet viewports (stacked, right-aligned) */
-@media (min-width: 577px) and (max-width: 1023px) {
-  .discovery-qty-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
-  }
-  .qty-selector-pill {
-    align-self: flex-end; /* Stacked, right-aligned in LTR */
-  }
-  html[dir="rtl"] .qty-selector-pill {
-    align-self: flex-start; /* Stacked, left-aligned in RTL */
-  }
-}
-
-/* Mobile viewports (fully centered) */
+/* Always keep qty row as horizontal flex on all viewports */
 @media (max-width: 576px) {
   .discovery-qty-row {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--space-3);
-    padding: var(--space-4);
+    padding: var(--space-3);
+    gap: var(--space-2);
+    min-height: 56px;
   }
-  .qty-row-info {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .qty-row-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .qty-row-text h4 {
+    font-size: 0.88rem;
   }
   .qty-selector-pill {
-    margin: 0 auto; /* Centered in mobile */
+    width: 112px;
+    height: 36px;
+    margin-left: auto;
   }
 }
 
@@ -5215,31 +5212,34 @@ html[dir="rtl"] .whatsapp-input-icon {
 }
 
 .btn-cta-submit {
-  background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+  background: var(--color-primary) !important;
   color: #FFFFFF !important;
   font-weight: 800 !important;
-  padding: var(--space-4) var(--space-6) !important;
+  padding: 0.9rem 2rem !important;
   border-radius: var(--radius-pill) !important;
   border: none !important;
   cursor: pointer !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   font-size: 1rem !important;
+  font-family: inherit !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   gap: var(--space-2) !important;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 4px 14px rgba(58, 141, 204, 0.35) !important;
   width: 100% !important;
+  min-height: 52px !important;
+  letter-spacing: 0.01em !important;
 }
 
 .btn-cta-submit:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.45) !important;
-  background: linear-gradient(135deg, #34D399 0%, #059669 100%) !important;
+  background: #2d6fa3 !important;
+  box-shadow: 0 6px 20px rgba(58, 141, 204, 0.5) !important;
 }
 
 .btn-cta-submit:active {
   transform: translateY(0) !important;
-  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+  background: #1e5b8a !important;
 }
 
