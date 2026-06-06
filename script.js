@@ -1521,7 +1521,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (actionCard) actionCard.style.display = 'none';
 
             // Reset progress ring fill offset
-            const strokeCircumference = 427.256;
+            const strokeCircumference = 534.07; // 2 * PI * 85 (200px ring, r=85)
             if (progressFill) progressFill.style.strokeDashoffset = strokeCircumference;
 
             if (calibratedBillValue !== null) {
@@ -1989,6 +1989,53 @@ document.addEventListener('DOMContentLoaded', () => {
             discBillDisplay.textContent = discBillSlider.value;
         });
     }
+
+
+    // Manual Bill Entry — Show/Hide Panel
+    const btnShowManualEntry = document.getElementById('btn-show-manual-entry');
+    const manualBillPanel = document.getElementById('manual-bill-panel');
+    const step5MainActions = document.getElementById('step5-main-actions');
+    const step5SliderSection = document.getElementById('step5-slider-section');
+
+    if (btnShowManualEntry && manualBillPanel) {
+        btnShowManualEntry.addEventListener('click', () => {
+            if (step5MainActions) step5MainActions.style.display = 'none';
+            if (step5SliderSection) step5SliderSection.style.display = 'none';
+            manualBillPanel.style.display = 'block';
+            // Pre-fill with slider value
+            const manualAmountInput = document.getElementById('manual-bill-amount');
+            if (manualAmountInput && discBillSlider) {
+                manualAmountInput.value = discBillSlider.value;
+            }
+        });
+    }
+
+    const btnCancelManual = document.getElementById('btn-cancel-manual');
+    if (btnCancelManual && manualBillPanel) {
+        btnCancelManual.addEventListener('click', () => {
+            manualBillPanel.style.display = 'none';
+            if (step5MainActions) step5MainActions.style.display = 'flex';
+            if (step5SliderSection) step5SliderSection.style.display = 'block';
+        });
+    }
+
+    const btnManualBillSubmit = document.getElementById('btn-manual-bill-submit');
+    if (btnManualBillSubmit) {
+        btnManualBillSubmit.addEventListener('click', () => {
+            const manualAmountInput = document.getElementById('manual-bill-amount');
+            const val = manualAmountInput ? parseFloat(manualAmountInput.value) : null;
+            if (!val || isNaN(val) || val < 5) {
+                alert(isArabic ? 'يرجى إدخال مبلغ صحيح.' : 'Please enter a valid bill amount.');
+                return;
+            }
+            calibratedBillValue = val;
+            // Sync slider display
+            if (discBillSlider) discBillSlider.value = Math.min(1000, Math.max(10, val));
+            if (discBillDisplay) discBillDisplay.textContent = Math.round(val);
+            goToDiscoveryStep(6);
+        });
+    }
+
 
     // Lead Form submission handler
     const discoveryForm = document.getElementById('discovery-lead-form');

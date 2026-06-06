@@ -387,31 +387,83 @@ $lang = require_once "lang/{$active_lang}.php";
 
           <!-- Panel 5: Ask for average electricity bill (Step 5) -->
           <div class="discovery-step-panel" id="discovery-panel-5" style="display: none;">
-            <h3 class="mb-2"><?= $lang['calibration_title'] ?></h3>
-            <p class="text-muted mb-4" style="font-size: 0.88rem;">
-              <?= $active_lang === 'ar' ? 'إدخال فاتورتك الفعلية يساعدنا في معايرة الحسابات وتطابقها مع الواقع بدقة أكبر.' : 'Specifying your average utility bill helps align the appliance estimates with your actual billing history.' ?>
-            </p>
-            <div class="calibration-choice-zone">
-              <div class="form-group mb-3">
-                <label for="discovery-bill-slider" class="form-label font-weight-bold mb-2">
-                  <?= $active_lang === 'ar' ? 'متوسط الفاتورة الكهربائية الشهرية (ريال عُماني):' : 'Average Monthly Bill (OMR):' ?>
-                </label>
-                <div class="slider-container">
-                  <input type="range" id="discovery-bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Calibration Slider">
-                  <div class="slider-value"><span id="discovery-bill-display">50</span> OMR</div>
+
+            <!-- SECTION A: Question -->
+            <div class="step5-question-section">
+              <h3><?= $active_lang === 'ar' ? 'هل تعرف متوسط فاتورتك الكهربائية الشهرية؟' : 'Do you know your average monthly electricity bill?' ?></h3>
+              <p class="step5-subtitle">
+                <?= $active_lang === 'ar' ? 'إدخال فاتورتك الفعلية يحسّن دقة حسابات العائد على الاستثمار والتوفير الفعلي.' : 'Providing your bill improves accuracy and ROI calculations.' ?>
+              </p>
+            </div>
+
+            <!-- SECTION B: Slider Card -->
+            <div class="step5-slider-card" id="step5-slider-section">
+              <div class="step5-bill-badge-row">
+                <span class="step5-bill-label"><?= $active_lang === 'ar' ? 'متوسط الفاتورة الشهرية' : 'Average Monthly Bill' ?></span>
+                <div class="step5-bill-badge">
+                  <span class="bill-badge-amount" id="discovery-bill-display">50</span>
+                  <span class="bill-badge-currency">OMR</span>
                 </div>
               </div>
-              <div class="calibration-actions mt-3" style="display: flex; gap: 0.75rem;">
-                <button type="button" class="btn btn-secondary" id="btn-skip-calibration" style="flex: 1;">
-                  <?= $lang['calibration_skip'] ?>
-                </button>
-                <button type="button" class="btn btn-primary" id="btn-calibrate-bill" style="flex: 1;">
-                  <?= $lang['calibration_enter'] ?>
-                </button>
+              <div class="step5-slider-wrapper">
+                <input type="range" id="discovery-bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Calibration Slider" class="step5-range">
+                <div class="step5-slider-labels">
+                  <span>10 OMR</span>
+                  <span>1000 OMR</span>
+                </div>
               </div>
             </div>
-            <div class="step-actions mt-4">
-              <button type="button" class="btn btn-text-secondary" id="btn-back-to-step4">
+
+            <!-- SECTION C: Action Hierarchy -->
+            <div class="step5-actions-section" id="step5-main-actions">
+              <!-- Primary CTA -->
+              <button type="button" class="btn-step5-primary" id="btn-calibrate-bill">
+                <?= $active_lang === 'ar' ? '✓ المتابعة بهذه الفاتورة' : '✓ Continue With This Bill' ?>
+              </button>
+              <!-- Secondary CTA -->
+              <button type="button" class="btn-step5-secondary" id="btn-show-manual-entry">
+                <?= $active_lang === 'ar' ? '✏ إدخال تفاصيل الفاتورة يدوياً' : '✏ Enter Exact Bill Details' ?>
+              </button>
+              <!-- Tertiary Text Link -->
+              <button type="button" class="btn-step5-skip" id="btn-skip-calibration">
+                <?= $active_lang === 'ar' ? 'تخطي في الوقت الحالي' : 'Skip For Now' ?>
+              </button>
+            </div>
+
+            <!-- Manual Bill Entry Sub-Panel (hidden by default) -->
+            <div class="manual-bill-panel" id="manual-bill-panel" style="display: none;">
+              <div class="manual-bill-card">
+                <div class="manual-bill-header">
+                  <h4><?= $active_lang === 'ar' ? 'أدخل فاتورة الكهرباء' : 'Enter Your Electricity Bill' ?></h4>
+                </div>
+                <div class="manual-bill-fields">
+                  <div class="manual-bill-input-group">
+                    <label class="manual-bill-field-label"><?= $active_lang === 'ar' ? 'الفاتورة الشهرية (ريال عُماني)' : 'Monthly Bill (OMR)' ?></label>
+                    <input type="number" id="manual-bill-amount" min="5" max="5000" step="1" placeholder="<?= $active_lang === 'ar' ? 'أدخل المبلغ...' : 'Enter amount...' ?>" class="manual-bill-input" aria-label="Monthly Bill Amount">
+                  </div>
+                  <div class="manual-bill-input-group">
+                    <label class="manual-bill-field-label"><?= $active_lang === 'ar' ? 'ملاحظات (اختياري)' : 'Optional Notes' ?></label>
+                    <input type="text" id="manual-bill-notes" placeholder="<?= $active_lang === 'ar' ? 'مثال: الفاتورة صيفية...' : 'e.g. Summer bill, AC heavy...' ?>" class="manual-bill-input" aria-label="Optional Notes">
+                  </div>
+                </div>
+                <div class="manual-bill-benefits">
+                  <div class="benefit-item"><span class="benefit-check">✓</span> <?= $active_lang === 'ar' ? 'دقة أفضل في حساب العائد على الاستثمار' : 'Better ROI accuracy' ?></div>
+                  <div class="benefit-item"><span class="benefit-check">✓</span> <?= $active_lang === 'ar' ? 'تقدير أدق للتوفير' : 'Better savings estimate' ?></div>
+                  <div class="benefit-item"><span class="benefit-check">✓</span> <?= $active_lang === 'ar' ? 'تحديد أمثل لحجم النظام الشمسي' : 'Better solar sizing' ?></div>
+                </div>
+                <div class="manual-bill-actions">
+                  <button type="button" class="btn-manual-submit" id="btn-manual-bill-submit">
+                    <?= $active_lang === 'ar' ? 'متابعة المعايرة' : 'Continue Calibration' ?>
+                  </button>
+                  <button type="button" class="btn-manual-cancel" id="btn-cancel-manual">
+                    <?= $active_lang === 'ar' ? 'رجوع' : 'Back' ?>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-actions" style="justify-content: flex-start;">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step4" style="flex: 0 0 auto;">
                 <?= $active_lang === 'ar' ? '⬅ العودة لحجم النظام' : '⬅ Back to Solar Size' ?>
               </button>
             </div>
@@ -420,63 +472,60 @@ $lang = require_once "lang/{$active_lang}.php";
           <!-- Panel 6: Calibrate results (Step 6) -->
           <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
             <div class="calibration-container">
-              <h3 class="mb-2"><?= $active_lang === 'ar' ? 'الخطوة 6: معايرة وتحسين البيانات' : 'Step 6: Calibrate & Optimize' ?></h3>
-              
-              <div class="calibration-content-grid py-4">
-                <!-- Left: Progress Ring Gauge -->
-                <div class="calibration-gauge-column">
-                  <div class="progress-ring-wrapper">
-                    <svg class="progress-ring-svg" width="160" height="160">
-                      <circle class="progress-ring-bg" cx="80" cy="80" r="68" stroke-width="8" fill="none" />
-                      <circle class="progress-ring-fill" id="calibration-progress-fill" cx="80" cy="80" r="68" stroke-width="8" fill="none" />
-                    </svg>
-                    <div class="progress-ring-text">
-                      <span class="progress-ring-number" id="calibration-confidence-pct"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></span>
-                      <span class="progress-ring-label"><?= $active_lang === 'ar' ? 'درجة الثقة' : 'Confidence' ?></span>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Right: Calibration Metrics Grid -->
-                <div class="calibration-metrics-column">
-                  <div class="calibration-metrics-grid">
-                    <div class="cal-metric-card">
-                      <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'حالة التطابق' : 'Match Status' ?></span>
-                      <strong class="cal-metric-val" id="cal-val-score"><?= $active_lang === 'ar' ? 'استخدام ملف الأجهزة' : 'Using Appliance Profile' ?></strong>
-                    </div>
-                    <div class="cal-metric-card">
-                      <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'نسبة تطابق الفاتورة' : 'Bill Match %' ?></span>
-                      <strong class="cal-metric-val" id="cal-val-bill-match"><?= $active_lang === 'ar' ? 'غير متوفر' : 'Not Available' ?></strong>
-                    </div>
-                    <div class="cal-metric-card">
-                      <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'دقة تقدير الطاقة' : 'Energy Accuracy' ?></span>
-                      <strong class="cal-metric-val text-eco" id="cal-val-accuracy"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
-                    </div>
-                    <div class="cal-metric-card">
-                      <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'مستوى الثقة' : 'Confidence Level' ?></span>
-                      <strong class="cal-metric-val" id="cal-val-confidence-level"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
-              <!-- Scanning status message -->
-              <div class="calibration-status-wrapper text-center">
-                <div class="calibration-status-text font-weight-bold" id="calibration-status-message">
+              <!-- Calibration Status Title -->
+              <div class="calibration-title-section">
+                <h3><?= $active_lang === 'ar' ? 'حالة المعايرة' : 'Calibration Status' ?></h3>
+                <p class="calibration-title-sub" id="calibration-status-message">
                   <?= $active_lang === 'ar' ? 'اكتملت المعايرة!' : 'Calibration completed!' ?>
+                </p>
+              </div>
+
+              <!-- Large Confidence Ring -->
+              <div class="calibration-ring-section">
+                <div class="progress-ring-wrapper">
+                  <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
+                    <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                    <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                  </svg>
+                  <div class="progress-ring-text">
+                    <span class="progress-ring-number" id="calibration-confidence-pct"><?= $active_lang === 'ar' ? 'تقديري' : '—' ?></span>
+                    <span class="progress-ring-sublabel" id="calibration-match-label"><?= $active_lang === 'ar' ? 'درجة الثقة' : 'Excellent Match' ?></span>
+                    <span class="progress-ring-label"><?= $active_lang === 'ar' ? 'الثقة' : 'Confidence' ?></span>
+                  </div>
                 </div>
               </div>
 
-              <!-- Keep original boxes for Selenium validation to pass -->
-              <div class="calibration-feedback mt-4 alert alert-warning" id="calibration-warning-box" style="display: none;">
+              <!-- 2x2 Metrics Grid -->
+              <div class="calibration-metrics-grid">
+                <div class="cal-metric-card">
+                  <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'حالة التطابق' : 'Match Status' ?></span>
+                  <strong class="cal-metric-val" id="cal-val-score"><?= $active_lang === 'ar' ? 'استخدام ملف الأجهزة' : 'Using Appliance Profile' ?></strong>
+                </div>
+                <div class="cal-metric-card">
+                  <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'نسبة تطابق الفاتورة' : 'Bill Match' ?></span>
+                  <strong class="cal-metric-val" id="cal-val-bill-match"><?= $active_lang === 'ar' ? 'غير متوفر' : 'Not Available' ?></strong>
+                </div>
+                <div class="cal-metric-card">
+                  <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'دقة تقدير الطاقة' : 'Energy Accuracy' ?></span>
+                  <strong class="cal-metric-val text-eco" id="cal-val-accuracy"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
+                </div>
+                <div class="cal-metric-card">
+                  <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'مستوى الثقة' : 'Confidence Level' ?></span>
+                  <strong class="cal-metric-val" id="cal-val-confidence-level"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
+                </div>
+              </div>
+
+              <!-- Hidden feedback boxes (kept for JS logic) -->
+              <div class="calibration-feedback alert alert-warning" id="calibration-warning-box" style="display: none;">
                 ⚠️ <?= $lang['calibration_warning'] ?>
               </div>
-              <div class="calibration-feedback mt-4 alert alert-success" id="calibration-success-box" style="display: none;">
+              <div class="calibration-feedback alert alert-success" id="calibration-success-box" style="display: none;">
                 ✅ <?= $active_lang === 'ar' ? 'تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.' : 'Excellent match between appliance usage and bill history! Estimates calibrated.' ?>
               </div>
 
-              <!-- Insight Summary & Recommended Action Cards -->
-              <div class="calibration-insight-card mt-3" id="cal-insight-card" style="display: none;">
+              <!-- Insight Summary Card -->
+              <div class="calibration-insight-card" id="cal-insight-card" style="display: none;">
                 <div class="cal-insight-header">
                   <span>💡</span>
                   <strong><?= $active_lang === 'ar' ? 'تحليل مقارنة الاستهلاك' : 'Calibrated Energy Insight' ?></strong>
@@ -484,7 +533,8 @@ $lang = require_once "lang/{$active_lang}.php";
                 <p id="cal-insight-desc" class="mb-0 mt-1"></p>
               </div>
 
-              <div class="calibration-action-card mt-3" id="cal-action-card" style="display: none;">
+              <!-- Action Plan Card -->
+              <div class="calibration-action-card" id="cal-action-card" style="display: none;">
                 <div class="cal-action-header">
                   <span>🚀</span>
                   <strong><?= $active_lang === 'ar' ? 'الإجراء الموصى به من قبل النظام' : 'Recommended Action Plan' ?></strong>
@@ -492,14 +542,16 @@ $lang = require_once "lang/{$active_lang}.php";
                 <p id="cal-action-desc" class="mb-0 mt-1"></p>
               </div>
 
-              <div class="step-actions mt-4" style="display: flex; gap: 0.75rem;">
-                <button type="button" class="btn btn-secondary" id="btn-back-to-step5" style="flex: 1; min-width: 80px;">
+              <!-- Action Buttons -->
+              <div class="calibration-step-actions">
+                <button type="button" class="btn btn-secondary" id="btn-back-to-step5">
                   <?= $active_lang === 'ar' ? '⬅ تعديل الفاتورة' : '⬅ Edit Bill' ?>
                 </button>
-                <button type="button" class="btn btn-primary" id="btn-goto-step7" style="flex: 2;">
-                  <?= $active_lang === 'ar' ? 'عرض التقرير النهائي لوحة التحكم ➔' : 'Reveal Insights Dashboard ➔' ?>
+                <button type="button" class="btn btn-primary" id="btn-goto-step7">
+                  <?= $active_lang === 'ar' ? 'عرض لوحة التحكم ➔' : 'Reveal Insights Dashboard ➔' ?>
                 </button>
               </div>
+
             </div>
           </div>
 
@@ -649,8 +701,8 @@ $lang = require_once "lang/{$active_lang}.php";
                 <div class="dashboard-row form-row-row">
                   <div class="cta-lead-card">
                     <div class="cta-lead-header">
-                      <h4><?= $lang['lead_title_discovery'] ?></h4>
-                      <p><?= $active_lang === 'ar' ? 'احصل على توصية مخصصة للطاقة الشمسية بناءً على ملف تعريف منزلك.' : 'Receive a customized solar recommendation based on your home profile.' ?></p>
+                      <h4><?= $active_lang === 'ar' ? 'احصل على تقييمك الشمسي المخصص' : 'Get Your Personalized Solar Assessment' ?></h4>
+                      <p><?= $active_lang === 'ar' ? 'استلم استشارة مخصصة بناءً على نتائج تقييمك.' : 'Receive a customized consultation based on your assessment results.' ?></p>
                     </div>
                     <form id="discovery-lead-form" class="cta-lead-form">
                       <input type="hidden" name="action" value="submit_lead">
@@ -665,7 +717,7 @@ $lang = require_once "lang/{$active_lang}.php";
                           <input type="text" id="disc-lead-name" name="name" required placeholder="<?= $active_lang === 'ar' ? 'الاسم الكامل *' : 'Full Name *' ?>" class="form-control-discovery" aria-label="Full Name">
                         </div>
                         <div class="form-group-field phone-input-wrapper">
-                          <input type="tel" id="disc-lead-phone" name="phone" required placeholder="<?= $active_lang === 'ar' ? 'رقم الهاتف (الواتساب) *' : 'Phone Number (WhatsApp) *' ?>" class="form-control-discovery" aria-label="Phone Number">
+                          <input type="tel" id="disc-lead-phone" name="phone" required placeholder="<?= $active_lang === 'ar' ? 'رقم واتساب *' : 'WhatsApp Number *' ?>" class="form-control-discovery" aria-label="Phone Number">
                           <span class="whatsapp-input-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wa-icon-svg" style="width: 18px; height: 18px; color: #25D366; fill: #25D366;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                           </span>
@@ -680,7 +732,7 @@ $lang = require_once "lang/{$active_lang}.php";
                       </div>
 
                       <button type="submit" class="btn-cta-submit mt-3" id="btn-submit-discovery">
-                        <span><?= $lang['lead_btn_discovery'] ?> 🚀</span>
+                        <span><?= $active_lang === 'ar' ? 'احجز تقييمي' : 'Book My Assessment' ?> 🚀</span>
                         <span class="spinner" style="display: none; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;"></span>
                       </button>
                     </form>

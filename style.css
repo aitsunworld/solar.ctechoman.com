@@ -4347,8 +4347,8 @@ footer {
 .progress-ring-fill {
   fill: transparent;
   stroke: var(--color-primary);
-  stroke-dasharray: 427.256;
-  stroke-dashoffset: 427.256;
+  stroke-dasharray: 534.07;
+  stroke-dashoffset: 534.07;
   transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .progress-ring-text {
@@ -5408,8 +5408,8 @@ html[dir="rtl"] .whatsapp-input-icon {
   fill: none !important;
   fill-opacity: 0 !important;
   stroke: var(--color-primary) !important;
-  stroke-dasharray: 427.256 !important;
-  stroke-dashoffset: 427.256 !important;
+  stroke-dasharray: 534.07 !important;
+  stroke-dashoffset: 534.07 !important;
   stroke-linecap: round !important;
   transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
@@ -5554,4 +5554,647 @@ html[dir="rtl"] .whatsapp-input-icon { right: auto !important; left: 14px !impor
 .phone-input-wrapper .form-control-discovery { padding-right: 44px !important; }
 html[dir="rtl"] .phone-input-wrapper .form-control-discovery { padding-right: 1rem !important; padding-left: 44px !important; }
 
+
 /* End Final Corrections v6.0 */
+
+/* ==========================================================================
+   CRITICAL UX REDESIGN v7.0 — Steps 5, 6 & 7
+   Issues: Bill Entry Hierarchy, Calibration Ring, Dashboard Grid, Lead Form
+   ========================================================================== */
+
+/* ── STEP 5: Three-Section Bill Entry ─────────────────────────────────── */
+
+.step5-question-section {
+  text-align: center;
+  padding: 0 0 var(--space-2) 0;
+}
+
+.step5-question-section h3 {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+
+.step5-subtitle {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* SECTION B: Slider Card */
+.step5-slider-card {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.step5-bill-badge-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.step5-bill-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.step5-bill-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border: 2px solid rgba(22, 163, 74, 0.2);
+  border-radius: 100px;
+  padding: 0.5rem 1.5rem;
+}
+
+.bill-badge-amount {
+  font-size: 2.75rem;
+  font-weight: 900;
+  color: #15803d;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.bill-badge-currency {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #166534;
+}
+
+.step5-slider-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.step5-range {
+  width: 100% !important;
+  margin: 0 !important;
+  accent-color: #15803d;
+}
+
+.step5-range::-webkit-slider-thumb {
+  background: #15803d !important;
+}
+
+.step5-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+/* SECTION C: Action Hierarchy */
+.step5-actions-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.btn-step5-primary {
+  width: 100%;
+  max-width: 480px;
+  min-height: 52px;
+  background: #0d1014;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+  font-family: inherit;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(13, 16, 20, 0.15);
+  letter-spacing: 0.01em;
+}
+
+.btn-step5-primary:hover {
+  background: #1e2530;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(13, 16, 20, 0.22);
+}
+
+.btn-step5-secondary {
+  width: 100%;
+  max-width: 480px;
+  min-height: 48px;
+  background: var(--color-surface);
+  color: var(--color-text-dark);
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 1.5px solid var(--color-border);
+  border-radius: 14px;
+  cursor: pointer;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-step5-secondary:hover {
+  background: #F8FAFC;
+  border-color: #94A3B8;
+  transform: translateY(-1px);
+}
+
+.btn-step5-skip {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0.35rem 1rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.btn-step5-skip:hover {
+  color: var(--color-text-dark);
+}
+
+/* Manual Bill Entry Panel */
+.manual-bill-panel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.manual-bill-card {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.manual-bill-header h4 {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+
+.manual-bill-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.manual-bill-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.manual-bill-field-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.manual-bill-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.75rem 1.25rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: #F8FAFC;
+  color: var(--color-text-dark);
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.manual-bill-input:focus {
+  border-color: var(--color-primary);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 3px rgba(58, 141, 204, 0.12);
+}
+
+/* Benefits checklist */
+.manual-bill-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+  background: #F0FDF4;
+  border: 1px solid rgba(22, 163, 74, 0.15);
+  border-radius: 1rem;
+}
+
+.benefit-item {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #166534;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.benefit-check {
+  color: #16a34a;
+  font-weight: 900;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.manual-bill-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.btn-manual-submit {
+  width: 100%;
+  min-height: 52px;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+  font-family: inherit;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
+}
+
+.btn-manual-submit:hover {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+}
+
+.btn-manual-cancel {
+  background: none;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  min-height: 44px;
+  border-radius: 14px;
+  cursor: pointer;
+  padding: 0 1.5rem;
+  transition: all 0.15s ease;
+}
+
+.btn-manual-cancel:hover {
+  background: #F8FAFC;
+  color: var(--color-text-dark);
+}
+
+@media (min-width: 640px) {
+  .manual-bill-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .manual-bill-actions {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .btn-manual-submit { flex: 2; }
+  .btn-manual-cancel { flex: 1; }
+}
+
+
+/* ── STEP 6: Calibration — Vertical Centered Premium Layout ───────────── */
+
+.calibration-title-section {
+  text-align: center;
+  width: 100%;
+}
+
+.calibration-title-section h3 {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.calibration-title-sub {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin: 0;
+  animation: calPulse 1.8s infinite ease-in-out;
+}
+
+/* 200px ring override */
+.calibration-ring-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.calibration-ring-section .progress-ring-wrapper {
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+}
+
+.calibration-ring-section .progress-ring-svg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  transform: rotate(-90deg) !important;
+}
+
+.calibration-ring-section .progress-ring-bg {
+  stroke: #E2E8F0 !important;
+  fill: none !important;
+}
+
+.calibration-ring-section .progress-ring-fill {
+  fill: none !important;
+  stroke: #3a8dcc !important;
+  stroke-dasharray: 534.07 !important;
+  stroke-dashoffset: 534.07 !important;
+  stroke-linecap: round !important;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.calibration-ring-section .progress-ring-text {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.calibration-ring-section .progress-ring-number {
+  font-size: 2.4rem !important;
+  font-weight: 900 !important;
+  color: #0d1014 !important;
+  line-height: 1 !important;
+}
+
+.progress-ring-sublabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #3a8dcc;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.calibration-ring-section .progress-ring-label {
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  color: #94A3B8 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  margin-top: 1px !important;
+}
+
+/* Calibration vertical stacked layout */
+.calibration-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 1.75rem !important;
+  width: 100% !important;
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+/* Keep old content-grid hidden to avoid layout conflicts */
+.calibration-content-grid {
+  display: none !important;
+}
+
+/* Metrics grid: 2x2, equal height */
+.calibration-container .calibration-metrics-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 0.85rem !important;
+  width: 100% !important;
+}
+
+.calibration-container .cal-metric-card {
+  background: var(--color-surface) !important;
+  border: 1.5px solid #F1F5F9 !important;
+  border-radius: 1.1rem !important;
+  padding: 1rem 1.25rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  text-align: center !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  min-height: 80px !important;
+  height: 100% !important;
+}
+
+/* Calibration action buttons */
+.calibration-step-actions {
+  display: flex !important;
+  gap: 0.85rem !important;
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+.calibration-step-actions .btn {
+  flex: 1 !important;
+  max-width: 280px !important;
+  min-height: 48px !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+}
+
+.calibration-container .calibration-feedback,
+.calibration-container .calibration-insight-card,
+.calibration-container .calibration-action-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important;
+  text-align: start !important;
+}
+
+html[dir="rtl"] .calibration-container .calibration-insight-card,
+html[dir="rtl"] .calibration-container .calibration-action-card {
+  text-align: right !important;
+  text-align: end !important;
+}
+
+@media (max-width: 480px) {
+  .calibration-container .calibration-metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .calibration-step-actions {
+    flex-direction: column !important;
+  }
+  .calibration-step-actions .btn {
+    max-width: 100% !important;
+  }
+}
+
+
+/* ── STEP 7: Results Dashboard — Fixed Grid & No Empty Space ─────────── */
+
+/* Remove fixed min-height causing empty white areas */
+.discovery-metric-card {
+  min-height: auto !important;
+  height: auto !important;
+}
+
+/* Energy consumption card: auto height */
+.col-insights .insights-grid-sub .discovery-metric-card {
+  min-height: auto !important;
+  height: auto !important;
+}
+
+/* All 3 insight columns equal width, equal height */
+.discovery-dashboard .insights-row {
+  grid-template-columns: 1fr !important;
+  align-items: stretch !important;
+}
+
+@media (min-width: 768px) {
+  .discovery-dashboard .insights-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .discovery-dashboard .insights-row {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* All col-insights cards: same height, no fixed heights */
+.dashboard-section.col-insights {
+  height: auto !important;
+  min-height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Lead form — Full width, integrated */
+.discovery-dashboard .form-row-row {
+  width: 100% !important;
+  display: block !important;
+}
+
+.cta-lead-card {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Lead form fields: 3 columns on desktop */
+.cta-form-fields {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: var(--space-4) !important;
+  width: 100% !important;
+}
+
+@media (min-width: 768px) {
+  .cta-form-fields {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Tech spec grid: all 4 cards equal + installation cost full row */
+.select-tech-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: var(--space-3) !important;
+}
+
+/* Installation cost card: remove forced span 2, let content flow */
+#db-card-install-cost {
+  grid-column: span 2 !important;
+}
+
+/* Responsiveness: no overflow at any width */
+@media (max-width: 375px) {
+  .step5-bill-badge {
+    padding: 0.4rem 1rem;
+  }
+  .bill-badge-amount {
+    font-size: 2.2rem;
+  }
+  .btn-step5-primary,
+  .btn-step5-secondary {
+    font-size: 0.88rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .step5-question-section h3 {
+    font-size: 1.5rem;
+  }
+  .calibration-ring-section .progress-ring-number {
+    font-size: 2.8rem !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .cta-lead-card {
+    padding: var(--space-7) !important;
+  }
+}
+
+/* End v7.0 Redesign */
