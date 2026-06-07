@@ -5831,7 +5831,61 @@ html[dir="rtl"] .calibration-ring-section .progress-ring-svg {
   }
 }
 
-/* ── Base Metric Card ── */
+/* ── Base Metric Card — Summary Row (vibrant, always visible) ── */
+.discovery-dashboard .summary-row .discovery-metric-card {
+  background: #F8FAFC !important;
+  border: 2px solid #E2E8F0 !important;
+  border-radius: 1rem !important;
+  padding: 1.1rem 1.25rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.3rem !important;
+  min-height: 90px !important;
+  height: auto !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
+  transition: box-shadow 0.2s ease, transform 0.2s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Colored top accent bar for each KPI card */
+.discovery-dashboard .summary-row .discovery-metric-card::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 3px !important;
+  background: #10B981 !important;
+  border-radius: 1rem 1rem 0 0 !important;
+}
+
+/* Green savings cards */
+.discovery-dashboard .summary-row .discovery-metric-card.text-eco-card {
+  background: linear-gradient(145deg, #F0FDF7 0%, #F8FAFC 100%) !important;
+  border-color: #A7F3D0 !important;
+}
+
+.discovery-dashboard .summary-row .discovery-metric-card.text-eco-card::before {
+  background: linear-gradient(to right, #10B981, #059669) !important;
+}
+
+/* Last card (Payback/ROI — dark accent) */
+.discovery-dashboard .summary-row .discovery-metric-card:last-child {
+  background: linear-gradient(145deg, #F0F4FF 0%, #F8FAFC 100%) !important;
+  border-color: #C7D7FD !important;
+}
+
+.discovery-dashboard .summary-row .discovery-metric-card:last-child::before {
+  background: linear-gradient(to right, #3a8dcc, #1e40af) !important;
+}
+
+.discovery-dashboard .summary-row .discovery-metric-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ── Base Metric Card — Default (inside insight columns) ── */
 .discovery-metric-card {
   background: #FFFFFF !important;
   border: 1.5px solid #E2E8F0 !important;
@@ -5850,30 +5904,40 @@ html[dir="rtl"] .calibration-ring-section .progress-ring-svg {
   transform: translateY(-2px) !important;
 }
 
-/* Green accent cards (savings) */
-.discovery-metric-card.text-eco-card {
-  border-left: 3px solid #10B981 !important;
-  background: linear-gradient(135deg, #F0FDF4 0%, #FFFFFF 60%) !important;
-}
-
 /* ── Metric Text Styles ── */
 .metric-label {
-  font-size: 0.72rem !important;
+  font-size: 0.7rem !important;
   font-weight: 700 !important;
   color: #64748B !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
+  letter-spacing: 0.06em !important;
   line-height: 1.3 !important;
 }
 
 .metric-val {
-  font-size: 1.35rem !important;
+  font-size: 1.4rem !important;
   font-weight: 900 !important;
-  color: var(--color-text-dark) !important;
+  color: #0d1014 !important;
   line-height: 1.1 !important;
   letter-spacing: -0.01em !important;
 }
 
+/* Summary row metric values — always high contrast */
+.discovery-dashboard .summary-row .metric-val {
+  font-size: 1.5rem !important;
+  color: #0d1014 !important;
+}
+
+.discovery-dashboard .summary-row .metric-val.text-eco {
+  color: #059669 !important;
+}
+
+.discovery-dashboard .summary-row .metric-label {
+  color: #475569 !important;
+  font-size: 0.72rem !important;
+}
+
+/* Generic text-eco override for metric-val */
 .metric-val.text-eco {
   color: #059669 !important;
 }

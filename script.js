@@ -1389,10 +1389,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 calcWrapper.classList.add('residential-mode');
                 calcWrapper.classList.remove('commercial-mode');
             }
-            if (calcInfo) calcInfo.style.display = '';
+            if (calcInfo) calcInfo.style.display = 'none'; // hide the left-panel heading for residential
             if (standardInputs) standardInputs.style.display = 'none';
             if (standardResults) standardResults.style.display = 'none';
             if (discoveryJourney) discoveryJourney.style.display = 'block';
+            // Reset bill slider to residential default
+            if (billSlider) { billSlider.value = 50; if (billDisplay) billDisplay.textContent = 50; }
             resetDiscoveryJourney();
         } else {
             // Commercial or Industrial: single-column centered layout
@@ -1416,6 +1418,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     ? `حاسبة نظام الطاقة الشمسية للمشاريع ${typeLabel}`
                     : `Solar System Calculator — ${typeLabel} Properties`;
             }
+
+            // Set sensible default bill for each property type and force re-animation
+            const defaultBills = { commercial: 200, industrial: 500 };
+            const defaultBill = defaultBills[selectedPropType] || 200;
+            if (billSlider) {
+                billSlider.value = defaultBill;
+                if (billDisplay) billDisplay.textContent = defaultBill;
+            }
+
+            // Force results to re-animate from 0 on type switch
+            if (resSize) resSize.textContent = '0 kW';
+            if (resPanels) resPanels.textContent = '0';
+            if (resSavings) resSavings.textContent = '0 OMR';
 
             // Re-init appliance sizer if in appliance mode
             if (activeSizerMode === 'appliances') {
