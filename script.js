@@ -1382,19 +1382,45 @@ document.addEventListener('DOMContentLoaded', () => {
         const discoveryJourney = document.getElementById('residential-discovery-journey');
         const discoveryResults = document.getElementById('residential-discovery-results');
         const calcWrapper = document.querySelector('.calculator-wrapper');
+        const calcInfo = document.querySelector('.calc-info');
 
         if (selectedPropType === 'residential') {
-            if (calcWrapper) calcWrapper.classList.add('residential-mode');
+            if (calcWrapper) {
+                calcWrapper.classList.add('residential-mode');
+                calcWrapper.classList.remove('commercial-mode');
+            }
+            if (calcInfo) calcInfo.style.display = '';
             if (standardInputs) standardInputs.style.display = 'none';
             if (standardResults) standardResults.style.display = 'none';
             if (discoveryJourney) discoveryJourney.style.display = 'block';
             resetDiscoveryJourney();
         } else {
-            if (calcWrapper) calcWrapper.classList.remove('residential-mode');
+            // Commercial or Industrial: single-column centered layout
+            if (calcWrapper) {
+                calcWrapper.classList.remove('residential-mode');
+                calcWrapper.classList.add('commercial-mode');
+            }
             if (discoveryJourney) discoveryJourney.style.display = 'none';
             if (discoveryResults) discoveryResults.style.display = 'none';
+            if (calcInfo) calcInfo.style.display = 'block';
             if (standardInputs) standardInputs.style.display = 'block';
             if (standardResults) standardResults.style.display = 'block';
+
+            // Update subtitle to reflect selected type
+            const calcSubtitle = document.getElementById('calc-subtitle');
+            if (calcSubtitle) {
+                const typeLabel = selectedPropType === 'commercial'
+                    ? (isArabic ? 'التجاري' : 'Commercial')
+                    : (isArabic ? 'الصناعي' : 'Industrial');
+                calcSubtitle.textContent = isArabic
+                    ? `حاسبة نظام الطاقة الشمسية للمشاريع ${typeLabel}`
+                    : `Solar System Calculator — ${typeLabel} Properties`;
+            }
+
+            // Re-init appliance sizer if in appliance mode
+            if (activeSizerMode === 'appliances') {
+                initApplianceSizer();
+            }
             calculateSolar();
         }
     }

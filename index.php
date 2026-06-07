@@ -99,8 +99,8 @@ $lang = require_once "lang/{$active_lang}.php";
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=8.0" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=8.0"></noscript>
+  <link rel="preload" as="style" href="style.css?v=8.1" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=8.1"></noscript>
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -191,14 +191,14 @@ $lang = require_once "lang/{$active_lang}.php";
   <!-- Solar Calculator -->
   <section id="calculator" class="calculator-section container reveal">
     <div class="calculator-wrapper">
-      <div class="calc-info">
+      <div class="calc-info" style="display:none">
         <h2><?= $lang['calc_title'] ?></h2>
         <?php if (isset($lang['calc_subtitle'])): ?>
           <p class="section-subtitle text-muted mb-3" id="calc-subtitle" style="font-weight: 500; font-size: 1.1rem; line-height: 1.5;"><?= $lang['calc_subtitle'] ?></p>
         <?php endif; ?>
         <p class="text-muted" id="calc-description"><?= $lang['calc_desc'] ?></p>
 
-        <div id="standard-calc-results">
+        <div id="standard-calc-results" style="display:none">
           <div class="results-grid mt-4">
             <div class="result-box">
               <span class="result-label"><?= $lang['calc_sys_size'] ?></span>
@@ -249,7 +249,7 @@ $lang = require_once "lang/{$active_lang}.php";
       </div>
 
       <div class="calc-form">
-        <div id="standard-calc-inputs">
+        <div id="standard-calc-inputs" style="display:none">
           <div class="calc-tabs">
             <button id="tab-bill" class="calc-tab active">
               <?= $active_lang === 'ar' ? 'تقدير الفاتورة' : 'Bill Estimator' ?>
@@ -1634,7 +1634,7 @@ $lang = require_once "lang/{$active_lang}.php";
   </script>
 
 <script src="calculator-engine.js?v=3.7"></script>
-  <script src="script.js?v=5.0" defer></script>
+  <script src="script.js?v=5.1" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>
