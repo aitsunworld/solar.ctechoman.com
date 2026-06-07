@@ -247,7 +247,7 @@ def run_verification():
             "passed": step7_passed
         })
         
-        # Verify Commercial mode restores standard tabs and layout
+        # Verify Commercial mode adapts the wizard layout and loads commercial appliances
         prop_type = driver.find_element(By.ID, "property-type")
         driver.execute_script("arguments[0].value = 'commercial'; arguments[0].dispatchEvent(new Event('change'));", prop_type)
         time.sleep(0.5)
@@ -255,13 +255,16 @@ def run_verification():
         standard_inputs = driver.find_element(By.ID, "standard-calc-inputs")
         standard_results = driver.find_element(By.ID, "standard-calc-results")
         journey_container = driver.find_element(By.ID, "residential-discovery-journey")
-        is_journey_hidden = not journey_container.is_displayed()
+        
+        # Verify a commercial appliance is rendered in the wizard
+        ac_card = driver.find_element(By.CSS_SELECTOR, '.discovery-appliance-card[data-id="com_ducted_ac"]')
+        has_commercial_appliance = ac_card is not None
         
         driver.save_screenshot(os.path.join(ARTIFACT_DIR, "commercial_sizer_restored_en.png"))
-        print("Captured Commercial Sizer Restored (EN)")
+        print("Captured Commercial Wizard (EN)")
         report.append({
-            "check": "Switching to Commercial mode restores standard layouts (EN)",
-            "passed": standard_inputs.is_displayed() and standard_results.is_displayed() and is_journey_hidden
+            "check": "Switching to Commercial mode adapts wizard layouts (EN)",
+            "passed": (not standard_inputs.is_displayed()) and (not standard_results.is_displayed()) and journey_container.is_displayed() and has_commercial_appliance
         })
     except Exception as e:
         print(f"Error during English verification: {e}")

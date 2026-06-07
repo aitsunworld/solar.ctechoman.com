@@ -1384,63 +1384,40 @@ document.addEventListener('DOMContentLoaded', () => {
         const calcWrapper = document.querySelector('.calculator-wrapper');
         const calcInfo = document.querySelector('.calc-info');
 
+        // ALWAYS hide the legacy standard/old calculator elements
+        if (standardInputs) standardInputs.style.display = 'none';
+        if (standardResults) standardResults.style.display = 'none';
+
+        // ALWAYS show discovery journey (wizard)
+        if (discoveryJourney) discoveryJourney.style.display = 'block';
+
         if (selectedPropType === 'residential') {
             if (calcWrapper) {
                 calcWrapper.classList.add('residential-mode');
                 calcWrapper.classList.remove('commercial-mode');
             }
-            if (calcInfo) calcInfo.style.display = 'none'; // hide the left-panel heading for residential
-            if (standardInputs) standardInputs.style.display = 'none';
-            if (standardResults) standardResults.style.display = 'none';
-            if (discoveryJourney) discoveryJourney.style.display = 'block';
-            // Reset bill slider to residential default
+            if (calcInfo) calcInfo.style.display = 'none'; // hide left panel title
             if (billSlider) { billSlider.value = 50; if (billDisplay) billDisplay.textContent = 50; }
-            resetDiscoveryJourney();
         } else {
-            // Commercial or Industrial: single-column centered layout
+            // Commercial or Industrial: uses the same block layout, but can track active class
             if (calcWrapper) {
                 calcWrapper.classList.remove('residential-mode');
                 calcWrapper.classList.add('commercial-mode');
             }
-            if (discoveryJourney) discoveryJourney.style.display = 'none';
-            if (discoveryResults) discoveryResults.style.display = 'none';
-            if (calcInfo) calcInfo.style.display = 'block';
-            if (standardInputs) standardInputs.style.display = 'block';
-            if (standardResults) standardResults.style.display = 'block';
-
-            // Update subtitle to reflect selected type
-            const calcSubtitle = document.getElementById('calc-subtitle');
-            if (calcSubtitle) {
-                const typeLabel = selectedPropType === 'commercial'
-                    ? (isArabic ? 'التجاري' : 'Commercial')
-                    : (isArabic ? 'الصناعي' : 'Industrial');
-                calcSubtitle.textContent = isArabic
-                    ? `حاسبة نظام الطاقة الشمسية للمشاريع ${typeLabel}`
-                    : `Solar System Calculator — ${typeLabel} Properties`;
-            }
-
-            // Set sensible default bill for each property type and force re-animation
+            if (calcInfo) calcInfo.style.display = 'none'; // hide left panel title
+            
             const defaultBills = { commercial: 200, industrial: 500 };
             const defaultBill = defaultBills[selectedPropType] || 200;
             if (billSlider) {
                 billSlider.value = defaultBill;
                 if (billDisplay) billDisplay.textContent = defaultBill;
             }
-
-            // Force results to re-animate from 0 on type switch
-            if (resSize) resSize.textContent = '0 kW';
-            if (resPanels) resPanels.textContent = '0';
-            if (resSavings) resSavings.textContent = '0 OMR';
-
-            // Re-init appliance sizer if in appliance mode
-            if (activeSizerMode === 'appliances') {
-                initApplianceSizer();
-            }
-            calculateSolar();
         }
+        resetDiscoveryJourney();
     }
 
     function goToDiscoveryStep(step) {
+        const selectedPropType = propType ? propType.value : 'residential';
         currentDiscoveryStep = step;
 
         // Update progress indicators (wrapper + inner dot)
@@ -1500,8 +1477,8 @@ document.addEventListener('DOMContentLoaded', () => {
             renderDiscoveryApplianceQtyGrid();
         } else if (step === 3) {
             const result = window.SolarCalculatorEngine.calculateByLoad(
-                applianceQuantities.residential,
-                'residential',
+                applianceQuantities[selectedPropType],
+                selectedPropType,
                 loc.value
             );
             const monthlyConsumption = result.loadSizing.avgDailyKwh * 30;
@@ -1511,8 +1488,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else if (step === 4) {
             const result = window.SolarCalculatorEngine.calculateByLoad(
-                applianceQuantities.residential,
-                'residential',
+                applianceQuantities[selectedPropType],
+                selectedPropType,
                 loc.value
             );
             const revealSolarKw = document.getElementById('reveal-solar-kw');
@@ -1527,8 +1504,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const display = document.getElementById('discovery-bill-display');
             if (slider && display) {
                 const result = window.SolarCalculatorEngine.calculateByLoad(
-                    applianceQuantities.residential,
-                    'residential',
+                    applianceQuantities[selectedPropType],
+                    selectedPropType,
                     loc.value
                 );
                 const estimatedBill = Math.round(result.inputs.monthlyBill);
@@ -1541,7 +1518,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const successBox = document.getElementById('calibration-success-box');
             const btnGotoStep7 = document.getElementById('btn-goto-step7');
             
-            // New elements
             const progressFill = document.getElementById('calibration-progress-fill');
             const confidencePct = document.getElementById('calibration-confidence-pct');
             const calScore = document.getElementById('cal-val-score');
@@ -1549,7 +1525,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const calAccuracy = document.getElementById('cal-val-accuracy');
             const calConfLevel = document.getElementById('cal-val-confidence-level');
 
-            // Insight and recommended action cards
             const insightCard = document.getElementById('cal-insight-card');
             const actionCard = document.getElementById('cal-action-card');
             const insightDesc = document.getElementById('cal-insight-desc');
@@ -1561,15 +1536,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (insightCard) insightCard.style.display = 'none';
             if (actionCard) actionCard.style.display = 'none';
 
-            // Reset progress ring fill offset
-            const strokeCircumference = 534.07; // 2 * PI * 85 (200px ring, r=85)
+            const strokeCircumference = 534.07;
             if (progressFill) progressFill.style.strokeDashoffset = strokeCircumference;
 
             if (calibratedBillValue !== null) {
-                // Bill is entered - show transition scan animation
                 if (statusMsg) statusMsg.textContent = isArabic ? "جاري مقارنة استهلاك الأجهزة مع فاتورة الكهرباء..." : "Comparing appliance usage with bill history...";
                 
-                // Show "Analyzing..." during simulation to avoid user distrust of empty dashes or 0%
                 if (confidencePct) confidencePct.textContent = isArabic ? "جاري الحساب..." : "Calculating...";
                 if (calScore) calScore.textContent = isArabic ? "جاري التحليل..." : "Analyzing...";
                 if (calBillMatch) calBillMatch.textContent = isArabic ? "جاري التحليل..." : "Analyzing...";
@@ -1586,16 +1558,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     let actionText = "";
 
                     const result = window.SolarCalculatorEngine.calculateByLoad(
-                        applianceQuantities.residential,
-                        'residential',
+                        applianceQuantities[selectedPropType],
+                        selectedPropType,
                         loc.value
                     );
                     const loadConsumption = result.loadSizing.avgDailyKwh * 30;
-                    const billConsumption = calibratedBillValue / 0.020;
+                    const tariff = window.SolarCalculatorEngine.TARIFFS[selectedPropType] || 0.020;
+                    const billConsumption = calibratedBillValue / tariff;
                     const variance = Math.abs(billConsumption - loadConsumption) / loadConsumption;
                     const pctDiff = Math.round(variance * 100);
 
-                    // Compute dynamic metrics based on variance
                     billMatchPct = Math.max(10, Math.round((1 - Math.min(1, variance)) * 100));
                     energyAccuracy = Math.max(10, Math.round((1 - Math.min(1, variance * 0.8)) * 100));
                     confidence = Math.max(10, Math.round(billMatchPct * 0.9 + 5));
@@ -1626,18 +1598,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
 
-                    // Animate progress ring
                     const offset = strokeCircumference - (confidence / 100) * strokeCircumference;
                     if (progressFill) progressFill.style.strokeDashoffset = offset;
 
-                    // Animate metric text values
                     if (confidencePct) animateValue(confidencePct, 0, confidence, 800, "", "%");
                     if (calScore) calScore.textContent = scoreText;
                     if (calBillMatch) animateValue(calBillMatch, 0, billMatchPct, 800, "", "%");
                     if (calAccuracy) animateValue(calAccuracy, 0, energyAccuracy, 800, "", "%");
                     if (calConfLevel) calConfLevel.textContent = confidenceLevelText;
 
-                    // Set dynamic texts and show cards
                     if (insightDesc) insightDesc.textContent = insightText;
                     if (actionDesc) actionDesc.textContent = actionText;
                     if (insightCard) insightCard.style.display = 'block';
@@ -1647,19 +1616,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (btnGotoStep7) btnGotoStep7.style.display = 'inline-block';
                 }, 1000);
             } else {
-                // Bypassed (skipped) bill - load intelligent defaults synchronously
                 if (statusMsg) statusMsg.textContent = isArabic ? "اكتملت المعايرة!" : "Calibration completed!";
                 if (successBox) {
                     successBox.textContent = isArabic ? "تم التجاوز بنجاح. سيتم استخدام تقديرات استهلاك الأجهزة." : "Skipped successfully. Using appliance-derived estimates.";
                     successBox.style.display = 'block';
                 }
 
-                // Default ring animation
                 const confidence = 85;
                 const offset = strokeCircumference - (confidence / 100) * strokeCircumference;
                 if (progressFill) progressFill.style.strokeDashoffset = offset;
 
-                // Displays intelligent defaults immediately to prevent showing 0% or empty dashes
                 if (confidencePct) confidencePct.textContent = isArabic ? "تقديري" : "Estimated";
                 if (calScore) calScore.textContent = isArabic ? "استخدام ملف الأجهزة" : "Using Appliance Profile";
                 if (calBillMatch) calBillMatch.textContent = isArabic ? "غير متوفر" : "Not Available";
@@ -1669,10 +1635,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 let insightText = "";
                 let actionText = "";
                 if (isArabic) {
-                    insightText = "يتم استخدام تقدير الاستهلاك القياسي المستند إلى الأجهزة نظراً لتجاوز إدخال الفاتورة. نسبة الدقة ممتازة لتقديرات المباني السكنية المماثلة.";
+                    const typeLabel = selectedPropType === 'residential' ? 'السكنية' : (selectedPropType === 'commercial' ? 'التجارية' : 'الصناعية');
+                    insightText = `يتم استخدام تقدير الاستهلاك القياسي المستند إلى الأجهزة نظراً لتجاوز إدخال الفاتورة. نسبة الدقة ممتازة لتقديرات المباني ${typeLabel} المماثلة.`;
                     actionText = "تابع لمراجعة لوحة معلومات التوفير. ننصحك بالتحقق من فاتورتك لاحقاً مع مستشارينا لتأكيد القياسات الدقيقة قبل التثبيت.";
                 } else {
-                    insightText = "Using standard appliance-based load profile as bill input was bypassed. Sizing accuracy remains high for typical residential properties in your area.";
+                    insightText = `Using standard appliance-based load profile as bill input was bypassed. Sizing accuracy remains high for typical ${selectedPropType} properties in your area.`;
                     actionText = "Proceed to view your savings dashboard. We suggest verifying with a physical electricity bill during our consultant's follow-up call to finalize system engineering.";
                 }
 
@@ -1689,9 +1656,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let finalResult;
             if (calibratedBillValue !== null) {
-                finalResult = window.SolarCalculatorEngine.calculate(calibratedBillValue, 'residential', loc.value);
+                finalResult = window.SolarCalculatorEngine.calculate(calibratedBillValue, selectedPropType, loc.value);
             } else {
-                finalResult = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities.residential, 'residential', loc.value);
+                finalResult = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities[selectedPropType], selectedPropType, loc.value);
             }
 
             updateDiscoveryDashboard(finalResult);
@@ -1720,7 +1687,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const grid = document.getElementById('discovery-appliance-selection-grid');
         if (!grid || !window.SolarCalculatorEngine) return;
 
-        const appliances = window.SolarCalculatorEngine.APPLIANCES.filter(app => app.property_type === 'residential');
+        const selectedPropType = propType ? propType.value : 'residential';
+        const appliances = window.SolarCalculatorEngine.APPLIANCES.filter(app => app.property_type === selectedPropType);
         let html = '';
 
         appliances.forEach(app => {
@@ -1759,12 +1727,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (selectedAppliances.has(id)) {
                     selectedAppliances.delete(id);
                     card.classList.remove('selected');
-                    applianceQuantities.residential[id] = 0;
+                    applianceQuantities[selectedPropType][id] = 0;
                 } else {
                     selectedAppliances.add(id);
                     card.classList.add('selected');
                     const app = appliances.find(a => a.id === id);
-                    applianceQuantities.residential[id] = (app.default_qty || 1);
+                    applianceQuantities[selectedPropType][id] = (app.default_qty || 1);
                 }
             });
         });
@@ -1774,7 +1742,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const grid = document.getElementById('discovery-appliance-qty-grid');
         if (!grid || !window.SolarCalculatorEngine) return;
 
-        const appliances = window.SolarCalculatorEngine.APPLIANCES.filter(app => app.property_type === 'residential');
+        const selectedPropType = propType ? propType.value : 'residential';
+        const appliances = window.SolarCalculatorEngine.APPLIANCES.filter(app => app.property_type === selectedPropType);
         let html = '';
         let hasSelected = false;
 
@@ -1783,7 +1752,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hasSelected = true;
 
             const name = isArabic ? app.name_ar : app.name_en;
-            const qty = applianceQuantities.residential[app.id] || 1;
+            const qty = applianceQuantities[selectedPropType][app.id] || 1;
 
             html += `
                 <div class="discovery-qty-row" data-id="${app.id}">
@@ -1818,13 +1787,13 @@ document.addEventListener('DOMContentLoaded', () => {
         grid.querySelectorAll('.disc-qty-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const id = btn.dataset.id;
-                let qty = applianceQuantities.residential[id] || 1;
+                let qty = applianceQuantities[selectedPropType][id] || 1;
                 if (btn.classList.contains('plus')) {
                     qty = Math.min(99, qty + 1);
                 } else if (btn.classList.contains('minus')) {
                     qty = Math.max(1, qty - 1);
                 }
-                applianceQuantities.residential[id] = qty;
+                applianceQuantities[selectedPropType][id] = qty;
                 const qtyText = document.getElementById(`disc-qty-val-${id}`);
                 if (qtyText) qtyText.textContent = qty;
             });
@@ -1835,10 +1804,11 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedAppliances.clear();
         calibratedBillValue = null;
 
+        const selectedPropType = propType ? propType.value : 'residential';
         const appliances = window.SolarCalculatorEngine ? window.SolarCalculatorEngine.APPLIANCES : [];
         appliances.forEach(app => {
-            if (app.property_type === 'residential') {
-                applianceQuantities.residential[app.id] = app.default_qty || 0;
+            if (app.property_type === selectedPropType) {
+                applianceQuantities[selectedPropType][app.id] = app.default_qty || 0;
                 if (app.default_qty > 0) {
                     selectedAppliances.add(app.id);
                 }
@@ -1855,8 +1825,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateDiscoveryDashboard(result) {
+        const selectedPropType = propType ? propType.value : 'residential';
+        const tariff = window.SolarCalculatorEngine.TARIFFS[selectedPropType] || 0.020;
         const yieldKwh = window.SolarCalculatorEngine.YIELDS[loc.value] || 1700;
-        const monthlyConsumption = result.inputs.monthlyBill / (window.SolarCalculatorEngine.TARIFFS.residential);
+        const monthlyConsumption = result.inputs.monthlyBill / tariff;
         const dailyConsumption = monthlyConsumption / 30;
         const monthlyProduction = (result.systemSizeKw * yieldKwh) / 12;
         const lifetimeSavings = result.yearlySavingsOmr * 25;
@@ -2112,11 +2084,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(discoveryForm);
             
+            const selectedPropType = propType ? propType.value : 'residential';
             let finalResult;
             if (calibratedBillValue !== null) {
-                finalResult = window.SolarCalculatorEngine.calculate(calibratedBillValue, 'residential', loc.value);
+                finalResult = window.SolarCalculatorEngine.calculate(calibratedBillValue, selectedPropType, loc.value);
             } else {
-                finalResult = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities.residential, 'residential', loc.value);
+                finalResult = window.SolarCalculatorEngine.calculateByLoad(applianceQuantities[selectedPropType], selectedPropType, loc.value);
             }
             formData.append('estimated_kw', finalResult.systemSizeKw);
             formData.append('estimated_cost', finalResult.costRange.formatted);
@@ -2147,7 +2120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             name: formData.get('name'),
                             phone: formData.get('phone'),
                             location: loc.value,
-                            property_type: "residential",
+                            property_type: selectedPropType,
                             system_size_kw: finalResult.systemSizeKw,
                             enquiry_source: "discovery_assessment_form"
                         });
