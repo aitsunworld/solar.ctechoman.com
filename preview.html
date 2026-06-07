@@ -77,8 +77,8 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=5.0" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=5.0"></noscript>
+<link rel="preload" as="style" href="style.css?v=7.0" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="style.css?v=7.0"></noscript>
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -363,31 +363,83 @@
 
           <!-- Panel 5: Ask for average electricity bill (Step 5) -->
           <div class="discovery-step-panel" id="discovery-panel-5" style="display: none;">
-            <h3 class="mb-2">Do you know your average monthly electricity bill?</h3>
-            <p class="text-muted mb-4" style="font-size: 0.88rem;">
-              Specifying your average utility bill helps align the appliance estimates with your actual billing history.
-            </p>
-            <div class="calibration-choice-zone">
-              <div class="form-group mb-3">
-                <label for="discovery-bill-slider" class="form-label font-weight-bold mb-2">
-                  Average Monthly Bill (OMR):
-                </label>
-                <div class="slider-container">
-                  <input type="range" id="discovery-bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Calibration Slider">
-                  <div class="slider-value"><span id="discovery-bill-display">50</span> OMR</div>
+            
+            <!-- SECTION A: Question -->
+            <div class="step5-question-section">
+              <h3>Do you know your average monthly electricity bill?</h3>
+              <p class="step5-subtitle">
+                Providing your bill improves accuracy and ROI calculations.
+              </p>
+            </div>
+
+            <!-- SECTION B: Slider Card -->
+            <div class="step5-slider-card" id="step5-slider-section">
+              <div class="step5-bill-badge-row">
+                <span class="step5-bill-label">Average Monthly Bill</span>
+                <div class="step5-bill-badge">
+                  <span class="bill-badge-amount" id="discovery-bill-display">50</span>
+                  <span class="bill-badge-currency">OMR</span>
                 </div>
               </div>
-              <div class="calibration-actions mt-3" style="display: flex; gap: 0.75rem;">
-                <button type="button" class="btn btn-secondary" id="btn-skip-calibration" style="flex: 1;">
-                  Skip & Continue
-                </button>
-                <button type="button" class="btn btn-primary" id="btn-calibrate-bill" style="flex: 1;">
-                  Enter Bill Manually
-                </button>
+              <div class="step5-slider-wrapper">
+                <input type="range" id="discovery-bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Calibration Slider" class="step5-range">
+                <div class="step5-slider-labels">
+                  <span>10 OMR</span>
+                  <span>1000 OMR</span>
+                </div>
               </div>
             </div>
-            <div class="step-actions mt-4">
-              <button type="button" class="btn btn-text-secondary" id="btn-back-to-step4">
+
+            <!-- SECTION C: Action Hierarchy -->
+            <div class="step5-actions-section" id="step5-main-actions">
+              <!-- Primary CTA -->
+              <button type="button" class="btn-step5-primary" id="btn-calibrate-bill">
+                ✓ Continue With This Bill
+              </button>
+              <!-- Secondary CTA -->
+              <button type="button" class="btn-step5-secondary" id="btn-show-manual-entry">
+                ✏ Enter Exact Bill Details
+              </button>
+              <!-- Tertiary Text Link -->
+              <button type="button" class="btn-step5-skip" id="btn-skip-calibration">
+                Skip For Now
+              </button>
+            </div>
+
+            <!-- Manual Bill Entry Sub-Panel (hidden by default) -->
+            <div class="manual-bill-panel" id="manual-bill-panel" style="display: none;">
+              <div class="manual-bill-card">
+                <div class="manual-bill-header">
+                  <h4>Enter Your Electricity Bill</h4>
+                </div>
+                <div class="manual-bill-fields">
+                  <div class="manual-bill-input-group">
+                    <label class="manual-bill-field-label">Monthly Bill (OMR)</label>
+                    <input type="number" id="manual-bill-amount" min="5" max="5000" step="1" placeholder="Enter amount..." class="manual-bill-input" aria-label="Monthly Bill Amount">
+                  </div>
+                  <div class="manual-bill-input-group">
+                    <label class="manual-bill-field-label">Optional Notes</label>
+                    <input type="text" id="manual-bill-notes" placeholder="e.g. Summer bill, AC heavy..." class="manual-bill-input" aria-label="Optional Notes">
+                  </div>
+                </div>
+                <div class="manual-bill-benefits">
+                  <div class="benefit-item"><span class="benefit-check">✓</span> Better ROI accuracy</div>
+                  <div class="benefit-item"><span class="benefit-check">✓</span> Better savings estimate</div>
+                  <div class="benefit-item"><span class="benefit-check">✓</span> Better solar sizing</div>
+                </div>
+                <div class="manual-bill-actions">
+                  <button type="button" class="btn-manual-submit" id="btn-manual-bill-submit">
+                    Continue Calibration
+                  </button>
+                  <button type="button" class="btn-manual-cancel" id="btn-cancel-manual">
+                    Back
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-actions" style="justify-content: flex-start;">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step4" style="flex: 0 0 auto;">
                 ⬅ Back to Solar Size
               </button>
             </div>
@@ -396,58 +448,55 @@
           <!-- Panel 6: Calibrate results (Step 6) -->
           <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
             <div class="calibration-container">
-              <h3 class="mb-2">Step 6: Calibrate & Optimize</h3>
               
-              <div class="calibration-content-grid py-4">
-                <!-- Left: Progress Ring Gauge -->
-                <div class="calibration-gauge-column">
-                  <div class="progress-ring-wrapper">
-                    <svg class="progress-ring-svg" width="160" height="160">
-                      <circle class="progress-ring-bg" cx="80" cy="80" r="68" stroke-width="8" fill="none" />
-                      <circle class="progress-ring-fill" id="calibration-progress-fill" cx="80" cy="80" r="68" stroke-width="8" fill="none" />
-                    </svg>
-                    <div class="progress-ring-text">
-                      <span class="progress-ring-number" id="calibration-confidence-pct">0%</span>
-                      <span class="progress-ring-label">Confidence</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Right: Calibration Metrics Grid -->
-                <div class="calibration-metrics-column">
-                  <div class="calibration-metrics-grid">
-                    <div class="cal-metric-card">
-                      <span class="cal-metric-label">Match Status</span>
-                      <strong class="cal-metric-val" id="cal-val-score">-</strong>
-                    </div>
-                    <div class="cal-metric-card">
-                      <span class="cal-metric-label">Bill Match %</span>
-                      <strong class="cal-metric-val" id="cal-val-bill-match">0%</strong>
-                    </div>
-                    <div class="cal-metric-card">
-                      <span class="cal-metric-label">Energy Accuracy</span>
-                      <strong class="cal-metric-val text-eco" id="cal-val-accuracy">0%</strong>
-                    </div>
-                    <div class="cal-metric-card">
-                      <span class="cal-metric-label">Confidence Level</span>
-                      <strong class="cal-metric-val" id="cal-val-confidence-level">-</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Scanning status message -->
-              <div class="calibration-status-wrapper text-center">
-                <div class="calibration-status-text font-weight-bold" id="calibration-status-message">
+              <!-- Calibration Status Title -->
+              <div class="calibration-title-section">
+                <h3>Calibration Status</h3>
+                <p class="calibration-title-sub" id="calibration-status-message">
                   Comparing appliance usage with bill history...
+                </p>
+              </div>
+
+              <!-- Large Confidence Ring -->
+              <div class="calibration-ring-section">
+                <div class="progress-ring-wrapper">
+                  <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
+                    <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                    <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                  </svg>
+                  <div class="progress-ring-text">
+                    <span class="progress-ring-number" id="calibration-confidence-pct">—</span>
+                    <span class="progress-ring-sublabel" id="calibration-match-label">Excellent Match</span>
+                    <span class="progress-ring-label">Confidence</span>
+                  </div>
                 </div>
               </div>
 
-              <!-- Keep original boxes for Selenium validation to pass -->
-              <div class="calibration-feedback mt-4 alert alert-warning" id="calibration-warning-box" style="display: none;">
-                ⚠️ We noticed a difference between appliance usage and your bill history. We\
+              <!-- 2x2 Metrics Grid -->
+              <div class="calibration-metrics-grid">
+                <div class="cal-metric-card">
+                  <span class="cal-metric-label">Match Status</span>
+                  <strong class="cal-metric-val" id="cal-val-score">-</strong>
+                </div>
+                <div class="cal-metric-card">
+                  <span class="cal-metric-label">Bill Match %</span>
+                  <strong class="cal-metric-val" id="cal-val-bill-match">0%</strong>
+                </div>
+                <div class="cal-metric-card">
+                  <span class="cal-metric-label">Energy Accuracy</span>
+                  <strong class="cal-metric-val text-eco" id="cal-val-accuracy">0%</strong>
+                </div>
+                <div class="cal-metric-card">
+                  <span class="cal-metric-label">Confidence Level</span>
+                  <strong class="cal-metric-val" id="cal-val-confidence-level">-</strong>
+                </div>
               </div>
-              <div class="calibration-feedback mt-4 alert alert-success" id="calibration-success-box" style="display: none;">
+
+              <!-- Hidden feedback boxes (kept for JS logic) -->
+              <div class="calibration-feedback alert alert-warning" id="calibration-warning-box" style="display: none;">
+                ⚠️ We noticed a difference between appliance usage and your bill history. We have adjusted the estimates.
+              </div>
+              <div class="calibration-feedback alert alert-success" id="calibration-success-box" style="display: none;">
                 ✅ Excellent match between appliance usage and bill history! Estimates calibrated.
               </div>
 
@@ -468,11 +517,11 @@
                 <p id="cal-action-desc" class="mb-0 mt-1"></p>
               </div>
 
-              <div class="step-actions mt-4" style="display: flex; gap: 0.75rem;">
-                <button type="button" class="btn btn-secondary" id="btn-back-to-step5" style="flex: 1; min-width: 80px;">
+              <div class="calibration-step-actions">
+                <button type="button" class="btn btn-secondary" id="btn-back-to-step5">
                   ⬅ Edit Bill
                 </button>
-                <button type="button" class="btn btn-primary" id="btn-goto-step7" style="flex: 2;">
+                <button type="button" class="btn btn-primary" id="btn-goto-step7">
                   Reveal Insights Dashboard ➔
                 </button>
               </div>
