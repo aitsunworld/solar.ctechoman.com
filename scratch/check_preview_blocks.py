@@ -1,21 +1,21 @@
-with open("index.php", "r", encoding="utf-8") as f:
-    php_lines = f.readlines()
-with open("preview.html", "r", encoding="utf-8") as f:
-    html_lines = f.readlines()
+with open('style.css', 'r', encoding='utf-8') as f:
+    lines = f.readlines()
 
-# Look for standard indicators or comments
-# Let's count how many times "discovery-panel-1" appears in preview.html
-html_content = "".join(html_lines)
-print("Count of 'discovery-panel-1' in preview.html:", html_content.count("discovery-panel-1"))
-print("Count of 'discovery-panel-1' in index.php:", "".join(php_lines).count("discovery-panel-1"))
+def clean_print(s):
+    # Keep only ASCII printable characters
+    cleaned = "".join(c if ord(c) < 128 else f"\\u{ord(c):04x}" for c in s)
+    print(cleaned)
 
-# Let's print out lines around the stepper in preview.html
-stepper_line = -1
-for idx, line in enumerate(html_lines):
-    if "discovery-steps-progress" in line:
-        stepper_line = idx
-        break
-print(f"Stepper in preview.html on line {stepper_line+1}:")
-if stepper_line != -1:
-    for i in range(max(0, stepper_line - 1), min(len(html_lines), stepper_line + 10)):
-        print(f"  {i+1}: {html_lines[i].strip()}")
+occurrences = []
+for idx, line in enumerate(lines):
+    if '.discovery-dashboard {' in line:
+        occurrences.append(idx + 1)
+
+print(f"Occurrences of '.discovery-dashboard {{': {occurrences}")
+
+for lineno in occurrences:
+    print(f"\n--- Occurrence at line {lineno} ---")
+    start = max(1, lineno - 2)
+    end = min(len(lines), lineno + 15)
+    for l in range(start, end + 1):
+        clean_print(f"{l}: {lines[l-1].strip()}")

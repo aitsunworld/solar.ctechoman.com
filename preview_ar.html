@@ -402,9 +402,9 @@
                 <!-- Left: Progress Ring Gauge -->
                 <div class="calibration-gauge-column">
                   <div class="progress-ring-wrapper">
-                    <svg class="progress-ring-svg" width="160" height="160">
-                      <circle class="progress-ring-bg" cx="80" cy="80" r="68" stroke-width="8" fill="none" />
-                      <circle class="progress-ring-fill" id="calibration-progress-fill" cx="80" cy="80" r="68" stroke-width="8" fill="none" />
+                    <svg class="progress-ring-svg" width="200" height="200">
+                      <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                      <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
                     </svg>
                     <div class="progress-ring-text">
                       <span class="progress-ring-number" id="calibration-confidence-pct">0%</span>
@@ -676,20 +676,26 @@
           </div>
         </div>
 
-        <div class="form-row">
-          <select id="property-type" aria-label="سكني">
-            <option value="residential">سكني</option>
-            <option value="commercial">تجاري</option>
-            <option value="industrial">صناعي</option>
-          </select>
+        <!-- Footer Controls Container -->
+        <div class="wizard-footer-controls">
+          <div class="form-group-field">
+            <select id="property-type" aria-label="سكني">
+              <option value="residential">سكني</option>
+              <option value="commercial">تجاري</option>
+              <option value="industrial">صناعي</option>
+            </select>
+          </div>
 
-          <select id="location" aria-label="مسقط">
-            <option value="muscat">مسقط</option>
-            <option value="dhofar">ظفار</option>
-            <option value="batinah">الباطنة</option>
-            <option value="other">أخرى</option>
-          </select>
+          <div class="form-group-field">
+            <select id="location" aria-label="مسقط">
+              <option value="muscat">مسقط</option>
+              <option value="dhofar">ظفار</option>
+              <option value="batinah">الباطنة</option>
+              <option value="other">أخرى</option>
+            </select>
+          </div>
         </div>
+        <!-- END Footer Controls -->
       </div>
     </div>
   </section>

@@ -3897,14 +3897,8 @@ footer {
 }
 
 /* ── Discovery Dashboard — Results ────────────────────────────────────── */
-.discovery-dashboard {
-  background: #FFFFFF;
-  border: 1.5px solid #E8EDF3;
-  border-radius: 1.5rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-}
 
+/* ── Preserved Unique Widget Styles (Consolidated) ── */
 .discovery-dashboard h3 {
   font-size: 1.25rem;
   font-weight: 900;
@@ -3912,632 +3906,6 @@ footer {
   padding-bottom: 0.65rem;
   border-bottom: 2px solid #F1F5F9;
   margin-bottom: 1.25rem;
-}
-
-.dashboard-section {
-  background: rgba(248, 250, 252, 0.6);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  border-radius: 1rem;
-  padding: 1.15rem;
-  margin-bottom: 1rem;
-}
-
-.section-title-discovery {
-  font-size: var(--fs-section-title);
-  font-weight: 800;
-  color: var(--color-text-dark);
-  margin-bottom: 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.discovery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-}
-
-.discovery-metric-card {
-  background: #FFFFFF;
-  border: 1px solid #E8EDF3;
-  border-radius: 0.9rem;
-  padding: 0.85rem 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  transition: all 0.22s ease;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-
-.discovery-metric-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.07);
-  border-color: rgba(58, 141, 204, 0.18);
-}
-
-.metric-label {
-  font-size: var(--fs-small);
-  font-weight: 700;
-  color: #64748B;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.metric-val {
-  font-size: var(--fs-metric);
-  font-weight: 900;
-  color: var(--color-text-dark);
-  letter-spacing: -0.01em;
-}
-
-/* Highlight card: spans full row */
-.discovery-metric-card.highlight-lifetime {
-  grid-column: span 2;
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-  border: 1.5px solid rgba(62, 182, 73, 0.2);
-}
-
-.discovery-metric-card.highlight-lifetime .metric-val {
-  font-size: 1.35rem;
-  color: #15803d;
-}
-
-.discovery-metric-card.highlight-lifetime .metric-label {
-  color: #166534;
-}
-
-/* ── Gamification Scorecards ──────────────────────────────────────────── */
-.gamification-section {
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.game-score-card {
-  background: #FFFFFF;
-  border: 1px solid #E8EDF3;
-  border-radius: 1rem;
-  padding: 0.9rem 1rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-
-.game-score-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: var(--color-text-dark);
-  margin-bottom: 0.5rem;
-}
-
-.score-value-pill {
-  background: rgba(62, 182, 73, 0.1);
-  color: #166534;
-  font-size: 0.82rem;
-  font-weight: 900;
-  padding: 0.15rem 0.65rem;
-  border-radius: 100px;
-}
-
-.progress-bar-wrapper {
-  background: #F1F5F9;
-  height: 9px;
-  border-radius: 100px;
-  overflow: hidden;
-}
-
-.progress-bar-fill {
-  height: 100%;
-  border-radius: 100px;
-  transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.fill-energy {
-  background: linear-gradient(to right, #3a8dcc, #10b981);
-}
-
-/* Solar Suitability badge row */
-.suitability-badges {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: nowrap;
-}
-
-.suit-badge {
-  flex: 1;
-  text-align: center;
-  padding: 0.3rem 0.25rem;
-  background: #F1F5F9;
-  border-radius: 0.5rem;
-  font-size: 0.78rem;
-  font-weight: 800;
-  color: #94A3B8;
-  border: 1px solid transparent;
-  transition: all 0.25s ease;
-}
-
-.suit-badge.active[data-score="C"] {
-  background: #fef2f2;
-  color: #b91c1c;
-  border-color: rgba(239,68,68,0.2);
-}
-
-.suit-badge.active[data-score="B"] {
-  background: #fffbeb;
-  color: #b45309;
-  border-color: rgba(245,158,11,0.2);
-}
-
-.suit-badge.active[data-score="A"] {
-  background: #EFF6FF;
-  color: #1d4ed8;
-  border-color: rgba(58,141,204,0.2);
-}
-
-.suit-badge.active[data-score="A+"] {
-  background: #f0fdf4;
-  color: #166534;
-  border-color: rgba(62,182,73,0.25);
-  transform: scale(1.08);
-  box-shadow: 0 2px 8px rgba(62,182,73,0.2);
-}
-
-/* Green Impact display */
-.green-metrics {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.65rem;
-  justify-content: center;
-}
-
-.green-sub {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-}
-
-.green-sub span {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #059669;
-  letter-spacing: -0.03em;
-}
-
-.green-sub small {
-  font-size: 0.68rem;
-  color: var(--color-text-muted);
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.3;
-}
-
-.animated-green-bar {
-  background: #D1FAE5;
-  height: 7px;
-  border-radius: 100px;
-  overflow: hidden;
-}
-
-.green-leaf-progress {
-  height: 100%;
-  background: linear-gradient(to right, #059669, #10b981);
-  border-radius: 100px;
-  transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ── Responsive ───────────────────────────────────────────────────────── */
-@media (max-width: 480px) {
-  .discovery-steps-progress {
-    padding: 0;
-  }
-  .appliance-selection-grid {
-    grid-template-columns: 1fr 1fr;
-    max-height: 300px;
-  }
-  .solar-specs-row {
-    flex-wrap: wrap;
-  }
-  .consumption-context-cards {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (min-width: 481px) and (max-width: 767px) {
-  .appliance-selection-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  .step-label {
-    font-size: 0.55rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .appliance-selection-grid {
-    grid-template-columns: repeat(3, 1fr);
-    max-height: 360px;
-  }
-  .discovery-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .discovery-metric-card.highlight-lifetime {
-    grid-column: span 3;
-  }
-}
-
-@media (min-width: 1024px) {
-  .appliance-selection-grid {
-    grid-template-columns: repeat(4, 1fr);
-    max-height: 380px;
-  }
-  .discovery-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* ==========================================================================
-   17. Residential Discovery Experience — Custom Redesign Styles
-   ========================================================================== */
-
-/* ── Stepper Mobile Horizontal Scroll ─────────────────────────────────── */
-@media (max-width: 767px) {
-  .discovery-steps-progress {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    padding: 0.75rem 1rem 1.25rem 1rem;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-    scrollbar-width: none; /* Firefox */
-  }
-  .discovery-steps-progress::-webkit-scrollbar {
-    display: none; /* Chrome/Safari/Webkit */
-  }
-  .discovery-steps-progress::before,
-  .discovery-steps-progress::after {
-    display: none !important;
-  }
-  .step-indicator {
-    flex: 0 0 auto;
-    min-width: 75px;
-  }
-  .step-dot {
-    width: 38px;
-    height: 38px;
-    font-size: 0.85rem;
-    border-width: 2px;
-  }
-  .step-dot.active {
-    transform: none;
-  }
-  .step-label {
-    display: block !important;
-    font-size: 0.65rem;
-    white-space: normal;
-    overflow: visible;
-    word-break: break-word;
-    max-width: 60px;
-    text-overflow: unset;
-  }
-  .step-indicator.active::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 20%;
-    right: 20%;
-    height: 3px;
-    background: var(--color-primary);
-    border-radius: 2px;
-  }
-  .step-indicator.completed::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 20%;
-    right: 20%;
-    height: 3px;
-    background: #3eb649;
-    border-radius: 2px;
-  }
-}
-
-/* ── Unified Grid Layout ─────────────────────────────────────────────────── */
-.calculator-wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-@media (min-width: 768px) {
-  .calculator-wrapper {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 2rem;
-  }
-  .calc-info {
-    grid-column: span 2;
-  }
-  .calc-form {
-    grid-column: span 4;
-  }
-  .calculator-wrapper.residential-mode {
-    grid-template-columns: 1fr !important;
-    gap: 0 !important;
-  }
-  .calculator-wrapper.residential-mode .calc-info {
-    display: none !important;
-  }
-  .calculator-wrapper.residential-mode .calc-form {
-    grid-column: span 6 !important;
-  }
-}
-
-@media (min-width: 1024px) {
-  .calculator-wrapper {
-    grid-template-columns: repeat(12, 1fr);
-    gap: 3.5rem;
-  }
-  .calc-info {
-    grid-column: span 5;
-  }
-  .calc-form {
-    grid-column: span 7;
-  }
-  .calculator-wrapper.residential-mode {
-    grid-template-columns: 1fr !important;
-    gap: 0 !important;
-  }
-  .calculator-wrapper.residential-mode .calc-form {
-    grid-column: span 12 !important;
-  }
-}
-
-/* ── Calibration Screen Redesign ───────────────────────────────────────── */
-.calibration-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0;
-  width: 100%;
-}
-.calibration-content-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  width: 100%;
-  align-items: center;
-}
-@media (min-width: 768px) {
-  .calibration-content-grid {
-    grid-template-columns: 180px 1fr;
-    gap: 3rem;
-  }
-}
-.calibration-gauge-column {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.progress-ring-wrapper {
-  position: relative;
-  width: 160px;
-  height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.progress-ring-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: rotate(-90deg);
-}
-.progress-ring-bg {
-  stroke: #E2E8F0;
-  fill: transparent;
-}
-.progress-ring-fill {
-  fill: transparent;
-  stroke: var(--color-primary);
-  stroke-dasharray: 534.07;
-  stroke-dashoffset: 534.07;
-  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.progress-ring-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-.progress-ring-number {
-  font-size: 2.25rem;
-  font-weight: 900;
-  color: var(--color-text-dark);
-  line-height: 1;
-}
-.progress-ring-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-top: 0.25rem;
-}
-.calibration-metrics-column {
-  width: 100%;
-}
-.calibration-metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-}
-.cal-metric-card {
-  background: var(--color-bg);
-  border: 1px solid rgba(0,0,0,0.04);
-  padding: 1rem 1.25rem;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.cal-metric-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-soft);
-}
-.cal-metric-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-}
-.cal-metric-val {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--color-text-dark);
-}
-.cal-metric-val.text-eco {
-  color: #3eb649;
-}
-.calibration-status-wrapper {
-  width: 100%;
-  margin-top: 1rem;
-}
-.calibration-status-text {
-  font-size: var(--fs-body);
-  color: var(--color-text-dark);
-  animation: calPulse 1.8s infinite ease-in-out;
-}
-@keyframes calPulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-/* ── Executive Dashboard Layout ───────────────────────────────────────── */
-#residential-discovery-results {
-  width: 100%;
-  margin-top: 0.5rem;
-}
-.dashboard-main-title {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: var(--color-text-dark);
-  margin-bottom: 1.5rem;
-}
-.discovery-dashboard {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-}
-
-/* Row 1: Top Summaries */
-.discovery-dashboard .summary-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  width: 100%;
-}
-@media (min-width: 576px) {
-  .discovery-dashboard .summary-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 1024px) {
-  .discovery-dashboard .summary-row {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Row 2: Lifetime savings hero */
-.discovery-dashboard .hero-row {
-  width: 100%;
-}
-.discovery-metric-card.highlight-lifetime {
-  background: linear-gradient(135deg, #115E59 0%, #047857 100%);
-  color: #FFFFFF;
-  padding: 2.25rem 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 25px rgba(4, 120, 87, 0.15);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  border: none;
-}
-.discovery-metric-card.highlight-lifetime::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-  pointer-events: none;
-}
-.discovery-metric-card.highlight-lifetime .metric-label {
-  color: #A7F3D0;
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-}
-.discovery-metric-card.highlight-lifetime .metric-val {
-  font-size: 3rem;
-  font-weight: 900;
-  color: #FFFFFF !important;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  line-height: 1;
-}
-.discovery-metric-card.highlight-lifetime .hero-card-desc {
-  color: #D1FAE5;
-  font-size: var(--fs-body);
-  max-width: 600px;
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Row 3: Insights grid */
-.discovery-dashboard .insights-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  width: 100%;
-}
-@media (min-width: 768px) {
-  .discovery-dashboard .insights-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 1024px) {
-  .discovery-dashboard .insights-row {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* Cards & sections inside row 3 */
-.dashboard-section.col-insights {
-  background: var(--color-surface);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  padding: var(--space-5);
-  border-radius: 1.5rem;
-  box-shadow: var(--shadow-soft);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  min-height: auto;
 }
 .section-title-discovery {
   font-size: var(--fs-section-title);
@@ -4559,46 +3927,26 @@ footer {
   gap: var(--space-3);
 }
 .select-tech-grid {
+  display: grid;
   grid-template-columns: repeat(2, 1fr) !important;
+  gap: var(--space-3) !important;
 }
-.discovery-metric-card {
-  background: var(--color-surface);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  padding: var(--space-4);
-  border-radius: 1.25rem;
+#db-card-install-cost {
+  grid-column: span 2 !important;
+}
+.gamification-section {
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  box-shadow: var(--shadow-soft);
-  transition: all 0.25s ease;
+  gap: 0.75rem;
+  width: 100%;
 }
-.discovery-metric-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-}
-.discovery-metric-card.text-eco-card {
-  border-left: 4px solid #3eb649;
-}
-.discovery-metric-card .metric-label {
-  font-size: var(--fs-small);
-  font-weight: 700;
-  color: var(--color-text-muted);
-}
-.discovery-metric-card .metric-val {
-  font-size: var(--fs-metric);
-  font-weight: 900;
-  color: var(--color-text-dark);
-}
-.discovery-metric-card .metric-val.text-eco {
-  color: #3eb649;
-}
-
-/* Row 3 Gamification widgets */
 .game-score-card {
   background: var(--color-bg);
   border-radius: 1rem;
   padding: var(--space-3);
   border: 1px solid rgba(0,0,0,0.03);
+  width: 100%;
 }
 .game-score-header {
   display: flex;
@@ -4631,6 +3979,78 @@ footer {
 .progress-bar-fill.fill-energy {
   background: var(--color-primary);
 }
+.green-impact-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.green-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  text-align: center;
+}
+.green-sub {
+  display: flex;
+  flex-direction: column;
+}
+.green-sub span {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #059669;
+  line-height: 1.1;
+}
+.green-sub small {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+  line-height: 1.3;
+}
+.animated-green-bar {
+  background: #E2E8F0;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.green-leaf-progress {
+  height: 100%;
+  background: linear-gradient(to right, #059669, #10b981);
+  border-radius: 4px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.suitability-score-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.suitability-score-card .game-score-header strong {
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #3eb649;
+  line-height: 1;
+}
+.suitability-badges {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-1);
+}
+.suit-badge {
+  flex: 1;
+  text-align: center;
+  padding: 0.4rem 0;
+  border-radius: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  background: #E2E8F0;
+  color: #94A3B8;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.suit-badge.active[data-score="C"] { background: #EF4444; color: white; }
+.suit-badge.active[data-score="B"] { background: #F59E0B; color: white; }
+.suit-badge.active[data-score="A"] { background: #10B981; color: white; }
+.suit-badge.active[data-score="A+"] { background: #059669; color: white; }
+
 
 /* Environmental widgets */
 .green-impact-card {
@@ -5481,9 +4901,32 @@ html[dir="rtl"] .whatsapp-input-icon {
 .discovery-dashboard .summary-row { display: grid !important; gap: 1rem !important; width: 100% !important; grid-template-columns: repeat(2, 1fr) !important; }
 @media (min-width: 1024px) { .discovery-dashboard .summary-row { grid-template-columns: repeat(4, 1fr) !important; } }
 .discovery-metric-card { display: flex !important; flex-direction: column !important; justify-content: center !important; min-height: 90px !important; }
-.discovery-dashboard .insights-row { display: grid !important; gap: 1.25rem !important; width: 100% !important; grid-template-columns: 1fr !important; }
-@media (min-width: 768px) { .discovery-dashboard .insights-row { grid-template-columns: repeat(2, 1fr) !important; } }
-@media (min-width: 1024px) { .discovery-dashboard .insights-row { grid-template-columns: repeat(3, 1fr) !important; } }
+.discovery-dashboard .insights-row { 
+    display: grid !important; 
+    gap: var(--space-4) !important; 
+    width: 100% !important; 
+    grid-template-columns: 1fr !important; 
+    align-items: flex-start !important;
+}
+
+@media (min-width: 768px) { 
+    .discovery-dashboard .insights-row { 
+        grid-template-columns: 1fr 1fr !important; 
+        grid-template-rows: auto auto !important;
+    } 
+    .col-insights:nth-child(1) {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+    }
+    .col-insights:nth-child(2) {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+    }
+    .col-insights:nth-child(3) {
+        grid-column: 2 !important;
+        grid-row: 1 / span 2 !important;
+    }
+}
 .discovery-dashboard .form-row-row { display: flex !important; justify-content: center !important; width: 100% !important; }
 .cta-lead-card { max-width: 600px !important; width: 100% !important; margin: 0 auto !important; }
 .cta-form-fields { display: flex !important; flex-direction: column !important; gap: 14px !important; width: 100% !important; }
@@ -6198,3 +5641,32 @@ html[dir="rtl"] .calibration-container .calibration-action-card {
 }
 
 /* End v7.0 Redesign */
+
+/* ── Custom Select Arrow Styles ── */
+select.manual-bill-input,
+.wizard-footer-controls select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 1rem center !important;
+    background-size: 1.2em !important;
+    padding-right: 2.5rem !important;
+}
+html[dir="rtl"] select.manual-bill-input,
+html[dir="rtl"] .wizard-footer-controls select {
+    background-position: left 1rem center !important;
+    padding-right: 1.25rem !important;
+    padding-left: 2.5rem !important;
+}
+
+/* ── Progress Ring Responsive Scaling Fix ── */
+.calibration-ring-section .progress-ring-svg {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: rotate(-90deg) !important;
+    width: 100% !important;
+    height: 100% !important;
+}

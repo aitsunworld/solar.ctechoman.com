@@ -752,20 +752,26 @@ $lang = require_once "lang/{$active_lang}.php";
           </div>
         </div>
 
-        <div class="form-row">
-          <select id="property-type" aria-label="<?= $lang['calc_prop_residential'] ?>">
-            <option value="residential"><?= $lang['calc_prop_residential'] ?></option>
-            <option value="commercial"><?= $lang['calc_prop_commercial'] ?></option>
-            <option value="industrial"><?= $lang['calc_prop_industrial'] ?></option>
-          </select>
+        <!-- Footer Controls Container -->
+        <div class="wizard-footer-controls">
+          <div class="form-group-field">
+            <select id="property-type" aria-label="<?= $lang['calc_prop_residential'] ?>">
+              <option value="residential"><?= $lang['calc_prop_residential'] ?></option>
+              <option value="commercial"><?= $lang['calc_prop_commercial'] ?></option>
+              <option value="industrial"><?= $lang['calc_prop_industrial'] ?></option>
+            </select>
+          </div>
 
-          <select id="location" aria-label="<?= $lang['calc_loc_muscat'] ?>">
-            <option value="muscat"><?= $lang['calc_loc_muscat'] ?></option>
-            <option value="dhofar"><?= $lang['calc_loc_dhofar'] ?></option>
-            <option value="batinah"><?= $lang['calc_loc_batinah'] ?></option>
-            <option value="other"><?= $lang['calc_loc_other'] ?></option>
-          </select>
+          <div class="form-group-field">
+            <select id="location" aria-label="<?= $lang['calc_loc_muscat'] ?>">
+              <option value="muscat"><?= $lang['calc_loc_muscat'] ?></option>
+              <option value="dhofar"><?= $lang['calc_loc_dhofar'] ?></option>
+              <option value="batinah"><?= $lang['calc_loc_batinah'] ?></option>
+              <option value="other"><?= $lang['calc_loc_other'] ?></option>
+            </select>
+          </div>
         </div>
+        <!-- END Footer Controls -->
       </div>
     </div>
   </section>
