@@ -4919,24 +4919,51 @@ html[dir="rtl"] .whatsapp-input-icon {
     gap: var(--space-4) !important; 
     width: 100% !important; 
     grid-template-columns: 1fr !important; 
-    align-items: flex-start !important;
+    align-items: stretch !important;
 }
 
 @media (min-width: 768px) { 
     .discovery-dashboard .insights-row { 
         grid-template-columns: 1fr 1fr !important; 
-        grid-template-rows: auto auto !important;
+        grid-template-rows: auto !important;
     } 
     .col-insights:nth-child(1) {
         grid-column: 1 !important;
-        grid-row: 1 !important;
+        grid-row: auto !important;
     }
     .col-insights:nth-child(2) {
+        grid-column: 2 !important;
+        grid-row: auto !important;
+    }
+    .col-insights:nth-child(3) {
         grid-column: 1 !important;
-        grid-row: 2 !important;
+        grid-row: auto !important;
+    }
+    .col-insights:nth-child(4) {
+        grid-column: 2 !important;
+        grid-row: auto !important;
+    }
+}
+
+@media (min-width: 1024px) {
+    .discovery-dashboard .insights-row { 
+        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-rows: auto auto !important;
+    }
+    .col-insights:nth-child(1) {
+        grid-column: 1 !important;
+        grid-row: 1 / span 2 !important;
+    }
+    .col-insights:nth-child(2) {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
     }
     .col-insights:nth-child(3) {
         grid-column: 2 !important;
+        grid-row: 2 !important;
+    }
+    .col-insights:nth-child(4) {
+        grid-column: 3 !important;
         grid-row: 1 / span 2 !important;
     }
 }
@@ -5980,17 +6007,7 @@ html[dir="rtl"] .calibration-ring-section .progress-ring-svg {
   align-items: stretch !important;
 }
 
-@media (min-width: 640px) {
-  .discovery-dashboard .insights-row {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
 
-@media (min-width: 1024px) {
-  .discovery-dashboard .insights-row {
-    grid-template-columns: repeat(3, 1fr) !important;
-  }
-}
 
 /* Column insight panel card */
 .dashboard-section.col-insights {

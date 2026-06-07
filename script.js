@@ -1845,6 +1845,37 @@ document.addEventListener('DOMContentLoaded', () => {
         const inverterSize = result.loadSizing ? result.loadSizing.inverterRecommendationKw : Math.max(1.5, parseFloat((result.systemSizeKw * 0.95).toFixed(1)));
         const batterySize = result.loadSizing ? result.loadSizing.batteryRecommendationKwh : Math.max(2.4, parseFloat((result.systemSizeKw * 1.5).toFixed(1)));
 
+        // New sizer metrics for Solar Performance Summary
+        const annualProduction = result.systemSizeKw * yieldKwh;
+        const batteryRatio = batterySize / Math.max(1, result.systemSizeKw);
+        let selfConsRate = 60;
+        if (batterySize > 0) {
+            selfConsRate = Math.min(98, Math.round(75 + 15 * Math.min(2, batteryRatio)));
+        } else {
+            selfConsRate = Math.min(80, Math.round(55 + 10 * Math.min(2, monthlyProduction / monthlyConsumption)));
+        }
+        if (monthlyProduction > monthlyConsumption) {
+            selfConsRate = Math.round(selfConsRate * (monthlyConsumption / monthlyProduction));
+        }
+        selfConsRate = Math.max(25, Math.min(98, selfConsRate));
+
+        let perfGrade = "B";
+        if (yieldKwh >= 1750) {
+            perfGrade = "A+";
+        } else if (yieldKwh >= 1650) {
+            perfGrade = "A";
+        } else {
+            perfGrade = "B";
+        }
+
+        let perfGradeText = perfGrade;
+        if (isArabic) {
+            if (perfGrade === "A+") perfGradeText = "أ+";
+            else if (perfGrade === "A") perfGradeText = "أ";
+            else if (perfGrade === "B") perfGradeText = "ب";
+            else if (perfGrade === "C") perfGradeText = "ج";
+        }
+
         const dbDaily = document.getElementById('db-val-daily-cons');
         const dbMonthly = document.getElementById('db-val-monthly-cons');
         const dbRecSize = document.getElementById('db-val-rec-size');
@@ -1860,6 +1891,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const dbInverterSize = document.getElementById('db-val-inverter-size');
         const dbBatterySize = document.getElementById('db-val-battery-size');
 
+        const dbAnnualProd = document.getElementById('db-val-annual-prod');
+        const dbMonthlyGen = document.getElementById('db-val-monthly-gen');
+        const dbSelfCons = document.getElementById('db-val-self-cons');
+        const dbGridOffset = document.getElementById('db-val-grid-offset');
+        const dbPerfGrade = document.getElementById('db-val-perf-grade');
+
         if (dbDaily) animateValue(dbDaily, 0, dailyConsumption, 1000, "", " kWh/day");
         if (dbMonthly) animateValue(dbMonthly, 0, monthlyConsumption, 1000, "", " kWh/month");
         if (dbRecSize) animateValue(dbRecSize, 0, result.systemSizeKw, 1000, "", " kW");
@@ -1874,8 +1911,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dbInverterSize) animateValue(dbInverterSize, 0, inverterSize, 1000, "", " kW");
         if (dbBatterySize) animateValue(dbBatterySize, 0, batterySize, 1000, "", " kWh");
 
-        // Energy Independence
+        if (dbAnnualProd) animateValue(dbAnnualProd, 0, annualProduction, 1000, "", isArabic ? " كيلوواط ساعة/سنة" : " kWh/year");
+        if (dbMonthlyGen) animateValue(dbMonthlyGen, 0, monthlyProduction, 1000, "", isArabic ? " كيلوواط ساعة/شهر" : " kWh/month");
+        if (dbSelfCons) animateValue(dbSelfCons, 0, selfConsRate, 1000, "", "%");
         const indScore = Math.min(100, Math.round((monthlyProduction / monthlyConsumption) * 100));
+        if (dbGridOffset) animateValue(dbGridOffset, 0, indScore, 1000, "", "%");
+        if (dbPerfGrade) {
+            dbPerfGrade.textContent = perfGradeText;
+            dbPerfGrade.className = `proposal-value ${perfGrade === "A+" || perfGrade === "A" ? "text-green" : "text-orange"}`;
+        }
+
+        // Energy Independence
         const scoreLabel = document.getElementById('score-energy-label');
         const statusLabel = document.getElementById('db-val-energy-status');
         

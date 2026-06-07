@@ -99,8 +99,8 @@ $lang = require_once "lang/{$active_lang}.php";
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=8.4" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=8.4"></noscript>
+  <link rel="preload" as="style" href="style.css?v=8.5" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=8.5"></noscript>
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -600,6 +600,34 @@ $lang = require_once "lang/{$active_lang}.php";
 
                 <!-- ROW 3: Three Columns for Insights -->
                 <div class="dashboard-row insights-row">
+                  <!-- Col 1: Solar Performance Summary -->
+                  <div class="dashboard-section col-insights">
+                    <h4 class="section-title-discovery">
+                      <span>📊</span> <?= $active_lang === 'ar' ? 'ملخص أداء الطاقة الشمسية' : 'Solar Performance Summary' ?>
+                    </h4>
+                    <div class="proposal-card-content">
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'إنتاج الطاقة السنوي' : 'Annual Energy Production' ?></span>
+                        <strong class="proposal-value text-eco" id="db-val-annual-prod">0 kWh/year</strong>
+                      </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'التوليد الشمسي الشهري' : 'Monthly Solar Generation' ?></span>
+                        <strong class="proposal-value text-eco" id="db-val-monthly-gen">0 kWh/month</strong>
+                      </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'معدل الاستهلاك الذاتي' : 'Self Consumption Rate' ?></span>
+                        <strong class="proposal-value" id="db-val-self-cons">0%</strong>
+                      </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'نسبة إزاحة الشبكة' : 'Grid Offset %' ?></span>
+                        <strong class="proposal-value" id="db-val-grid-offset">0%</strong>
+                      </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'فئة الأداء التقديرية' : 'Estimated Performance Grade' ?></span>
+                        <strong class="proposal-value text-green" id="db-val-perf-grade">A+</strong>
+                      </div>
+                    </div>
+                  </div>
                   <!-- Col 1: Energy Consumption & Independence -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
@@ -1639,7 +1667,7 @@ $lang = require_once "lang/{$active_lang}.php";
   </script>
 
 <script src="calculator-engine.js?v=3.7"></script>
-  <script src="script.js?v=5.4" defer></script>
+  <script src="script.js?v=5.5" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>
