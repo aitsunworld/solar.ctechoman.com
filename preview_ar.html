@@ -77,8 +77,8 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=8.3" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=8.3"></noscript>
+  <link rel="preload" as="style" href="style.css?v=8.4" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=8.4"></noscript>
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -167,14 +167,14 @@
   <!-- Solar Calculator -->
   <section id="calculator" class="calculator-section container reveal">
     <div class="calculator-wrapper">
-      <div class="calc-info">
+      <div class="calc-info" style="display:none">
         <h2>كم تبلغ حاجة منزلك من الطاقة الشمسية؟</h2>
         
           <p class="section-subtitle text-muted mb-3" id="calc-subtitle" style="font-weight: 500; font-size: 1.1rem; line-height: 1.5;">اكتشف حجم نظام الطاقة الشمسية المثالي لمنزلك وتعرف على قيمة المبالغ التي يمكنك توفيرها شهرياً.</p>
         
         <p class="text-muted" id="calc-description">حدد الأجهزة المنزلية التي تستخدمها في منزلك ودع حاسبتنا الذكية تقدّر استهلاكك الإجمالي للطاقة، وحجم نظام الطاقة الشمسية الموصى به، والتوفير المالي المتوقع، والفوائد البيئية — كل ذلك في بضع دقائق فقط.</p>
 
-        <div id="standard-calc-results">
+        <div id="standard-calc-results" style="display:none">
           <div class="results-grid mt-4">
             <div class="result-box">
               <span class="result-label">حجم النظام</span>
@@ -225,7 +225,7 @@
       </div>
 
       <div class="calc-form">
-        <div id="standard-calc-inputs">
+        <div id="standard-calc-inputs" style="display:none">
           <div class="calc-tabs">
             <button id="tab-bill" class="calc-tab active">
               تقدير الفاتورة
@@ -363,7 +363,7 @@
 
           <!-- Panel 5: Ask for average electricity bill (Step 5) -->
           <div class="discovery-step-panel" id="discovery-panel-5" style="display: none;">
-            
+
             <!-- SECTION A: Question -->
             <div class="step5-question-section">
               <h3>هل تعرف متوسط فاتورتك الكهربائية الشهرية؟</h3>
@@ -448,12 +448,12 @@
           <!-- Panel 6: Calibrate results (Step 6) -->
           <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
             <div class="calibration-container">
-              
+
               <!-- Calibration Status Title -->
               <div class="calibration-title-section">
                 <h3>حالة المعايرة</h3>
                 <p class="calibration-title-sub" id="calibration-status-message">
-                  جاري مقارنة استهلاك الأجهزة مع سجل الفاتورة...
+                  اكتملت المعايرة!
                 </p>
               </div>
 
@@ -494,37 +494,40 @@
 
               <!-- Hidden feedback boxes (kept for JS logic) -->
               <div class="calibration-feedback alert alert-warning" id="calibration-warning-box" style="display: none;">
-                ⚠️ لاحظنا وجود اختلاف بين استهلاك الأجهزة وسجل الفاتورة. لقد قمنا بتعديل التقديرات.
+                ⚠️ لقد لاحظنا وجود اختلاف بين تقدير استهلاك الأجهزة وسجل فواتيرك، وقمنا بتعديل التقدير لتحسين الدقة.
               </div>
               <div class="calibration-feedback alert alert-success" id="calibration-success-box" style="display: none;">
-                ✅ تطابق ممتاز بين استهلاك الأجهزة وسجل الفاتورة! تم معايرة التقديرات.
+                ✅ تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.
               </div>
 
-              <!-- Insight Summary & Recommended Action Cards -->
-              <div class="calibration-insight-card mt-3" id="cal-insight-card" style="display: none;">
+              <!-- Insight Summary Card -->
+              <div class="calibration-insight-card" id="cal-insight-card" style="display: none;">
                 <div class="cal-insight-header">
                   <span>💡</span>
-                  <strong>تحليل الطاقة المعاير</strong>
+                  <strong>تحليل مقارنة الاستهلاك</strong>
                 </div>
                 <p id="cal-insight-desc" class="mb-0 mt-1"></p>
               </div>
 
-              <div class="calibration-action-card mt-3" id="cal-action-card" style="display: none;">
+              <!-- Action Plan Card -->
+              <div class="calibration-action-card" id="cal-action-card" style="display: none;">
                 <div class="cal-action-header">
                   <span>🚀</span>
-                  <strong>خطة العمل الموصى بها</strong>
+                  <strong>الإجراء الموصى به من قبل النظام</strong>
                 </div>
                 <p id="cal-action-desc" class="mb-0 mt-1"></p>
               </div>
 
+              <!-- Action Buttons -->
               <div class="calibration-step-actions">
                 <button type="button" class="btn btn-secondary" id="btn-back-to-step5">
                   ⬅ تعديل الفاتورة
                 </button>
                 <button type="button" class="btn btn-primary" id="btn-goto-step7">
-                  عرض لوحة البيانات ➔
+                  عرض لوحة التحكم ➔
                 </button>
               </div>
+
             </div>
           </div>
 
@@ -573,29 +576,28 @@
 
                 <!-- ROW 3: Three Columns for Insights -->
                 <div class="dashboard-row insights-row">
-                  <!-- Col 1: Energy Consumption -->
+                  <!-- Col 1: Energy Consumption & Independence -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
                       <span>⚡</span> استهلاك الطاقة والاستقلالية
                     </h4>
-                    <div class="insights-grid-sub">
-                      <div class="discovery-metric-card">
-                        <span class="metric-label">الاستهلاك اليومي للطاقة</span>
-                        <strong class="metric-val" id="db-val-daily-cons">0 kWh/day</strong>
+                    <div class="proposal-card-content">
+                      <div class="proposal-row">
+                        <span class="proposal-label">الاستهلاك اليومي</span>
+                        <strong class="proposal-value" id="db-val-daily-cons">0 kWh/day</strong>
                       </div>
-                      <div class="discovery-metric-card">
-                        <span class="metric-label">الاستهلاك الشهري للطاقة</span>
-                        <strong class="metric-val" id="db-val-monthly-cons">0 kWh/month</strong>
+                      <div class="proposal-row">
+                        <span class="proposal-label">الاستهلاك الشهري</span>
+                        <strong class="proposal-value" id="db-val-monthly-cons">0 kWh/month</strong>
                       </div>
-                    </div>
-                    <div class="gamification-section">
-                      <div class="game-score-card">
-                        <div class="game-score-header">
-                          <span>مؤشر الاستقلال عن الشبكة</span>
-                          <span class="score-value-pill" id="score-energy-label">0%</span>
-                        </div>
-                        <div class="progress-bar-wrapper">
-                          <div class="progress-bar-fill fill-energy" id="score-energy-fill" style="width:0%"></div>
+                      <div class="proposal-row">
+                        <span class="proposal-label">تغطية الطاقة الشمسية</span>
+                        <strong class="proposal-value text-eco" id="score-energy-label">0%</strong>
+                      </div>
+                      <div class="proposal-status-section">
+                        <span class="proposal-label-small">الحالة</span>
+                        <div class="proposal-status-badge status-excellent" id="db-val-energy-status">
+                          استقلالية ممتازة للطاقة
                         </div>
                       </div>
                     </div>
@@ -606,22 +608,22 @@
                     <h4 class="section-title-discovery">
                       <span>🌱</span> الأثر البيئي
                     </h4>
-                    <div class="gamification-section">
-                      <div class="game-score-card green-impact-card">
-                        <div class="green-metrics">
-                          <div class="green-sub">
-                            <span id="score-co2-val">0.0</span>
-                            <small>طن ثاني أكسيد الكربون المتجنب سنوياً</small>
-                          </div>
-                          <div class="green-sub">
-                            <span id="score-trees-val">0</span>
-                            <small>ما يعادل عدد الأشجار المزروعة</small>
-                          </div>
-                        </div>
-                        <div class="animated-green-bar">
-                          <div class="green-leaf-progress" id="green-progress-bar" style="width:0%"></div>
-                        </div>
+                    <div class="proposal-card-content">
+                      <div class="proposal-row">
+                        <span class="proposal-label">الحد السنوي من CO₂</span>
+                        <strong class="proposal-value text-green" id="score-co2-val">0.0 Tons</strong>
                       </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label">الأشجار المكافئة المزروعة</span>
+                        <strong class="proposal-value" id="score-trees-val">0</strong>
+                      </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label">التقييم البيئي</span>
+                        <strong class="proposal-value text-green" id="score-green-rating">Excellent</strong>
+                      </div>
+                      <p class="proposal-summary-text">
+                        يقلل هذا النظام الشمسي بشكل كبير من الانبعاثات الكربونية السنوية.
+                      </p>
                     </div>
                   </div>
 
@@ -630,40 +632,46 @@
                     <h4 class="section-title-discovery">
                       <span>🔧</span> المواصفات الفنية والملاءمة
                     </h4>
-                    <div class="insights-grid-sub select-tech-grid">
-                      <div class="discovery-metric-card">
-                        <span class="metric-label">حجم نظام الطاقة الشمسية الموصى به</span>
-                        <strong class="metric-val text-eco" id="db-val-rec-size">0 kW</strong>
-                      </div>
-                      <div class="discovery-metric-card">
-                        <span class="metric-label">عدد الألواح المقدر</span>
-                        <strong class="metric-val" id="db-val-panel-count">0 Panels</strong>
-                      </div>
-                      <div class="discovery-metric-card">
-                        <span class="metric-label">حجم العاكس الموصى به</span>
-                        <strong class="metric-val" id="db-val-inverter-size">0 kW</strong>
-                      </div>
-                      <div class="discovery-metric-card">
-                        <span class="metric-label">سعة البطارية الموصى بها</span>
-                        <strong class="metric-val text-eco" id="db-val-battery-size">0 kWh</strong>
-                      </div>
-                      <div class="discovery-metric-card" id="db-card-install-cost" style="grid-column: span 2;">
-                        <span class="metric-label">التكلفة التقديرية لتوريد وتركيب النظام</span>
-                        <strong class="metric-val text-eco" id="db-val-install-cost">0 OMR</strong>
-                      </div>
-                    </div>
-                    
-                    <div class="gamification-section">
-                      <div class="game-score-card suitability-score-card">
-                        <div class="game-score-header">
-                          <span>🏠 مستوى ملاءمة الطاقة الشمسية</span>
-                          <strong id="score-suitability-label">A</strong>
+                    <div class="proposal-card-content spec-card-content">
+                      <!-- Section 1: Recommended System -->
+                      <div class="spec-section">
+                        <h5 class="spec-section-title">النظام الموصى به</h5>
+                        <div class="proposal-row">
+                          <span class="proposal-label">قدرة الطاقة الشمسية</span>
+                          <strong class="proposal-value text-eco" id="db-val-rec-size">0 kW</strong>
                         </div>
-                        <div class="suitability-badges" id="suitability-badge-container">
-                          <span class="suit-badge" data-score="C">C</span>
-                          <span class="suit-badge" data-score="B">B</span>
-                          <span class="suit-badge" data-score="A">A</span>
-                          <span class="suit-badge" data-score="A+">A+</span>
+                        <div class="proposal-row">
+                          <span class="proposal-label">عدد الألواح</span>
+                          <strong class="proposal-value" id="db-val-panel-count">0 Panels</strong>
+                        </div>
+                        <div class="proposal-row">
+                          <span class="proposal-label">قدرة العاكس</span>
+                          <strong class="proposal-value" id="db-val-inverter-size">0 kW</strong>
+                        </div>
+                        <div class="proposal-row">
+                          <span class="proposal-label">سعة تخزين البطارية</span>
+                          <strong class="proposal-value text-eco" id="db-val-battery-size">0 kWh</strong>
+                        </div>
+                      </div>
+
+                      <!-- Section 2: Estimated Investment -->
+                      <div class="spec-section border-top-divider">
+                        <h5 class="spec-section-title">الاستثمار التقديري</h5>
+                        <div class="investment-value-box" id="db-val-install-cost">
+                          0 OMR
+                        </div>
+                      </div>
+
+                      <!-- Section 3: Property Suitability -->
+                      <div class="spec-section border-top-divider">
+                        <h5 class="spec-section-title">ملاءمة العقار</h5>
+                        <div class="suitability-result-box">
+                          <div class="suitability-badge-new grade-b" id="score-suitability-badge">
+                            <span id="score-suitability-label">B</span>
+                          </div>
+                          <p class="suitability-desc" id="score-suitability-desc">
+                            مناسب لتركيب الطاقة الشمسية مع وجود فرص تحسين متوسطة.
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -674,8 +682,8 @@
                 <div class="dashboard-row form-row-row">
                   <div class="cta-lead-card">
                     <div class="cta-lead-header">
-                      <h4>احصل على تقييم مخصص لمنزلك بالطاقة الشمسية</h4>
-                      <p>احصل على توصية مخصصة للطاقة الشمسية بناءً على ملف تعريف منزلك.</p>
+                      <h4>احصل على تقييمك الشمسي المخصص</h4>
+                      <p>استلم استشارة مخصصة بناءً على نتائج تقييمك.</p>
                     </div>
                     <form id="discovery-lead-form" class="cta-lead-form">
                       <input type="hidden" name="action" value="submit_lead">
@@ -690,7 +698,7 @@
                           <input type="text" id="disc-lead-name" name="name" required placeholder="الاسم الكامل *" class="form-control-discovery" aria-label="Full Name">
                         </div>
                         <div class="form-group-field phone-input-wrapper">
-                          <input type="tel" id="disc-lead-phone" name="phone" required placeholder="رقم الهاتف (الواتساب) *" class="form-control-discovery" aria-label="Phone Number">
+                          <input type="tel" id="disc-lead-phone" name="phone" required placeholder="رقم واتساب *" class="form-control-discovery" aria-label="Phone Number">
                           <span class="whatsapp-input-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wa-icon-svg" style="width: 18px; height: 18px; color: #25D366; fill: #25D366;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                           </span>
@@ -705,7 +713,7 @@
                       </div>
 
                       <button type="submit" class="btn-cta-submit mt-3" id="btn-submit-discovery">
-                        <span>تأكيد وحجز موعد تقييم 🚀</span>
+                        <span>احجز تقييمي 🚀</span>
                         <span class="spinner" style="display: none; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;"></span>
                       </button>
                     </form>
@@ -1607,7 +1615,7 @@
   </script>
 
 <script src="calculator-engine.js?v=3.7"></script>
-  <script src="script.js?v=5.3" defer></script>
+  <script src="script.js?v=5.4" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>

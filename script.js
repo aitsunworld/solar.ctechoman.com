@@ -1877,20 +1877,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // Energy Independence
         const indScore = Math.min(100, Math.round((monthlyProduction / monthlyConsumption) * 100));
         const scoreLabel = document.getElementById('score-energy-label');
-        const scoreFill = document.getElementById('score-energy-fill');
+        const statusLabel = document.getElementById('db-val-energy-status');
         
-        let labelText = "";
-        if (indScore >= 91) {
-            labelText = isArabic ? "ممتاز" : "Excellent";
-        } else if (indScore >= 71) {
-            labelText = isArabic ? "جيد" : "Good";
-        } else if (indScore >= 41) {
-            labelText = isArabic ? "متوسط" : "Average";
-        } else {
-            labelText = isArabic ? "ضعيف" : "Poor";
+        if (scoreLabel) animateValue(scoreLabel, 0, indScore, 1000, "", "%");
+
+        if (statusLabel) {
+            let labelText = "";
+            let statusClass = "";
+            if (indScore >= 91) {
+                labelText = isArabic ? "استقلالية ممتازة للطاقة" : "Excellent Energy Independence";
+                statusClass = "status-excellent";
+            } else if (indScore >= 71) {
+                labelText = isArabic ? "استقلالية جيدة للطاقة" : "Good Energy Independence";
+                statusClass = "status-good";
+            } else if (indScore >= 41) {
+                labelText = isArabic ? "استقلالية متوسطة للطاقة" : "Moderate Energy Independence";
+                statusClass = "status-average";
+            } else {
+                labelText = isArabic ? "استقلالية منخفضة للطاقة" : "Low Energy Independence";
+                statusClass = "status-poor";
+            }
+            statusLabel.textContent = labelText;
+            statusLabel.className = `proposal-status-badge ${statusClass}`;
         }
-        if (scoreLabel) scoreLabel.textContent = `${indScore}% (${labelText})`;
-        if (scoreFill) scoreFill.style.width = `${indScore}%`;
 
         // Solar Suitability
         let yieldPoints = 2;
@@ -1914,26 +1923,53 @@ document.addEventListener('DOMContentLoaded', () => {
         const suitLabel = document.getElementById('score-suitability-label');
         if (suitLabel) suitLabel.textContent = grade;
 
-        const suitBadges = document.querySelectorAll('.suit-badge');
-        suitBadges.forEach(badge => {
-            if (badge.dataset.score === grade) {
-                badge.classList.add('active');
+        const suitBadge = document.getElementById('score-suitability-badge');
+        const suitDesc = document.getElementById('score-suitability-desc');
+        if (suitBadge) {
+            suitBadge.className = `suitability-badge-new grade-${grade.toLowerCase().replace('+', 'plus')}`;
+        }
+        if (suitDesc) {
+            let descText = "";
+            if (grade === "A+") {
+                descText = isArabic ? "مرشح استثنائي. ملاءمة مثالية للموقع لتركيب الطاقة الشمسية." : "Outstanding Candidate. Ideal site suitability for solar deployment.";
+            } else if (grade === "A") {
+                descText = isArabic ? "مرشح ممتاز. إمكانات توليد عالية وملاءمة ممتازة للطاقة الشمسية." : "Excellent Candidate. High solar generation potential and suitability.";
+            } else if (grade === "B") {
+                descText = isArabic ? "مناسب لتركيب الطاقة الشمسية مع وجود فرص تحسين متوسطة." : "Suitable for solar deployment with moderate optimization opportunities.";
             } else {
-                badge.classList.remove('active');
+                descText = isArabic ? "مرشح ممكن. يتطلب تصميماً أو هندسة مخصصة." : "Feasible Candidate. Custom design or engineering required.";
             }
-        });
+            suitDesc.textContent = descText;
+        }
 
-        // Green Impact
+        // Green Impact & Environmental Rating
         const co2Val = document.getElementById('score-co2-val');
         const treesVal = document.getElementById('score-trees-val');
-        const greenProgress = document.getElementById('green-progress-bar');
+        const greenRating = document.getElementById('score-green-rating');
         
         const trees = Math.round(result.co2OffsetTons * 16.5);
         if (co2Val) animateValue(co2Val, 0, result.co2OffsetTons, 1000, "", " Tons");
         if (treesVal) animateValue(treesVal, 0, trees, 1000);
 
-        const greenPct = Math.min(100, Math.round((result.co2OffsetTons / 30) * 100));
-        if (greenProgress) greenProgress.style.width = `${greenPct}%`;
+        if (greenRating) {
+            let ratingText = '';
+            let ratingClass = '';
+            if (result.co2OffsetTons >= 25) {
+                ratingText = isArabic ? 'ممتاز' : 'Excellent';
+                ratingClass = 'text-green';
+            } else if (result.co2OffsetTons >= 10) {
+                ratingText = isArabic ? 'جيد' : 'Good';
+                ratingClass = 'text-green';
+            } else if (result.co2OffsetTons >= 5) {
+                ratingText = isArabic ? 'متوسط' : 'Moderate';
+                ratingClass = 'text-orange';
+            } else {
+                ratingText = isArabic ? 'مقبول' : 'Standard';
+                ratingClass = 'text-muted';
+            }
+            greenRating.textContent = ratingText;
+            greenRating.className = `proposal-value ${ratingClass}`;
+        }
     }
 
     // Step Actions Bindings

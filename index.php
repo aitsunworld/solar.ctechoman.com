@@ -99,8 +99,8 @@ $lang = require_once "lang/{$active_lang}.php";
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=8.3" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=8.3"></noscript>
+  <link rel="preload" as="style" href="style.css?v=8.4" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="style.css?v=8.4"></noscript>
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -600,29 +600,28 @@ $lang = require_once "lang/{$active_lang}.php";
 
                 <!-- ROW 3: Three Columns for Insights -->
                 <div class="dashboard-row insights-row">
-                  <!-- Col 1: Energy Consumption -->
+                  <!-- Col 1: Energy Consumption & Independence -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
                       <span>⚡</span> <?= $active_lang === 'ar' ? 'استهلاك الطاقة والاستقلالية' : 'Energy Consumption & Independence' ?>
                     </h4>
-                    <div class="insights-grid-sub">
-                      <div class="discovery-metric-card">
-                        <span class="metric-label"><?= $lang['db_daily_cons'] ?></span>
-                        <strong class="metric-val" id="db-val-daily-cons">0 kWh/day</strong>
+                    <div class="proposal-card-content">
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'الاستهلاك اليومي' : 'Daily Usage' ?></span>
+                        <strong class="proposal-value" id="db-val-daily-cons">0 kWh/day</strong>
                       </div>
-                      <div class="discovery-metric-card">
-                        <span class="metric-label"><?= $lang['db_monthly_cons'] ?></span>
-                        <strong class="metric-val" id="db-val-monthly-cons">0 kWh/month</strong>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'الاستهلاك الشهري' : 'Monthly Usage' ?></span>
+                        <strong class="proposal-value" id="db-val-monthly-cons">0 kWh/month</strong>
                       </div>
-                    </div>
-                    <div class="gamification-section">
-                      <div class="game-score-card">
-                        <div class="game-score-header">
-                          <span><?= $lang['score_energy_ind'] ?></span>
-                          <span class="score-value-pill" id="score-energy-label">0%</span>
-                        </div>
-                        <div class="progress-bar-wrapper">
-                          <div class="progress-bar-fill fill-energy" id="score-energy-fill" style="width:0%"></div>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'تغطية الطاقة الشمسية' : 'Solar Offset Potential' ?></span>
+                        <strong class="proposal-value text-eco" id="score-energy-label">0%</strong>
+                      </div>
+                      <div class="proposal-status-section">
+                        <span class="proposal-label-small"><?= $active_lang === 'ar' ? 'الحالة' : 'Status' ?></span>
+                        <div class="proposal-status-badge status-excellent" id="db-val-energy-status">
+                          <?= $active_lang === 'ar' ? 'استقلالية ممتازة للطاقة' : 'Excellent Energy Independence' ?>
                         </div>
                       </div>
                     </div>
@@ -633,22 +632,22 @@ $lang = require_once "lang/{$active_lang}.php";
                     <h4 class="section-title-discovery">
                       <span>🌱</span> <?= $active_lang === 'ar' ? 'الأثر البيئي' : 'Environmental Impact' ?>
                     </h4>
-                    <div class="gamification-section">
-                      <div class="game-score-card green-impact-card">
-                        <div class="green-metrics">
-                          <div class="green-sub">
-                            <span id="score-co2-val">0.0</span>
-                            <small><?= $active_lang === 'ar' ? 'طن ثاني أكسيد الكربون المتجنب سنوياً' : 'CO₂ avoided per year (Tons)' ?></small>
-                          </div>
-                          <div class="green-sub">
-                            <span id="score-trees-val">0</span>
-                            <small><?= $lang['green_trees'] ?></small>
-                          </div>
-                        </div>
-                        <div class="animated-green-bar">
-                          <div class="green-leaf-progress" id="green-progress-bar" style="width:0%"></div>
-                        </div>
+                    <div class="proposal-card-content">
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'الحد السنوي من CO₂' : 'Annual CO₂ Reduction' ?></span>
+                        <strong class="proposal-value text-green" id="score-co2-val">0.0 Tons</strong>
                       </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'الأشجار المكافئة المزروعة' : 'Equivalent Trees Planted' ?></span>
+                        <strong class="proposal-value" id="score-trees-val">0</strong>
+                      </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'التقييم البيئي' : 'Environmental Rating' ?></span>
+                        <strong class="proposal-value text-green" id="score-green-rating">Excellent</strong>
+                      </div>
+                      <p class="proposal-summary-text">
+                        <?= $active_lang === 'ar' ? 'يقلل هذا النظام الشمسي بشكل كبير من الانبعاثات الكربونية السنوية.' : 'This solar system significantly reduces annual carbon emissions.' ?>
+                      </p>
                     </div>
                   </div>
 
@@ -657,40 +656,46 @@ $lang = require_once "lang/{$active_lang}.php";
                     <h4 class="section-title-discovery">
                       <span>🔧</span> <?= $active_lang === 'ar' ? 'المواصفات الفنية والملاءمة' : 'Technical Specifications & Suitability' ?>
                     </h4>
-                    <div class="insights-grid-sub select-tech-grid">
-                      <div class="discovery-metric-card">
-                        <span class="metric-label"><?= $lang['db_rec_size'] ?></span>
-                        <strong class="metric-val text-eco" id="db-val-rec-size">0 kW</strong>
-                      </div>
-                      <div class="discovery-metric-card">
-                        <span class="metric-label"><?= $active_lang === 'ar' ? 'عدد الألواح المقدر' : 'Required Panel Count' ?></span>
-                        <strong class="metric-val" id="db-val-panel-count">0 Panels</strong>
-                      </div>
-                      <div class="discovery-metric-card">
-                        <span class="metric-label"><?= $active_lang === 'ar' ? 'حجم العاكس الموصى به' : 'Recommended Inverter Size' ?></span>
-                        <strong class="metric-val" id="db-val-inverter-size">0 kW</strong>
-                      </div>
-                      <div class="discovery-metric-card">
-                        <span class="metric-label"><?= $active_lang === 'ar' ? 'سعة البطارية الموصى بها' : 'Recommended Battery Size' ?></span>
-                        <strong class="metric-val text-eco" id="db-val-battery-size">0 kWh</strong>
-                      </div>
-                      <div class="discovery-metric-card" id="db-card-install-cost" style="grid-column: span 2;">
-                        <span class="metric-label"><?= $active_lang === 'ar' ? 'التكلفة التقديرية لتوريد وتركيب النظام' : 'Est. Installation Cost' ?></span>
-                        <strong class="metric-val text-eco" id="db-val-install-cost">0 OMR</strong>
-                      </div>
-                    </div>
-                    
-                    <div class="gamification-section">
-                      <div class="game-score-card suitability-score-card">
-                        <div class="game-score-header">
-                          <span>🏠 <?= $lang['score_suitability'] ?></span>
-                          <strong id="score-suitability-label">A</strong>
+                    <div class="proposal-card-content spec-card-content">
+                      <!-- Section 1: Recommended System -->
+                      <div class="spec-section">
+                        <h5 class="spec-section-title"><?= $active_lang === 'ar' ? 'النظام الموصى به' : 'Recommended System' ?></h5>
+                        <div class="proposal-row">
+                          <span class="proposal-label"><?= $active_lang === 'ar' ? 'قدرة الطاقة الشمسية' : 'Solar Capacity' ?></span>
+                          <strong class="proposal-value text-eco" id="db-val-rec-size">0 kW</strong>
                         </div>
-                        <div class="suitability-badges" id="suitability-badge-container">
-                          <span class="suit-badge" data-score="C">C</span>
-                          <span class="suit-badge" data-score="B">B</span>
-                          <span class="suit-badge" data-score="A">A</span>
-                          <span class="suit-badge" data-score="A+">A+</span>
+                        <div class="proposal-row">
+                          <span class="proposal-label"><?= $active_lang === 'ar' ? 'عدد الألواح' : 'Panel Count' ?></span>
+                          <strong class="proposal-value" id="db-val-panel-count">0 Panels</strong>
+                        </div>
+                        <div class="proposal-row">
+                          <span class="proposal-label"><?= $active_lang === 'ar' ? 'قدرة العاكس' : 'Inverter Capacity' ?></span>
+                          <strong class="proposal-value" id="db-val-inverter-size">0 kW</strong>
+                        </div>
+                        <div class="proposal-row">
+                          <span class="proposal-label"><?= $active_lang === 'ar' ? 'سعة تخزين البطارية' : 'Battery Storage' ?></span>
+                          <strong class="proposal-value text-eco" id="db-val-battery-size">0 kWh</strong>
+                        </div>
+                      </div>
+
+                      <!-- Section 2: Estimated Investment -->
+                      <div class="spec-section border-top-divider">
+                        <h5 class="spec-section-title"><?= $active_lang === 'ar' ? 'الاستثمار التقديري' : 'Estimated Investment' ?></h5>
+                        <div class="investment-value-box" id="db-val-install-cost">
+                          0 OMR
+                        </div>
+                      </div>
+
+                      <!-- Section 3: Property Suitability -->
+                      <div class="spec-section border-top-divider">
+                        <h5 class="spec-section-title"><?= $active_lang === 'ar' ? 'ملاءمة العقار' : 'Property Suitability' ?></h5>
+                        <div class="suitability-result-box">
+                          <div class="suitability-badge-new grade-b" id="score-suitability-badge">
+                            <span id="score-suitability-label">B</span>
+                          </div>
+                          <p class="suitability-desc" id="score-suitability-desc">
+                            <?= $active_lang === 'ar' ? 'مناسب لتركيب الطاقة الشمسية مع وجود فرص تحسين متوسطة.' : 'Suitable for solar deployment with moderate optimization opportunities.' ?>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -1634,7 +1639,7 @@ $lang = require_once "lang/{$active_lang}.php";
   </script>
 
 <script src="calculator-engine.js?v=3.7"></script>
-  <script src="script.js?v=5.3" defer></script>
+  <script src="script.js?v=5.4" defer></script>
 
   <!-- Idle-load non-critical scripts: chatbot + analytics loaded after user interacts or browser is idle -->
   <script>

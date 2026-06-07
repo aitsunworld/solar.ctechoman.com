@@ -1,0 +1,97 @@
+<div class="dashboard-row insights-row">
+                  <!-- Col 1: Energy Consumption -->
+                  <div class="dashboard-section col-insights">
+                    <h4 class="section-title-discovery">
+                      <span>⚡</span> Energy Consumption & Independence
+                    </h4>
+                    <div class="insights-grid-sub">
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">Daily Energy Consumption</span>
+                        <strong class="metric-val" id="db-val-daily-cons">0 kWh/day</strong>
+                      </div>
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">Monthly Energy Consumption</span>
+                        <strong class="metric-val" id="db-val-monthly-cons">0 kWh/month</strong>
+                      </div>
+                    </div>
+                    <div class="gamification-section">
+                      <div class="game-score-card">
+                        <div class="game-score-header">
+                          <span>Energy Independence</span>
+                          <span class="score-value-pill" id="score-energy-label">0%</span>
+                        </div>
+                        <div class="progress-bar-wrapper">
+                          <div class="progress-bar-fill fill-energy" id="score-energy-fill" style="width:0%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Col 2: Environmental Impact -->
+                  <div class="dashboard-section col-insights">
+                    <h4 class="section-title-discovery">
+                      <span>🌱</span> Environmental Impact
+                    </h4>
+                    <div class="gamification-section">
+                      <div class="game-score-card green-impact-card">
+                        <div class="green-metrics">
+                          <div class="green-sub">
+                            <span id="score-co2-val">0.0</span>
+                            <small>CO₂ avoided per year (Tons)</small>
+                          </div>
+                          <div class="green-sub">
+                            <span id="score-trees-val">0</span>
+                            <small>Equivalent trees planted</small>
+                          </div>
+                        </div>
+                        <div class="animated-green-bar">
+                          <div class="green-leaf-progress" id="green-progress-bar" style="width:0%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Col 3: Technical Specifications & Suitability -->
+                  <div class="dashboard-section col-insights">
+                    <h4 class="section-title-discovery">
+                      <span>🔧</span> Technical Specifications & Suitability
+                    </h4>
+                    <div class="insights-grid-sub select-tech-grid">
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">Recommended Solar Size</span>
+                        <strong class="metric-val text-eco" id="db-val-rec-size">0 kW</strong>
+                      </div>
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">Required Panel Count</span>
+                        <strong class="metric-val" id="db-val-panel-count">0 Panels</strong>
+                      </div>
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">Recommended Inverter Size</span>
+                        <strong class="metric-val" id="db-val-inverter-size">0 kW</strong>
+                      </div>
+                      <div class="discovery-metric-card">
+                        <span class="metric-label">Recommended Battery Size</span>
+                        <strong class="metric-val text-eco" id="db-val-battery-size">0 kWh</strong>
+                      </div>
+                      <div class="discovery-metric-card" id="db-card-install-cost" style="grid-column: span 2;">
+                        <span class="metric-label">Est. Installation Cost</span>
+                        <strong class="metric-val text-eco" id="db-val-install-cost">0 OMR</strong>
+                      </div>
+                    </div>
+                    
+                    <div class="gamification-section">
+                      <div class="game-score-card suitability-score-card">
+                        <div class="game-score-header">
+                          <span>🏠 Solar Suitability</span>
+                          <strong id="score-suitability-label">A</strong>
+                        </div>
+                        <div class="suitability-badges" id="suitability-badge-container">
+                          <span class="suit-badge" data-score="C">C</span>
+                          <span class="suit-badge" data-score="B">B</span>
+                          <span class="suit-badge" data-score="A">A</span>
+                          <span class="suit-badge" data-score="A+">A+</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
