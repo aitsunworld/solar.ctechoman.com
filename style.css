@@ -4965,11 +4965,15 @@ html[dir="rtl"] .whatsapp-input-icon {
 }
 .step-actions .btn-primary:hover, .calibration-actions .btn-primary:hover { background: #1e2530 !important; transform: translateY(-1px) !important; }
 .step-actions .btn-secondary, .calibration-actions .btn-secondary {
-  background: #FFFFFF !important; color: #0d1014 !important; border: 1.5px solid #E2E8F0 !important; box-shadow: none !important;
+  background: #F8FAFC !important;
+  color: #0d1014 !important;
+  border: 1.5px solid #CBD5E1 !important;
+  box-shadow: none !important;
+  min-width: 88px !important;
 }
-.step-actions .btn-secondary:hover, .calibration-actions .btn-secondary:hover { background: #F8FAFC !important; border-color: #94A3B8 !important; }
-.step-actions { display: flex !important; align-items: center !important; gap: 16px !important; width: 100% !important; margin-top: 1rem !important; }
-.calibration-actions { display: flex !important; align-items: center !important; gap: 16px !important; width: 100% !important; }
+.step-actions .btn-secondary:hover, .calibration-actions .btn-secondary:hover { background: #EFF4FA !important; border-color: #94A3B8 !important; }
+.step-actions { display: flex !important; align-items: center !important; gap: 12px !important; width: 100% !important; margin-top: 1.25rem !important; }
+.calibration-actions { display: flex !important; align-items: center !important; gap: 12px !important; width: 100% !important; }
 .calibration-actions .btn { flex: 1 !important; }
 
 /* ── ISSUE 6: SUBMIT BUTTON — Premium Green ── */
@@ -5399,7 +5403,10 @@ html[dir="rtl"] .phone-input-wrapper .form-control-discovery { padding-right: 1r
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
+  width: 200px !important;
+  height: 200px !important;
   transform: rotate(-90deg) !important;
+  transform-origin: center !important;
 }
 
 .calibration-ring-section .progress-ring-bg {
@@ -5648,9 +5655,53 @@ html[dir="rtl"] .calibration-container .calibration-action-card {
 
 /* End v7.0 Redesign */
 
-/* ── Custom Select Arrow Styles ── */
-select.manual-bill-input,
+/* ── Wizard Footer Controls Layout ── */
+.wizard-footer-controls {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 0.75rem !important;
+  padding: 0.75rem 1rem !important;
+  border-top: 1px solid var(--color-border) !important;
+  background: var(--color-surface) !important;
+  width: 100% !important;
+}
+
+.wizard-footer-controls .form-group-field {
+  flex: 1 !important;
+  min-width: 140px !important;
+}
+
 .wizard-footer-controls select {
+  width: 100% !important;
+  padding: 0.55rem 2.5rem 0.55rem 0.875rem !important;
+  border: 1.5px solid var(--color-border) !important;
+  border-radius: 10px !important;
+  font-size: 0.9rem !important;
+  font-family: inherit !important;
+  font-weight: 600 !important;
+  color: var(--color-text-dark) !important;
+  background-color: var(--color-surface) !important;
+  cursor: pointer !important;
+  outline: none !important;
+  transition: border-color 0.2s ease !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.75rem center !important;
+  background-size: 1.1em !important;
+}
+
+.wizard-footer-controls select:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(58, 141, 204, 0.12) !important;
+}
+
+/* ── Custom Select Arrow for Manual Bill Input ── */
+select.manual-bill-input {
     appearance: none !important;
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
@@ -5660,26 +5711,17 @@ select.manual-bill-input,
     background-size: 1.2em !important;
     padding-right: 2.5rem !important;
 }
-html[dir="rtl"] select.manual-bill-input,
-html[dir="rtl"] .wizard-footer-controls select {
+
+html[dir="rtl"] select.manual-bill-input {
     background-position: left 1rem center !important;
     padding-right: 1.25rem !important;
     padding-left: 2.5rem !important;
 }
 
-/* ── Progress Ring Centering and Styling ── */
-.calibration-ring-section .progress-ring-svg {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 200px !important;
-    height: 200px !important;
-    transform: rotate(-90deg) !important;
-    transform-origin: center !important;
-}
-
-html[dir="rtl"] .calibration-ring-section .progress-ring-svg {
-    transform: rotate(-90deg) scaleY(-1) !important;
+html[dir="rtl"] .wizard-footer-controls select {
+    background-position: left 0.75rem center !important;
+    padding-right: 0.875rem !important;
+    padding-left: 2.5rem !important;
 }
 
 /* ── Start Over / Reset Button Styling ── */
@@ -5711,4 +5753,9 @@ html[dir="rtl"] .calibration-ring-section .progress-ring-svg {
   color: var(--color-text-dark) !important;
   background: rgba(0, 0, 0, 0.04) !important;
   transform: translateY(-1px) !important;
+}
+
+/* ── RTL: Calibration Ring Mirror ── */
+html[dir="rtl"] .calibration-ring-section .progress-ring-svg {
+  transform: rotate(-90deg) scaleY(-1) !important;
 }
