@@ -5231,6 +5231,30 @@ html[dir="rtl"] .phone-input-wrapper .form-control-discovery { padding-right: 1r
   color: var(--color-text-dark);
 }
 
+.btn-step5-upload {
+  background: none;
+  border: 1.5px dashed #94a3b8;
+  color: #64748b;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.btn-step5-upload:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  background: rgba(59,130,246,0.05);
+}
+
 /* Manual Bill Entry Panel */
 .manual-bill-panel {
   width: 100%;
@@ -5390,6 +5414,108 @@ html[dir="rtl"] .phone-input-wrapper .form-control-discovery { padding-right: 1r
   .btn-manual-cancel { flex: 1; }
 }
 
+
+/* ── Upload Bill Panel (Option C) ─────────────────────────────────────── */
+.upload-bill-panel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.upload-bill-card {
+  background: #fff;
+  border: 1.5px solid var(--color-border, #e2e8f0);
+  border-radius: 20px;
+  padding: 1.5rem 1.75rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.upload-bill-header h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-text-dark, #0d1014);
+  margin: 0 0 0.2rem;
+}
+
+.upload-bill-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-muted, #64748b);
+  margin: 0;
+}
+
+.upload-bill-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: 2px dashed #cbd5e1;
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  background: #f8fafc;
+}
+
+.upload-bill-dropzone.dragover,
+.upload-bill-dropzone:hover {
+  border-color: #3b82f6;
+  background: rgba(59,130,246,0.04);
+}
+
+.upload-dropzone-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.upload-dropzone-text {
+  font-size: 0.88rem;
+  color: var(--color-text-muted, #64748b);
+  font-weight: 500;
+}
+
+.upload-link {
+  color: #3b82f6;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.upload-bill-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-radius: 14px;
+  border: 1.5px solid #6ee7b7;
+}
+
+.upload-success-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.upload-success-msg {
+  font-size: 0.92rem;
+  color: #065f46;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.upload-bill-actions {
+  display: flex;
+  justify-content: flex-end;
+}
 
 /* ── STEP 6: Calibration — Vertical Centered Premium Layout ───────────── */
 

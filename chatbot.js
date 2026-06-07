@@ -34,11 +34,13 @@
 
   const TRANSLATIONS = {
     en: {
-      greeting: "👋 Hi! I'm SolarBot, your solar energy guide for Concept Technologies.",
-      greetingCta: "I can help you understand solar savings, answer questions, or get you a free quote!",
+      greeting: "👋 Hi! Would you like to estimate your solar system size and see your potential savings?",
+      greetingCta: "I can guide you through our solar sizer, answer your questions, or connect you with a free quote!",
       placeholder: "Type your message...",
       send: "Send",
       quickReplies: {
+        sizerYes: "✅ Yes, estimate my system!",
+        sizerNo: "💬 I have a question first",
         calculator: "🧮 Use Solar Calculator",
         savings: "💰 How much will I save?",
         cost: "💵 What does it cost?",
@@ -48,8 +50,9 @@
       leadCapture: {
         name: "What's your name?",
         phone: "What's your phone number?",
-        email: "What's your email address?",
-        location: "Which city/area are you located in?",
+        email: "What's your email address? (Optional)",
+        governorate: "Which Governorate are you in? (e.g. Muscat, Dhofar, Al Batinah...)",
+        propertyType: "What type of property? (Residential / Commercial / Industrial)",
         submitted: "✅ Thank you! Our solar expert will contact you within 24 hours.",
       },
       typing: "SolarBot is typing...",
@@ -59,11 +62,13 @@
       language: "العربية",
     },
     ar: {
-      greeting: "👋 مرحباً! أنا SolarBot، مرشدك للطاقة الشمسية من كونسبت تكنولوجيز.",
-      greetingCta: "يمكنني مساعدتك في فهم توفير الطاقة الشمسية، الإجابة على أسئلتك، أو الحصول على عرض سعر مجاني!",
+      greeting: "👋 مرحباً! هل تريد تقدير حجم نظامك الشمسي ومعرفة التوفير المحتمل؟",
+      greetingCta: "يمكنني إرشادك عبر حاسبة الطاقة الشمسية، الإجابة على أسئلتك، أو توصيلك بعرض سعر مجاني!",
       placeholder: "اكتب رسالتك...",
       send: "إرسال",
       quickReplies: {
+        sizerYes: "✅ نعم، قدّر نظامي!",
+        sizerNo: "💬 لدي سؤال أولاً",
         calculator: "🧮 استخدم حاسبة الطاقة الشمسية",
         savings: "💰 كم سأوفر؟",
         cost: "💵 ما هي التكلفة؟",
@@ -73,8 +78,9 @@
       leadCapture: {
         name: "ما اسمك؟",
         phone: "ما رقم هاتفك؟",
-        email: "ما عنوان بريدك الإلكتروني؟",
-        location: "في أي مدينة/منطقة تقع؟",
+        email: "ما عنوان بريدك الإلكتروني؟ (اختياري)",
+        governorate: "في أي محافظة أنت؟ (مثال: مسقط، ظفار، الباطنة...)",
+        propertyType: "نوع العقار؟ (سكني / تجاري / صناعي)",
         submitted: "✅ شكراً! سيتواصل معك خبير الطاقة الشمسية لدينا خلال 24 ساعة.",
       },
       typing: "SolarBot يكتب...",
@@ -283,6 +289,9 @@
     CALCULATOR_GUIDE: "CALCULATOR_GUIDE",
     LEAD_CAPTURE: "LEAD_CAPTURE",
     LEAD_DONE: "LEAD_DONE",
+    GUIDE_APPLIANCES: "GUIDE_APPLIANCES",
+    GUIDE_BILL: "GUIDE_BILL",
+    GUIDE_SAVINGS: "GUIDE_SAVINGS",
   };
 
   // ─── STATE MANAGEMENT ────────────────────────────────────────────────────────
@@ -509,18 +518,22 @@
     state.flow = FLOW.WELCOME;
 
     if (state.lang === "ar") {
-      // Arabic: deliver single fast greeting with the main menu inline for snappy RTL UX
       addBotMessage(TRANSLATIONS.ar.greeting);
       setTimeout(function () {
-        addBotMessage(TRANSLATIONS.ar.greetingCta, getMainMenuReplies());
-        state.flow = FLOW.MAIN_MENU;
+        addBotMessage(TRANSLATIONS.ar.greetingCta, [
+          { label: TRANSLATIONS.ar.quickReplies.sizerYes, value: "sizer_start" },
+          { label: TRANSLATIONS.ar.quickReplies.sizerNo, value: "menu" },
+        ]);
+        state.flow = FLOW.GUIDE_APPLIANCES;
       }, 800);
     } else {
-      // English: classic 2-bubble sequence with typing delay
       addBotMessage(TRANSLATIONS.en.greeting);
       setTimeout(function () {
-        addBotMessage(TRANSLATIONS.en.greetingCta, getMainMenuReplies());
-        state.flow = FLOW.MAIN_MENU;
+        addBotMessage(TRANSLATIONS.en.greetingCta, [
+          { label: TRANSLATIONS.en.quickReplies.sizerYes, value: "sizer_start" },
+          { label: TRANSLATIONS.en.quickReplies.sizerNo, value: "menu" },
+        ]);
+        state.flow = FLOW.GUIDE_APPLIANCES;
       }, 1200);
     }
   }
@@ -633,6 +646,66 @@
     }
 
     switch (opt.value) {
+      // ─── GUIDED SIZER JOURNEY ────────────────────────────────────────────────
+      case "sizer_start":
+        state.flow = FLOW.GUIDE_APPLIANCES;
+        addBotMessage(
+          l === "ar"
+            ? "رائع! 🌞 الخطوة الأولى هي معرفة أجهزتك المنزلية. هل تستخدم مكيفات هواء؟"
+            : "Great! 🌞 Step 1: Let's understand your appliances. Do you use air conditioners?",
+          [
+            { label: l === "ar" ? "✅ نعم، لديّ مكيفات" : "✅ Yes, I use ACs", value: "guide_has_ac" },
+            { label: l === "ar" ? "❌ لا مكيفات" : "❌ No ACs", value: "guide_no_ac" },
+          ]
+        );
+        break;
+
+      case "guide_has_ac":
+      case "guide_no_ac": {
+        state.flow = FLOW.GUIDE_BILL;
+        const hasAC = opt.value === "guide_has_ac";
+        const acNote = hasAC
+          ? (l === "ar" ? "✅ ممتاز! المكيفات تمثل عادةً 40-60% من استهلاك الكهرباء." : "✅ Great! ACs typically account for 40–60% of electricity usage.")
+          : (l === "ar" ? "✅ حسناً! معظم منازلنا تستهلك أقل بدون مكيفات." : "✅ Noted! Homes without ACs tend to consume less.");
+        addBotMessage(acNote);
+        setTimeout(function () {
+          addBotMessage(
+            l === "ar"
+              ? "📄 هل تعرف فاتورتك الشهرية تقريباً؟ هذا يساعدنا في تحديد حجم النظام بدقة."
+              : "📄 Do you know your approximate monthly electricity bill? This helps us size your system accurately.",
+            [
+              { label: l === "ar" ? "< 30 ريال" : "< OMR 30", value: "guide_bill_low" },
+              { label: l === "ar" ? "30–80 ريال" : "OMR 30–80", value: "guide_bill_mid" },
+              { label: l === "ar" ? "80–150 ريال" : "OMR 80–150", value: "guide_bill_high" },
+              { label: l === "ar" ? "> 150 ريال" : "> OMR 150", value: "guide_bill_vhigh" },
+              { label: l === "ar" ? "غير متأكد" : "Not sure", value: "guide_bill_unknown" },
+            ]
+          );
+        }, 900);
+        break;
+      }
+
+      case "guide_bill_low":
+      case "guide_bill_mid":
+      case "guide_bill_high":
+      case "guide_bill_vhigh":
+      case "guide_bill_unknown": {
+        state.flow = FLOW.GUIDE_SAVINGS;
+        const billRange = { guide_bill_low: "<30", guide_bill_mid: "30-80", guide_bill_high: "80-150", guide_bill_vhigh: ">150", guide_bill_unknown: "unknown" }[opt.value];
+        const sizeEst = { guide_bill_low: "2–3 kW", guide_bill_mid: "3–5 kW", guide_bill_high: "5–8 kW", guide_bill_vhigh: "8–15 kW", guide_bill_unknown: "3–10 kW" }[opt.value];
+        const saveEst = { guide_bill_low: "OMR 20–30/month", guide_bill_mid: "OMR 30–60/month", guide_bill_high: "OMR 60–100/month", guide_bill_vhigh: "OMR 100–180/month", guide_bill_unknown: "OMR 30–120/month" }[opt.value];
+        const saveEstAr = { guide_bill_low: "20-30 ريال/شهر", guide_bill_mid: "30-60 ريال/شهر", guide_bill_high: "60-100 ريال/شهر", guide_bill_vhigh: "100-180 ريال/شهر", guide_bill_unknown: "30-120 ريال/شهر" }[opt.value];
+        const msg = l === "ar"
+          ? `☀️ **تقدير النظام الشمسي الخاص بك:**\n\n• الحجم المقترح: **${sizeEst}**\n• التوفير المتوقع: **${saveEstAr}**\n• فترة الاسترداد: **4-6 سنوات**\n• العمر الإنتاجي: **25+ سنة**\n\nهل تريد عرض سعر مجاني ومخصص لمنزلك؟`
+          : `☀️ **Your Estimated Solar Profile:**\n\n• Suggested System Size: **${sizeEst}**\n• Estimated Monthly Savings: **${saveEst}**\n• Payback Period: **4–6 years**\n• System Lifespan: **25+ years**\n\nWould you like a free personalized quote for your home?`;
+        addBotMessage(msg, [
+          { label: l === "ar" ? "📋 نعم، أريد عرض سعر مجاني!" : "📋 Yes, get me a free quote!", value: "quote" },
+          { label: l === "ar" ? "🧮 جرب الحاسبة التفصيلية" : "🧮 Try detailed calculator", value: "calculator" },
+          { label: l === "ar" ? "❓ أسئلة أخرى" : "❓ I have questions", value: "faq" },
+        ]);
+        break;
+      }
+
       case "calculator":
         addBotMessage(FAQ_DB.calculator[l] || FAQ_DB.calculator.en, [
           { label: l === "ar" ? "📋 احصل على عرض سعر" : "📋 Get a Quote", value: "quote" },
@@ -938,8 +1011,14 @@
     setSafeHTML(el.formPanel, `
       <input type="text" id="sb-lead-name" class="sb-input" placeholder="${t.name}" aria-label="${t.name}" required />
       <input type="tel" id="sb-lead-phone" class="sb-input" placeholder="${t.phone}" aria-label="${t.phone}" required />
-      <input type="email" id="sb-lead-email" class="sb-input" placeholder="${t.email} (${state.lang === "ar" ? "اختياري" : "Optional"})" aria-label="${t.email}" />
-      <input type="text" id="sb-lead-loc" class="sb-input" placeholder="${t.location}" aria-label="${t.location}" required />
+      <input type="email" id="sb-lead-email" class="sb-input" placeholder="${t.email}" aria-label="${t.email}" />
+      <input type="text" id="sb-lead-governorate" class="sb-input" placeholder="${t.governorate}" aria-label="${t.governorate}" required />
+      <select id="sb-lead-property-type" class="sb-input" aria-label="${t.propertyType}">
+        <option value="" disabled selected>${state.lang === "ar" ? "اختر نوع العقار" : "Select Property Type"}</option>
+        <option value="residential">${state.lang === "ar" ? "🏠 سكني" : "🏠 Residential"}</option>
+        <option value="commercial">${state.lang === "ar" ? "🏢 تجاري" : "🏢 Commercial"}</option>
+        <option value="industrial">${state.lang === "ar" ? "🏭 صناعي" : "🏭 Industrial"}</option>
+      </select>
       <button class="sb-submit-btn" id="sb-form-submit">${state.lang === "ar" ? "إرسال ←" : "Submit →"}</button>
     `);
     el.formPanel.style.display = "block";
@@ -954,10 +1033,12 @@
   function submitLeadForm() {
     const nameVal = document.getElementById("sb-lead-name").value.trim();
     const phoneVal = document.getElementById("sb-lead-phone").value.trim();
-    const emailVal = document.getElementById("sb-lead-email").value.trim();
-    const locVal = document.getElementById("sb-lead-loc").value.trim();
+    const emailVal = document.getElementById("sb-lead-email") ? document.getElementById("sb-lead-email").value.trim() : "";
+    const govVal = document.getElementById("sb-lead-governorate") ? document.getElementById("sb-lead-governorate").value.trim() : "";
+    const propTypeEl = document.getElementById("sb-lead-property-type");
+    const propTypeVal = propTypeEl ? propTypeEl.value : "residential";
 
-    if (!nameVal || !phoneVal || !locVal) {
+    if (!nameVal || !phoneVal || !govVal) {
       alert(state.lang === "ar" ? "يرجى ملء جميع الحقول المطلوبة!" : "Please fill in all required fields!");
       return;
     }
@@ -965,14 +1046,15 @@
     el.formPanel.style.display = "none";
     setSafeHTML(el.formPanel, "");
 
-    const userLog = `${nameVal} | ${phoneVal} ${emailVal ? "| " + emailVal : ""} | ${locVal}`;
+    const userLog = `${nameVal} | ${phoneVal}${emailVal ? " | " + emailVal : ""} | ${govVal} | ${propTypeVal}`;
     addUserMessage(userLog);
 
     const leadObj = {
       name: nameVal,
       phone: phoneVal,
       email: emailVal,
-      location: locVal,
+      governorate: govVal,
+      property_type: propTypeVal,
       lang: state.lang,
       timestamp: new Date().toISOString(),
       calculator: state.calculatorContext
@@ -991,7 +1073,8 @@
         name: nameVal,
         phone: phoneVal,
         email: emailVal,
-        location: locVal,
+        governorate: govVal,
+        property_type: propTypeVal,
         system_size_kw: state.calculatorContext ? state.calculatorContext.systemSize : 0
       });
     }

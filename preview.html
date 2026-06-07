@@ -404,6 +404,32 @@
               <button type="button" class="btn-step5-skip" id="btn-skip-calibration">
                 Skip For Now
               </button>
+              <!-- Option C: Upload Bill -->
+              <button type="button" class="btn-step5-upload" id="btn-show-upload-bill">
+                📎 Upload Bill (PDF / Image)
+              </button>
+            </div>
+
+            <!-- Upload Bill Sub-Panel (hidden by default) -->
+            <div class="upload-bill-panel" id="upload-bill-panel" style="display: none;">
+              <div class="upload-bill-card">
+                <div class="upload-bill-header">
+                  <h4>📄 Upload Your Electricity Bill</h4>
+                  <p class="upload-bill-subtitle">Accept PDF, JPG, PNG — Max 10 MB</p>
+                </div>
+                <label class="upload-bill-dropzone" id="upload-bill-dropzone" for="db-bill-file">
+                  <div class="upload-dropzone-icon">☁️</div>
+                  <div class="upload-dropzone-text">Drag &amp; drop your bill here, or <span class="upload-link">browse</span></div>
+                  <input type="file" id="db-bill-file" name="bill_file" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" aria-label="Upload electricity bill">
+                </label>
+                <div class="upload-bill-success" id="upload-bill-success" style="display: none;">
+                  <div class="upload-success-icon">✅</div>
+                  <p class="upload-success-msg">Bill uploaded successfully. A solar consultant will review the bill during assessment.</p>
+                </div>
+                <div class="upload-bill-actions">
+                  <button type="button" class="btn-manual-cancel" id="btn-cancel-upload">Back</button>
+                </div>
+              </div>
             </div>
 
             <!-- Manual Bill Entry Sub-Panel (hidden by default) -->

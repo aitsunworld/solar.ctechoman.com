@@ -2132,6 +2132,73 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    // ─── Upload Bill Panel (Option C) ─────────────────────────────────────────
+    const btnShowUploadBill = document.getElementById('btn-show-upload-bill');
+    const uploadBillPanel   = document.getElementById('upload-bill-panel');
+    const uploadBillSuccess = document.getElementById('upload-bill-success');
+    const uploadBillDropzone = document.getElementById('upload-bill-dropzone');
+    const dbBillFile        = document.getElementById('db-bill-file');
+    const btnCancelUpload   = document.getElementById('btn-cancel-upload');
+
+    if (btnShowUploadBill && uploadBillPanel) {
+        btnShowUploadBill.addEventListener('click', () => {
+            if (step5MainActions) step5MainActions.style.display = 'none';
+            if (step5SliderSection) step5SliderSection.style.display = 'none';
+            uploadBillPanel.style.display = 'block';
+        });
+    }
+
+    if (btnCancelUpload && uploadBillPanel) {
+        btnCancelUpload.addEventListener('click', () => {
+            uploadBillPanel.style.display = 'none';
+            if (uploadBillSuccess) uploadBillSuccess.style.display = 'none';
+            if (dbBillFile) dbBillFile.value = '';
+            if (uploadBillDropzone) uploadBillDropzone.classList.remove('dragover');
+            if (step5MainActions) step5MainActions.style.display = 'flex';
+            if (step5SliderSection) step5SliderSection.style.display = 'block';
+        });
+    }
+
+    if (dbBillFile && uploadBillSuccess && uploadBillDropzone) {
+        // File input change → show success
+        dbBillFile.addEventListener('change', () => {
+            if (dbBillFile.files && dbBillFile.files.length > 0) {
+                uploadBillDropzone.style.display = 'none';
+                uploadBillSuccess.style.display = 'flex';
+            }
+        });
+
+        // Drag-and-drop on the dropzone label
+        uploadBillDropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadBillDropzone.classList.add('dragover');
+        });
+        uploadBillDropzone.addEventListener('dragleave', () => {
+            uploadBillDropzone.classList.remove('dragover');
+        });
+        uploadBillDropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadBillDropzone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files && files.length > 0) {
+                const file = files[0];
+                const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
+                if (validTypes.includes(file.type) || /\.(pdf|jpg|jpeg|png)$/i.test(file.name)) {
+                    // Assign to file input (for form submission if needed)
+                    try {
+                        const dt = new DataTransfer();
+                        dt.items.add(file);
+                        dbBillFile.files = dt.files;
+                    } catch (ex) { /* DataTransfer not supported in all browsers */ }
+                    uploadBillDropzone.style.display = 'none';
+                    uploadBillSuccess.style.display = 'flex';
+                } else {
+                    alert(isArabic ? 'يُرجى رفع ملف PDF أو صورة JPG/PNG فقط.' : 'Please upload a PDF or JPG/PNG image only.');
+                }
+            }
+        });
+    }
+
     // Lead Form submission handler
     const discoveryForm = document.getElementById('discovery-lead-form');
     const discoveryFeedback = document.getElementById('discovery-form-feedback');

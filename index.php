@@ -428,6 +428,35 @@ $lang = require_once "lang/{$active_lang}.php";
               <button type="button" class="btn-step5-skip" id="btn-skip-calibration">
                 <?= $active_lang === 'ar' ? 'تخطي في الوقت الحالي' : 'Skip For Now' ?>
               </button>
+              <!-- Option C: Upload Bill -->
+              <button type="button" class="btn-step5-upload" id="btn-show-upload-bill">
+                <?= $active_lang === 'ar' ? '📎 رفع الفاتورة (PDF / صورة)' : '📎 Upload Bill (PDF / Image)' ?>
+              </button>
+            </div>
+
+            <!-- Upload Bill Sub-Panel (hidden by default) -->
+            <div class="upload-bill-panel" id="upload-bill-panel" style="display: none;">
+              <div class="upload-bill-card">
+                <div class="upload-bill-header">
+                  <h4><?= $active_lang === 'ar' ? '📄 رفع فاتورة الكهرباء' : '📄 Upload Your Electricity Bill' ?></h4>
+                  <p class="upload-bill-subtitle"><?= $active_lang === 'ar' ? 'يُقبل PDF و JPG و PNG — الحد الأقصى 10 ميغابايت' : 'Accept PDF, JPG, PNG — Max 10 MB' ?></p>
+                </div>
+                <label class="upload-bill-dropzone" id="upload-bill-dropzone" for="db-bill-file">
+                  <div class="upload-dropzone-icon">☁️</div>
+                  <div class="upload-dropzone-text">
+                    <?= $active_lang === 'ar' ? 'اسحب وأفلت الفاتورة هنا، أو ' : 'Drag &amp; drop your bill here, or ' ?>
+                    <span class="upload-link"><?= $active_lang === 'ar' ? 'تصفح' : 'browse' ?></span>
+                  </div>
+                  <input type="file" id="db-bill-file" name="bill_file" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" aria-label="Upload electricity bill">
+                </label>
+                <div class="upload-bill-success" id="upload-bill-success" style="display: none;">
+                  <div class="upload-success-icon">✅</div>
+                  <p class="upload-success-msg"><?= $active_lang === 'ar' ? 'تم رفع الفاتورة بنجاح. سيراجع استشاري الطاقة الشمسية الفاتورة خلال التقييم.' : 'Bill uploaded successfully. A solar consultant will review the bill during assessment.' ?></p>
+                </div>
+                <div class="upload-bill-actions">
+                  <button type="button" class="btn-manual-cancel" id="btn-cancel-upload"><?= $active_lang === 'ar' ? 'رجوع' : 'Back' ?></button>
+                </div>
+              </div>
             </div>
 
             <!-- Manual Bill Entry Sub-Panel (hidden by default) -->
