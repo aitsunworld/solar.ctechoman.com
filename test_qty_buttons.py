@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
-ARTIFACT_DIR = r"C:\Users\Dell\.gemini\antigravity-ide\brain\16a35125-41a5-485d-b60a-4c70ddba3d7a"
+ARTIFACT_DIR = r"C:\Users\Sagar\.gemini\antigravity-ide\brain\b02ff7af-5c61-4d2b-bac8-226198aa6cb0"
 
 def run_qty_test():
     options = Options()
@@ -18,7 +18,9 @@ def run_qty_test():
     driver = webdriver.Chrome(options=options)
     driver.set_window_size(1920, 1080)
     
-    url = "http://localhost:8000/preview.html"
+    cwd = os.getcwd()
+    file_path = os.path.join(cwd, "preview.html")
+    url = "file:///" + file_path.replace("\\", "/")
     results = {}
     
     try:
