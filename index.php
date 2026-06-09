@@ -51,9 +51,9 @@ $lang = require_once "lang/{$active_lang}.php";
   <link rel="preload" as="image" href="lightbulb.webp" fetchpriority="high">
   <link rel="preload" as="image" href="https://www.ctechoman.com/public/logo.webp">
 
-<!-- CRITICAL INLINE CSS: Only what's needed for above-fold render -->
+<!-- CRITICAL INLINE CSS: Above-fold render + core layout primitives -->
    <style>
-     *{margin:0;padding:0;box-sizing:border-box}
+     *{margin:0;padding:0;box-sizing:border-box;overflow-wrap:break-word}
      html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
      body{font-family:'Outfit','Tajawal','Noto Sans Arabic','Segoe UI',Arial,sans-serif;color:#0d1014;background-color:#FAFAFA;line-height:1.6;overflow-x:hidden;width:100%;font-size:.95rem}
      img{max-width:100%;height:auto;display:block}
@@ -75,32 +75,42 @@ $lang = require_once "lang/{$active_lang}.php";
      .hero{min-height:auto;padding-top:80px;padding-bottom:2rem;display:flex;align-items:center}
      .hero-grid{display:flex;flex-direction:column;gap:1.5rem;width:100%}
      .hero-text{text-align:center;opacity:1}
-     h1{font-size:1.85rem;font-weight:900;line-height:1.2;color:#0d1014}
-     h2{font-size:1.45rem;font-weight:900;line-height:1.2;color:#0d1014}
-     h3{font-size:1.2rem;font-weight:900;line-height:1.2;color:#0d1014}
-     h4{font-size:1.05rem;font-weight:900;line-height:1.2;color:#0d1014}
+     h1{font-size:clamp(1.6rem,5vw,2.1rem);font-weight:900;line-height:1.2;color:#0d1014}
+     h2{font-size:clamp(1.25rem,4vw,1.45rem);font-weight:900;line-height:1.2;color:#0d1014}
+     h3{font-size:clamp(1.05rem,3vw,1.2rem);font-weight:900;line-height:1.2;color:#0d1014}
+     h4{font-size:clamp(.95rem,2.5vw,1.05rem);font-weight:900;line-height:1.2;color:#0d1014}
      .hero-text p{font-size:1rem;color:#64748B;margin-bottom:1.5rem;font-weight:500}
-.hero-actions{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem;align-items:center;width:100%}
-      .hero-visual{width:100%;height:180px;display:flex;justify-content:flex-start;align-items:center;position:relative;overflow:hidden;opacity:1}
-      .lightbulb-img{max-height:160px;width:auto;}
-      .text-muted{color:#64748B}
-      .bg-blobs{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
-      .blob-1,.blob-2{position:absolute;width:200px;height:200px;background:#F1F5F9;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;opacity:.2}
-      .blob-1{top:-10%;left:-10%}.blob-2{bottom:10%;right:-5%}
-      /* Prevent FOUC: keep hero visible until styles load */
-      .js-enabled .hero-text,.js-enabled .hero-visual{opacity:1}
-      /* Reveal elements - hidden until active */
-      .js-enabled .reveal{opacity:0;transform:translate3d(0,15px,0)}
-      .js-enabled .reveal.active{opacity:1;transform:translate3d(0,0,0)}
-    </style>
+     .hero-actions{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem;align-items:center;width:100%}
+     .hero-visual{width:100%;height:180px;display:flex;justify-content:flex-start;align-items:center;position:relative;overflow:hidden;opacity:1}
+     .lightbulb-img{max-height:160px;width:auto}
+     .text-muted{color:#64748B}
+     .text-center{text-align:center}
+     .section-padding{padding-top:2rem;padding-bottom:2rem}
+     .section-title{text-align:center;margin-bottom:2rem}
+     .bg-blobs{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+     .blob-1,.blob-2{position:absolute;width:200px;height:200px;background:#F1F5F9;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;opacity:.2}
+     .blob-1{top:-10%;left:-10%}.blob-2{bottom:10%;right:-5%}
+     /* Calculator section — prevent FOUC on below-hero content */
+     .calculator-section{position:relative;z-index:10;margin-top:1rem}
+     .calculator-wrapper{background:#fff;border-radius:1.5rem;padding:1.25rem 1rem;box-shadow:0 12px 30px -10px rgba(15,23,42,.05);display:flex;flex-direction:column;gap:1.5rem}
+     .calc-form{min-width:0;width:100%;max-width:100%}
+     .discovery-step-panel{width:100%}
+     /* Prevent FOUC: keep hero visible */
+     .js-enabled .hero-text,.js-enabled .hero-visual{opacity:1}
+     /* Reveal system — hidden until JS activates */
+     .js-enabled .reveal{opacity:0;transform:translate3d(0,15px,0);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+     .js-enabled .reveal.active{opacity:1;transform:translate3d(0,0,0)}
+     /* Spacing utilities */
+     .mt-2{margin-top:.5rem}.mt-3{margin-top:1rem}.mt-4{margin-top:1.5rem}
+     .mb-3{margin-bottom:1rem}.mb-4{margin-bottom:1.5rem}
+   </style>
 
   <!-- Non-blocking Google Fonts (avoids render-blocking) -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
-  <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=8.5" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=8.5"></noscript>
+  <!-- Main stylesheet: RENDER-BLOCKING to prevent FOUC -->
+  <link rel="stylesheet" href="style.css?v=9.0">
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
