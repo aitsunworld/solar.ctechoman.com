@@ -81,6 +81,94 @@ def render():
         return constants.get(key, f"Constant missing: {key}")
     html = re.sub(r"<\?=\s*\$constants\['([^']+)'\]\s*\?>", replace_const, html)
 
+    # Expand English slider loop statically
+    slides_en = [
+        {
+            'badge': '⚡ BILL REDUCTION',
+            'title': 'Reduce Your Electricity Bills by Up To 90%',
+            'desc': 'Harness Oman\'s abundant sunlight to power your home. Stop renting your power and start generating your own to eliminate monthly utility bills.',
+            'btn': 'Calculate Savings ➔',
+            'img': 'lightbulb.webp'
+        },
+        {
+            'badge': '☀️ ENERGY INDEPENDENCE',
+            'title': 'Generate Your Own Clean Energy',
+            'desc': 'Become your own power utility. Solar energy provides absolute energy independence, keeping your family powered by clean, reliable green electricity.',
+            'btn': 'Calculate Savings ➔',
+            'img': 'solar_panel.webp'
+        },
+        {
+            'badge': '🔒 COST PROTECTION',
+            'title': 'Protect Yourself From Future Tariff Increases',
+            'desc': 'Utility rates are rising. Lock in your energy costs today and secure stable, free electricity for the next 25+ years with a premium solar system.',
+            'btn': 'Calculate Savings ➔',
+            'img': 'hero-commercial.webp?v=3.11'
+        },
+        {
+            'badge': '📈 REAL ESTATE VALUE',
+            'title': 'Increase Property Value With Solar',
+            'desc': 'Modern homes equipped with smart solar systems sell faster and at a premium price. Solar is an asset that yields high financial returns.',
+            'btn': 'Calculate Savings ➔',
+            'img': 'hero-villa.webp'
+        },
+        {
+            'badge': '📊 INSTANT ANALYSIS',
+            'title': 'See Your Potential Savings In Minutes',
+            'desc': 'No aggressive sales calls. Use our smart, interactive solar calculator to discover your recommended system size and real financial savings.',
+            'btn': 'Calculate Savings ➔',
+            'img': 'lightbulb.webp'
+        },
+        {
+            'badge': '🌱 ECO FRIENDLY',
+            'title': 'Reduce CO₂ Emissions & Support Sustainability',
+            'desc': 'Support Oman Vision 2040. Join the green transition, reduce your environmental footprint, and plant the equivalent of hundreds of trees each year.',
+            'btn': 'Calculate Savings ➔',
+            'img': 'solar_panel.webp'
+        }
+    ]
+
+    slides_html = ""
+    for index, slide in enumerate(slides_en):
+        lazy = "eager" if index == 0 else "lazy"
+        priority = "fetchpriority=\"high\"" if index == 0 else ""
+        slides_html += f"""
+          <div class="hero-slide">
+            <div class="slide-card-container">
+              <div class="slide-card-text">
+                <span class="slide-badge">{slide['badge']}</span>
+                <h2>{slide['title']}</h2>
+                <p>{slide['desc']}</p>
+                <div class="slide-actions">
+                  <a href="#calculator" class="btn btn-hero-primary">{slide['btn']}</a>
+                </div>
+              </div>
+              <div class="slide-card-visual">
+                <img src="{slide['img']}" alt="{slide['title']}" class="lightbulb-img" width="500" height="500"
+                  loading="{lazy}" {priority} style="mix-blend-mode: darken;">
+              </div>
+            </div>
+          </div>
+        """
+
+    nav_html = ""
+    for index in range(len(slides_en)):
+        active_class = " active" if index == 0 else ""
+        num_str = f"{index + 1:02d}"
+        nav_html += f"""
+          <div class="slider-item{active_class}" data-slide-index="{index}">
+            <span class="slider-num">{num_str}</span>
+            <div class="slider-line"></div>
+          </div>
+        """
+
+    # Locate and replace the slide loop in the track
+    slide_loop_pattern = re.compile(r'<\?php\s+\$slide_images\s*=\s*\[.*?foreach\s*\(\s*\$lang\s*\[\s*\'slides\'\s*\]\s*as\s*\$index\s*=>\s*\$slide\s*\):\s*\?>.*?<\?php\s+endforeach;\s*\?>', re.DOTALL)
+    html = slide_loop_pattern.sub(slides_html, html)
+
+    # Locate and replace the navigation controls loop
+    nav_loop_pattern = re.compile(r'<\?php\s+foreach\s*\(\s*\$lang\s*\[\s*\'slides\'\s*\]\s*as\s*\$index\s*=>\s*\$slide\s*\):\s*\?>.*?<\?php\s+endforeach;\s*\?>', re.DOTALL)
+    html = nav_loop_pattern.sub(nav_html, html)
+
     # Strip remaining php blocks/headers
     html = re.sub(r"<\?php.*?\?>", "", html, flags=re.DOTALL)
 

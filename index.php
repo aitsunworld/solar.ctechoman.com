@@ -137,7 +137,7 @@ $lang = require_once "lang/{$active_lang}.php";
         <?php else: ?>
           <a href="?lang=en" class="lang-btn" style="text-decoration:none;">English</a>
         <?php endif; ?>
-        <a href="#contact" class="btn btn-primary"><?= $lang['nav_quote'] ?></a>
+        <a href="#calculator" class="btn btn-primary"><?= $lang['nav_quote'] ?></a>
       </div>
 
       <!-- Mobile Menu Toggle -->
@@ -153,47 +153,49 @@ $lang = require_once "lang/{$active_lang}.php";
 
   <!-- Hero Section -->
   <section class="hero container">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <h1><?= $lang['hero_title'] ?></h1>
-        <p><?= $lang['hero_desc'] ?></p>
-
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-hero-primary"><?= $lang['hero_btn'] ?></a>
-
-        </div>
-
-        <div class="hero-slider-nav">
-          <div class="slider-item active" data-slide-index="0">
-            <span class="slider-num">1.</span>
-            <div class="slider-line"></div>
+    <div class="hero-slider-container" id="hero-slider-visual">
+      <div class="hero-slider-track" id="hero-slider-track">
+        <?php 
+        $slide_images = [
+          'lightbulb.webp',
+          'solar_panel.webp',
+          'hero-commercial.webp?v=3.11',
+          'hero-villa.webp',
+          'lightbulb.webp',
+          'solar_panel.webp'
+        ];
+        foreach ($lang['slides'] as $index => $slide): 
+          $img = $slide_images[$index];
+          $lazy = ($index === 0) ? 'eager' : 'lazy';
+          $priority = ($index === 0) ? 'fetchpriority="high"' : '';
+        ?>
+          <div class="hero-slide">
+            <div class="slide-card-container">
+              <div class="slide-card-text">
+                <span class="slide-badge"><?= $slide['badge'] ?></span>
+                <h2><?= $slide['title'] ?></h2>
+                <p><?= $slide['desc'] ?></p>
+                <div class="slide-actions">
+                  <a href="#calculator" class="btn btn-hero-primary"><?= $slide['btn'] ?></a>
+                </div>
+              </div>
+              <div class="slide-card-visual">
+                <img src="<?= $img ?>" alt="<?= $slide['title'] ?>" class="lightbulb-img" width="500" height="500"
+                  loading="<?= $lazy ?>" <?= $priority ?> style="mix-blend-mode: darken;">
+              </div>
+            </div>
           </div>
-          <div class="slider-item" data-slide-index="1">
-            <span class="slider-num">2.</span>
-            <div class="slider-line"></div>
-          </div>
-          <div class="slider-item" data-slide-index="2">
-            <span class="slider-num">3.</span>
-            <div class="slider-line"></div>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
-
-      <div class="hero-visual" id="hero-slider-visual">
-        <div class="hero-slider-track" id="hero-slider-track">
-          <div class="hero-slide">
-            <img src="lightbulb.webp" alt="Renewable Energy" class="lightbulb-img" width="500" height="500"
-              fetchpriority="high" loading="eager" decoding="async" style="mix-blend-mode: darken;">
+      
+      <!-- Slider Navigation Controls inside the Hero Section -->
+      <div class="hero-slider-nav">
+        <?php foreach ($lang['slides'] as $index => $slide): ?>
+          <div class="slider-item <?= $index === 0 ? 'active' : '' ?>" data-slide-index="<?= $index ?>">
+            <span class="slider-num"><?= sprintf("%02d", $index + 1) ?></span>
+            <div class="slider-line"></div>
           </div>
-          <div class="hero-slide">
-            <img src="hero-villa.webp" alt="Residential Villa Solar Panels" class="lightbulb-img" width="500" height="500"
-              loading="lazy" decoding="async" style="mix-blend-mode: darken;">
-          </div>
-          <div class="hero-slide">
-            <img src="hero-commercial.webp?v=3.11" alt="Commercial Industrial Solar Panels" class="lightbulb-img" width="500" height="500"
-              loading="lazy" decoding="async" style="mix-blend-mode: darken;">
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -773,8 +775,8 @@ $lang = require_once "lang/{$active_lang}.php";
                 <div class="dashboard-row form-row-row">
                   <div class="cta-lead-card">
                     <div class="cta-lead-header">
-                      <h4><?= $active_lang === 'ar' ? 'احصل على تقييمك الشمسي المخصص' : 'Get Your Personalized Solar Assessment' ?></h4>
-                      <p><?= $active_lang === 'ar' ? 'استلم استشارة مخصصة بناءً على نتائج تقييمك.' : 'Receive a customized consultation based on your assessment results.' ?></p>
+                      <h4><?= $active_lang === 'ar' ? 'طلب التحقق الفني المجاني من حجم النظام' : 'Request Free Engineering Sizing Verification' ?></h4>
+                      <p><?= $active_lang === 'ar' ? 'سيقوم فريقنا الفني بمراجعة ملف استهلاك أجهزتك وقاعدة بيانات الإنتاج للتحقق النهائي دون أي التزام مبيعات.' : 'Our engineering team will review your appliance load profile and local yield database to verify your layout, completely free of charge.' ?></p>
                     </div>
                     <form id="discovery-lead-form" class="cta-lead-form">
                       <input type="hidden" name="action" value="submit_lead">
@@ -804,7 +806,7 @@ $lang = require_once "lang/{$active_lang}.php";
                       </div>
 
                       <button type="submit" class="btn-cta-submit mt-3" id="btn-submit-discovery">
-                        <span><?= $active_lang === 'ar' ? 'احجز تقييمي' : 'Book My Assessment' ?> 🚀</span>
+                        <span><?= $active_lang === 'ar' ? 'إرسال للمراجعة الهندسية ➔' : 'Submit for Engineering Review ➔' ?></span>
                         <span class="spinner" style="display: none; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;"></span>
                       </button>
                     </form>

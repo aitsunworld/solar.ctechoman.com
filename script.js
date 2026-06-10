@@ -1,6 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
     "use strict";
 
+    // Appliance Image Mappings for Visual Cards
+    const APPLIANCE_IMAGES = {
+        window_ac: 'https://images.unsplash.com/photo-1628909261865-d6a06db9ca11?auto=format&fit=crop&w=400&q=80',
+        ac_1ton: 'img/appliances/ac_1ton.png',
+        ac_1_5ton: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=400&q=80',
+        ac_2ton: 'img/appliances/ac_2ton.png',
+        refrigerator: 'img/appliances/refrigerator.png',
+        freezer: 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=400&q=80',
+        washing_machine: 'img/appliances/washing_machine.png',
+        water_heater: 'img/appliances/water_heater.png',
+        tv: 'img/appliances/tv.png',
+        led_lights: 'https://images.unsplash.com/photo-1550985543-f47f38aeee65?auto=format&fit=crop&w=400&q=80',
+        ceiling_fan: 'https://images.unsplash.com/photo-1618944913480-b67ee16d7b77?auto=format&fit=crop&w=400&q=80',
+        microwave: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&w=400&q=80',
+        electric_oven: 'https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?auto=format&fit=crop&w=400&q=80',
+        water_pump: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80',
+        dishwasher: 'https://images.unsplash.com/photo-1581622558663-b2e33377dfb2?auto=format&fit=crop&w=400&q=80',
+        desktop_pc: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=400&q=80',
+        laptop: 'https://images.unsplash.com/photo-1496181130204-7552cc14b1e0?auto=format&fit=crop&w=400&q=80',
+        ev_charger: 'https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=400&q=80',
+        // Commercial
+        com_ducted_ac: 'https://images.unsplash.com/photo-1621905252507-b354bc25edac?auto=format&fit=crop&w=400&q=80',
+        com_server_rack: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80',
+        com_led_lighting: 'https://images.unsplash.com/photo-1550985543-f47f38aeee65?auto=format&fit=crop&w=400&q=80',
+        com_copier: 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=400&q=80',
+        com_display_fridge: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80',
+        com_cctv: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=400&q=80',
+        com_workstation: 'https://images.unsplash.com/photo-1547082299-de196ea013d6?auto=format&fit=crop&w=400&q=80',
+        com_water_dispenser: 'https://images.unsplash.com/photo-1585338107529-13afc5f02586?auto=format&fit=crop&w=400&q=80',
+        com_sliding_door: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&q=80',
+        com_adv_signage: 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?auto=format&fit=crop&w=400&q=80',
+        // Industrial
+        ind_compressor: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80',
+        ind_chiller: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80',
+        ind_water_pump: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80',
+        ind_molding_mach: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80',
+        ind_gantry_crane: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80',
+        ind_exhaust_fan: 'https://images.unsplash.com/photo-1618944913480-b67ee16d7b77?auto=format&fit=crop&w=400&q=80',
+        ind_welding_mach: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80',
+        ind_conveyor: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80',
+        ind_cnc_machine: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80',
+        ind_induction_furnace: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80'
+    };
+
+    function getApplianceImage(id) {
+        return APPLIANCE_IMAGES[id] || 'img/appliances/default.png';
+    }
+
+
     // --- 1. Mobile Menu Drawer ---
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.querySelector('.nav-links');
@@ -280,6 +329,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
                     <rect x="2" y="5" width="20" height="9" rx="2"></rect>
                     <path d="M2 9h20M6 14v1M18 14v1M12 9v5"></path>
+                    <path d="M8 18c1 1.5 2 2 4 2s3-.5 4-2" stroke-dasharray="2 2"></path>
+                </svg>
+            `,
+            ac_1_5ton: `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="${svgStyle}">
+                    <rect x="2" y="4.5" width="20" height="9.5" rx="2"></rect>
+                    <path d="M2 9h20M6 14v1.5M18 14v1.5M12 9v5"></path>
                     <path d="M8 18c1 1.5 2 2 4 2s3-.5 4-2" stroke-dasharray="2 2"></path>
                 </svg>
             `,
@@ -1705,11 +1761,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             html += `
                 <div class="discovery-appliance-card${selectedClass}" data-id="${app.id}">
-                    <div class="card-icon-wrapper">
-                        ${getApplianceSVG(app.id)}
+                    <div class="card-image-wrapper">
+                        <img src="${getApplianceImage(app.id)}" alt="${name}" loading="lazy" class="appliance-card-image">
                     </div>
-                    <h4>${name}</h4>
-                    <span class="card-spec">${powerText} • ${app.hours}h/d</span>
+                    <div class="card-info-row">
+                        <div class="card-icon-wrapper">
+                            ${getApplianceSVG(app.id)}
+                        </div>
+                        <div class="card-details">
+                            <h4>${name}</h4>
+                            <span class="card-spec">${powerText} • ${app.hours}h/d</span>
+                        </div>
+                    </div>
                     <div class="card-checkbox-circle">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>

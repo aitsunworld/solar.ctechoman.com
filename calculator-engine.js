@@ -33,9 +33,10 @@
   };
 
   const APPLIANCES = [
-    { id: "window_ac", property_type: "residential", category: "HVAC", name_en: "Window AC", name_ar: "\u0645\u0643\u064A\u0641 \u0646\u0627\u0641\u0630\u0629", min_w: 1500, max_w: 2000, hours: 8.0, default_qty: 0 },
-    { id: "ac_1ton", property_type: "residential", category: "HVAC", name_en: "Split AC 1 Ton", name_ar: "\u0645\u0643\u064A\u0641 1 \u0637\u0646", min_w: 1200, max_w: 1500, hours: 8.0, default_qty: 1 },
-    { id: "ac_2ton", property_type: "residential", category: "HVAC", name_en: "Split AC 2 Ton", name_ar: "\u0645\u0643\u064A\u0641 2 \u0637\u0646", min_w: 2400, max_w: 3000, hours: 8.0, default_qty: 1 },
+    { id: "window_ac", property_type: "residential", category: "HVAC", name_en: "Window AC (Standard Room AC)", name_ar: "\u0645\u0643\u064A\u0641 \u0646\u0627\u0641\u0630\u0629 (\u0645\u0643\u064A\u0641 \u063A\u0631\u0641\u0629 \u0642\u064A\u0627\u0633\u064A)", min_w: 1500, max_w: 2000, hours: 8.0, default_qty: 0 },
+    { id: "ac_1ton", property_type: "residential", category: "HVAC", name_en: "Split AC 1 Ton (Small Bedroom AC)", name_ar: "\u0645\u0643\u064A\u0641 \u0633\u0628\u0644\u064A\u062A 1 \u0637\u0646 (\u0645\u0643\u064A\u0641 \u063A\u0631\u0641\u0629 \u0646\u0648\u0645 \u0635\u063A\u064A\u0631\u0629)", min_w: 1200, max_w: 1500, hours: 8.0, default_qty: 1 },
+    { id: "ac_1_5ton", property_type: "residential", category: "HVAC", name_en: "Split AC 1.5 Ton (Medium Bedroom AC)", name_ar: "\u0645\u0643\u064A\u0641 \u0633\u0628\u0644\u064A\u062A 1.5 \u0637\u0646 (\u0645\u0643\u064A\u0641 \u063A\u0631\u0641\u0629 \u0646\u0648\u0645 \u0645\u062A\u0648\u0633\u0637\u0629)", min_w: 1800, max_w: 2200, hours: 8.0, default_qty: 0 },
+    { id: "ac_2ton", property_type: "residential", category: "HVAC", name_en: "Split AC 2 Ton (Large Room / Hall AC)", name_ar: "\u0645\u0643\u064A\u0641 \u0633\u0628\u0644\u064A\u062A 2 \u0637\u0646 (\u0645\u0643\u064A\u0641 \u063A\u0631\u0641\u0629 \u0643\u0628\u064A\u0631\u0629 / \u0635\u0627\u0644\u0629)", min_w: 2400, max_w: 3000, hours: 8.0, default_qty: 1 },
     { id: "refrigerator", property_type: "residential", category: "Kitchen", name_en: "Refrigerator", name_ar: "\u062B\u0644\u0627\u062C\u0629", min_w: 150, max_w: 300, hours: 24.0, default_qty: 1 },
     { id: "freezer", property_type: "residential", category: "Kitchen", name_en: "Freezer", name_ar: "\u0641\u0631\u063A\u064A\u0632\u0631", min_w: 200, max_w: 400, hours: 24.0, default_qty: 0 },
     { id: "washing_machine", property_type: "residential", category: "Kitchen", name_en: "Washing Machine", name_ar: "\u063A\u0633\u0627\u0644\u0629 \u0645\u0644\u0627\u0628\u0633", min_w: 500, max_w: 1000, hours: 1.0, default_qty: 0 },

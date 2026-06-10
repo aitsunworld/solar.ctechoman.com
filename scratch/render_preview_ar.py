@@ -81,6 +81,94 @@ def render():
         return constants.get(key, f"Constant missing: {key}")
     html = re.sub(r"<\?=\s*\$constants\['([^']+)'\]\s*\?>", replace_const, html)
 
+    # Expand Arabic slider loop statically
+    slides_ar = [
+        {
+            'badge': '⚡ خفض الفواتير',
+            'title': 'خفّض فواتير الكهرباء بنسبة تصل إلى 90٪',
+            'desc': 'استغل أشعة الشمس الوفيرة في سلطنة عمان لتشغيل منزلك. توقف عن دفع فواتير مرتفعة وابدأ بتوليد طاقتك الخاصة لتلغي التكاليف الشهرية.',
+            'btn': 'احسب وفرك ➔',
+            'img': 'lightbulb.webp'
+        },
+        {
+            'badge': '☀️ استقلالية الطاقة',
+            'title': 'ولّد طاقتك النظيفة بنفسك',
+            'desc': 'كن مصدر الطاقة الخاص بك. توفر الطاقة الشمسية استقلالية تامة في الطاقة، مما يحافظ على تشغيل منزلك بكهرباء نظيفة وموثوقة.',
+            'btn': 'احسب وفرك ➔',
+            'img': 'solar_panel.webp'
+        },
+        {
+            'badge': '🔒 حماية التكاليف',
+            'title': 'احمِ نفسك من ارتفاع أسعار الكهرباء مستقبلاً',
+            'desc': 'أسعار الكهرباء في ارتفاع مستمر. ثبّت تكلفة طاقتك اليوم واضمن الحصول على كهرباء مجانية ومستقرة لأكثر من 25 عاماً قادمة.',
+            'btn': 'احسب وفرك ➔',
+            'img': 'hero-commercial.webp?v=3.11'
+        },
+        {
+            'badge': '📈 زيادة قيمة العقار',
+            'title': 'زد من قيمة عقارك مع الطاقة الشمسية',
+            'desc': 'تُباع المنازل الحديثة المجهزة بأنظمة الطاقة الشمسية الذكية بشكل أسرع وبسعر أعلى. الطاقة الشمسية هي أصل استثماري يدر عوائد مالية عالية.',
+            'btn': 'احسب وفرك ➔',
+            'img': 'hero-villa.webp'
+        },
+        {
+            'badge': '📊 تحليل فوري',
+            'title': 'تعرف على وفرك المالي المتوقع في دقائق',
+            'desc': 'بدون مكالمات مبيعات مزعجة. استخدم حاسبتنا الذكية والتفاعلية لتكتشف حجم النظام الموصى به وتفاصيل وفرك المالي الفعلي.',
+            'btn': 'احسب وفرك ➔',
+            'img': 'lightbulb.webp'
+        },
+        {
+            'badge': '🌱 صديق للبيئة',
+            'title': 'قلل من انبعاثات الكربون وادعم الاستدامة',
+            'desc': 'ادعم رؤية عمان 2040. انضم إلى التحول الأخضر، وقلل من بصمتك البيئية وازرع ما يعادل مئات الأشجار سنوياً.',
+            'btn': 'احسب وفرك ➔',
+            'img': 'solar_panel.webp'
+        }
+    ]
+
+    slides_html = ""
+    for index, slide in enumerate(slides_ar):
+        lazy = "eager" if index == 0 else "lazy"
+        priority = "fetchpriority=\"high\"" if index == 0 else ""
+        slides_html += f"""
+          <div class="hero-slide">
+            <div class="slide-card-container">
+              <div class="slide-card-text">
+                <span class="slide-badge">{slide['badge']}</span>
+                <h2>{slide['title']}</h2>
+                <p>{slide['desc']}</p>
+                <div class="slide-actions">
+                  <a href="#calculator" class="btn btn-hero-primary">{slide['btn']}</a>
+                </div>
+              </div>
+              <div class="slide-card-visual">
+                <img src="{slide['img']}" alt="{slide['title']}" class="lightbulb-img" width="500" height="500"
+                  loading="{lazy}" {priority} style="mix-blend-mode: darken;">
+              </div>
+            </div>
+          </div>
+        """
+
+    nav_html = ""
+    for index in range(len(slides_ar)):
+        active_class = " active" if index == 0 else ""
+        num_str = f"{index + 1:02d}"
+        nav_html += f"""
+          <div class="slider-item{active_class}" data-slide-index="{index}">
+            <span class="slider-num">{num_str}</span>
+            <div class="slider-line"></div>
+          </div>
+        """
+
+    # Locate and replace the slide loop in the track
+    slide_loop_pattern = re.compile(r'<\?php\s+\$slide_images\s*=\s*\[.*?foreach\s*\(\s*\$lang\s*\[\s*\'slides\'\s*\]\s*as\s*\$index\s*=>\s*\$slide\s*\):\s*\?>.*?<\?php\s+endforeach;\s*\?>', re.DOTALL)
+    html = slide_loop_pattern.sub(slides_html, html)
+
+    # Locate and replace the navigation controls loop
+    nav_loop_pattern = re.compile(r'<\?php\s+foreach\s*\(\s*\$lang\s*\[\s*\'slides\'\s*\]\s*as\s*\$index\s*=>\s*\$slide\s*\):\s*\?>.*?<\?php\s+endforeach;\s*\?>', re.DOTALL)
+    html = nav_loop_pattern.sub(nav_html, html)
+
     # Strip remaining php blocks/headers
     html = re.sub(r"<\?php.*?\?>", "", html, flags=re.DOTALL)
 

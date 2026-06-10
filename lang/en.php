@@ -7,11 +7,11 @@ return [
     'nav_calculator' => 'Calculator',
     'nav_benefits' => 'Benefits',
     'nav_process' => 'Process',
-    'nav_quote' => 'Get a Quote',
-    'hero_title' => 'How Much Solar Does Your Home Need?',
-    'hero_desc' => 'Discover your ideal solar system size and see how much you could save every month.',
+    'nav_quote' => 'Analyze Savings',
+    'hero_title' => 'How Much Can Solar Reduce Your Electric Bill?',
+    'hero_desc' => 'Discover your savings potential, energy independence, and environmental footprint in minutes.',
     'hero_support' => 'Select the appliances you use at home and let our smart calculator estimate your energy consumption, recommended solar system size, potential savings, and environmental benefits — all in just a few minutes.',
-    'hero_btn' => 'Get a Quote',
+    'hero_btn' => 'Analyze Your Solar Potential ➔',
     'hero_btn_video' => 'Watch Video',
 
     // Calculator
@@ -334,7 +334,45 @@ return [
     'score_green_impact' => 'Green Impact',
     'green_co2' => 'CO₂ avoided per year',
     'green_trees' => 'Equivalent trees planted',
-    'lead_title_discovery' => 'Get Your Personalized Solar Assessment',
-    'lead_btn_discovery' => 'Confirm & Book Assessment',
+    'lead_title_discovery' => 'Request Free Engineering Sizing Verification',
+    'lead_btn_discovery' => 'Submit for Engineering Review ➔',
+    'slides' => [
+        [
+            'badge' => '⚡ BILL REDUCTION',
+            'title' => 'Reduce Your Electricity Bills by Up To 90%',
+            'desc' => 'Harness Oman\'s abundant sunlight to power your home. Stop renting your power and start generating your own to eliminate monthly utility bills.',
+            'btn' => 'Calculate Savings ➔'
+        ],
+        [
+            'badge' => '☀️ ENERGY INDEPENDENCE',
+            'title' => 'Generate Your Own Clean Energy',
+            'desc' => 'Become your own power utility. Solar energy provides absolute energy independence, keeping your family powered by clean, reliable green electricity.',
+            'btn' => 'Calculate Savings ➔'
+        ],
+        [
+            'badge' => '🔒 COST PROTECTION',
+            'title' => 'Protect Yourself From Future Tariff Increases',
+            'desc' => 'Utility rates are rising. Lock in your energy costs today and secure stable, free electricity for the next 25+ years with a premium solar system.',
+            'btn' => 'Calculate Savings ➔'
+        ],
+        [
+            'badge' => '📈 REAL ESTATE VALUE',
+            'title' => 'Increase Property Value With Solar',
+            'desc' => 'Modern homes equipped with smart solar systems sell faster and at a premium price. Solar is an asset that yields high financial returns.',
+            'btn' => 'Calculate Savings ➔'
+        ],
+        [
+            'badge' => '📊 INSTANT ANALYSIS',
+            'title' => 'See Your Potential Savings In Minutes',
+            'desc' => 'No aggressive sales calls. Use our smart, interactive solar calculator to discover your recommended system size and real financial savings.',
+            'btn' => 'Calculate Savings ➔'
+        ],
+        [
+            'badge' => '🌱 ECO FRIENDLY',
+            'title' => 'Reduce CO₂ Emissions & Support Sustainability',
+            'desc' => 'Support Oman Vision 2040. Join the green transition, reduce your environmental footprint, and plant the equivalent of hundreds of trees each year.',
+            'btn' => 'Calculate Savings ➔'
+        ]
+    ]
 ];
 

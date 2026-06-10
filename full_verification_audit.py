@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
-ARTIFACT_DIR = r"C:\Users\Sagar\.gemini\antigravity-ide\brain\b02ff7af-5c61-4d2b-bac8-226198aa6cb0"
+ARTIFACT_DIR = r"C:\Users\Dell\.gemini\antigravity-ide\brain\83648abb-e9c6-474f-bac4-f0c23c1b5bdb"
 
 def run_audit():
     options = Options()
@@ -155,34 +155,40 @@ def run_audit():
         except Exception as e:
             results["qty_buttons"] = {"error": str(e)}
 
-        # 8. Simulate qty click and verify state
+        # 8. Simulate qty click and verify state in wizard (Step 2)
         try:
-            # Switch to Appliance Auditor tab first
-            app_tab = driver.find_element(By.ID, "tab-appliances")
-            driver.execute_script("arguments[0].click();", app_tab)
+            # Click the first appliance card in Step 1 to select it if not already selected
+            first_card = driver.find_element(By.CSS_SELECTOR, ".discovery-appliance-card")
+            card_id = first_card.get_attribute("data-id")
+            if "selected" not in first_card.get_attribute("class"):
+                driver.execute_script("arguments[0].click();", first_card)
+                time.sleep(0.5)
+            
+            # Go to Step 2
+            goto_step2_btn = driver.find_element(By.ID, "btn-goto-step2")
+            driver.execute_script("arguments[0].click();", goto_step2_btn)
             time.sleep(1)
 
-            # Find the first plus button and click it
-            first_plus = driver.find_element(By.CSS_SELECTOR, ".qty-btn.plus")
-            app_id = first_plus.get_attribute("data-id")
+            # Find the plus button in Step 2 for this appliance
+            plus_btn = driver.find_element(By.CSS_SELECTOR, f".disc-qty-btn.plus[data-id='{card_id}']")
             
             # Get current qty
-            qty_before = driver.find_element(By.ID, f"qty-{app_id}").text
+            qty_before = driver.find_element(By.ID, f"disc-qty-val-{card_id}").text
             
             # Click once
-            driver.execute_script("arguments[0].click();", first_plus)
+            driver.execute_script("arguments[0].click();", plus_btn)
             time.sleep(0.3)
             
-            qty_after = driver.find_element(By.ID, f"qty-{app_id}").text
+            qty_after = driver.find_element(By.ID, f"disc-qty-val-{card_id}").text
             
             # Click again
-            driver.execute_script("arguments[0].click();", first_plus)
+            driver.execute_script("arguments[0].click();", plus_btn)
             time.sleep(0.3)
             
-            qty_after_2 = driver.find_element(By.ID, f"qty-{app_id}").text
+            qty_after_2 = driver.find_element(By.ID, f"disc-qty-val-{card_id}").text
             
             results["qty_click_test"] = {
-                "appliance_id": app_id,
+                "appliance_id": card_id,
                 "qty_before": qty_before,
                 "qty_after_1_click": qty_after,
                 "qty_after_2_clicks": qty_after_2,
