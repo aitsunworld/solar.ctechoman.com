@@ -399,14 +399,10 @@ $lang = require_once "lang/{$active_lang}.php";
 
           <!-- Panel 5: Ask for average electricity bill (Step 5) -->
           <div class="discovery-step-panel" id="discovery-panel-5" style="display: none;">
-
-            <!-- SECTION A: Question -->
-            <div class="step5-question-section">
-              <h3><?= $active_lang === 'ar' ? 'هل تعرف متوسط فاتورتك الكهربائية الشهرية؟' : 'Do you know your average monthly electricity bill?' ?></h3>
-              <p class="step5-subtitle">
-                <?= $active_lang === 'ar' ? 'إدخال فاتورتك الفعلية يحسّن دقة حسابات العائد على الاستثمار والتوفير الفعلي.' : 'Providing your bill improves accuracy and ROI calculations.' ?>
-              </p>
-            </div>
+            <h3 class="mb-2"><?= $active_lang === 'ar' ? 'هل تعرف متوسط فاتورتك الكهربائية الشهرية؟' : 'Do you know your average monthly electricity bill?' ?></h3>
+            <p class="text-muted mb-3" style="font-size: 0.88rem;">
+              <?= $active_lang === 'ar' ? 'إدخال فاتورتك الفعلية يحسّن دقة حسابات العائد على الاستثمار والتوفير الفعلي.' : 'Providing your bill improves accuracy and ROI calculations.' ?>
+            </p>
 
             <!-- SECTION B: Slider Card -->
             <div class="step5-slider-card" id="step5-slider-section">
@@ -512,87 +508,80 @@ $lang = require_once "lang/{$active_lang}.php";
 
           <!-- Panel 6: Calibrate results (Step 6) -->
           <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
-            <div class="calibration-container">
+            <h3 class="mb-2"><?= $active_lang === 'ar' ? 'حالة المعايرة' : 'Calibration Status' ?></h3>
+            <p class="text-muted mb-3" id="calibration-status-message">
+              <?= $active_lang === 'ar' ? 'اكتملت المعايرة!' : 'Calibration completed!' ?>
+            </p>
 
-              <!-- Calibration Status Title -->
-              <div class="calibration-title-section">
-                <h3><?= $active_lang === 'ar' ? 'حالة المعايرة' : 'Calibration Status' ?></h3>
-                <p class="calibration-title-sub" id="calibration-status-message">
-                  <?= $active_lang === 'ar' ? 'اكتملت المعايرة!' : 'Calibration completed!' ?>
-                </p>
-              </div>
-
-              <!-- Large Confidence Ring -->
-              <div class="calibration-ring-section">
-                <div class="progress-ring-wrapper">
-                  <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
-                    <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
-                    <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
-                  </svg>
-                  <div class="progress-ring-text">
-                    <span class="progress-ring-number" id="calibration-confidence-pct"><?= $active_lang === 'ar' ? 'تقديري' : '—' ?></span>
-                    <span class="progress-ring-sublabel" id="calibration-match-label"><?= $active_lang === 'ar' ? 'درجة الثقة' : 'Excellent Match' ?></span>
-                    <span class="progress-ring-label"><?= $active_lang === 'ar' ? 'الثقة' : 'Confidence' ?></span>
-                  </div>
+            <!-- Large Confidence Ring -->
+            <div class="calibration-ring-section">
+              <div class="progress-ring-wrapper">
+                <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
+                  <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                  <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                </svg>
+                <div class="progress-ring-text">
+                  <span class="progress-ring-number" id="calibration-confidence-pct"><?= $active_lang === 'ar' ? 'تقديري' : '—' ?></span>
+                  <span class="progress-ring-sublabel" id="calibration-match-label"><?= $active_lang === 'ar' ? 'درجة الثقة' : 'Excellent Match' ?></span>
+                  <span class="progress-ring-label"><?= $active_lang === 'ar' ? 'الثقة' : 'Confidence' ?></span>
                 </div>
               </div>
+            </div>
 
-              <!-- 2x2 Metrics Grid -->
-              <div class="calibration-metrics-grid">
-                <div class="cal-metric-card">
-                  <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'حالة التطابق' : 'Match Status' ?></span>
-                  <strong class="cal-metric-val" id="cal-val-score"><?= $active_lang === 'ar' ? 'استخدام ملف الأجهزة' : 'Using Appliance Profile' ?></strong>
-                </div>
-                <div class="cal-metric-card">
-                  <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'نسبة تطابق الفاتورة' : 'Bill Match' ?></span>
-                  <strong class="cal-metric-val" id="cal-val-bill-match"><?= $active_lang === 'ar' ? 'غير متوفر' : 'Not Available' ?></strong>
-                </div>
-                <div class="cal-metric-card">
-                  <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'دقة تقدير الطاقة' : 'Energy Accuracy' ?></span>
-                  <strong class="cal-metric-val text-eco" id="cal-val-accuracy"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
-                </div>
-                <div class="cal-metric-card">
-                  <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'مستوى الثقة' : 'Confidence Level' ?></span>
-                  <strong class="cal-metric-val" id="cal-val-confidence-level"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
-                </div>
+            <!-- 2x2 Metrics Grid -->
+            <div class="calibration-metrics-grid">
+              <div class="cal-metric-card">
+                <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'حالة التطابق' : 'Match Status' ?></span>
+                <strong class="cal-metric-val" id="cal-val-score"><?= $active_lang === 'ar' ? 'استخدام ملف الأجهزة' : 'Using Appliance Profile' ?></strong>
               </div>
+              <div class="cal-metric-card">
+                <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'نسبة تطابق الفاتورة' : 'Bill Match' ?></span>
+                <strong class="cal-metric-val" id="cal-val-bill-match"><?= $active_lang === 'ar' ? 'غير متوفر' : 'Not Available' ?></strong>
+              </div>
+              <div class="cal-metric-card">
+                <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'دقة تقدير الطاقة' : 'Energy Accuracy' ?></span>
+                <strong class="cal-metric-val text-eco" id="cal-val-accuracy"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
+              </div>
+              <div class="cal-metric-card">
+                <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'مستوى الثقة' : 'Confidence Level' ?></span>
+                <strong class="cal-metric-val" id="cal-val-confidence-level"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
+              </div>
+            </div>
 
-              <!-- Hidden feedback boxes (kept for JS logic) -->
-              <div class="calibration-feedback alert alert-warning" id="calibration-warning-box" style="display: none;">
-                ⚠️ <?= $lang['calibration_warning'] ?>
-              </div>
-              <div class="calibration-feedback alert alert-success" id="calibration-success-box" style="display: none;">
-                ✅ <?= $active_lang === 'ar' ? 'تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.' : 'Excellent match between appliance usage and bill history! Estimates calibrated.' ?>
-              </div>
+            <!-- Hidden feedback boxes -->
+            <div class="calibration-feedback alert alert-warning" id="calibration-warning-box" style="display: none;">
+              ⚠️ <?= $lang['calibration_warning'] ?>
+            </div>
+            <div class="calibration-feedback alert alert-success" id="calibration-success-box" style="display: none;">
+              ✅ <?= $active_lang === 'ar' ? 'تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.' : 'Excellent match between appliance usage and bill history! Estimates calibrated.' ?>
+            </div>
 
-              <!-- Insight Summary Card -->
-              <div class="calibration-insight-card" id="cal-insight-card" style="display: none;">
-                <div class="cal-insight-header">
-                  <span>💡</span>
-                  <strong><?= $active_lang === 'ar' ? 'تحليل مقارنة الاستهلاك' : 'Calibrated Energy Insight' ?></strong>
-                </div>
-                <p id="cal-insight-desc" class="mb-0 mt-1"></p>
+            <!-- Insight Summary Card -->
+            <div class="calibration-insight-card" id="cal-insight-card" style="display: none;">
+              <div class="cal-insight-header">
+                <span>💡</span>
+                <strong><?= $active_lang === 'ar' ? 'تحليل مقارنة الاستهلاك' : 'Calibrated Energy Insight' ?></strong>
               </div>
+              <p id="cal-insight-desc" class="mb-0 mt-1"></p>
+            </div>
 
-              <!-- Action Plan Card -->
-              <div class="calibration-action-card" id="cal-action-card" style="display: none;">
-                <div class="cal-action-header">
-                  <span>🚀</span>
-                  <strong><?= $active_lang === 'ar' ? 'الإجراء الموصى به من قبل النظام' : 'Recommended Action Plan' ?></strong>
-                </div>
-                <p id="cal-action-desc" class="mb-0 mt-1"></p>
+            <!-- Action Plan Card -->
+            <div class="calibration-action-card" id="cal-action-card" style="display: none;">
+              <div class="cal-action-header">
+                <span>🚀</span>
+                <strong><?= $active_lang === 'ar' ? 'الإجراء الموصى به من قبل النظام' : 'Recommended Action Plan' ?></strong>
               </div>
+              <p id="cal-action-desc" class="mb-0 mt-1"></p>
+            </div>
 
-              <!-- Action Buttons -->
-              <div class="calibration-step-actions">
-                <button type="button" class="btn btn-secondary" id="btn-back-to-step5">
-                  <?= $active_lang === 'ar' ? '⬅ تعديل الفاتورة' : '⬅ Edit Bill' ?>
-                </button>
-                <button type="button" class="btn btn-primary" id="btn-goto-step7">
-                  <?= $active_lang === 'ar' ? 'عرض لوحة التحكم ➔' : 'Reveal Insights Dashboard ➔' ?>
-                </button>
-              </div>
-
+            <!-- Action Buttons -->
+            <div class="calibration-step-actions">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step5">
+                <?= $active_lang === 'ar' ? '⬅ تعديل الفاتورة' : '⬅ Edit Bill' ?>
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-goto-step7">
+                <?= $active_lang === 'ar' ? 'عرض لوحة التحكم ➔' : 'Reveal Insights Dashboard ➔' ?>
+              </button>
             </div>
           </div>
 
@@ -628,8 +617,9 @@ $lang = require_once "lang/{$active_lang}.php";
                   </div>
                 </div>
 
-                <!-- ROW 2: Lifetime Savings Hero Card -->
+                <!-- ROW 2: Lifetime Savings & Environmental Impact Banners -->
                 <div class="dashboard-row hero-row">
+                  <!-- Lifetime Savings Card -->
                   <div class="discovery-metric-card highlight-lifetime">
                     <span class="metric-label"><?= $lang['db_lifetime_sav'] ?></span>
                     <strong class="metric-val text-eco" id="db-val-lifetime-sav">0 OMR</strong>
@@ -637,38 +627,31 @@ $lang = require_once "lang/{$active_lang}.php";
                       <?= $active_lang === 'ar' ? 'الوفر الإجمالي المتوقع على مدى العمر الافتراضي للنظام الشمسي (25 عاماً).' : 'Expected cumulative savings over the 25-year lifetime of your solar system.' ?>
                     </p>
                   </div>
+                  <!-- Lifetime Environmental Impact Card -->
+                  <div class="discovery-metric-card highlight-environmental">
+                    <span class="metric-label"><?= $active_lang === 'ar' ? 'الأثر البيئي والحد من الكربون' : 'Environmental Impact & Carbon Offset' ?></span>
+                    <div class="environmental-metrics-inline">
+                      <div class="env-metric-item">
+                        <span class="env-value text-green" id="score-co2-val">0.0 Tons</span>
+                        <span class="env-label"><?= $active_lang === 'ar' ? 'الحد السنوي من CO₂' : 'Annual CO₂ Offset' ?></span>
+                      </div>
+                      <div class="env-metric-item">
+                        <span class="env-value" id="score-trees-val">0</span>
+                        <span class="env-label"><?= $active_lang === 'ar' ? 'الأشجار المزروعة المكافئة' : 'Trees Planted' ?></span>
+                      </div>
+                      <div class="env-metric-item">
+                        <span class="env-value text-green" id="score-green-rating">Excellent</span>
+                        <span class="env-label"><?= $active_lang === 'ar' ? 'التقييم البيئي' : 'Environmental Rating' ?></span>
+                      </div>
+                    </div>
+                    <p class="hero-card-desc">
+                      <?= $active_lang === 'ar' ? 'يقلل هذا النظام الشمسي بشكل كبير من الانبعاثات الكربونية السنوية.' : 'This solar system significantly reduces annual carbon emissions.' ?>
+                    </p>
+                  </div>
                 </div>
 
                 <!-- ROW 3: Three Columns for Insights -->
                 <div class="dashboard-row insights-row">
-                  <!-- Col 1: Solar Performance Summary -->
-                  <div class="dashboard-section col-insights">
-                    <h4 class="section-title-discovery">
-                      <span>📊</span> <?= $active_lang === 'ar' ? 'ملخص أداء الطاقة الشمسية' : 'Solar Performance Summary' ?>
-                    </h4>
-                    <div class="proposal-card-content">
-                      <div class="proposal-row">
-                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'إنتاج الطاقة السنوي' : 'Annual Energy Production' ?></span>
-                        <strong class="proposal-value text-eco" id="db-val-annual-prod">0 kWh/year</strong>
-                      </div>
-                      <div class="proposal-row">
-                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'التوليد الشمسي الشهري' : 'Monthly Solar Generation' ?></span>
-                        <strong class="proposal-value text-eco" id="db-val-monthly-gen">0 kWh/month</strong>
-                      </div>
-                      <div class="proposal-row">
-                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'معدل الاستهلاك الذاتي' : 'Self Consumption Rate' ?></span>
-                        <strong class="proposal-value" id="db-val-self-cons">0%</strong>
-                      </div>
-                      <div class="proposal-row">
-                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'نسبة إزاحة الشبكة' : 'Grid Offset %' ?></span>
-                        <strong class="proposal-value" id="db-val-grid-offset">0%</strong>
-                      </div>
-                      <div class="proposal-row">
-                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'فئة الأداء التقديرية' : 'Estimated Performance Grade' ?></span>
-                        <strong class="proposal-value text-green" id="db-val-perf-grade">A+</strong>
-                      </div>
-                    </div>
-                  </div>
                   <!-- Col 1: Energy Consumption & Independence -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
@@ -696,27 +679,32 @@ $lang = require_once "lang/{$active_lang}.php";
                     </div>
                   </div>
 
-                  <!-- Col 2: Environmental Impact -->
+                  <!-- Col 2: Solar Performance Summary -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>🌱</span> <?= $active_lang === 'ar' ? 'الأثر البيئي' : 'Environmental Impact' ?>
+                      <span>📊</span> <?= $active_lang === 'ar' ? 'ملخص أداء الطاقة الشمسية' : 'Solar Performance Summary' ?>
                     </h4>
                     <div class="proposal-card-content">
                       <div class="proposal-row">
-                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'الحد السنوي من CO₂' : 'Annual CO₂ Reduction' ?></span>
-                        <strong class="proposal-value text-green" id="score-co2-val">0.0 Tons</strong>
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'إنتاج الطاقة السنوي' : 'Annual Energy Production' ?></span>
+                        <strong class="proposal-value text-eco" id="db-val-annual-prod">0 kWh/year</strong>
                       </div>
                       <div class="proposal-row">
-                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'الأشجار المكافئة المزروعة' : 'Equivalent Trees Planted' ?></span>
-                        <strong class="proposal-value" id="score-trees-val">0</strong>
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'التوليد الشمسي الشهري' : 'Monthly Solar Generation' ?></span>
+                        <strong class="proposal-value text-eco" id="db-val-monthly-gen">0 kWh/month</strong>
                       </div>
                       <div class="proposal-row">
-                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'التقييم البيئي' : 'Environmental Rating' ?></span>
-                        <strong class="proposal-value text-green" id="score-green-rating">Excellent</strong>
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'معدل الاستهلاك الذاتي' : 'Self Consumption Rate' ?></span>
+                        <strong class="proposal-value" id="db-val-self-cons">0%</strong>
                       </div>
-                      <p class="proposal-summary-text">
-                        <?= $active_lang === 'ar' ? 'يقلل هذا النظام الشمسي بشكل كبير من الانبعاثات الكربونية السنوية.' : 'This solar system significantly reduces annual carbon emissions.' ?>
-                      </p>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'نسبة إزاحة الشبكة' : 'Grid Offset %' ?></span>
+                        <strong class="proposal-value" id="db-val-grid-offset">0%</strong>
+                      </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label"><?= $active_lang === 'ar' ? 'فئة الأداء التقديرية' : 'Estimated Performance Grade' ?></span>
+                        <strong class="proposal-value text-green" id="db-val-perf-grade">A+</strong>
+                      </div>
                     </div>
                   </div>
 
@@ -823,7 +811,6 @@ $lang = require_once "lang/{$active_lang}.php";
               </div>
 
             </div> <!-- /residential-discovery-results -->
-          </div>
         </div>
 
         <!-- Footer Controls Container -->

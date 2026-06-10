@@ -29,9 +29,9 @@
   <link rel="preload" as="image" href="lightbulb.webp" fetchpriority="high">
   <link rel="preload" as="image" href="https://www.ctechoman.com/public/logo.webp">
 
-<!-- CRITICAL INLINE CSS: Only what's needed for above-fold render -->
+<!-- CRITICAL INLINE CSS: Above-fold render + core layout primitives -->
    <style>
-     *{margin:0;padding:0;box-sizing:border-box}
+     *{margin:0;padding:0;box-sizing:border-box;overflow-wrap:break-word}
      html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
      body{font-family:'Outfit','Tajawal','Noto Sans Arabic','Segoe UI',Arial,sans-serif;color:#0d1014;background-color:#FAFAFA;line-height:1.6;overflow-x:hidden;width:100%;font-size:.95rem}
      img{max-width:100%;height:auto;display:block}
@@ -53,32 +53,42 @@
      .hero{min-height:auto;padding-top:80px;padding-bottom:2rem;display:flex;align-items:center}
      .hero-grid{display:flex;flex-direction:column;gap:1.5rem;width:100%}
      .hero-text{text-align:center;opacity:1}
-     h1{font-size:1.85rem;font-weight:900;line-height:1.2;color:#0d1014}
-     h2{font-size:1.45rem;font-weight:900;line-height:1.2;color:#0d1014}
-     h3{font-size:1.2rem;font-weight:900;line-height:1.2;color:#0d1014}
-     h4{font-size:1.05rem;font-weight:900;line-height:1.2;color:#0d1014}
+     h1{font-size:clamp(1.6rem,5vw,2.1rem);font-weight:900;line-height:1.2;color:#0d1014}
+     h2{font-size:clamp(1.25rem,4vw,1.45rem);font-weight:900;line-height:1.2;color:#0d1014}
+     h3{font-size:clamp(1.05rem,3vw,1.2rem);font-weight:900;line-height:1.2;color:#0d1014}
+     h4{font-size:clamp(.95rem,2.5vw,1.05rem);font-weight:900;line-height:1.2;color:#0d1014}
      .hero-text p{font-size:1rem;color:#64748B;margin-bottom:1.5rem;font-weight:500}
-.hero-actions{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem;align-items:center;width:100%}
-      .hero-visual{width:100%;height:180px;display:flex;justify-content:flex-start;align-items:center;position:relative;overflow:hidden;opacity:1}
-      .lightbulb-img{max-height:160px;width:auto;}
-      .text-muted{color:#64748B}
-      .bg-blobs{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
-      .blob-1,.blob-2{position:absolute;width:200px;height:200px;background:#F1F5F9;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;opacity:.2}
-      .blob-1{top:-10%;left:-10%}.blob-2{bottom:10%;right:-5%}
-      /* Prevent FOUC: keep hero visible until styles load */
-      .js-enabled .hero-text,.js-enabled .hero-visual{opacity:1}
-      /* Reveal elements - hidden until active */
-      .js-enabled .reveal{opacity:0;transform:translate3d(0,15px,0)}
-      .js-enabled .reveal.active{opacity:1;transform:translate3d(0,0,0)}
-    </style>
+     .hero-actions{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem;align-items:center;width:100%}
+     .hero-visual{width:100%;height:180px;display:flex;justify-content:flex-start;align-items:center;position:relative;overflow:hidden;opacity:1}
+     .lightbulb-img{max-height:160px;width:auto}
+     .text-muted{color:#64748B}
+     .text-center{text-align:center}
+     .section-padding{padding-top:2rem;padding-bottom:2rem}
+     .section-title{text-align:center;margin-bottom:2rem}
+     .bg-blobs{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+     .blob-1,.blob-2{position:absolute;width:200px;height:200px;background:#F1F5F9;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;opacity:.2}
+     .blob-1{top:-10%;left:-10%}.blob-2{bottom:10%;right:-5%}
+     /* Calculator section — prevent FOUC on below-hero content */
+     .calculator-section{position:relative;z-index:10;margin-top:1rem}
+     .calculator-wrapper{background:#fff;border-radius:1.5rem;padding:1.25rem 1rem;box-shadow:0 12px 30px -10px rgba(15,23,42,.05);display:flex;flex-direction:column;gap:1.5rem}
+     .calc-form{min-width:0;width:100%;max-width:100%}
+     .discovery-step-panel{width:100%}
+     /* Prevent FOUC: keep hero visible */
+     .js-enabled .hero-text,.js-enabled .hero-visual{opacity:1}
+     /* Reveal system — hidden until JS activates */
+     .js-enabled .reveal{opacity:0;transform:translate3d(0,15px,0);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+     .js-enabled .reveal.active{opacity:1;transform:translate3d(0,0,0)}
+     /* Spacing utilities */
+     .mt-2{margin-top:.5rem}.mt-3{margin-top:1rem}.mt-4{margin-top:1.5rem}
+     .mb-3{margin-bottom:1rem}.mb-4{margin-bottom:1.5rem}
+   </style>
 
   <!-- Non-blocking Google Fonts (avoids render-blocking) -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
-  <!-- Main stylesheet: load non-blocking, apply after fonts -->
-  <link rel="preload" as="style" href="style.css?v=8.5" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="style.css?v=8.5"></noscript>
+  <!-- Main stylesheet: RENDER-BLOCKING to prevent FOUC -->
+  <link rel="stylesheet" href="style.css?v=9.0">
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -427,14 +437,10 @@
 
           <!-- Panel 5: Ask for average electricity bill (Step 5) -->
           <div class="discovery-step-panel" id="discovery-panel-5" style="display: none;">
-
-            <!-- SECTION A: Question -->
-            <div class="step5-question-section">
-              <h3>Do you know your average monthly electricity bill?</h3>
-              <p class="step5-subtitle">
-                Providing your bill improves accuracy and ROI calculations.
-              </p>
-            </div>
+            <h3 class="mb-2">Do you know your average monthly electricity bill?</h3>
+            <p class="text-muted mb-3" style="font-size: 0.88rem;">
+              Providing your bill improves accuracy and ROI calculations.
+            </p>
 
             <!-- SECTION B: Slider Card -->
             <div class="step5-slider-card" id="step5-slider-section">
@@ -540,87 +546,80 @@
 
           <!-- Panel 6: Calibrate results (Step 6) -->
           <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
-            <div class="calibration-container">
+            <h3 class="mb-2">Calibration Status</h3>
+            <p class="text-muted mb-3" id="calibration-status-message">
+              Calibration completed!
+            </p>
 
-              <!-- Calibration Status Title -->
-              <div class="calibration-title-section">
-                <h3>Calibration Status</h3>
-                <p class="calibration-title-sub" id="calibration-status-message">
-                  Calibration completed!
-                </p>
-              </div>
-
-              <!-- Large Confidence Ring -->
-              <div class="calibration-ring-section">
-                <div class="progress-ring-wrapper">
-                  <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
-                    <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
-                    <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
-                  </svg>
-                  <div class="progress-ring-text">
-                    <span class="progress-ring-number" id="calibration-confidence-pct">—</span>
-                    <span class="progress-ring-sublabel" id="calibration-match-label">Excellent Match</span>
-                    <span class="progress-ring-label">Confidence</span>
-                  </div>
+            <!-- Large Confidence Ring -->
+            <div class="calibration-ring-section">
+              <div class="progress-ring-wrapper">
+                <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
+                  <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                  <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                </svg>
+                <div class="progress-ring-text">
+                  <span class="progress-ring-number" id="calibration-confidence-pct">—</span>
+                  <span class="progress-ring-sublabel" id="calibration-match-label">Excellent Match</span>
+                  <span class="progress-ring-label">Confidence</span>
                 </div>
               </div>
+            </div>
 
-              <!-- 2x2 Metrics Grid -->
-              <div class="calibration-metrics-grid">
-                <div class="cal-metric-card">
-                  <span class="cal-metric-label">Match Status</span>
-                  <strong class="cal-metric-val" id="cal-val-score">Using Appliance Profile</strong>
-                </div>
-                <div class="cal-metric-card">
-                  <span class="cal-metric-label">Bill Match</span>
-                  <strong class="cal-metric-val" id="cal-val-bill-match">Not Available</strong>
-                </div>
-                <div class="cal-metric-card">
-                  <span class="cal-metric-label">Energy Accuracy</span>
-                  <strong class="cal-metric-val text-eco" id="cal-val-accuracy">Estimated</strong>
-                </div>
-                <div class="cal-metric-card">
-                  <span class="cal-metric-label">Confidence Level</span>
-                  <strong class="cal-metric-val" id="cal-val-confidence-level">Estimated</strong>
-                </div>
+            <!-- 2x2 Metrics Grid -->
+            <div class="calibration-metrics-grid">
+              <div class="cal-metric-card">
+                <span class="cal-metric-label">Match Status</span>
+                <strong class="cal-metric-val" id="cal-val-score">Using Appliance Profile</strong>
               </div>
+              <div class="cal-metric-card">
+                <span class="cal-metric-label">Bill Match</span>
+                <strong class="cal-metric-val" id="cal-val-bill-match">Not Available</strong>
+              </div>
+              <div class="cal-metric-card">
+                <span class="cal-metric-label">Energy Accuracy</span>
+                <strong class="cal-metric-val text-eco" id="cal-val-accuracy">Estimated</strong>
+              </div>
+              <div class="cal-metric-card">
+                <span class="cal-metric-label">Confidence Level</span>
+                <strong class="cal-metric-val" id="cal-val-confidence-level">Estimated</strong>
+              </div>
+            </div>
 
-              <!-- Hidden feedback boxes (kept for JS logic) -->
-              <div class="calibration-feedback alert alert-warning" id="calibration-warning-box" style="display: none;">
-                ⚠️ We noticed a difference between appliance usage and your bill history. We\
-              </div>
-              <div class="calibration-feedback alert alert-success" id="calibration-success-box" style="display: none;">
-                ✅ Excellent match between appliance usage and bill history! Estimates calibrated.
-              </div>
+            <!-- Hidden feedback boxes -->
+            <div class="calibration-feedback alert alert-warning" id="calibration-warning-box" style="display: none;">
+              ⚠️ We noticed a difference between appliance usage and your bill history. We\
+            </div>
+            <div class="calibration-feedback alert alert-success" id="calibration-success-box" style="display: none;">
+              ✅ Excellent match between appliance usage and bill history! Estimates calibrated.
+            </div>
 
-              <!-- Insight Summary Card -->
-              <div class="calibration-insight-card" id="cal-insight-card" style="display: none;">
-                <div class="cal-insight-header">
-                  <span>💡</span>
-                  <strong>Calibrated Energy Insight</strong>
-                </div>
-                <p id="cal-insight-desc" class="mb-0 mt-1"></p>
+            <!-- Insight Summary Card -->
+            <div class="calibration-insight-card" id="cal-insight-card" style="display: none;">
+              <div class="cal-insight-header">
+                <span>💡</span>
+                <strong>Calibrated Energy Insight</strong>
               </div>
+              <p id="cal-insight-desc" class="mb-0 mt-1"></p>
+            </div>
 
-              <!-- Action Plan Card -->
-              <div class="calibration-action-card" id="cal-action-card" style="display: none;">
-                <div class="cal-action-header">
-                  <span>🚀</span>
-                  <strong>Recommended Action Plan</strong>
-                </div>
-                <p id="cal-action-desc" class="mb-0 mt-1"></p>
+            <!-- Action Plan Card -->
+            <div class="calibration-action-card" id="cal-action-card" style="display: none;">
+              <div class="cal-action-header">
+                <span>🚀</span>
+                <strong>Recommended Action Plan</strong>
               </div>
+              <p id="cal-action-desc" class="mb-0 mt-1"></p>
+            </div>
 
-              <!-- Action Buttons -->
-              <div class="calibration-step-actions">
-                <button type="button" class="btn btn-secondary" id="btn-back-to-step5">
-                  ⬅ Edit Bill
-                </button>
-                <button type="button" class="btn btn-primary" id="btn-goto-step7">
-                  Reveal Insights Dashboard ➔
-                </button>
-              </div>
-
+            <!-- Action Buttons -->
+            <div class="calibration-step-actions">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step5">
+                ⬅ Edit Bill
+              </button>
+              <button type="button" class="btn btn-primary" id="btn-goto-step7">
+                Reveal Insights Dashboard ➔
+              </button>
             </div>
           </div>
 
@@ -656,8 +655,9 @@
                   </div>
                 </div>
 
-                <!-- ROW 2: Lifetime Savings Hero Card -->
+                <!-- ROW 2: Lifetime Savings & Environmental Impact Banners -->
                 <div class="dashboard-row hero-row">
+                  <!-- Lifetime Savings Card -->
                   <div class="discovery-metric-card highlight-lifetime">
                     <span class="metric-label">Lifetime Savings (25 Years)</span>
                     <strong class="metric-val text-eco" id="db-val-lifetime-sav">0 OMR</strong>
@@ -665,38 +665,31 @@
                       Expected cumulative savings over the 25-year lifetime of your solar system.
                     </p>
                   </div>
+                  <!-- Lifetime Environmental Impact Card -->
+                  <div class="discovery-metric-card highlight-environmental">
+                    <span class="metric-label">Environmental Impact & Carbon Offset</span>
+                    <div class="environmental-metrics-inline">
+                      <div class="env-metric-item">
+                        <span class="env-value text-green" id="score-co2-val">0.0 Tons</span>
+                        <span class="env-label">Annual CO₂ Offset</span>
+                      </div>
+                      <div class="env-metric-item">
+                        <span class="env-value" id="score-trees-val">0</span>
+                        <span class="env-label">Trees Planted</span>
+                      </div>
+                      <div class="env-metric-item">
+                        <span class="env-value text-green" id="score-green-rating">Excellent</span>
+                        <span class="env-label">Environmental Rating</span>
+                      </div>
+                    </div>
+                    <p class="hero-card-desc">
+                      This solar system significantly reduces annual carbon emissions.
+                    </p>
+                  </div>
                 </div>
 
                 <!-- ROW 3: Three Columns for Insights -->
                 <div class="dashboard-row insights-row">
-                  <!-- Col 1: Solar Performance Summary -->
-                  <div class="dashboard-section col-insights">
-                    <h4 class="section-title-discovery">
-                      <span>📊</span> Solar Performance Summary
-                    </h4>
-                    <div class="proposal-card-content">
-                      <div class="proposal-row">
-                        <span class="proposal-label">Annual Energy Production</span>
-                        <strong class="proposal-value text-eco" id="db-val-annual-prod">0 kWh/year</strong>
-                      </div>
-                      <div class="proposal-row">
-                        <span class="proposal-label">Monthly Solar Generation</span>
-                        <strong class="proposal-value text-eco" id="db-val-monthly-gen">0 kWh/month</strong>
-                      </div>
-                      <div class="proposal-row">
-                        <span class="proposal-label">Self Consumption Rate</span>
-                        <strong class="proposal-value" id="db-val-self-cons">0%</strong>
-                      </div>
-                      <div class="proposal-row">
-                        <span class="proposal-label">Grid Offset %</span>
-                        <strong class="proposal-value" id="db-val-grid-offset">0%</strong>
-                      </div>
-                      <div class="proposal-row">
-                        <span class="proposal-label">Estimated Performance Grade</span>
-                        <strong class="proposal-value text-green" id="db-val-perf-grade">A+</strong>
-                      </div>
-                    </div>
-                  </div>
                   <!-- Col 1: Energy Consumption & Independence -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
@@ -724,27 +717,32 @@
                     </div>
                   </div>
 
-                  <!-- Col 2: Environmental Impact -->
+                  <!-- Col 2: Solar Performance Summary -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>🌱</span> Environmental Impact
+                      <span>📊</span> Solar Performance Summary
                     </h4>
                     <div class="proposal-card-content">
                       <div class="proposal-row">
-                        <span class="proposal-label">Annual CO₂ Reduction</span>
-                        <strong class="proposal-value text-green" id="score-co2-val">0.0 Tons</strong>
+                        <span class="proposal-label">Annual Energy Production</span>
+                        <strong class="proposal-value text-eco" id="db-val-annual-prod">0 kWh/year</strong>
                       </div>
                       <div class="proposal-row">
-                        <span class="proposal-label">Equivalent Trees Planted</span>
-                        <strong class="proposal-value" id="score-trees-val">0</strong>
+                        <span class="proposal-label">Monthly Solar Generation</span>
+                        <strong class="proposal-value text-eco" id="db-val-monthly-gen">0 kWh/month</strong>
                       </div>
                       <div class="proposal-row">
-                        <span class="proposal-label">Environmental Rating</span>
-                        <strong class="proposal-value text-green" id="score-green-rating">Excellent</strong>
+                        <span class="proposal-label">Self Consumption Rate</span>
+                        <strong class="proposal-value" id="db-val-self-cons">0%</strong>
                       </div>
-                      <p class="proposal-summary-text">
-                        This solar system significantly reduces annual carbon emissions.
-                      </p>
+                      <div class="proposal-row">
+                        <span class="proposal-label">Grid Offset %</span>
+                        <strong class="proposal-value" id="db-val-grid-offset">0%</strong>
+                      </div>
+                      <div class="proposal-row">
+                        <span class="proposal-label">Estimated Performance Grade</span>
+                        <strong class="proposal-value text-green" id="db-val-perf-grade">A+</strong>
+                      </div>
                     </div>
                   </div>
 
@@ -851,7 +849,6 @@
               </div>
 
             </div> <!-- /residential-discovery-results -->
-          </div>
         </div>
 
         <!-- Footer Controls Container -->
