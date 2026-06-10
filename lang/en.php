@@ -350,21 +350,21 @@ return [
             'btn' => 'Calculate Savings ➔'
         ],
         [
-            'badge' => '🔒 COST PROTECTION',
-            'title' => 'Protect Yourself From Future Tariff Increases',
-            'desc' => 'Utility rates are rising. Lock in your energy costs today and secure stable, free electricity for the next 25+ years with a premium solar system.',
+            'badge' => '🔒 FINANCIAL ROI',
+            'title' => 'Lock In High Annual Returns for 25+ Years',
+            'desc' => 'Solar installations function as secure financial assets in Oman, yielding an effective annual ROI of over 12-15% with a payback period of just 5 to 7 years.',
             'btn' => 'Calculate Savings ➔'
         ],
         [
             'badge' => '📈 REAL ESTATE VALUE',
-            'title' => 'Increase Property Value With Solar',
-            'desc' => 'Modern homes equipped with smart solar systems sell faster and at a premium price. Solar is an asset that yields high financial returns.',
+            'title' => 'Increase Property Value With Solar Assets',
+            'desc' => 'Modern villas equipped with smart solar systems sell faster and at a premium price. Solar is a building upgrade that yields high financial returns.',
             'btn' => 'Calculate Savings ➔'
         ],
         [
-            'badge' => '📊 INSTANT ANALYSIS',
-            'title' => 'See Your Potential Savings In Minutes',
-            'desc' => 'No aggressive sales calls. Use our smart, interactive solar calculator to discover your recommended system size and real financial savings.',
+            'badge' => '🇴🇲 IDEAL FOR OMAN',
+            'title' => 'Oman is One of the Best Solar Locations Globally',
+            'desc' => 'With over 320 days of pure annual sunshine and high solar insolation rates, solar panels in Oman operate at peak performance, ensuring rapid returns.',
             'btn' => 'Calculate Savings ➔'
         ],
         [

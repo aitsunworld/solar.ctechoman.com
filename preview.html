@@ -627,10 +627,19 @@
           <div class="discovery-step-panel" id="discovery-panel-7" style="display: none;">
             <div id="residential-discovery-results">
               
-              <h3 class="dashboard-main-title">Your Home Energy Assessment</h3>
+              <h3 class="dashboard-main-title">Your Personalized Solar Assessment</h3>
+              
+              <p class="dashboard-summary-intro text-center text-muted mb-4" style="max-width: 800px; margin: 0 auto 1.5rem auto; font-size: 0.95rem; line-height: 1.6;">
+                Based on your selected appliances, estimated load profile, and monthly bill calibration, we have generated a personalized technical, investment, and environmental yield analysis for your property in Oman.
+              </p>
               
               <div class="discovery-dashboard">
                 
+                <!-- Financial Impact Section Title -->
+                <h4 class="dashboard-group-title mb-3">
+                  <span>📊</span> Financial Impact Summary
+                </h4>
+
                 <!-- ROW 1: Top Summary Row -->
                 <div class="dashboard-row summary-row">
                   <!-- Monthly Savings -->
@@ -662,12 +671,12 @@
                     <span class="metric-label">Lifetime Savings (25 Years)</span>
                     <strong class="metric-val text-eco" id="db-val-lifetime-sav">0 OMR</strong>
                     <p class="hero-card-desc">
-                      Expected cumulative savings over the 25-year lifetime of your solar system.
+                      Expected cumulative cash savings over the guaranteed 25-year operational lifecycle of the solar panels.
                     </p>
                   </div>
                   <!-- Lifetime Environmental Impact Card -->
                   <div class="discovery-metric-card highlight-environmental">
-                    <span class="metric-label">Environmental Impact & Carbon Offset</span>
+                    <span class="metric-label">Environmental Impact Summary</span>
                     <div class="environmental-metrics-inline">
                       <div class="env-metric-item">
                         <span class="env-value text-green" id="score-co2-val">0.0 Tons</span>
@@ -675,25 +684,25 @@
                       </div>
                       <div class="env-metric-item">
                         <span class="env-value" id="score-trees-val">0</span>
-                        <span class="env-label">Trees Planted</span>
+                        <span class="env-label">Equivalent Trees</span>
                       </div>
                       <div class="env-metric-item">
                         <span class="env-value text-green" id="score-green-rating">Excellent</span>
-                        <span class="env-label">Environmental Rating</span>
+                        <span class="env-label">Ecological Rating</span>
                       </div>
                     </div>
                     <p class="hero-card-desc">
-                      This solar system significantly reduces annual carbon emissions.
+                      This project directly offsets grid-generated emissions, advancing Oman Vision 2040 sustainability targets.
                     </p>
                   </div>
                 </div>
 
                 <!-- ROW 3: Three Columns for Insights -->
                 <div class="dashboard-row insights-row">
-                  <!-- Col 1: Energy Consumption & Independence -->
+                  <!-- Col 1: Energy Consumption & Independence Score -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>⚡</span> Energy Consumption & Independence
+                      <span>⚡</span> Energy Independence Score
                     </h4>
                     <div class="proposal-card-content">
                       <div class="proposal-row">
@@ -720,7 +729,7 @@
                   <!-- Col 2: Solar Performance Summary -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>📊</span> Solar Performance Summary
+                      <span>☀️</span> Solar Performance Summary
                     </h4>
                     <div class="proposal-card-content">
                       <div class="proposal-row">
@@ -746,10 +755,10 @@
                     </div>
                   </div>
 
-                  <!-- Col 3: Technical Specifications & Suitability -->
+                  <!-- Col 3: Technical Specifications & Solar Readiness Score -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>🔧</span> Technical Specifications & Suitability
+                      <span>🔧</span> Technical Specs & Solar Readiness
                     </h4>
                     <div class="proposal-card-content spec-card-content">
                       <!-- Section 1: Recommended System -->
@@ -781,15 +790,15 @@
                         </div>
                       </div>
 
-                      <!-- Section 3: Property Suitability -->
+                      <!-- Section 3: Solar Readiness Score -->
                       <div class="spec-section border-top-divider">
-                        <h5 class="spec-section-title">Property Suitability</h5>
+                        <h5 class="spec-section-title">Solar Readiness Score</h5>
                         <div class="suitability-result-box">
                           <div class="suitability-badge-new grade-b" id="score-suitability-badge">
                             <span id="score-suitability-label">B</span>
                           </div>
                           <p class="suitability-desc" id="score-suitability-desc">
-                            Suitable for solar deployment with moderate optimization opportunities.
+                            High suitability ready for deployment with optimum orientation.
                           </p>
                         </div>
                       </div>
@@ -797,12 +806,15 @@
                   </div>
                 </div>
 
-                <!-- ROW 4: Integrated Lead Assessment Form -->
+                <!-- ROW 4: Integrated Lead Assessment Form (Recommended Next Step) -->
                 <div class="dashboard-row form-row-row">
                   <div class="cta-lead-card">
-                    <div class="cta-lead-header">
-                      <h4>Request Free Engineering Sizing Verification</h4>
-                      <p>Our engineering team will review your appliance load profile and local yield database to verify your layout, completely free of charge.</p>
+                    <div class="cta-lead-header text-center">
+                      <span class="next-step-badge mb-2 d-inline-block">Recommended Next Step</span>
+                      <h4>Request Free Engineering Verification & Sizing Audit</h4>
+                      <p class="mt-2" style="max-width: 800px; margin: 0 auto; font-size: 0.9rem; line-height: 1.5; color: var(--color-text-muted);">
+                        Our DCRP-certified engineering team will review your load profile and run site-specific shadow modeling to verify your system readiness and final cash yield, completely free of obligation.
+                      </p>
                     </div>
                     <form id="discovery-lead-form" class="cta-lead-form">
                       <input type="hidden" name="action" value="submit_lead">
@@ -832,7 +844,7 @@
                       </div>
 
                       <button type="submit" class="btn-cta-submit mt-3" id="btn-submit-discovery">
-                        <span>Submit for Engineering Review ➔</span>
+                        <span>Confirm Sizing & Request Engineering Audit ➔</span>
                         <span class="spinner" style="display: none; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;"></span>
                       </button>
                     </form>
@@ -849,6 +861,7 @@
               </div>
 
             </div> <!-- /residential-discovery-results -->
+          </div>
         </div>
 
         <!-- Footer Controls Container -->

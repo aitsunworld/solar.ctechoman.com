@@ -553,7 +553,7 @@ body.js-enabled .reveal-right.active {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
-  max-width: 1000px;
+  max-width: var(--container-width);
   margin: 0 auto;
 }
 
@@ -567,14 +567,24 @@ body.js-enabled .reveal-right.active {
   display: flex;
   justify-content: space-between;
   position: relative;
-  margin: 0 auto var(--space-5) auto;
+  margin: 0 auto var(--space-4) auto;
   max-width: 800px;
   width: 100%;
-  padding-bottom: var(--space-2);
-  border-bottom: 2px solid var(--color-accent-light);
+  padding-bottom: var(--space-3);
   overflow-x: auto;
   gap: var(--space-3);
   scrollbar-width: none;
+}
+
+.discovery-steps-progress::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 36px;
+  right: 36px;
+  height: 2px;
+  background: var(--color-border);
+  z-index: 1;
 }
 
 .discovery-steps-progress::-webkit-scrollbar {
@@ -598,7 +608,7 @@ body.js-enabled .reveal-right.active {
   width: 28px;
   height: 28px;
   border-radius: var(--radius-circle);
-  background: var(--color-accent-light);
+  background: var(--color-surface);
   border: 2px solid var(--color-border);
   display: flex;
   align-items: center;
@@ -607,6 +617,8 @@ body.js-enabled .reveal-right.active {
   font-size: 0.85rem;
   color: var(--color-text-muted);
   transition: var(--transition);
+  position: relative;
+  z-index: 2;
 }
 
 .step-number {
@@ -653,6 +665,10 @@ body.js-enabled .reveal-right.active {
   margin: 0 auto;
   animation: fadeIn 0.4s ease;
   width: 100%;
+}
+
+#discovery-panel-7 {
+  max-width: 1200px;
 }
 
 @keyframes fadeIn {
@@ -775,28 +791,44 @@ body.js-enabled .reveal-right.active {
   min-width: 0;
 }
 
+.card-category {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 2px;
+}
+
+[dir="rtl"] .card-info-row {
+  text-align: right;
+}
+
+.discovery-appliance-card.selected .card-category {
+  color: var(--color-eco);
+}
+
 .card-details h4 {
   font-size: 0.88rem;
   font-weight: 800;
-  margin-bottom: var(--space-1);
+  margin-bottom: 3px;
   color: var(--color-text-dark);
   line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.discovery-appliance-card:hover h4,
-.discovery-appliance-card.selected h4 {
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
+.card-desc {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+  margin-bottom: 6px;
+  font-weight: 500;
 }
 
 .card-spec {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--color-text-muted);
-  font-weight: 600;
+  font-weight: 700;
   display: block;
 }
 
@@ -834,6 +866,8 @@ body.js-enabled .reveal-right.active {
   flex-direction: column;
   gap: var(--space-3);
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .discovery-qty-row {
@@ -1440,6 +1474,255 @@ body.js-enabled .reveal-right.active {
 }
 
 /* ==========================================================================
+   4b. Wizard Side-by-Side Layouts (Steps 3-6)
+   ========================================================================== */
+
+/* Generic side-by-side two-column layout for wizard panels */
+.side-by-side-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+/* Step 3: Consumption Contributors Card */
+.contributors-card-wrapper {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  flex: 1;
+}
+
+.contributors-header {
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+}
+
+.contributors-list {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.contributor-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.contributor-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.contributor-name {
+  font-weight: 700;
+  color: var(--color-text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+}
+
+.contributor-val {
+  font-weight: 800;
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.contributor-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: var(--color-accent-light);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.contributor-bar-fill {
+  height: 100%;
+  background: var(--gradient-sun);
+  border-radius: var(--radius-pill);
+  transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  min-width: 4px;
+}
+
+/* Step 4: Educational "How We Sized" Info Card */
+.education-info-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  flex: 1;
+}
+
+.edu-card-header {
+  background: linear-gradient(135deg, rgba(58, 141, 204, 0.06) 0%, rgba(62, 182, 73, 0.04) 100%);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-4);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+}
+
+.edu-card-body {
+  padding: var(--space-3) var(--space-4);
+}
+
+.edu-math-desc {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-3);
+}
+
+.edu-specs-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.edu-specs-list li {
+  font-size: 0.82rem;
+  color: var(--color-text-dark);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  line-height: 1.5;
+}
+
+.edu-specs-list li strong {
+  font-weight: 800;
+  color: var(--color-text-dark);
+  white-space: nowrap;
+}
+
+.edu-specs-list li span {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Step 5: Two-Column Bill Calibration */
+.step5-left-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.step5-right-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.calibration-options-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  height: 100%;
+}
+
+.calibration-options-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.cal-opt-tab {
+  flex: 1;
+  padding: var(--space-3) var(--space-2);
+  border: none;
+  background: transparent;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  border-bottom: 2px solid transparent;
+}
+
+.cal-opt-tab:hover {
+  background: var(--color-accent-light);
+  color: var(--color-text-dark);
+}
+
+.cal-opt-tab.active {
+  color: var(--color-primary);
+  background: var(--color-surface);
+  border-bottom-color: var(--color-primary);
+}
+
+.cal-opt-panel {
+  padding: var(--space-4);
+}
+
+/* Step 6: Ring + Details Two-Column */
+.calibration-ring-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calibration-details-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Panel 7: Technical Assessment Summary Box */
+.assessment-summary-box {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background: linear-gradient(135deg, rgba(58, 141, 204, 0.05) 0%, rgba(62, 182, 73, 0.03) 100%);
+  border: 1.5px solid rgba(58, 141, 204, 0.15);
+  border-radius: var(--radius-card);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.summary-box-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.summary-box-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.summary-box-title {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-2);
+}
+
+#db-val-assessment-summary-text {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Wizard restart row */
+.wizard-restart-row {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ==========================================================================
    5. Results Dashboard - Three-Column Premium Grid
    ========================================================================== */
 
@@ -1447,18 +1730,49 @@ body.js-enabled .reveal-right.active {
   width: 100%;
 }
 
-.dashboard-main-title {
-  text-align: center;
-  font-size: var(--fs-section-title);
-  font-weight: 950;
-  margin-bottom: var(--space-5);
-}
+
 
 .discovery-dashboard {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
+  gap: var(--space-4);
   width: 100%;
+}
+
+.dashboard-main-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 950;
+  margin-bottom: var(--space-2);
+}
+
+.dashboard-group-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  border-bottom: 2px solid var(--color-accent-light);
+  padding-bottom: 6px;
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: left;
+}
+
+[dir="rtl"] .dashboard-group-title {
+  text-align: right;
+}
+
+.next-step-badge {
+  background: rgba(58, 141, 204, 0.1);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.05em;
 }
 
 .dashboard-row {
@@ -2646,6 +2960,49 @@ body.js-enabled .reveal-right.active {
   .cta-form-fields {
     flex-direction: row !important;
   }
+
+  /* Wizard Side-by-Side: activate two-column layout on tablets+ */
+  .side-by-side-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  /* Step 5: Ensure left column has fixed upper limit */
+  .step5-left-col {
+    max-width: 55%;
+  }
+
+  /* Step 6: Two-column calibration ring + details */
+  .calibration-step-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* Hero slider: two-column layout on tablets */
+  .slide-card-container {
+    flex-direction: row;
+    text-align: left;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  [dir="rtl"] .slide-card-container {
+    text-align: right;
+  }
+
+  .slide-card-text {
+    align-items: flex-start;
+    max-width: 55%;
+  }
+
+  [dir="rtl"] .slide-card-text {
+    align-items: flex-end;
+  }
+
+  .slide-card-visual img {
+    max-height: 260px;
+  }
 }
 
 /* Laptops / Desktops (1024px+) */
@@ -2665,6 +3022,20 @@ body.js-enabled .reveal-right.active {
   }
   .brands-grid {
     grid-template-columns: repeat(6, 1fr);
+  }
+
+  /* Widen discovery step panels on desktop for readability */
+  .discovery-step-panel {
+    max-width: 900px;
+  }
+
+  #discovery-panel-7 {
+    max-width: 1200px;
+  }
+
+  /* Summary row 4-col on 1024+ */
+  .summary-row {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

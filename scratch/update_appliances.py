@@ -1,38 +1,15 @@
-/**
- * calculator-engine.js
- * Concept Technologies LLC - Core Solar Sizing & Tariff Calculation Engine
- *
- * Centralized Single Source of Truth (SSOT) for all solar mathematics.
- * Used identically by the Website UI, Chatbot Advisor, CRM lead payloads, and Analytics.
- * Modular and migration-friendly (pure JavaScript).
- */
+filepath = "calculator-engine.js"
+with open(filepath, "r", encoding="utf-8") as f:
+    content = f.read()
 
-(function () {
-  "use strict";
+start_marker = "  const APPLIANCES = ["
+end_marker = "  ];\n\n  function calculateSolarResults"
 
-  const PANEL_WATTAGE = 550;
+start_idx = content.find(start_marker)
+end_idx = content.find(end_marker)
 
-  const BASE_TARIFFS = {
-    residential: 0.020,
-    commercial: 0.024,
-    industrial: 0.028
-  };
-
-  const REGIONAL_YIELDS = {
-    muscat: 1700,
-    batinah: 1700,
-    dhofar: 1445,
-    dakhiliyah: 1750,
-    other: 1650
-  };
-
-  const EPC_COSTS_PER_KW = {
-    residential: 380,
-    commercial: 320,
-    industrial: 285
-  };
-
-  const APPLIANCES = [
+if start_idx != -1 and end_idx != -1:
+    new_appliances = """  const APPLIANCES = [
     { id: "window_ac", property_type: "residential", category: "HVAC", name_en: "Window AC", name_ar: "مكيف نافذة", min_w: 1500, max_w: 2000, hours: 8.0, default_qty: 0, desc_en: "Standard window-mounted room cooler", desc_ar: "وحدة تبريد الغرفة القياسية المثبتة على النافذة", cat_en: "Cooling", cat_ar: "التبريد" },
     { id: "ac_1ton", property_type: "residential", category: "HVAC", name_en: "Split AC 1 Ton", name_ar: "مكيف سبليت 1 طن", min_w: 1200, max_w: 1500, hours: 8.0, default_qty: 1, desc_en: "Suitable for small bedrooms (up to 12 sqm)", desc_ar: "مناسب لغرف النوم الصغيرة (حتى 12 متر مربع)", cat_en: "Cooling", cat_ar: "التبريد" },
     { id: "ac_1_5ton", property_type: "residential", category: "HVAC", name_en: "Split AC 1.5 Ton", name_ar: "مكيف سبليت 1.5 طن", min_w: 1800, max_w: 2200, hours: 8.0, default_qty: 0, desc_en: "Suitable for medium bedrooms (up to 18 sqm)", desc_ar: "مناسب لغرف النوم المتوسطة (حتى 18 متر مربع)", cat_en: "Cooling", cat_ar: "التبريد" },
@@ -72,137 +49,10 @@
     { id: "ind_cnc_machine", property_type: "industrial", category: "Machinery", name_en: "CNC Milling Machine", name_ar: "آلة تشكيل بالتحكم الرقمي", min_w: 11000, max_w: 22000, hours: 10.0, default_qty: 0, desc_en: "Precision automated metal lathe", desc_ar: "آلة تشكيل وخراطة دقيقة تعمل بالكمبيوتر", cat_en: "Factory", cat_ar: "المصنع" },
     { id: "ind_induction_furnace", property_type: "industrial", category: "Machinery", name_en: "Induction Furnace", name_ar: "فرن حثي صهر المعادن", min_w: 50000, max_w: 100000, hours: 8.0, default_qty: 0, desc_en: "Metal smelting induction furnace", desc_ar: "فرن حثي حراري مخصص لصهر المعادن", cat_en: "Factory", cat_ar: "المصنع" }
   ];
-
-  function calculateSolarResults(monthlyBill, propertyType, location, availableSpace, overrideSystemSize) {
-    if (overrideSystemSize === void 0) { overrideSystemSize = null; }
-    
-    var bill = Math.max(10, parseFloat(monthlyBill) || 50);
-    var prop = (propertyType || "residential").toLowerCase();
-    var loc = (location || "muscat").toLowerCase();
-    var space = parseFloat(availableSpace) || null;
-
-    var tariff = BASE_TARIFFS[prop] || BASE_TARIFFS.residential;
-    var yieldKwh = REGIONAL_YIELDS[loc] || REGIONAL_YIELDS.other;
-    var costPerKw = EPC_COSTS_PER_KW[prop] || EPC_COSTS_PER_KW.residential;
-
-    var monthlyConsumptionKwh = bill / tariff;
-    var yearlyConsumptionKwh = monthlyConsumptionKwh * 12;
-
-    var targetSystemSizeKw = overrideSystemSize !== null ? overrideSystemSize : (yearlyConsumptionKwh / yieldKwh);
-    if (targetSystemSizeKw < 1.0) targetSystemSizeKw = 1.0;
-
-    var totalWatts = targetSystemSizeKw * 1000;
-    var numPanels = Math.ceil(totalWatts / PANEL_WATTAGE);
-    var exactSystemSizeKw = (numPanels * PANEL_WATTAGE) / 1000;
-
-    var estimatedSpaceRequiredSqm = Math.ceil(exactSystemSizeKw * 6);
-
-    var baseEpcCost = exactSystemSizeKw * costPerKw;
-    var minCost = Math.floor(baseEpcCost * 0.9);
-    var maxCost = Math.ceil(baseEpcCost * 1.1);
-
-    var averageOffsetFactor = prop === "residential" ? 0.85 : 0.95;
-    var yearlySavingsOmr = bill * 12 * averageOffsetFactor;
-    var paybackPeriodYears = baseEpcCost / yearlySavingsOmr;
-
-    var annualCo2OffsetTons = (exactSystemSizeKw * yieldKwh * 0.82) / 1000;
-
-    var warnings = [];
-
-    if (prop === "residential" && exactSystemSizeKw > 30) {
-      warnings.push("EXCEEDS_RESIDENTIAL_GRID_CAP");
-    }
-
-    if (space !== null && estimatedSpaceRequiredSqm > space) {
-      warnings.push("ROOF_SPACE_INSUFFICIENT");
-    }
-
-    return {
-      inputs: {
-        monthlyBill: bill,
-        propertyType: prop,
-        location: loc,
-        availableSpace: space
-      },
-      systemSizeKw: parseFloat(exactSystemSizeKw.toFixed(2)),
-      panelCount: numPanels,
-      spaceRequiredSqm: estimatedSpaceRequiredSqm,
-      costRange: {
-        min: minCost,
-        max: maxCost,
-        formatted: minCost.toLocaleString() + " - " + maxCost.toLocaleString() + " OMR"
-      },
-      yearlySavingsOmr: Math.round(yearlySavingsOmr),
-      monthlySavingsOmr: Math.round(yearlySavingsOmr / 12),
-      paybackYears: parseFloat(paybackPeriodYears.toFixed(1)),
-      co2OffsetTons: parseFloat(annualCo2OffsetTons.toFixed(1)),
-      warnings: warnings
-    };
-  }
-
-  function calculateByLoad(applianceSelections, propertyType, location, availableSpace) {
-    var prop = (propertyType || "residential").toLowerCase();
-    var loc = (location || "muscat").toLowerCase();
-    var tariff = BASE_TARIFFS[prop] || BASE_TARIFFS.residential;
-
-    var totalMinWatts = 0;
-    var totalMaxWatts = 0;
-    var totalMinKwhDaily = 0;
-    var totalMaxKwhDaily = 0;
-
-    APPLIANCES.forEach(function(spec) {
-      if (spec.property_type !== prop) return;
-      var qty = parseInt(applianceSelections[spec.id]) || 0;
-      if (qty > 0) {
-        totalMinWatts += spec.min_w * qty;
-        totalMaxWatts += spec.max_w * qty;
-        totalMinKwhDaily += (spec.min_w * qty * spec.hours) / 1000;
-        totalMaxKwhDaily += (spec.max_w * qty * spec.hours) / 1000;
-      }
-    });
-
-    if (totalMaxKwhDaily <= 0) {
-      return Object.assign({}, calculateSolarResults(50, prop, loc, availableSpace), {
-        loadSizing: {
-          minDailyKwh: 0,
-          maxDailyKwh: 0,
-          avgDailyKwh: 0,
-          peakLoadWatts: 0,
-          inverterRecommendationKw: 0,
-          batteryRecommendationKwh: 0
-        }
-      });
-    }
-
-    var avgDailyKwh = (totalMinKwhDaily + totalMaxKwhDaily) / 2;
-    var monthlyConsumptionKwh = avgDailyKwh * 30;
-    var simulatedBill = monthlyConsumptionKwh * tariff;
-    var overrideSystemSize = (avgDailyKwh * 1.2) / 5.5;
-    var results = calculateSolarResults(simulatedBill, prop, loc, availableSpace, overrideSystemSize);
-
-    var inverterSizeKw = parseFloat(((totalMaxWatts * 1.25) / 1000).toFixed(1));
-    var batteryBackupKwh = parseFloat((avgDailyKwh * 1.0 / 0.80).toFixed(1));
-
-    return Object.assign({}, results, {
-      loadSizing: {
-        minDailyKwh: parseFloat(totalMinKwhDaily.toFixed(1)),
-        maxDailyKwh: parseFloat(totalMaxKwhDaily.toFixed(1)),
-        avgDailyKwh: parseFloat(avgDailyKwh.toFixed(1)),
-        peakLoadWatts: totalMaxWatts,
-        inverterRecommendationKw: Math.max(1.5, inverterSizeKw),
-        batteryRecommendationKwh: Math.max(2.4, batteryBackupKwh)
-      }
-    });
-  }
-
-  window.SolarCalculatorEngine = {
-    calculate: calculateSolarResults,
-    calculateByLoad: calculateByLoad,
-    APPLIANCES: APPLIANCES,
-    PANEL_WATTAGE: PANEL_WATTAGE,
-    TARIFFS: BASE_TARIFFS,
-    YIELDS: REGIONAL_YIELDS,
-    COSTS: EPC_COSTS_PER_KW
-  };
-
-})();
+"""
+    updated_content = content[:start_idx] + new_appliances + content[end_idx:]
+    with open(filepath, "w", encoding="utf-8") as f:
+        f.write(updated_content)
+    print("SUCCESS: Updated APPLIANCES array in calculator-engine.js")
+else:
+    print(f"ERROR: Indices not found. start={start_idx}, end={end_idx}")

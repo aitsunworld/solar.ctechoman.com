@@ -33,52 +33,54 @@ lang['foot_call_desc'] = f'<a href="tel:{constants.get("phone_1_clean")}">{const
 with open(workspace + "\\index.php", "r", encoding="utf-8") as f:
     html = f.read()
 
-def show_diff(step_name):
-    pos1 = html.find("calibration-success-box")
-    pos2 = html.find("discovery-panel-7")
-    if pos1 != -1 and pos2 != -1:
-        print(f"[{step_name}] Characters in between: {pos2 - pos1}")
-        print(html[pos1:pos2])
-    else:
-        print(f"[{step_name}] Positions not found! pos1={pos1}, pos2={pos2}")
+print("Initial length:", len(html))
 
-show_diff("Initial")
+# Helper to check content around calibration
+def check_status(step_name):
+    pos = html.find("calibration-status-message")
+    if pos != -1:
+        print(f"[{step_name}] Substring around calibration:")
+        print(html[pos-100:pos+300])
+    else:
+        print(f"[{step_name}] 'calibration-status-message' NOT FOUND!")
+
+check_status("Initial")
 
 html = html.replace('<?= $active_lang ?>', 'en')
 html = html.replace('<?= $dir ?>', 'ltr')
-show_diff("After replace lang/dir")
+check_status("After lang/dir replace")
 
 pattern_if_else = re.compile(r"<\?php\s+if\s*\(\s*\$active_lang\s*===\s*'en'\s*\):\s*\?>(.*?)<\?php\s+else:\s*\?>(.*?)<\?php\s+endif;\s*\?>", re.DOTALL)
 html = pattern_if_else.sub(r"\1", html)
-show_diff("After pattern_if_else")
+check_status("After if_else en")
 
 pattern_if_else_ar = re.compile(r"<\?php\s+if\s*\(\s*\$active_lang\s*===\s*'ar'\s*\):\s*\?>(.*?)<\?php\s+else:\s*\?>(.*?)<\?php\s+endif;\s*\?>", re.DOTALL)
 html = pattern_if_else_ar.sub(r"\2", html)
-show_diff("After pattern_if_else_ar")
+check_status("After if_else ar")
 
 pattern_if_en = re.compile(r"<\?php\s+if\s*\(\s*\$active_lang\s*===\s*'en'\s*\):\s*\?>(.*?)<\?php\s+endif;\s*\?>", re.DOTALL)
 html = pattern_if_en.sub(r"\1", html)
-show_diff("After pattern_if_en")
+check_status("After if_en")
 
 pattern_if_ar = re.compile(r"<\?php\s+if\s*\(\s*\$active_lang\s*===\s*'ar'\s*\):\s*\?>(.*?)<\?php\s+endif;\s*\?>", re.DOTALL)
 html = pattern_if_ar.sub(r"", html)
-show_diff("After pattern_if_ar")
+check_status("After if_ar")
 
 pattern_ternary = re.compile(r"<\?=\s*\$active_lang\s*===\s*'ar'\s*\?\s*'([^']*)'\s*:\s*'([^']*)'\s*\?>")
 html = pattern_ternary.sub(r"\2", html)
-show_diff("After pattern_ternary")
+check_status("After pattern_ternary")
 
 def replace_lang(match):
     key = match.group(1)
     return lang.get(key, f"Translation missing: {key}")
 html = re.sub(r"<\?=\s*\$lang\['([^']+)'\]\s*\?>", replace_lang, html)
-show_diff("After replace_lang")
+check_status("After replace_lang")
 
 def replace_const(match):
     key = match.group(1)
     return constants.get(key, f"Constant missing: {key}")
 html = re.sub(r"<\?=\s*\$constants\['([^']+)'\]\s*\?>", replace_const, html)
-show_diff("After replace_const")
+check_status("After replace_const")
 
 # Slide & Nav loops
 slides_html = "SLIDES_PLACEHOLDER"
@@ -87,8 +89,8 @@ slide_loop_pattern = re.compile(r'<\?php\s+\$slide_images\s*=\s*\[.*?foreach\s*\
 html = slide_loop_pattern.sub(slides_html, html)
 nav_loop_pattern = re.compile(r'<\?php\s+foreach\s*\(\s*\$lang\s*\[\s*\'slides\'\s*\]\s*as\s*\$index\s*=>\s*\$slide\s*\):\s*\?>.*?<\?php\s+endforeach;\s*\?>', re.DOTALL)
 html = nav_loop_pattern.sub(nav_html, html)
-show_diff("After loops")
+check_status("After loops")
 
 # Strip remaining php blocks
 html = re.sub(r"<\?php.*?\?>", "", html, flags=re.DOTALL)
-show_diff("After php strip")
+check_status("After php strip")

@@ -1542,6 +1542,45 @@ document.addEventListener('DOMContentLoaded', () => {
             if (revealCons) {
                 animateValue(revealCons, 0, monthlyConsumption, 1000, "", " kWh");
             }
+            // Render Energy Contributors List
+            const contributorsList = document.getElementById('consumption-contributors-list');
+            if (contributorsList) {
+                let contributors = [];
+                window.SolarCalculatorEngine.APPLIANCES.forEach(app => {
+                    const qty = applianceQuantities[selectedPropType][app.id] || 0;
+                    if (qty > 0 && app.property_type === selectedPropType) {
+                        const dailyKwh = (qty * app.min_w * app.hours) / 1000;
+                        const monthlyKwh = dailyKwh * 30;
+                        contributors.push({
+                            name: isArabic ? app.name_ar : app.name_en,
+                            monthlyKwh: monthlyKwh,
+                            qty: qty
+                        });
+                    }
+                });
+                contributors.sort((a, b) => b.monthlyKwh - a.monthlyKwh);
+                let contHtml = "";
+                if (contributors.length === 0) {
+                    contHtml = `<p class="text-muted text-center" style="font-size:0.85rem; padding: 1rem;">${isArabic ? "لم يتم اختيار أي أجهزة." : "No appliances selected."}</p>`;
+                } else {
+                    const maxVal = contributors[0].monthlyKwh || 1;
+                    contributors.slice(0, 4).forEach(c => {
+                        const pct = Math.round((c.monthlyKwh / maxVal) * 100);
+                        contHtml += `
+                            <div class="contributor-item">
+                                <div class="contributor-info">
+                                    <span class="contributor-name">${c.name} (x${c.qty})</span>
+                                    <span class="contributor-val">${Math.round(c.monthlyKwh)} kWh/mo</span>
+                                </div>
+                                <div class="contributor-bar-bg">
+                                    <div class="contributor-bar-fill" style="width: ${pct}%"></div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                contributorsList.innerHTML = contHtml;
+            }
         } else if (step === 4) {
             const result = window.SolarCalculatorEngine.calculateByLoad(
                 applianceQuantities[selectedPropType],
@@ -1749,6 +1788,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         appliances.forEach(app => {
             const name = isArabic ? app.name_ar : app.name_en;
+            const category = isArabic ? app.cat_ar : app.cat_en;
+            const desc = isArabic ? app.desc_ar : app.desc_en;
             const isSelected = selectedAppliances.has(app.id);
             const selectedClass = isSelected ? ' selected' : '';
 
@@ -1769,7 +1810,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${getApplianceSVG(app.id)}
                         </div>
                         <div class="card-details">
+                            <span class="card-category">${category}</span>
                             <h4>${name}</h4>
+                            <p class="card-desc">${desc}</p>
                             <span class="card-spec">${powerText} • ${app.hours}h/d</span>
                         </div>
                     </div>
@@ -2079,6 +2122,21 @@ document.addEventListener('DOMContentLoaded', () => {
             greenRating.textContent = ratingText;
             greenRating.className = `proposal-value ${ratingClass}`;
         }
+
+        // Populate the Technical Assessment Summary Box
+        const summaryText = document.getElementById('db-val-assessment-summary-text');
+        if (summaryText) {
+            const systemSizeFormatted = result.systemSizeKw.toFixed(1);
+            const savingsFmt = result.yearlySavingsOmr.toLocaleString();
+            const paybackFmt = result.paybackYears;
+            const locationLabels = { muscat: 'Muscat', dhofar: 'Dhofar', batinah: 'Batinah', other: 'your region' };
+            const locLabel = locationLabels[loc ? loc.value : 'muscat'] || 'Oman';
+            if (isArabic) {
+                summaryText.textContent = `بناءً على ملف الأجهزة المحددة، نوصي بنظام طاقة شمسية بقدرة ${systemSizeFormatted} كيلوواط يتكون من ${result.panelCount} لوحاً شمسياً. يُقدَّر أن يُحقق هذا النظام وفورات سنوية تبلغ ${savingsFmt} ريالاً عُمانياً، مع فترة استرداد رأس المال تصل إلى ${paybackFmt} سنوات فقط في سلطنة عُمان.`;
+            } else {
+                summaryText.textContent = `Based on your selected appliance profile, we recommend a ${systemSizeFormatted} kW solar system with ${result.panelCount} panels for your ${locLabel} property. This system is projected to generate ${savingsFmt} OMR in annual savings with a payback period of just ${paybackFmt} years — one of the fastest ROI timelines achievable in Oman's high-yield solar climate.`;
+            }
+        }
     }
 
     // Step Actions Bindings
@@ -2145,6 +2203,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (discBillSlider && discBillDisplay) {
         discBillSlider.addEventListener('input', () => {
             discBillDisplay.textContent = discBillSlider.value;
+        });
+    }
+
+    // ─── Step 5: Upload/Manual Tab Switcher ───────────────────────────────────
+    const tabUploadBill = document.getElementById('tab-upload-bill');
+    const tabManualEntry = document.getElementById('tab-manual-entry');
+    const panelUploadBill = document.getElementById('panel-upload-bill');
+    const panelManualEntry = document.getElementById('panel-manual-entry');
+
+    if (tabUploadBill && tabManualEntry) {
+        tabUploadBill.addEventListener('click', () => {
+            tabUploadBill.classList.add('active');
+            tabManualEntry.classList.remove('active');
+            if (panelUploadBill) panelUploadBill.style.display = 'block';
+            if (panelManualEntry) panelManualEntry.style.display = 'none';
+        });
+        tabManualEntry.addEventListener('click', () => {
+            tabManualEntry.classList.add('active');
+            tabUploadBill.classList.remove('active');
+            if (panelManualEntry) panelManualEntry.style.display = 'block';
+            if (panelUploadBill) panelUploadBill.style.display = 'none';
         });
     }
 

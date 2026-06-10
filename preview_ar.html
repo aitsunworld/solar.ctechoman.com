@@ -627,10 +627,19 @@
           <div class="discovery-step-panel" id="discovery-panel-7" style="display: none;">
             <div id="residential-discovery-results">
               
-              <h3 class="dashboard-main-title">تقرير تحليل الطاقة لمنزلك</h3>
+              <h3 class="dashboard-main-title">تقرير تقييم الطاقة الشمسية المخصص لك</h3>
+              
+              <p class="dashboard-summary-intro text-center text-muted mb-4" style="max-width: 800px; margin: 0 auto 1.5rem auto; font-size: 0.95rem; line-height: 1.6;">
+                بناءً على الأجهزة المحددة، وسلوك الاستهلاك المقدر، ومعايرة الفاتورة الشهرية، قمنا بإعداد تحليل استثماري وبيئي مخصص لعقارك في سلطنة عُمان.
+              </p>
               
               <div class="discovery-dashboard">
                 
+                <!-- Financial Impact Section Title -->
+                <h4 class="dashboard-group-title mb-3">
+                  <span>📊</span> ملخص الأثر المالي والاستثماري
+                </h4>
+
                 <!-- ROW 1: Top Summary Row -->
                 <div class="dashboard-row summary-row">
                   <!-- Monthly Savings -->
@@ -662,20 +671,20 @@
                     <span class="metric-label">إجمالي التوفير (على مدى 25 عاماً)</span>
                     <strong class="metric-val text-eco" id="db-val-lifetime-sav">0 OMR</strong>
                     <p class="hero-card-desc">
-                      الوفر الإجمالي المتوقع على مدى العمر الافتراضي للنظام الشمسي (25 عاماً).
+                      الوفر المالي التراكمي المضمون على مدى العمر الافتراضي المتوقع للألواح (25 عاماً).
                     </p>
                   </div>
                   <!-- Lifetime Environmental Impact Card -->
                   <div class="discovery-metric-card highlight-environmental">
-                    <span class="metric-label">الأثر البيئي والحد من الكربون</span>
+                    <span class="metric-label">ملخص الأثر البيئي</span>
                     <div class="environmental-metrics-inline">
                       <div class="env-metric-item">
                         <span class="env-value text-green" id="score-co2-val">0.0 Tons</span>
-                        <span class="env-label">الحد السنوي من CO₂</span>
+                        <span class="env-label">تجنب ثاني أكسيد الكربون سنوياً</span>
                       </div>
                       <div class="env-metric-item">
                         <span class="env-value" id="score-trees-val">0</span>
-                        <span class="env-label">الأشجار المزروعة المكافئة</span>
+                        <span class="env-label">شجرة مكافئة مغروسة</span>
                       </div>
                       <div class="env-metric-item">
                         <span class="env-value text-green" id="score-green-rating">Excellent</span>
@@ -683,17 +692,17 @@
                       </div>
                     </div>
                     <p class="hero-card-desc">
-                      يقلل هذا النظام الشمسي بشكل كبير من الانبعاثات الكربونية السنوية.
+                      يدعم هذا المشروع بشكل مباشر مبادرات الحياد الكربوني ورؤية عُمان 2040 للبيئة المستدامة.
                     </p>
                   </div>
                 </div>
 
                 <!-- ROW 3: Three Columns for Insights -->
                 <div class="dashboard-row insights-row">
-                  <!-- Col 1: Energy Consumption & Independence -->
+                  <!-- Col 1: Energy Consumption & Independence Score -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>⚡</span> استهلاك الطاقة والاستقلالية
+                      <span>⚡</span> مؤشر استقلال الطاقة
                     </h4>
                     <div class="proposal-card-content">
                       <div class="proposal-row">
@@ -711,7 +720,7 @@
                       <div class="proposal-status-section">
                         <span class="proposal-label-small">الحالة</span>
                         <div class="proposal-status-badge status-excellent" id="db-val-energy-status">
-                          استقلالية ممتازة للطاقة
+                          استقلال ممتاز للطاقة
                         </div>
                       </div>
                     </div>
@@ -720,7 +729,7 @@
                   <!-- Col 2: Solar Performance Summary -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>📊</span> ملخص أداء الطاقة الشمسية
+                      <span>☀️</span> ملخص أداء الطاقة الشمسية
                     </h4>
                     <div class="proposal-card-content">
                       <div class="proposal-row">
@@ -746,10 +755,10 @@
                     </div>
                   </div>
 
-                  <!-- Col 3: Technical Specifications & Suitability -->
+                  <!-- Col 3: Technical Specifications & Solar Readiness Score -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>🔧</span> المواصفات الفنية والملاءمة
+                      <span>🔧</span> المواصفات الفنية والجاهزية
                     </h4>
                     <div class="proposal-card-content spec-card-content">
                       <!-- Section 1: Recommended System -->
@@ -781,15 +790,15 @@
                         </div>
                       </div>
 
-                      <!-- Section 3: Property Suitability -->
+                      <!-- Section 3: Solar Readiness Score -->
                       <div class="spec-section border-top-divider">
-                        <h5 class="spec-section-title">ملاءمة العقار</h5>
+                        <h5 class="spec-section-title">مؤشر الجاهزية للطاقة الشمسية</h5>
                         <div class="suitability-result-box">
                           <div class="suitability-badge-new grade-b" id="score-suitability-badge">
                             <span id="score-suitability-label">B</span>
                           </div>
                           <p class="suitability-desc" id="score-suitability-desc">
-                            مناسب لتركيب الطاقة الشمسية مع وجود فرص تحسين متوسطة.
+                            عقار مناسب جداً مع إمكانية شمسية عالية وحمل متوافق.
                           </p>
                         </div>
                       </div>
@@ -797,12 +806,15 @@
                   </div>
                 </div>
 
-                <!-- ROW 4: Integrated Lead Assessment Form -->
+                <!-- ROW 4: Integrated Lead Assessment Form (Recommended Next Step) -->
                 <div class="dashboard-row form-row-row">
                   <div class="cta-lead-card">
-                    <div class="cta-lead-header">
-                      <h4>طلب التحقق الفني المجاني من حجم النظام</h4>
-                      <p>سيقوم فريقنا الفني بمراجعة ملف استهلاك أجهزتك وقاعدة بيانات الإنتاج للتحقق النهائي دون أي التزام مبيعات.</p>
+                    <div class="cta-lead-header text-center">
+                      <span class="next-step-badge mb-2 d-inline-block">الخطوة التالية الموصى بها</span>
+                      <h4>طلب التحقق الفني المجاني لتصميم النظام</h4>
+                      <p class="mt-2" style="max-width: 800px; margin: 0 auto; font-size: 0.9rem; line-height: 1.5; color: var(--color-text-muted);">
+                        سيقوم مهندسونا المعتمدون من مجلس مراجعة قواعد توزيع الكهرباء (DCRP) بمراجعة ملف استهلاك أجهزتك وإجراء محاكاة تفصيلية للموقع للتحقق من الجاهزية والوفر النهائي دون أي التزام.
+                      </p>
                     </div>
                     <form id="discovery-lead-form" class="cta-lead-form">
                       <input type="hidden" name="action" value="submit_lead">
@@ -832,7 +844,7 @@
                       </div>
 
                       <button type="submit" class="btn-cta-submit mt-3" id="btn-submit-discovery">
-                        <span>إرسال للمراجعة الهندسية ➔</span>
+                        <span>تأكيد الحجز ومتابعة التدقيق الهندي ➔</span>
                         <span class="spinner" style="display: none; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;"></span>
                       </button>
                     </form>
@@ -849,6 +861,7 @@
               </div>
 
             </div> <!-- /residential-discovery-results -->
+          </div>
         </div>
 
         <!-- Footer Controls Container -->

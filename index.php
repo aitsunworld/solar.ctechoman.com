@@ -110,7 +110,7 @@ $lang = require_once "lang/{$active_lang}.php";
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: RENDER-BLOCKING to prevent FOUC -->
-  <link rel="stylesheet" href="style.css?v=9.0">
+  <link rel="stylesheet" href="style.css?v=9.1">
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -356,15 +356,28 @@ $lang = require_once "lang/{$active_lang}.php";
           <!-- Panel 3: Show Estimated Monthly Consumption (Step 3) -->
           <div class="discovery-step-panel" id="discovery-panel-3" style="display: none;">
             <h3 class="mb-2"><?= $active_lang === 'ar' ? 'الخطوة 3: الاستهلاك الشهري المقدر' : 'Step 3: Estimated Monthly Consumption' ?></h3>
-            <div class="consumption-reveal-zone text-center py-4">
-              <div class="animated-gauge-wrapper">
-                <div class="gauge-value" id="reveal-consumption-value">0 kWh</div>
-                <div class="gauge-label"><?= $active_lang === 'ar' ? 'شهرياً' : 'per month' ?></div>
+            <p class="text-muted mb-4"><?= $active_lang === 'ar' ? 'تحليل استهلاك الطاقة بناءً على قائمة أجهزتك المنزلية المحددة.' : 'Energy consumption profile computed from your selected household appliances.' ?></p>
+            
+            <div class="side-by-side-layout">
+              <div class="consumption-reveal-zone text-center py-4">
+                <div class="animated-gauge-wrapper">
+                  <div class="gauge-value" id="reveal-consumption-value">0 kWh</div>
+                  <div class="gauge-label"><?= $active_lang === 'ar' ? 'شهرياً' : 'per month' ?></div>
+                </div>
+                <p class="text-muted mt-3" style="font-size: 0.9rem;">
+                  <?= $active_lang === 'ar' ? 'تقدير استهلاكك الشهري التقريبي للكهرباء.' : 'Your approximate estimated monthly electricity consumption.' ?>
+                </p>
               </div>
-              <p class="text-muted mt-3" style="font-size: 0.9rem;">
-                <?= $active_lang === 'ar' ? 'بناءً على اختيار الأجهزة المنزلية، هذا هو تقدير استهلاكك الشهري التقريبي للكهرباء.' : 'Based on your selected appliances, this is your estimated monthly electricity consumption.' ?>
-              </p>
+              <div class="contributors-card-wrapper">
+                <div class="contributors-header">
+                  <strong><?= $active_lang === 'ar' ? 'أعلى الأجهزة استهلاكاً للطاقة' : 'Top Energy Contributors' ?></strong>
+                </div>
+                <div id="consumption-contributors-list" class="contributors-list">
+                  <!-- Rendered dynamically in script.js -->
+                </div>
+              </div>
             </div>
+
             <div class="step-actions mt-3" style="display: flex; gap: 0.75rem;">
               <button type="button" class="btn btn-secondary" id="btn-back-to-step2" style="flex: 1; min-width: 80px;">
                 <?= $active_lang === 'ar' ? '⬅ الكميات' : '⬅ Quantities' ?>
@@ -378,15 +391,38 @@ $lang = require_once "lang/{$active_lang}.php";
           <!-- Panel 4: Show Recommended Solar Size (Step 4) -->
           <div class="discovery-step-panel" id="discovery-panel-4" style="display: none;">
             <h3 class="mb-2"><?= $active_lang === 'ar' ? 'الخطوة 4: حجم النظام الشمسي الموصى به' : 'Step 4: Recommended Solar System' ?></h3>
-            <div class="solar-reveal-zone text-center py-4">
-              <div class="solar-value-wrapper">
-                <div class="solar-kw-value" id="reveal-solar-kw">0.0 kW</div>
-                <div class="solar-panels-count" id="reveal-solar-panels">0 Panels</div>
+            <p class="text-muted mb-4"><?= $active_lang === 'ar' ? 'تم حساب سعة النظام بناءً على نمط استهلاكك الفعلي.' : 'System capacity calculated based on your unique load profile.' ?></p>
+
+            <div class="side-by-side-layout">
+              <div class="solar-reveal-zone text-center py-4">
+                <div class="solar-value-wrapper">
+                  <div class="solar-kw-value" id="reveal-solar-kw">0.0 kW</div>
+                  <div class="solar-panels-count" id="reveal-solar-panels">0 Panels</div>
+                </div>
+                <p class="text-muted mt-3" style="font-size: 0.9rem;">
+                  <?= $active_lang === 'ar' ? 'حجم النظام المقترح لتلبية وتغطية احتياجاتك من الطاقة.' : 'This recommended solar system size is configured to generate enough electricity for your home.' ?>
+                </p>
               </div>
-              <p class="text-muted mt-3" style="font-size: 0.9rem;">
-                <?= $active_lang === 'ar' ? 'حجم النظام المقترح كافٍ لتلبية وتغطية كامل احتياجاتك من الطاقة.' : 'This recommended solar system size is configured to generate enough electricity for your home.' ?>
-              </p>
+              <div class="education-info-card">
+                <div class="edu-card-header">
+                  <strong><?= $active_lang === 'ar' ? 'كيف نقوم بحساب حجم النظام؟' : 'How We Sized Your System' ?></strong>
+                </div>
+                <div class="edu-card-body">
+                  <p class="edu-math-desc">
+                    <?= $active_lang === 'ar'
+                      ? 'نقوم بتحليل الحمل الكهربائي المتوقع لكل جهاز من أجهزتك المختارة على مدار 365 يومًا، ثم نقارنه بمعدل الإشعاع الشمسي السنوي في سلطنة عُمان (حوالي 1600-1800 كيلوواط ساعة لكل كيلوواط ذروة سنوياً) لتقدير القدرة الشمسية المطلوبة بدقة.'
+                      : 'We model the expected hourly runtimes of your selected appliances across a full calendar year. We cross-reference this against Oman\'s high annual solar yield (average 1,650 kWh/kWp per year) to calculate the precise solar capacity required to offset your consumption.'
+                    ?>
+                  </p>
+                  <ul class="edu-specs-list">
+                    <li>💡 <strong><?= $active_lang === 'ar' ? 'إجمالي الحمل المتصل:' : 'Total Connected Load:' ?></strong> <span id="reveal-total-load-kw">0 W</span></li>
+                    <li>🌞 <strong><?= $active_lang === 'ar' ? 'معامل الإنتاج الشمسي:' : 'Solar Yield Factor:' ?></strong> <span>~1,700 kWh/kW/yr</span></li>
+                    <li>📐 <strong><?= $active_lang === 'ar' ? 'المساحة التقريبية للسطح:' : 'Est. Roof Area Required:' ?></strong> <span id="reveal-roof-area-sqm">0 sqm</span></li>
+                  </ul>
+                </div>
+              </div>
             </div>
+
             <div class="step-actions mt-3" style="display: flex; gap: 0.75rem;">
               <button type="button" class="btn btn-secondary" id="btn-back-to-step3" style="flex: 1; min-width: 80px;">
                 <?= $active_lang === 'ar' ? '⬅ الاستهلاك' : '⬅ Consumption' ?>
@@ -400,108 +436,91 @@ $lang = require_once "lang/{$active_lang}.php";
           <!-- Panel 5: Ask for average electricity bill (Step 5) -->
           <div class="discovery-step-panel" id="discovery-panel-5" style="display: none;">
             <h3 class="mb-2"><?= $active_lang === 'ar' ? 'هل تعرف متوسط فاتورتك الكهربائية الشهرية؟' : 'Do you know your average monthly electricity bill?' ?></h3>
-            <p class="text-muted mb-3" style="font-size: 0.88rem;">
-              <?= $active_lang === 'ar' ? 'إدخال فاتورتك الفعلية يحسّن دقة حسابات العائد على الاستثمار والتوفير الفعلي.' : 'Providing your bill improves accuracy and ROI calculations.' ?>
+            <p class="text-muted mb-4" style="font-size: 0.88rem;">
+              <?= $active_lang === 'ar' ? 'معايرة النظام بناءً على نمط استهلاكك الفعلي تزيد من دقة حساب العائد المالي.' : 'Calibrating with your actual billing history ensures absolute ROI accuracy.' ?>
             </p>
 
-            <!-- SECTION B: Slider Card -->
-            <div class="step5-slider-card" id="step5-slider-section">
-              <div class="step5-bill-badge-row">
-                <span class="step5-bill-label"><?= $active_lang === 'ar' ? 'متوسط الفاتورة الشهرية' : 'Average Monthly Bill' ?></span>
-                <div class="step5-bill-badge">
-                  <span class="bill-badge-amount" id="discovery-bill-display">50</span>
-                  <span class="bill-badge-currency">OMR</span>
-                </div>
-              </div>
-              <div class="step5-slider-wrapper">
-                <input type="range" id="discovery-bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Calibration Slider" class="step5-range">
-                <div class="step5-slider-labels">
-                  <span>10 OMR</span>
-                  <span>1000 OMR</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- SECTION C: Action Hierarchy -->
-            <div class="step5-actions-section" id="step5-main-actions">
-              <!-- Primary CTA -->
-              <button type="button" class="btn-step5-primary" id="btn-calibrate-bill">
-                <?= $active_lang === 'ar' ? '✓ المتابعة بهذه الفاتورة' : '✓ Continue With This Bill' ?>
-              </button>
-              <!-- Secondary CTA -->
-              <button type="button" class="btn-step5-secondary" id="btn-show-manual-entry">
-                <?= $active_lang === 'ar' ? '✏ إدخال تفاصيل الفاتورة يدوياً' : '✏ Enter Exact Bill Details' ?>
-              </button>
-              <!-- Tertiary Text Link -->
-              <button type="button" class="btn-step5-skip" id="btn-skip-calibration">
-                <?= $active_lang === 'ar' ? 'تخطي في الوقت الحالي' : 'Skip For Now' ?>
-              </button>
-              <!-- Option C: Upload Bill -->
-              <button type="button" class="btn-step5-upload" id="btn-show-upload-bill">
-                <?= $active_lang === 'ar' ? '📎 رفع الفاتورة (PDF / صورة)' : '📎 Upload Bill (PDF / Image)' ?>
-              </button>
-            </div>
-
-            <!-- Upload Bill Sub-Panel (hidden by default) -->
-            <div class="upload-bill-panel" id="upload-bill-panel" style="display: none;">
-              <div class="upload-bill-card">
-                <div class="upload-bill-header">
-                  <h4><?= $active_lang === 'ar' ? '📄 رفع فاتورة الكهرباء' : '📄 Upload Your Electricity Bill' ?></h4>
-                  <p class="upload-bill-subtitle"><?= $active_lang === 'ar' ? 'يُقبل PDF و JPG و PNG — الحد الأقصى 10 ميغابايت' : 'Accept PDF, JPG, PNG — Max 10 MB' ?></p>
-                </div>
-                <label class="upload-bill-dropzone" id="upload-bill-dropzone" for="db-bill-file">
-                  <div class="upload-dropzone-icon">☁️</div>
-                  <div class="upload-dropzone-text">
-                    <?= $active_lang === 'ar' ? 'اسحب وأفلت الفاتورة هنا، أو ' : 'Drag &amp; drop your bill here, or ' ?>
-                    <span class="upload-link"><?= $active_lang === 'ar' ? 'تصفح' : 'browse' ?></span>
+            <div class="side-by-side-layout">
+              <!-- Left Column: Slider Calibration -->
+              <div class="step5-left-col">
+                <div class="step5-slider-card" id="step5-slider-section">
+                  <div class="step5-bill-badge-row">
+                    <span class="step5-bill-label"><?= $active_lang === 'ar' ? 'متوسط الفاتورة الشهرية' : 'Average Monthly Bill' ?></span>
+                    <div class="step5-bill-badge">
+                      <span class="bill-badge-amount" id="discovery-bill-display">50</span>
+                      <span class="bill-badge-currency">OMR</span>
+                    </div>
                   </div>
-                  <input type="file" id="db-bill-file" name="bill_file" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" aria-label="Upload electricity bill">
-                </label>
-                <div class="upload-bill-success" id="upload-bill-success" style="display: none;">
-                  <div class="upload-success-icon">✅</div>
-                  <p class="upload-success-msg"><?= $active_lang === 'ar' ? 'تم رفع الفاتورة بنجاح. سيراجع استشاري الطاقة الشمسية الفاتورة خلال التقييم.' : 'Bill uploaded successfully. A solar consultant will review the bill during assessment.' ?></p>
-                </div>
-                <div class="upload-bill-actions">
-                  <button type="button" class="btn-manual-cancel" id="btn-cancel-upload"><?= $active_lang === 'ar' ? 'رجوع' : 'Back' ?></button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Manual Bill Entry Sub-Panel (hidden by default) -->
-            <div class="manual-bill-panel" id="manual-bill-panel" style="display: none;">
-              <div class="manual-bill-card">
-                <div class="manual-bill-header">
-                  <h4><?= $active_lang === 'ar' ? 'أدخل فاتورة الكهرباء' : 'Enter Your Electricity Bill' ?></h4>
-                </div>
-                <div class="manual-bill-fields">
-                  <div class="manual-bill-input-group">
-                    <label class="manual-bill-field-label"><?= $active_lang === 'ar' ? 'الفاتورة الشهرية (ريال عُماني)' : 'Monthly Bill (OMR)' ?></label>
-                    <input type="number" id="manual-bill-amount" min="5" max="5000" step="1" placeholder="<?= $active_lang === 'ar' ? 'أدخل المبلغ...' : 'Enter amount...' ?>" class="manual-bill-input" aria-label="Monthly Bill Amount">
-                  </div>
-                  <div class="manual-bill-input-group">
-                    <label class="manual-bill-field-label"><?= $active_lang === 'ar' ? 'ملاحظات (اختياري)' : 'Optional Notes' ?></label>
-                    <input type="text" id="manual-bill-notes" placeholder="<?= $active_lang === 'ar' ? 'مثال: الفاتورة صيفية...' : 'e.g. Summer bill, AC heavy...' ?>" class="manual-bill-input" aria-label="Optional Notes">
+                  <div class="step5-slider-wrapper">
+                    <input type="range" id="discovery-bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Calibration Slider" class="step5-range">
+                    <div class="step5-slider-labels">
+                      <span>10 OMR</span>
+                      <span>1000 OMR</span>
+                    </div>
                   </div>
                 </div>
-                <div class="manual-bill-benefits">
-                  <div class="benefit-item"><span class="benefit-check">✓</span> <?= $active_lang === 'ar' ? 'دقة أفضل في حساب العائد على الاستثمار' : 'Better ROI accuracy' ?></div>
-                  <div class="benefit-item"><span class="benefit-check">✓</span> <?= $active_lang === 'ar' ? 'تقدير أدق للتوفير' : 'Better savings estimate' ?></div>
-                  <div class="benefit-item"><span class="benefit-check">✓</span> <?= $active_lang === 'ar' ? 'تحديد أمثل لحجم النظام الشمسي' : 'Better solar sizing' ?></div>
-                </div>
-                <div class="manual-bill-actions">
-                  <button type="button" class="btn-manual-submit" id="btn-manual-bill-submit">
-                    <?= $active_lang === 'ar' ? 'متابعة المعايرة' : 'Continue Calibration' ?>
+
+                <div class="step5-actions-section" id="step5-main-actions">
+                  <button type="button" class="btn-step5-primary" id="btn-calibrate-bill">
+                    <?= $active_lang === 'ar' ? '✓ المتابعة بهذه الفاتورة' : '✓ Continue With This Bill' ?>
                   </button>
-                  <button type="button" class="btn-manual-cancel" id="btn-cancel-manual">
-                    <?= $active_lang === 'ar' ? 'رجوع' : 'Back' ?>
+                  <button type="button" class="btn-step5-skip" id="btn-skip-calibration">
+                    <?= $active_lang === 'ar' ? 'تخطي في الوقت الحالي' : 'Skip For Now' ?>
                   </button>
                 </div>
               </div>
+
+              <!-- Right Column: Advanced Options (Tabs for Manual/Upload) -->
+              <div class="step5-right-col">
+                <div class="calibration-options-card">
+                  <div class="calibration-options-tabs">
+                    <button type="button" class="cal-opt-tab active" id="tab-upload-bill">
+                      <?= $active_lang === 'ar' ? '📎 رفع فاتورة' : '📎 Upload Bill' ?>
+                    </button>
+                    <button type="button" class="cal-opt-tab" id="tab-manual-entry">
+                      <?= $active_lang === 'ar' ? '✏️ إدخال تفاصيل يدوية' : '✏️ Manual Details' ?>
+                    </button>
+                  </div>
+
+                  <!-- Upload Dropzone (active by default) -->
+                  <div class="cal-opt-panel" id="panel-upload-bill">
+                    <label class="upload-bill-dropzone" id="upload-bill-dropzone" for="db-bill-file">
+                      <div class="upload-dropzone-icon">☁️</div>
+                      <div class="upload-dropzone-text">
+                        <?= $active_lang === 'ar' ? 'اسحب ملف الفاتورة هنا، أو <span>تصفح</span>' : 'Drag &amp; drop your bill here, or <span>browse</span>' ?>
+                      </div>
+                      <input type="file" id="db-bill-file" name="bill_file" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" aria-label="Upload electricity bill">
+                    </label>
+                    <div class="upload-bill-success" id="upload-bill-success" style="display: none;">
+                      <div class="upload-success-icon">✅</div>
+                      <p class="upload-success-msg"><?= $active_lang === 'ar' ? 'تم رفع الفاتورة بنجاح. سيقوم المهندس بمراجعتها.' : 'Bill uploaded successfully. A solar consultant will review the bill during assessment.' ?></p>
+                    </div>
+                  </div>
+
+                  <!-- Manual Entry Panel (hidden by default) -->
+                  <div class="cal-opt-panel" id="panel-manual-entry" style="display: none;">
+                    <div class="manual-bill-fields">
+                      <div class="manual-bill-input-group">
+                        <label class="manual-bill-field-label"><?= $active_lang === 'ar' ? 'الفاتورة الشهرية (ريال عماني)' : 'Monthly Bill (OMR)' ?></label>
+                        <input type="number" id="manual-bill-amount" min="5" max="5000" step="1" placeholder="Enter amount..." class="manual-bill-input" aria-label="Monthly Bill Amount">
+                      </div>
+                      <div class="manual-bill-input-group">
+                        <label class="manual-bill-field-label"><?= $active_lang === 'ar' ? 'ملاحظات إضافية (اختياري)' : 'Optional Notes' ?></label>
+                        <input type="text" id="manual-bill-notes" placeholder="e.g. Summer bill, AC heavy..." class="manual-bill-input" aria-label="Optional Notes">
+                      </div>
+                    </div>
+                    <button type="button" class="btn-manual-submit mt-3" id="btn-manual-bill-submit">
+                      <?= $active_lang === 'ar' ? 'تأكيد ومعايرة' : 'Continue Calibration' ?>
+                    </button>
+                  </div>
+
+                </div>
+              </div>
             </div>
 
-            <div class="step-actions" style="justify-content: flex-start;">
-              <button type="button" class="btn btn-secondary" id="btn-back-to-step4" style="flex: 0 0 auto;">
-                <?= $active_lang === 'ar' ? '⬅ العودة لحجم النظام' : '⬅ Back to Solar Size' ?>
+            <div class="step-actions mt-4" style="justify-content: flex-start;">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step4" style="flex: 0 0 auto; width: auto;">
+                <?= $active_lang === 'ar' ? '⬅ الحجم الشمسي' : '⬅ Back to Solar Size' ?>
               </button>
             </div>
           </div>
@@ -509,73 +528,78 @@ $lang = require_once "lang/{$active_lang}.php";
           <!-- Panel 6: Calibrate results (Step 6) -->
           <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
             <h3 class="mb-2"><?= $active_lang === 'ar' ? 'حالة المعايرة' : 'Calibration Status' ?></h3>
-            <p class="text-muted mb-3" id="calibration-status-message">
+            <p class="text-muted mb-4" id="calibration-status-message">
               <?= $active_lang === 'ar' ? 'اكتملت المعايرة!' : 'Calibration completed!' ?>
             </p>
 
-            <!-- Large Confidence Ring -->
-            <div class="calibration-ring-section">
-              <div class="progress-ring-wrapper">
-                <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
-                  <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
-                  <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
-                </svg>
-                <div class="progress-ring-text">
-                  <span class="progress-ring-number" id="calibration-confidence-pct"><?= $active_lang === 'ar' ? 'تقديري' : '—' ?></span>
-                  <span class="progress-ring-sublabel" id="calibration-match-label"><?= $active_lang === 'ar' ? 'درجة الثقة' : 'Excellent Match' ?></span>
-                  <span class="progress-ring-label"><?= $active_lang === 'ar' ? 'الثقة' : 'Confidence' ?></span>
+            <div class="side-by-side-layout">
+              <!-- Left Column: Ring progress -->
+              <div class="calibration-ring-section py-4">
+                <div class="progress-ring-wrapper">
+                  <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
+                    <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                    <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                  </svg>
+                  <div class="progress-ring-text">
+                    <span class="progress-ring-number" id="calibration-confidence-pct"><?= $active_lang === 'ar' ? 'تقديري' : '—' ?></span>
+                    <span class="progress-ring-sublabel" id="calibration-match-label"><?= $active_lang === 'ar' ? 'درجة الثقة' : 'Excellent Match' ?></span>
+                    <span class="progress-ring-label"><?= $active_lang === 'ar' ? 'الثقة' : 'Confidence' ?></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Metrics & Feedback -->
+              <div class="calibration-details-col">
+                <!-- 2x2 Metrics Grid -->
+                <div class="calibration-metrics-grid mb-3">
+                  <div class="cal-metric-card">
+                    <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'حالة التطابق' : 'Match Status' ?></span>
+                    <strong class="cal-metric-val" id="cal-val-score"><?= $active_lang === 'ar' ? 'استخدام ملف الأجهزة' : 'Using Appliance Profile' ?></strong>
+                  </div>
+                  <div class="cal-metric-card">
+                    <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'نسبة تطابق الفاتورة' : 'Bill Match' ?></span>
+                    <strong class="cal-metric-val" id="cal-val-bill-match"><?= $active_lang === 'ar' ? 'غير متوفر' : 'Not Available' ?></strong>
+                  </div>
+                  <div class="cal-metric-card">
+                    <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'دقة تقدير الطاقة' : 'Energy Accuracy' ?></span>
+                    <strong class="cal-metric-val text-eco" id="cal-val-accuracy"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
+                  </div>
+                  <div class="cal-metric-card">
+                    <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'مستوى الثقة' : 'Confidence Level' ?></span>
+                    <strong class="cal-metric-val" id="cal-val-confidence-level"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
+                  </div>
+                </div>
+
+                <!-- Hidden feedback boxes -->
+                <div class="calibration-feedback alert alert-warning mb-3" id="calibration-warning-box" style="display: none;">
+                  ⚠️ <?= $lang['calibration_warning'] ?>
+                </div>
+                <div class="calibration-feedback alert alert-success mb-3" id="calibration-success-box" style="display: none;">
+                  ✅ <?= $active_lang === 'ar' ? 'تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.' : 'Excellent match between appliance usage and bill history! Estimates calibrated.' ?>
+                </div>
+
+                <!-- Insight Summary Card -->
+                <div class="calibration-insight-card mb-3" id="cal-insight-card" style="display: none;">
+                  <div class="cal-insight-header">
+                    <span>💡</span>
+                    <strong><?= $active_lang === 'ar' ? 'تحليل مقارنة الاستهلاك' : 'Calibrated Energy Insight' ?></strong>
+                  </div>
+                  <p id="cal-insight-desc" class="mb-0 mt-1"></p>
+                </div>
+
+                <!-- Action Plan Card -->
+                <div class="calibration-action-card mb-3" id="cal-action-card" style="display: none;">
+                  <div class="cal-action-header">
+                    <span>🚀</span>
+                    <strong><?= $active_lang === 'ar' ? 'الإجراء الموصى به من قبل النظام' : 'Recommended Action Plan' ?></strong>
+                  </div>
+                  <p id="cal-action-desc" class="mb-0 mt-1"></p>
                 </div>
               </div>
             </div>
 
-            <!-- 2x2 Metrics Grid -->
-            <div class="calibration-metrics-grid">
-              <div class="cal-metric-card">
-                <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'حالة التطابق' : 'Match Status' ?></span>
-                <strong class="cal-metric-val" id="cal-val-score"><?= $active_lang === 'ar' ? 'استخدام ملف الأجهزة' : 'Using Appliance Profile' ?></strong>
-              </div>
-              <div class="cal-metric-card">
-                <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'نسبة تطابق الفاتورة' : 'Bill Match' ?></span>
-                <strong class="cal-metric-val" id="cal-val-bill-match"><?= $active_lang === 'ar' ? 'غير متوفر' : 'Not Available' ?></strong>
-              </div>
-              <div class="cal-metric-card">
-                <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'دقة تقدير الطاقة' : 'Energy Accuracy' ?></span>
-                <strong class="cal-metric-val text-eco" id="cal-val-accuracy"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
-              </div>
-              <div class="cal-metric-card">
-                <span class="cal-metric-label"><?= $active_lang === 'ar' ? 'مستوى الثقة' : 'Confidence Level' ?></span>
-                <strong class="cal-metric-val" id="cal-val-confidence-level"><?= $active_lang === 'ar' ? 'تقديري' : 'Estimated' ?></strong>
-              </div>
-            </div>
-
-            <!-- Hidden feedback boxes -->
-            <div class="calibration-feedback alert alert-warning" id="calibration-warning-box" style="display: none;">
-              ⚠️ <?= $lang['calibration_warning'] ?>
-            </div>
-            <div class="calibration-feedback alert alert-success" id="calibration-success-box" style="display: none;">
-              ✅ <?= $active_lang === 'ar' ? 'تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.' : 'Excellent match between appliance usage and bill history! Estimates calibrated.' ?>
-            </div>
-
-            <!-- Insight Summary Card -->
-            <div class="calibration-insight-card" id="cal-insight-card" style="display: none;">
-              <div class="cal-insight-header">
-                <span>💡</span>
-                <strong><?= $active_lang === 'ar' ? 'تحليل مقارنة الاستهلاك' : 'Calibrated Energy Insight' ?></strong>
-              </div>
-              <p id="cal-insight-desc" class="mb-0 mt-1"></p>
-            </div>
-
-            <!-- Action Plan Card -->
-            <div class="calibration-action-card" id="cal-action-card" style="display: none;">
-              <div class="cal-action-header">
-                <span>🚀</span>
-                <strong><?= $active_lang === 'ar' ? 'الإجراء الموصى به من قبل النظام' : 'Recommended Action Plan' ?></strong>
-              </div>
-              <p id="cal-action-desc" class="mb-0 mt-1"></p>
-            </div>
-
             <!-- Action Buttons -->
-            <div class="calibration-step-actions">
+            <div class="calibration-step-actions mt-4">
               <button type="button" class="btn btn-secondary" id="btn-back-to-step5">
                 <?= $active_lang === 'ar' ? '⬅ تعديل الفاتورة' : '⬅ Edit Bill' ?>
               </button>
@@ -584,15 +608,42 @@ $lang = require_once "lang/{$active_lang}.php";
               </button>
             </div>
           </div>
+          <!-- /Panel 6 -->
 
           <!-- Panel 7: Reveal personalized dashboard (Step 7) -->
           <div class="discovery-step-panel" id="discovery-panel-7" style="display: none;">
             <div id="residential-discovery-results">
               
-              <h3 class="dashboard-main-title"><?= $active_lang === 'ar' ? 'تقرير تحليل الطاقة لمنزلك' : 'Your Home Energy Assessment' ?></h3>
+              <h3 class="dashboard-main-title"><?= $active_lang === 'ar' ? 'تقرير تقييم الطاقة الشمسية المخصص لك' : 'Your Personalized Solar Assessment' ?></h3>
+              
+              <p class="dashboard-summary-intro text-center text-muted mb-4" style="max-width: 800px; margin: 0 auto 1.5rem auto; font-size: 0.95rem; line-height: 1.6;">
+                <?= $active_lang === 'ar' 
+                  ? 'بناءً على الأجهزة المحددة، وسلوك الاستهلاك المقدر، ومعايرة الفاتورة الشهرية، قمنا بإعداد تحليل استثماري وبيئي مخصص لعقارك في سلطنة عُمان.'
+                  : 'Based on your selected appliances, estimated load profile, and monthly bill calibration, we have generated a personalized technical, investment, and environmental yield analysis for your property in Oman.'
+                ?>
+              </p>
+
+              <!-- Dynamic Assessment Summary Box -->
+              <div class="assessment-summary-box mb-4" id="db-assessment-summary-box">
+                <div class="summary-box-icon">📋</div>
+                <div class="summary-box-content">
+                  <h4 class="summary-box-title"><?= $active_lang === 'ar' ? 'ملخص التقييم الفني' : 'Technical Assessment Summary' ?></h4>
+                  <p id="db-val-assessment-summary-text" class="mb-0">
+                    <?= $active_lang === 'ar' 
+                      ? 'جاري تحميل ملخص التقييم...'
+                      : 'Generating your custom solar assessment summary...'
+                    ?>
+                  </p>
+                </div>
+              </div>
               
               <div class="discovery-dashboard">
                 
+                <!-- Financial Impact Section Title -->
+                <h4 class="dashboard-group-title mb-3">
+                  <span>📊</span> <?= $active_lang === 'ar' ? 'ملخص الأثر المالي والاستثماري' : 'Financial Impact Summary' ?>
+                </h4>
+
                 <!-- ROW 1: Top Summary Row -->
                 <div class="dashboard-row summary-row">
                   <!-- Monthly Savings -->
@@ -624,38 +675,38 @@ $lang = require_once "lang/{$active_lang}.php";
                     <span class="metric-label"><?= $lang['db_lifetime_sav'] ?></span>
                     <strong class="metric-val text-eco" id="db-val-lifetime-sav">0 OMR</strong>
                     <p class="hero-card-desc">
-                      <?= $active_lang === 'ar' ? 'الوفر الإجمالي المتوقع على مدى العمر الافتراضي للنظام الشمسي (25 عاماً).' : 'Expected cumulative savings over the 25-year lifetime of your solar system.' ?>
+                      <?= $active_lang === 'ar' ? 'الوفر المالي التراكمي المضمون على مدى العمر الافتراضي المتوقع للألواح (25 عاماً).' : 'Expected cumulative cash savings over the guaranteed 25-year operational lifecycle of the solar panels.' ?>
                     </p>
                   </div>
                   <!-- Lifetime Environmental Impact Card -->
                   <div class="discovery-metric-card highlight-environmental">
-                    <span class="metric-label"><?= $active_lang === 'ar' ? 'الأثر البيئي والحد من الكربون' : 'Environmental Impact & Carbon Offset' ?></span>
+                    <span class="metric-label"><?= $active_lang === 'ar' ? 'ملخص الأثر البيئي' : 'Environmental Impact Summary' ?></span>
                     <div class="environmental-metrics-inline">
                       <div class="env-metric-item">
                         <span class="env-value text-green" id="score-co2-val">0.0 Tons</span>
-                        <span class="env-label"><?= $active_lang === 'ar' ? 'الحد السنوي من CO₂' : 'Annual CO₂ Offset' ?></span>
+                        <span class="env-label"><?= $active_lang === 'ar' ? 'تجنب ثاني أكسيد الكربون سنوياً' : 'Annual CO₂ Offset' ?></span>
                       </div>
                       <div class="env-metric-item">
                         <span class="env-value" id="score-trees-val">0</span>
-                        <span class="env-label"><?= $active_lang === 'ar' ? 'الأشجار المزروعة المكافئة' : 'Trees Planted' ?></span>
+                        <span class="env-label"><?= $active_lang === 'ar' ? 'شجرة مكافئة مغروسة' : 'Equivalent Trees' ?></span>
                       </div>
                       <div class="env-metric-item">
                         <span class="env-value text-green" id="score-green-rating">Excellent</span>
-                        <span class="env-label"><?= $active_lang === 'ar' ? 'التقييم البيئي' : 'Environmental Rating' ?></span>
+                        <span class="env-label"><?= $active_lang === 'ar' ? 'التقييم البيئي' : 'Ecological Rating' ?></span>
                       </div>
                     </div>
                     <p class="hero-card-desc">
-                      <?= $active_lang === 'ar' ? 'يقلل هذا النظام الشمسي بشكل كبير من الانبعاثات الكربونية السنوية.' : 'This solar system significantly reduces annual carbon emissions.' ?>
+                      <?= $active_lang === 'ar' ? 'يدعم هذا المشروع بشكل مباشر مبادرات الحياد الكربوني ورؤية عُمان 2040 للبيئة المستدامة.' : 'This project directly offsets grid-generated emissions, advancing Oman Vision 2040 sustainability targets.' ?>
                     </p>
                   </div>
                 </div>
 
                 <!-- ROW 3: Three Columns for Insights -->
                 <div class="dashboard-row insights-row">
-                  <!-- Col 1: Energy Consumption & Independence -->
+                  <!-- Col 1: Energy Consumption & Independence Score -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>⚡</span> <?= $active_lang === 'ar' ? 'استهلاك الطاقة والاستقلالية' : 'Energy Consumption & Independence' ?>
+                      <span>⚡</span> <?= $active_lang === 'ar' ? 'مؤشر استقلال الطاقة' : 'Energy Independence Score' ?>
                     </h4>
                     <div class="proposal-card-content">
                       <div class="proposal-row">
@@ -673,7 +724,7 @@ $lang = require_once "lang/{$active_lang}.php";
                       <div class="proposal-status-section">
                         <span class="proposal-label-small"><?= $active_lang === 'ar' ? 'الحالة' : 'Status' ?></span>
                         <div class="proposal-status-badge status-excellent" id="db-val-energy-status">
-                          <?= $active_lang === 'ar' ? 'استقلالية ممتازة للطاقة' : 'Excellent Energy Independence' ?>
+                          <?= $active_lang === 'ar' ? 'استقلال ممتاز للطاقة' : 'Excellent Energy Independence' ?>
                         </div>
                       </div>
                     </div>
@@ -682,7 +733,7 @@ $lang = require_once "lang/{$active_lang}.php";
                   <!-- Col 2: Solar Performance Summary -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>📊</span> <?= $active_lang === 'ar' ? 'ملخص أداء الطاقة الشمسية' : 'Solar Performance Summary' ?>
+                      <span>☀️</span> <?= $active_lang === 'ar' ? 'ملخص أداء الطاقة الشمسية' : 'Solar Performance Summary' ?>
                     </h4>
                     <div class="proposal-card-content">
                       <div class="proposal-row">
@@ -708,10 +759,10 @@ $lang = require_once "lang/{$active_lang}.php";
                     </div>
                   </div>
 
-                  <!-- Col 3: Technical Specifications & Suitability -->
+                  <!-- Col 3: Technical Specifications & Solar Readiness Score -->
                   <div class="dashboard-section col-insights">
                     <h4 class="section-title-discovery">
-                      <span>🔧</span> <?= $active_lang === 'ar' ? 'المواصفات الفنية والملاءمة' : 'Technical Specifications & Suitability' ?>
+                      <span>🔧</span> <?= $active_lang === 'ar' ? 'المواصفات الفنية والجاهزية' : 'Technical Specs & Solar Readiness' ?>
                     </h4>
                     <div class="proposal-card-content spec-card-content">
                       <!-- Section 1: Recommended System -->
@@ -743,15 +794,15 @@ $lang = require_once "lang/{$active_lang}.php";
                         </div>
                       </div>
 
-                      <!-- Section 3: Property Suitability -->
+                      <!-- Section 3: Solar Readiness Score -->
                       <div class="spec-section border-top-divider">
-                        <h5 class="spec-section-title"><?= $active_lang === 'ar' ? 'ملاءمة العقار' : 'Property Suitability' ?></h5>
+                        <h5 class="spec-section-title"><?= $active_lang === 'ar' ? 'مؤشر الجاهزية للطاقة الشمسية' : 'Solar Readiness Score' ?></h5>
                         <div class="suitability-result-box">
                           <div class="suitability-badge-new grade-b" id="score-suitability-badge">
                             <span id="score-suitability-label">B</span>
                           </div>
                           <p class="suitability-desc" id="score-suitability-desc">
-                            <?= $active_lang === 'ar' ? 'مناسب لتركيب الطاقة الشمسية مع وجود فرص تحسين متوسطة.' : 'Suitable for solar deployment with moderate optimization opportunities.' ?>
+                            <?= $active_lang === 'ar' ? 'عقار مناسب جداً مع إمكانية شمسية عالية وحمل متوافق.' : 'High suitability ready for deployment with optimum orientation.' ?>
                           </p>
                         </div>
                       </div>
@@ -759,12 +810,18 @@ $lang = require_once "lang/{$active_lang}.php";
                   </div>
                 </div>
 
-                <!-- ROW 4: Integrated Lead Assessment Form -->
+                <!-- ROW 4: Integrated Lead Assessment Form (Recommended Next Step) -->
                 <div class="dashboard-row form-row-row">
                   <div class="cta-lead-card">
-                    <div class="cta-lead-header">
-                      <h4><?= $active_lang === 'ar' ? 'طلب التحقق الفني المجاني من حجم النظام' : 'Request Free Engineering Sizing Verification' ?></h4>
-                      <p><?= $active_lang === 'ar' ? 'سيقوم فريقنا الفني بمراجعة ملف استهلاك أجهزتك وقاعدة بيانات الإنتاج للتحقق النهائي دون أي التزام مبيعات.' : 'Our engineering team will review your appliance load profile and local yield database to verify your layout, completely free of charge.' ?></p>
+                    <div class="cta-lead-header text-center">
+                      <span class="next-step-badge mb-2 d-inline-block"><?= $active_lang === 'ar' ? 'الخطوة التالية الموصى بها' : 'Recommended Next Step' ?></span>
+                      <h4><?= $active_lang === 'ar' ? 'طلب التحقق الفني المجاني لتصميم النظام' : 'Request Free Engineering Verification & Sizing Audit' ?></h4>
+                      <p class="mt-2" style="max-width: 800px; margin: 0 auto; font-size: 0.9rem; line-height: 1.5; color: var(--color-text-muted);">
+                        <?= $active_lang === 'ar' 
+                          ? 'سيقوم مهندسونا المعتمدون من مجلس مراجعة قواعد توزيع الكهرباء (DCRP) بمراجعة ملف استهلاك أجهزتك وإجراء محاكاة تفصيلية للموقع للتحقق من الجاهزية والوفر النهائي دون أي التزام.' 
+                          : 'Our DCRP-certified engineering team will review your load profile and run site-specific shadow modeling to verify your system readiness and final cash yield, completely free of obligation.' 
+                        ?>
+                      </p>
                     </div>
                     <form id="discovery-lead-form" class="cta-lead-form">
                       <input type="hidden" name="action" value="submit_lead">
@@ -794,7 +851,7 @@ $lang = require_once "lang/{$active_lang}.php";
                       </div>
 
                       <button type="submit" class="btn-cta-submit mt-3" id="btn-submit-discovery">
-                        <span><?= $active_lang === 'ar' ? 'إرسال للمراجعة الهندسية ➔' : 'Submit for Engineering Review ➔' ?></span>
+                        <span><?= $active_lang === 'ar' ? 'تأكيد الحجز ومتابعة التدقيق الهندي ➔' : 'Confirm Sizing & Request Engineering Audit ➔' ?></span>
                         <span class="spinner" style="display: none; width: 16px; height: 16px; border: 2px solid #fff; border-top-color: transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin-left: 8px;"></span>
                       </button>
                     </form>
@@ -811,6 +868,7 @@ $lang = require_once "lang/{$active_lang}.php";
               </div>
 
             </div> <!-- /residential-discovery-results -->
+          </div>
         </div>
 
         <!-- Footer Controls Container -->

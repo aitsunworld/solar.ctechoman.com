@@ -1,70 +1,30 @@
-"""Debug calibration container height."""
-import json, time, os
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
+import re
+import sys
 
-options = Options()
-options.add_argument('--headless')
-options.add_argument('--disable-gpu')
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
+if sys.version_info >= (3, 7):
+    sys.stdout.reconfigure(encoding='utf-8')
 
-cwd = os.getcwd()
-url = 'file:///' + os.path.join(cwd, 'preview.html').replace('\\', '/')
+workspace = r"c:\Users\Dell\Documents\GitHub\solar.ctechoman.com"
 
-driver = webdriver.Chrome(options=options)
-driver.set_window_size(1440, 900)
-driver.get(url)
-time.sleep(1)
+# Read index.php
+with open(workspace + "\\index.php", "r", encoding="utf-8") as f:
+    html = f.read()
 
-# Navigate to step 6
-for i in range(1, 4):
-    btn = driver.find_element(By.ID, f'btn-goto-step{i+1}')
-    driver.execute_script('arguments[0].click();', btn)
-    time.sleep(0.3)
-bill_slider = driver.find_element(By.ID, 'discovery-bill-slider')
-driver.execute_script("arguments[0].value = 400; arguments[0].dispatchEvent(new Event('input'));", bill_slider)
-time.sleep(0.2)
-cal_btn = driver.find_element(By.ID, 'btn-calibrate-bill')
-driver.execute_script('arguments[0].click();', cal_btn)
-time.sleep(2)
+# Let's see if the text contains calibration_warning
+print("index.php contains calibration_warning:", "calibration_warning" in html)
 
-# Get ALL children of calibration-container with their computed styles
-children_data = driver.execute_script('''
-    var container = document.querySelector('.calibration-container');
-    var children = Array.from(container.children);
-    var totalHeight = 0;
-    return children.map(function(child, idx) {
-        var r = child.getBoundingClientRect();
-        var cs = getComputedStyle(child);
-        var marginTop = parseFloat(cs.marginTop);
-        var marginBottom = parseFloat(cs.marginBottom);
-        var paddingTop = parseFloat(cs.paddingTop);
-        var paddingBottom = parseFloat(cs.paddingBottom);
-        var h = r.height + marginTop + marginBottom;
-        totalHeight += h;
-        return {
-            idx: idx,
-            tag: child.tagName,
-            className: child.className,
-            id: child.id,
-            x: Math.round(r.x),
-            y: Math.round(r.y),
-            width: Math.round(r.width),
-            height: Math.round(r.height),
-            marginTop: marginTop,
-            marginBottom: marginBottom,
-            paddingTop: paddingTop,
-            paddingBottom: paddingBottom,
-            display: cs.display,
-            visibility: cs.visibility,
-            minHeight: cs.minHeight,
-            maxHeight: cs.maxHeight,
-            totalContribution: Math.round(h)
-        };
-    });
-''')
+# Let's search index.php for the range around calibration_warning
+pos = html.find("calibration_warning")
+if pos != -1:
+    print("Around calibration_warning in index.php:")
+    print(html[pos-100:pos+300])
 
-driver.quit()
-print(json.dumps(children_data, indent=2))
+# Let's simulate the regex replacement of lang['calibration_warning']
+val = "We noticed a difference between appliance usage and your bill history. We\\"
+pat = r"<\?=\s*\$lang\['calibration_warning'\]\s*\?>"
+print("Pattern matches:", re.search(pat, html) is not None)
+
+html_sub = re.sub(pat, val, html)
+pos_sub = html_sub.find("We noticed a difference")
+print("After sub:")
+print(html_sub[pos_sub:pos_sub+400])
