@@ -175,6 +175,12 @@ $lang = require_once "lang/{$active_lang}.php";
                 <span class="slide-badge"><?= $slide['badge'] ?></span>
                 <h2><?= $slide['title'] ?></h2>
                 <p><?= $slide['desc'] ?></p>
+                <?php if (isset($slide['metric_value']) && isset($slide['metric_label'])): ?>
+                  <div class="slide-trust-metric">
+                    <span class="metric-value"><?= $slide['metric_value'] ?></span>
+                    <span class="metric-label"><?= $slide['metric_label'] ?></span>
+                  </div>
+                <?php endif; ?>
                 <div class="slide-actions">
                   <a href="#calculator" class="btn btn-hero-primary"><?= $slide['btn'] ?></a>
                 </div>
@@ -320,7 +326,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
           <!-- Panel 1: Select Appliances (Step 1) -->
           <div class="discovery-step-panel" id="discovery-panel-1">
-            <h3 class="mb-2"><?= $active_lang === 'ar' ? 'الخطوة 1: اختر الأجهزة المنزلية' : 'Step 1: Select Home Appliances' ?></h3>
+            <h3 class="mb-2"><?= $lang['step_title_1'] ?></h3>
             <p class="text-muted mb-3" style="font-size: 0.88rem;">
               <?= $active_lang === 'ar' ? 'اختر الأجهزة المستخدمة في منزلك من خلال النقر عليها لتحديدها.' : 'Click on the appliances you run at home to select them.' ?>
             </p>
@@ -336,7 +342,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
           <!-- Panel 2: Enter Quantity (Step 2) -->
           <div class="discovery-step-panel" id="discovery-panel-2" style="display: none;">
-            <h3 class="mb-2"><?= $active_lang === 'ar' ? 'الخطوة 2: حدد كميات الأجهزة' : 'Step 2: Enter Appliance Quantities' ?></h3>
+            <h3 class="mb-2"><?= $lang['step_title_2'] ?></h3>
             <p class="text-muted mb-3" style="font-size: 0.88rem;">
               <?= $active_lang === 'ar' ? 'اضبط الكمية المناسبة لكل جهاز من الأجهزة المحددة.' : 'Specify the count/quantity for each of your selected appliances.' ?>
             </p>
@@ -355,7 +361,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
           <!-- Panel 3: Show Estimated Monthly Consumption (Step 3) -->
           <div class="discovery-step-panel" id="discovery-panel-3" style="display: none;">
-            <h3 class="mb-2"><?= $active_lang === 'ar' ? 'الخطوة 3: الاستهلاك الشهري المقدر' : 'Step 3: Estimated Monthly Consumption' ?></h3>
+            <h3 class="mb-2"><?= $lang['step_title_3'] ?></h3>
             <p class="text-muted mb-4"><?= $active_lang === 'ar' ? 'تحليل استهلاك الطاقة بناءً على قائمة أجهزتك المنزلية المحددة.' : 'Energy consumption profile computed from your selected household appliances.' ?></p>
             
             <div class="side-by-side-layout">
@@ -390,7 +396,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
           <!-- Panel 4: Show Recommended Solar Size (Step 4) -->
           <div class="discovery-step-panel" id="discovery-panel-4" style="display: none;">
-            <h3 class="mb-2"><?= $active_lang === 'ar' ? 'الخطوة 4: حجم النظام الشمسي الموصى به' : 'Step 4: Recommended Solar System' ?></h3>
+            <h3 class="mb-2"><?= $lang['step_title_4'] ?></h3>
             <p class="text-muted mb-4"><?= $active_lang === 'ar' ? 'تم حساب سعة النظام بناءً على نمط استهلاكك الفعلي.' : 'System capacity calculated based on your unique load profile.' ?></p>
 
             <div class="side-by-side-layout">
@@ -435,7 +441,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
           <!-- Panel 5: Ask for average electricity bill (Step 5) -->
           <div class="discovery-step-panel" id="discovery-panel-5" style="display: none;">
-            <h3 class="mb-2"><?= $active_lang === 'ar' ? 'هل تعرف متوسط فاتورتك الكهربائية الشهرية؟' : 'Do you know your average monthly electricity bill?' ?></h3>
+            <h3 class="mb-2"><?= $lang['step_title_5'] ?></h3>
             <p class="text-muted mb-4" style="font-size: 0.88rem;">
               <?= $active_lang === 'ar' ? 'معايرة النظام بناءً على نمط استهلاكك الفعلي تزيد من دقة حساب العائد المالي.' : 'Calibrating with your actual billing history ensures absolute ROI accuracy.' ?>
             </p>
@@ -527,7 +533,7 @@ $lang = require_once "lang/{$active_lang}.php";
 
           <!-- Panel 6: Calibrate results (Step 6) -->
           <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
-            <h3 class="mb-2"><?= $active_lang === 'ar' ? 'حالة المعايرة' : 'Calibration Status' ?></h3>
+            <h3 class="mb-2"><?= $lang['step_title_6'] ?></h3>
             <p class="text-muted mb-4" id="calibration-status-message">
               <?= $active_lang === 'ar' ? 'اكتملت المعايرة!' : 'Calibration completed!' ?>
             </p>
@@ -614,7 +620,7 @@ $lang = require_once "lang/{$active_lang}.php";
           <div class="discovery-step-panel" id="discovery-panel-7" style="display: none;">
             <div id="residential-discovery-results">
               
-              <h3 class="dashboard-main-title"><?= $active_lang === 'ar' ? 'تقرير تقييم الطاقة الشمسية المخصص لك' : 'Your Personalized Solar Assessment' ?></h3>
+              <h3 class="dashboard-main-title"><?= $lang['step_title_7'] ?></h3>
               
               <p class="dashboard-summary-intro text-center text-muted mb-4" style="max-width: 800px; margin: 0 auto 1.5rem auto; font-size: 0.95rem; line-height: 1.6;">
                 <?= $active_lang === 'ar' 
@@ -639,6 +645,42 @@ $lang = require_once "lang/{$active_lang}.php";
               
               <div class="discovery-dashboard">
                 
+                <!-- 4-Up Premium Score Cards -->
+                <div class="score-cards-row mb-4">
+                  <!-- Score Card 1: Solar Readiness -->
+                  <div class="score-card-item">
+                    <span class="score-card-label"><?= $active_lang === 'ar' ? 'جاهزية الطاقة الشمسية' : 'Solar Readiness' ?></span>
+                    <strong class="score-card-value text-primary" id="score-card-readiness">A+</strong>
+                    <div class="score-card-bar-wrapper">
+                      <div class="score-card-bar bg-primary" id="score-card-readiness-bar" style="width: 95%;"></div>
+                    </div>
+                  </div>
+                  <!-- Score Card 2: Energy Independence -->
+                  <div class="score-card-item">
+                    <span class="score-card-label"><?= $active_lang === 'ar' ? 'الاستقلال عن الشبكة' : 'Energy Independence' ?></span>
+                    <strong class="score-card-value text-eco" id="score-card-independence">0%</strong>
+                    <div class="score-card-bar-wrapper">
+                      <div class="score-card-bar bg-eco" id="score-card-independence-bar" style="width: 0%;"></div>
+                    </div>
+                  </div>
+                  <!-- Score Card 3: Financial Opportunity -->
+                  <div class="score-card-item">
+                    <span class="score-card-label"><?= $active_lang === 'ar' ? 'الفرصة المالية السنوية' : 'Financial Opportunity' ?></span>
+                    <strong class="score-card-value text-gold" id="score-card-financial">0 OMR</strong>
+                    <div class="score-card-bar-wrapper">
+                      <div class="score-card-bar bg-gold" id="score-card-financial-bar" style="width: 85%;"></div>
+                    </div>
+                  </div>
+                  <!-- Score Card 4: Environmental Impact -->
+                  <div class="score-card-item">
+                    <span class="score-card-label"><?= $active_lang === 'ar' ? 'الأثر البيئي السنوي' : 'Environmental Impact' ?></span>
+                    <strong class="score-card-value text-green" id="score-card-environmental">0.0 T</strong>
+                    <div class="score-card-bar-wrapper">
+                      <div class="score-card-bar bg-green" id="score-card-environmental-bar" style="width: 75%;"></div>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Financial Impact Section Title -->
                 <h4 class="dashboard-group-title mb-3">
                   <span>📊</span> <?= $active_lang === 'ar' ? 'ملخص الأثر المالي والاستثماري' : 'Financial Impact Summary' ?>

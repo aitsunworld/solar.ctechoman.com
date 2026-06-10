@@ -7,9 +7,9 @@
   <script>document.documentElement.classList.add('js-enabled');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قلل من انبعاثات الكربون وادعم الاستدامة</title>
-  <meta name="description" content="ادعم رؤية عمان 2040. انضم إلى التحول الأخضر، وقلل من بصمتك البيئية وازرع ما يعادل مئات الأشجار سنوياً.">
-  <meta property="og:title" content="قلل من انبعاثات الكربون وادعم الاستدامة">
+  <title>ساهم في دعم رؤية عمان 2040 — ابدأ بالتحول الأخضر هذا العام</title>
+  <meta name="description" content="كل نظام طاقة شمسية يزيل أطناناً من انبعاثات الكربون سنوياً. يمكن لمنزلك أن يعادل زراعة مئات الأشجار كل عام — بكل سهولة ودون عناء.">
+  <meta property="og:title" content="ساهم في دعم رؤية عمان 2040 — ابدأ بالتحول الأخضر هذا العام">
   <meta property="og:description" content="حلول طاقة شمسية نظيفة ومستدامة لعمان. زد من قيمة عقارك وتخلص من فواتير الكهرباء.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://solar.ctechoman.com">
@@ -88,7 +88,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap"></noscript>
 
   <!-- Main stylesheet: RENDER-BLOCKING to prevent FOUC -->
-  <link rel="stylesheet" href="style.css?v=9.0">
+  <link rel="stylesheet" href="style.css?v=9.1">
   <!-- chatbot.css injected lazily by JS below, not here -->
 </head>
 
@@ -326,31 +326,31 @@
           <!-- Wizard Navigation & Steps -->
           <div class="discovery-steps-progress mb-4">
             <div class="step-indicator active" data-step="1">
-              <div class="step-dot" title="تحديد الأجهزة"><span class="step-number">1</span></div>
+              <div class="step-dot" title="ما هي الأجهزة التي تستهلك الطاقة في منزلك؟"><span class="step-number">1</span></div>
               <span class="step-label">الأجهزة</span>
             </div>
             <div class="step-indicator" data-step="2">
-              <div class="step-dot" title="تحديد الكميات"><span class="step-number">2</span></div>
+              <div class="step-dot" title="ما هو عدد كل منها؟"><span class="step-number">2</span></div>
               <span class="step-label">الكميات</span>
             </div>
             <div class="step-indicator" data-step="3">
-              <div class="step-dot" title="الاستهلاك المقدر"><span class="step-number">3</span></div>
+              <div class="step-dot" title="بصمتك الطاقية الذاتية"><span class="step-number">3</span></div>
               <span class="step-label">الاستهلاك</span>
             </div>
             <div class="step-indicator" data-step="4">
-              <div class="step-dot" title="حجم النظام المقترح"><span class="step-number">4</span></div>
+              <div class="step-dot" title="توصية نظام الطاقة الشمسية الخاص بك"><span class="step-number">4</span></div>
               <span class="step-label">حجم الطاقة</span>
             </div>
             <div class="step-indicator" data-step="5">
-              <div class="step-dot" title="الفاتورة الشهرية"><span class="step-number">5</span></div>
+              <div class="step-dot" title="تحقق بواسطة فاتورة الكهرباء الخاصة بك"><span class="step-number">5</span></div>
               <span class="step-label">الفاتورة</span>
             </div>
             <div class="step-indicator" data-step="6">
-              <div class="step-dot" title="معايرة النتائج"><span class="step-number">6</span></div>
+              <div class="step-dot" title="جاري تحليل بياناتك..."><span class="step-number">6</span></div>
               <span class="step-label">المعايرة</span>
             </div>
             <div class="step-indicator" data-step="7">
-              <div class="step-dot" title="لوحة التحكم المخصصة"><span class="step-number">7</span></div>
+              <div class="step-dot" title="تقرير تقييم الطاقة الشمسية الخاص بك"><span class="step-number">7</span></div>
               <span class="step-label">النتائج</span>
             </div>
           </div>
@@ -358,7 +358,7 @@
 
           <!-- Panel 1: Select Appliances (Step 1) -->
           <div class="discovery-step-panel" id="discovery-panel-1">
-            <h3 class="mb-2">الخطوة 1: اختر الأجهزة المنزلية</h3>
+            <h3 class="mb-2">ما هي الأجهزة التي تستهلك الطاقة في منزلك؟</h3>
             <p class="text-muted mb-3" style="font-size: 0.88rem;">
               اختر الأجهزة المستخدمة في منزلك من خلال النقر عليها لتحديدها.
             </p>
@@ -374,7 +374,7 @@
 
           <!-- Panel 2: Enter Quantity (Step 2) -->
           <div class="discovery-step-panel" id="discovery-panel-2" style="display: none;">
-            <h3 class="mb-2">الخطوة 2: حدد كميات الأجهزة</h3>
+            <h3 class="mb-2">ما هو عدد كل منها؟</h3>
             <p class="text-muted mb-3" style="font-size: 0.88rem;">
               اضبط الكمية المناسبة لكل جهاز من الأجهزة المحددة.
             </p>
@@ -393,16 +393,29 @@
 
           <!-- Panel 3: Show Estimated Monthly Consumption (Step 3) -->
           <div class="discovery-step-panel" id="discovery-panel-3" style="display: none;">
-            <h3 class="mb-2">الخطوة 3: الاستهلاك الشهري المقدر</h3>
-            <div class="consumption-reveal-zone text-center py-4">
-              <div class="animated-gauge-wrapper">
-                <div class="gauge-value" id="reveal-consumption-value">0 kWh</div>
-                <div class="gauge-label">شهرياً</div>
+            <h3 class="mb-2">بصمتك الطاقية الذاتية</h3>
+            <p class="text-muted mb-4">تحليل استهلاك الطاقة بناءً على قائمة أجهزتك المنزلية المحددة.</p>
+            
+            <div class="side-by-side-layout">
+              <div class="consumption-reveal-zone text-center py-4">
+                <div class="animated-gauge-wrapper">
+                  <div class="gauge-value" id="reveal-consumption-value">0 kWh</div>
+                  <div class="gauge-label">شهرياً</div>
+                </div>
+                <p class="text-muted mt-3" style="font-size: 0.9rem;">
+                  تقدير استهلاكك الشهري التقريبي للكهرباء.
+                </p>
               </div>
-              <p class="text-muted mt-3" style="font-size: 0.9rem;">
-                بناءً على اختيار الأجهزة المنزلية، هذا هو تقدير استهلاكك الشهري التقريبي للكهرباء.
-              </p>
+              <div class="contributors-card-wrapper">
+                <div class="contributors-header">
+                  <strong>أعلى الأجهزة استهلاكاً للطاقة</strong>
+                </div>
+                <div id="consumption-contributors-list" class="contributors-list">
+                  <!-- Rendered dynamically in script.js -->
+                </div>
+              </div>
             </div>
+
             <div class="step-actions mt-3" style="display: flex; gap: 0.75rem;">
               <button type="button" class="btn btn-secondary" id="btn-back-to-step2" style="flex: 1; min-width: 80px;">
                 ⬅ الكميات
@@ -415,16 +428,39 @@
 
           <!-- Panel 4: Show Recommended Solar Size (Step 4) -->
           <div class="discovery-step-panel" id="discovery-panel-4" style="display: none;">
-            <h3 class="mb-2">الخطوة 4: حجم النظام الشمسي الموصى به</h3>
-            <div class="solar-reveal-zone text-center py-4">
-              <div class="solar-value-wrapper">
-                <div class="solar-kw-value" id="reveal-solar-kw">0.0 kW</div>
-                <div class="solar-panels-count" id="reveal-solar-panels">0 Panels</div>
+            <h3 class="mb-2">توصية نظام الطاقة الشمسية الخاص بك</h3>
+            <p class="text-muted mb-4">تم حساب سعة النظام بناءً على نمط استهلاكك الفعلي.</p>
+
+            <div class="side-by-side-layout">
+              <div class="solar-reveal-zone text-center py-4">
+                <div class="solar-value-wrapper">
+                  <div class="solar-kw-value" id="reveal-solar-kw">0.0 kW</div>
+                  <div class="solar-panels-count" id="reveal-solar-panels">0 Panels</div>
+                </div>
+                <p class="text-muted mt-3" style="font-size: 0.9rem;">
+                  حجم النظام المقترح لتلبية وتغطية احتياجاتك من الطاقة.
+                </p>
               </div>
-              <p class="text-muted mt-3" style="font-size: 0.9rem;">
-                حجم النظام المقترح كافٍ لتلبية وتغطية كامل احتياجاتك من الطاقة.
-              </p>
+              <div class="education-info-card">
+                <div class="edu-card-header">
+                  <strong>كيف نقوم بحساب حجم النظام؟</strong>
+                </div>
+                <div class="edu-card-body">
+                  <p class="edu-math-desc">
+                    <?= $active_lang === 'ar'
+                      ? 'نقوم بتحليل الحمل الكهربائي المتوقع لكل جهاز من أجهزتك المختارة على مدار 365 يومًا، ثم نقارنه بمعدل الإشعاع الشمسي السنوي في سلطنة عُمان (حوالي 1600-1800 كيلوواط ساعة لكل كيلوواط ذروة سنوياً) لتقدير القدرة الشمسية المطلوبة بدقة.'
+                      : 'We model the expected hourly runtimes of your selected appliances across a full calendar year. We cross-reference this against Oman\'s high annual solar yield (average 1,650 kWh/kWp per year) to calculate the precise solar capacity required to offset your consumption.'
+                    ?>
+                  </p>
+                  <ul class="edu-specs-list">
+                    <li>💡 <strong>إجمالي الحمل المتصل:</strong> <span id="reveal-total-load-kw">0 W</span></li>
+                    <li>🌞 <strong>معامل الإنتاج الشمسي:</strong> <span>~1,700 kWh/kW/yr</span></li>
+                    <li>📐 <strong>المساحة التقريبية للسطح:</strong> <span id="reveal-roof-area-sqm">0 sqm</span></li>
+                  </ul>
+                </div>
+              </div>
             </div>
+
             <div class="step-actions mt-3" style="display: flex; gap: 0.75rem;">
               <button type="button" class="btn btn-secondary" id="btn-back-to-step3" style="flex: 1; min-width: 80px;">
                 ⬅ الاستهلاك
@@ -437,183 +473,171 @@
 
           <!-- Panel 5: Ask for average electricity bill (Step 5) -->
           <div class="discovery-step-panel" id="discovery-panel-5" style="display: none;">
-            <h3 class="mb-2">هل تعرف متوسط فاتورتك الكهربائية الشهرية؟</h3>
-            <p class="text-muted mb-3" style="font-size: 0.88rem;">
-              إدخال فاتورتك الفعلية يحسّن دقة حسابات العائد على الاستثمار والتوفير الفعلي.
+            <h3 class="mb-2">تحقق بواسطة فاتورة الكهرباء الخاصة بك</h3>
+            <p class="text-muted mb-4" style="font-size: 0.88rem;">
+              معايرة النظام بناءً على نمط استهلاكك الفعلي تزيد من دقة حساب العائد المالي.
             </p>
 
-            <!-- SECTION B: Slider Card -->
-            <div class="step5-slider-card" id="step5-slider-section">
-              <div class="step5-bill-badge-row">
-                <span class="step5-bill-label">متوسط الفاتورة الشهرية</span>
-                <div class="step5-bill-badge">
-                  <span class="bill-badge-amount" id="discovery-bill-display">50</span>
-                  <span class="bill-badge-currency">OMR</span>
-                </div>
-              </div>
-              <div class="step5-slider-wrapper">
-                <input type="range" id="discovery-bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Calibration Slider" class="step5-range">
-                <div class="step5-slider-labels">
-                  <span>10 OMR</span>
-                  <span>1000 OMR</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- SECTION C: Action Hierarchy -->
-            <div class="step5-actions-section" id="step5-main-actions">
-              <!-- Primary CTA -->
-              <button type="button" class="btn-step5-primary" id="btn-calibrate-bill">
-                ✓ المتابعة بهذه الفاتورة
-              </button>
-              <!-- Secondary CTA -->
-              <button type="button" class="btn-step5-secondary" id="btn-show-manual-entry">
-                ✏ إدخال تفاصيل الفاتورة يدوياً
-              </button>
-              <!-- Tertiary Text Link -->
-              <button type="button" class="btn-step5-skip" id="btn-skip-calibration">
-                تخطي في الوقت الحالي
-              </button>
-              <!-- Option C: Upload Bill -->
-              <button type="button" class="btn-step5-upload" id="btn-show-upload-bill">
-                📎 رفع الفاتورة (PDF / صورة)
-              </button>
-            </div>
-
-            <!-- Upload Bill Sub-Panel (hidden by default) -->
-            <div class="upload-bill-panel" id="upload-bill-panel" style="display: none;">
-              <div class="upload-bill-card">
-                <div class="upload-bill-header">
-                  <h4>📄 رفع فاتورة الكهرباء</h4>
-                  <p class="upload-bill-subtitle">يُقبل PDF و JPG و PNG — الحد الأقصى 10 ميغابايت</p>
-                </div>
-                <label class="upload-bill-dropzone" id="upload-bill-dropzone" for="db-bill-file">
-                  <div class="upload-dropzone-icon">☁️</div>
-                  <div class="upload-dropzone-text">
-                    اسحب وأفلت الفاتورة هنا، أو 
-                    <span class="upload-link">تصفح</span>
+            <div class="side-by-side-layout">
+              <!-- Left Column: Slider Calibration -->
+              <div class="step5-left-col">
+                <div class="step5-slider-card" id="step5-slider-section">
+                  <div class="step5-bill-badge-row">
+                    <span class="step5-bill-label">متوسط الفاتورة الشهرية</span>
+                    <div class="step5-bill-badge">
+                      <span class="bill-badge-amount" id="discovery-bill-display">50</span>
+                      <span class="bill-badge-currency">OMR</span>
+                    </div>
                   </div>
-                  <input type="file" id="db-bill-file" name="bill_file" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" aria-label="Upload electricity bill">
-                </label>
-                <div class="upload-bill-success" id="upload-bill-success" style="display: none;">
-                  <div class="upload-success-icon">✅</div>
-                  <p class="upload-success-msg">تم رفع الفاتورة بنجاح. سيراجع استشاري الطاقة الشمسية الفاتورة خلال التقييم.</p>
-                </div>
-                <div class="upload-bill-actions">
-                  <button type="button" class="btn-manual-cancel" id="btn-cancel-upload">رجوع</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Manual Bill Entry Sub-Panel (hidden by default) -->
-            <div class="manual-bill-panel" id="manual-bill-panel" style="display: none;">
-              <div class="manual-bill-card">
-                <div class="manual-bill-header">
-                  <h4>أدخل فاتورة الكهرباء</h4>
-                </div>
-                <div class="manual-bill-fields">
-                  <div class="manual-bill-input-group">
-                    <label class="manual-bill-field-label">الفاتورة الشهرية (ريال عُماني)</label>
-                    <input type="number" id="manual-bill-amount" min="5" max="5000" step="1" placeholder="أدخل المبلغ..." class="manual-bill-input" aria-label="Monthly Bill Amount">
-                  </div>
-                  <div class="manual-bill-input-group">
-                    <label class="manual-bill-field-label">ملاحظات (اختياري)</label>
-                    <input type="text" id="manual-bill-notes" placeholder="مثال: الفاتورة صيفية..." class="manual-bill-input" aria-label="Optional Notes">
+                  <div class="step5-slider-wrapper">
+                    <input type="range" id="discovery-bill-slider" min="10" max="1000" value="50" step="5" aria-label="Monthly Bill Calibration Slider" class="step5-range">
+                    <div class="step5-slider-labels">
+                      <span>10 OMR</span>
+                      <span>1000 OMR</span>
+                    </div>
                   </div>
                 </div>
-                <div class="manual-bill-benefits">
-                  <div class="benefit-item"><span class="benefit-check">✓</span> دقة أفضل في حساب العائد على الاستثمار</div>
-                  <div class="benefit-item"><span class="benefit-check">✓</span> تقدير أدق للتوفير</div>
-                  <div class="benefit-item"><span class="benefit-check">✓</span> تحديد أمثل لحجم النظام الشمسي</div>
-                </div>
-                <div class="manual-bill-actions">
-                  <button type="button" class="btn-manual-submit" id="btn-manual-bill-submit">
-                    متابعة المعايرة
+
+                <div class="step5-actions-section" id="step5-main-actions">
+                  <button type="button" class="btn-step5-primary" id="btn-calibrate-bill">
+                    ✓ المتابعة بهذه الفاتورة
                   </button>
-                  <button type="button" class="btn-manual-cancel" id="btn-cancel-manual">
-                    رجوع
+                  <button type="button" class="btn-step5-skip" id="btn-skip-calibration">
+                    تخطي في الوقت الحالي
                   </button>
                 </div>
               </div>
+
+              <!-- Right Column: Advanced Options (Tabs for Manual/Upload) -->
+              <div class="step5-right-col">
+                <div class="calibration-options-card">
+                  <div class="calibration-options-tabs">
+                    <button type="button" class="cal-opt-tab active" id="tab-upload-bill">
+                      📎 رفع فاتورة
+                    </button>
+                    <button type="button" class="cal-opt-tab" id="tab-manual-entry">
+                      ✏️ إدخال تفاصيل يدوية
+                    </button>
+                  </div>
+
+                  <!-- Upload Dropzone (active by default) -->
+                  <div class="cal-opt-panel" id="panel-upload-bill">
+                    <label class="upload-bill-dropzone" id="upload-bill-dropzone" for="db-bill-file">
+                      <div class="upload-dropzone-icon">☁️</div>
+                      <div class="upload-dropzone-text">
+                        اسحب ملف الفاتورة هنا، أو <span>تصفح</span>
+                      </div>
+                      <input type="file" id="db-bill-file" name="bill_file" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" aria-label="Upload electricity bill">
+                    </label>
+                    <div class="upload-bill-success" id="upload-bill-success" style="display: none;">
+                      <div class="upload-success-icon">✅</div>
+                      <p class="upload-success-msg">تم رفع الفاتورة بنجاح. سيقوم المهندس بمراجعتها.</p>
+                    </div>
+                  </div>
+
+                  <!-- Manual Entry Panel (hidden by default) -->
+                  <div class="cal-opt-panel" id="panel-manual-entry" style="display: none;">
+                    <div class="manual-bill-fields">
+                      <div class="manual-bill-input-group">
+                        <label class="manual-bill-field-label">الفاتورة الشهرية (ريال عماني)</label>
+                        <input type="number" id="manual-bill-amount" min="5" max="5000" step="1" placeholder="Enter amount..." class="manual-bill-input" aria-label="Monthly Bill Amount">
+                      </div>
+                      <div class="manual-bill-input-group">
+                        <label class="manual-bill-field-label">ملاحظات إضافية (اختياري)</label>
+                        <input type="text" id="manual-bill-notes" placeholder="e.g. Summer bill, AC heavy..." class="manual-bill-input" aria-label="Optional Notes">
+                      </div>
+                    </div>
+                    <button type="button" class="btn-manual-submit mt-3" id="btn-manual-bill-submit">
+                      تأكيد ومعايرة
+                    </button>
+                  </div>
+
+                </div>
+              </div>
             </div>
 
-            <div class="step-actions" style="justify-content: flex-start;">
-              <button type="button" class="btn btn-secondary" id="btn-back-to-step4" style="flex: 0 0 auto;">
-                ⬅ العودة لحجم النظام
+            <div class="step-actions mt-4" style="justify-content: flex-start;">
+              <button type="button" class="btn btn-secondary" id="btn-back-to-step4" style="flex: 0 0 auto; width: auto;">
+                ⬅ الحجم الشمسي
               </button>
             </div>
           </div>
 
           <!-- Panel 6: Calibrate results (Step 6) -->
           <div class="discovery-step-panel" id="discovery-panel-6" style="display: none;">
-            <h3 class="mb-2">حالة المعايرة</h3>
-            <p class="text-muted mb-3" id="calibration-status-message">
+            <h3 class="mb-2">جاري تحليل بياناتك...</h3>
+            <p class="text-muted mb-4" id="calibration-status-message">
               اكتملت المعايرة!
             </p>
 
-            <!-- Large Confidence Ring -->
-            <div class="calibration-ring-section">
-              <div class="progress-ring-wrapper">
-                <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
-                  <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
-                  <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
-                </svg>
-                <div class="progress-ring-text">
-                  <span class="progress-ring-number" id="calibration-confidence-pct">تقديري</span>
-                  <span class="progress-ring-sublabel" id="calibration-match-label">درجة الثقة</span>
-                  <span class="progress-ring-label">الثقة</span>
+            <div class="side-by-side-layout">
+              <!-- Left Column: Ring progress -->
+              <div class="calibration-ring-section py-4">
+                <div class="progress-ring-wrapper">
+                  <svg class="progress-ring-svg" width="200" height="200" viewBox="0 0 200 200">
+                    <circle class="progress-ring-bg" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                    <circle class="progress-ring-fill" id="calibration-progress-fill" cx="100" cy="100" r="85" stroke-width="10" fill="none" />
+                  </svg>
+                  <div class="progress-ring-text">
+                    <span class="progress-ring-number" id="calibration-confidence-pct">تقديري</span>
+                    <span class="progress-ring-sublabel" id="calibration-match-label">درجة الثقة</span>
+                    <span class="progress-ring-label">الثقة</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Metrics & Feedback -->
+              <div class="calibration-details-col">
+                <!-- 2x2 Metrics Grid -->
+                <div class="calibration-metrics-grid mb-3">
+                  <div class="cal-metric-card">
+                    <span class="cal-metric-label">حالة التطابق</span>
+                    <strong class="cal-metric-val" id="cal-val-score">استخدام ملف الأجهزة</strong>
+                  </div>
+                  <div class="cal-metric-card">
+                    <span class="cal-metric-label">نسبة تطابق الفاتورة</span>
+                    <strong class="cal-metric-val" id="cal-val-bill-match">غير متوفر</strong>
+                  </div>
+                  <div class="cal-metric-card">
+                    <span class="cal-metric-label">دقة تقدير الطاقة</span>
+                    <strong class="cal-metric-val text-eco" id="cal-val-accuracy">تقديري</strong>
+                  </div>
+                  <div class="cal-metric-card">
+                    <span class="cal-metric-label">مستوى الثقة</span>
+                    <strong class="cal-metric-val" id="cal-val-confidence-level">تقديري</strong>
+                  </div>
+                </div>
+
+                <!-- Hidden feedback boxes -->
+                <div class="calibration-feedback alert alert-warning mb-3" id="calibration-warning-box" style="display: none;">
+                  ⚠️ لقد لاحظنا وجود اختلاف بين تقدير استهلاك الأجهزة وسجل فواتيرك، وقمنا بتعديل التقدير لتحسين الدقة.
+                </div>
+                <div class="calibration-feedback alert alert-success mb-3" id="calibration-success-box" style="display: none;">
+                  ✅ تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.
+                </div>
+
+                <!-- Insight Summary Card -->
+                <div class="calibration-insight-card mb-3" id="cal-insight-card" style="display: none;">
+                  <div class="cal-insight-header">
+                    <span>💡</span>
+                    <strong>تحليل مقارنة الاستهلاك</strong>
+                  </div>
+                  <p id="cal-insight-desc" class="mb-0 mt-1"></p>
+                </div>
+
+                <!-- Action Plan Card -->
+                <div class="calibration-action-card mb-3" id="cal-action-card" style="display: none;">
+                  <div class="cal-action-header">
+                    <span>🚀</span>
+                    <strong>الإجراء الموصى به من قبل النظام</strong>
+                  </div>
+                  <p id="cal-action-desc" class="mb-0 mt-1"></p>
                 </div>
               </div>
             </div>
 
-            <!-- 2x2 Metrics Grid -->
-            <div class="calibration-metrics-grid">
-              <div class="cal-metric-card">
-                <span class="cal-metric-label">حالة التطابق</span>
-                <strong class="cal-metric-val" id="cal-val-score">استخدام ملف الأجهزة</strong>
-              </div>
-              <div class="cal-metric-card">
-                <span class="cal-metric-label">نسبة تطابق الفاتورة</span>
-                <strong class="cal-metric-val" id="cal-val-bill-match">غير متوفر</strong>
-              </div>
-              <div class="cal-metric-card">
-                <span class="cal-metric-label">دقة تقدير الطاقة</span>
-                <strong class="cal-metric-val text-eco" id="cal-val-accuracy">تقديري</strong>
-              </div>
-              <div class="cal-metric-card">
-                <span class="cal-metric-label">مستوى الثقة</span>
-                <strong class="cal-metric-val" id="cal-val-confidence-level">تقديري</strong>
-              </div>
-            </div>
-
-            <!-- Hidden feedback boxes -->
-            <div class="calibration-feedback alert alert-warning" id="calibration-warning-box" style="display: none;">
-              ⚠️ لقد لاحظنا وجود اختلاف بين تقدير استهلاك الأجهزة وسجل فواتيرك، وقمنا بتعديل التقدير لتحسين الدقة.
-            </div>
-            <div class="calibration-feedback alert alert-success" id="calibration-success-box" style="display: none;">
-              ✅ تطابق استهلاك الأجهزة مع الفاتورة ممتاز! التقديرات معايرة بدقة.
-            </div>
-
-            <!-- Insight Summary Card -->
-            <div class="calibration-insight-card" id="cal-insight-card" style="display: none;">
-              <div class="cal-insight-header">
-                <span>💡</span>
-                <strong>تحليل مقارنة الاستهلاك</strong>
-              </div>
-              <p id="cal-insight-desc" class="mb-0 mt-1"></p>
-            </div>
-
-            <!-- Action Plan Card -->
-            <div class="calibration-action-card" id="cal-action-card" style="display: none;">
-              <div class="cal-action-header">
-                <span>🚀</span>
-                <strong>الإجراء الموصى به من قبل النظام</strong>
-              </div>
-              <p id="cal-action-desc" class="mb-0 mt-1"></p>
-            </div>
-
             <!-- Action Buttons -->
-            <div class="calibration-step-actions">
+            <div class="calibration-step-actions mt-4">
               <button type="button" class="btn btn-secondary" id="btn-back-to-step5">
                 ⬅ تعديل الفاتورة
               </button>
@@ -622,19 +646,67 @@
               </button>
             </div>
           </div>
+          <!-- /Panel 6 -->
 
           <!-- Panel 7: Reveal personalized dashboard (Step 7) -->
           <div class="discovery-step-panel" id="discovery-panel-7" style="display: none;">
             <div id="residential-discovery-results">
               
-              <h3 class="dashboard-main-title">تقرير تقييم الطاقة الشمسية المخصص لك</h3>
+              <h3 class="dashboard-main-title">تقرير تقييم الطاقة الشمسية الخاص بك</h3>
               
               <p class="dashboard-summary-intro text-center text-muted mb-4" style="max-width: 800px; margin: 0 auto 1.5rem auto; font-size: 0.95rem; line-height: 1.6;">
                 بناءً على الأجهزة المحددة، وسلوك الاستهلاك المقدر، ومعايرة الفاتورة الشهرية، قمنا بإعداد تحليل استثماري وبيئي مخصص لعقارك في سلطنة عُمان.
               </p>
+
+              <!-- Dynamic Assessment Summary Box -->
+              <div class="assessment-summary-box mb-4" id="db-assessment-summary-box">
+                <div class="summary-box-icon">📋</div>
+                <div class="summary-box-content">
+                  <h4 class="summary-box-title">ملخص التقييم الفني</h4>
+                  <p id="db-val-assessment-summary-text" class="mb-0">
+                    جاري تحميل ملخص التقييم...
+                  </p>
+                </div>
+              </div>
               
               <div class="discovery-dashboard">
                 
+                <!-- 4-Up Premium Score Cards -->
+                <div class="score-cards-row mb-4">
+                  <!-- Score Card 1: Solar Readiness -->
+                  <div class="score-card-item">
+                    <span class="score-card-label">جاهزية الطاقة الشمسية</span>
+                    <strong class="score-card-value text-primary" id="score-card-readiness">A+</strong>
+                    <div class="score-card-bar-wrapper">
+                      <div class="score-card-bar bg-primary" id="score-card-readiness-bar" style="width: 95%;"></div>
+                    </div>
+                  </div>
+                  <!-- Score Card 2: Energy Independence -->
+                  <div class="score-card-item">
+                    <span class="score-card-label">الاستقلال عن الشبكة</span>
+                    <strong class="score-card-value text-eco" id="score-card-independence">0%</strong>
+                    <div class="score-card-bar-wrapper">
+                      <div class="score-card-bar bg-eco" id="score-card-independence-bar" style="width: 0%;"></div>
+                    </div>
+                  </div>
+                  <!-- Score Card 3: Financial Opportunity -->
+                  <div class="score-card-item">
+                    <span class="score-card-label">الفرصة المالية السنوية</span>
+                    <strong class="score-card-value text-gold" id="score-card-financial">0 OMR</strong>
+                    <div class="score-card-bar-wrapper">
+                      <div class="score-card-bar bg-gold" id="score-card-financial-bar" style="width: 85%;"></div>
+                    </div>
+                  </div>
+                  <!-- Score Card 4: Environmental Impact -->
+                  <div class="score-card-item">
+                    <span class="score-card-label">الأثر البيئي السنوي</span>
+                    <strong class="score-card-value text-green" id="score-card-environmental">0.0 T</strong>
+                    <div class="score-card-bar-wrapper">
+                      <div class="score-card-bar bg-green" id="score-card-environmental-bar" style="width: 75%;"></div>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Financial Impact Section Title -->
                 <h4 class="dashboard-group-title mb-3">
                   <span>📊</span> ملخص الأثر المالي والاستثماري

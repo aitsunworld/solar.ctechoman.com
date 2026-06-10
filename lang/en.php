@@ -309,14 +309,14 @@ return [
     'foot_call_title' => 'Call Us',
     'foot_call_desc' => '<a href="tel:' . $c['phone_1_clean'] . '">' . $c['phone_1'] . '</a><br><a href="tel:' . $c['phone_2_clean'] . '">' . $c['phone_2'] . '</a>',
 
-    // Residential Discovery Experience
-    'step_title_1' => 'Select Appliances',
-    'step_title_2' => 'Enter Quantity',
-    'step_title_3' => 'Estimated Consumption',
-    'step_title_4' => 'Recommended Solar Size',
-    'step_title_5' => 'Average Bill',
-    'step_title_6' => 'Calibrate Results',
-    'step_title_7' => 'Personalized Dashboard',
+    // Residential Discovery Experience — Assessment Psychology Language
+    'step_title_1' => 'What Appliances Power Your Home?',
+    'step_title_2' => 'How Many Of Each?',
+    'step_title_3' => 'Your Energy Footprint',
+    'step_title_4' => 'Your Solar Recommendation',
+    'step_title_5' => 'Validate With Your Bill',
+    'step_title_6' => 'Analyzing Your Data...',
+    'step_title_7' => 'Your Solar Assessment Report',
     'calibration_title' => 'Do you know your average monthly electricity bill?',
     'calibration_enter' => 'Enter Bill Manually',
     'calibration_skip' => 'Skip & Continue',
@@ -331,47 +331,60 @@ return [
     'db_lifetime_sav' => 'Lifetime Savings (25 Years)',
     'score_energy_ind' => 'Energy Independence',
     'score_suitability' => 'Solar Suitability',
-    'score_green_impact' => 'Green Impact',
-    'green_co2' => 'CO₂ avoided per year',
-    'green_trees' => 'Equivalent trees planted',
-    'lead_title_discovery' => 'Request Free Engineering Sizing Verification',
-    'lead_btn_discovery' => 'Submit for Engineering Review ➔',
+    'score_green_impact' => 'Environmental Impact',
+    'score_financial_opp' => 'Financial Opportunity',
+    'green_co2' => 'CO₂ Avoided Per Year',
+    'green_trees' => 'Equivalent Trees Planted',
+    'lead_title_discovery' => 'Book Your Free Expert Consultation',
+    'lead_btn_discovery' => 'Get My Free Assessment ➔',
     'slides' => [
         [
-            'badge' => '⚡ BILL REDUCTION',
-            'title' => 'Reduce Your Electricity Bills by Up To 90%',
-            'desc' => 'Harness Oman\'s abundant sunlight to power your home. Stop renting your power and start generating your own to eliminate monthly utility bills.',
-            'btn' => 'Calculate Savings ➔'
+            'badge'        => '⚡ BILL REDUCTION',
+            'title'        => 'Reduce Your Electricity Bills by Up To 90%',
+            'desc'         => 'Harness Oman\'s abundant sunlight to power your home. Stop renting your power — generate your own clean energy and permanently eliminate monthly utility bills.',
+            'metric_value' => '90%',
+            'metric_label' => 'Average Bill Reduction Achieved by Our Clients',
+            'btn'          => 'Analyze My Savings ➔'
         ],
         [
-            'badge' => '☀️ ENERGY INDEPENDENCE',
-            'title' => 'Generate Your Own Clean Energy',
-            'desc' => 'Become your own power utility. Solar energy provides absolute energy independence, keeping your family powered by clean, reliable green electricity.',
-            'btn' => 'Calculate Savings ➔'
+            'badge'        => '☀️ ENERGY INDEPENDENCE',
+            'title'        => 'Generate Your Own Clean Energy, 365 Days a Year',
+            'desc'         => 'Stop depending on the national grid. With solar, your home generates its own electricity — giving your family reliable, clean power regardless of tariff increases.',
+            'metric_value' => '320+',
+            'metric_label' => 'Peak Sunshine Days Per Year in Oman',
+            'btn'          => 'Discover My Independence ➔'
         ],
         [
-            'badge' => '🔒 FINANCIAL ROI',
-            'title' => 'Lock In High Annual Returns for 25+ Years',
-            'desc' => 'Solar installations function as secure financial assets in Oman, yielding an effective annual ROI of over 12-15% with a payback period of just 5 to 7 years.',
-            'btn' => 'Calculate Savings ➔'
+            'badge'        => '🔒 FINANCIAL ROI',
+            'title'        => 'A 12–15% Annual Return Locked In for 25 Years',
+            'desc'         => 'Solar is the most reliable investment available in Oman today. Systems pay for themselves in 5–7 years and then generate pure savings for the next 20+ years.',
+            'metric_value' => '5–7 Yrs',
+            'metric_label' => 'Average Investment Payback Period in Oman',
+            'btn'          => 'Calculate My ROI ➔'
         ],
         [
-            'badge' => '📈 REAL ESTATE VALUE',
-            'title' => 'Increase Property Value With Solar Assets',
-            'desc' => 'Modern villas equipped with smart solar systems sell faster and at a premium price. Solar is a building upgrade that yields high financial returns.',
-            'btn' => 'Calculate Savings ➔'
+            'badge'        => '📈 PROPERTY VALUE',
+            'title'        => 'Solar Adds Premium Value to Your Property',
+            'desc'         => 'Villas and homes with solar systems sell faster and at a premium. Solar is no longer just an energy upgrade — it is a financial asset that increases your net worth.',
+            'metric_value' => '+15%',
+            'metric_label' => 'Average Property Value Increase With Solar',
+            'btn'          => 'Start My Assessment ➔'
         ],
         [
-            'badge' => '🇴🇲 IDEAL FOR OMAN',
-            'title' => 'Oman is One of the Best Solar Locations Globally',
-            'desc' => 'With over 320 days of pure annual sunshine and high solar insolation rates, solar panels in Oman operate at peak performance, ensuring rapid returns.',
-            'btn' => 'Calculate Savings ➔'
+            'badge'        => '🇴🇲 OMAN ADVANTAGE',
+            'title'        => 'Oman Ranks Among the Top Solar Locations Globally',
+            'desc'         => 'With solar insolation levels among the highest worldwide, Oman is ideal for solar energy. Your panels will operate at peak performance year-round.',
+            'metric_value' => '2,100+',
+            'metric_label' => 'kWh of Solar Energy Per kW Installed Per Year',
+            'btn'          => 'Explore My Potential ➔'
         ],
         [
-            'badge' => '🌱 ECO FRIENDLY',
-            'title' => 'Reduce CO₂ Emissions & Support Sustainability',
-            'desc' => 'Support Oman Vision 2040. Join the green transition, reduce your environmental footprint, and plant the equivalent of hundreds of trees each year.',
-            'btn' => 'Calculate Savings ➔'
+            'badge'        => '🌱 ENVIRONMENTAL IMPACT',
+            'title'        => 'Join Oman Vision 2040 — Go Green This Year',
+            'desc'         => 'Every solar system eliminates tonnes of CO₂ annually. Your home can become the equivalent of planting hundreds of trees every single year — effortlessly.',
+            'metric_value' => '4.6 T',
+            'metric_label' => 'Avg CO₂ Eliminated Per Year Per Residential System',
+            'btn'          => 'See My Impact ➔'
         ]
     ]
 ];

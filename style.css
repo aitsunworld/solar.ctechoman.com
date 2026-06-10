@@ -3040,6 +3040,160 @@ body.js-enabled .reveal-right.active {
 }
 
 /* ==========================================================================
+   13.5. Premium Final Design Polish & Trust Metrics
+   ========================================================================== */
+
+.card-subtitle {
+  font-size: 0.72rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-top: 1px;
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+.discovery-appliance-card.selected .card-subtitle {
+  color: var(--color-eco);
+}
+
+.slide-trust-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-card);
+  margin-bottom: var(--space-4);
+  text-align: center;
+  max-width: 320px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.slide-trust-metric .metric-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  line-height: 1.1;
+  margin-bottom: 0.15rem;
+}
+
+.slide-trust-metric .metric-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+}
+
+/* 4-Up Premium Score Cards */
+.score-cards-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.score-card-item {
+  background: var(--color-surface);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.score-card-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.score-card-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.score-card-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+}
+
+.score-card-bar-wrapper {
+  background: rgba(0, 0, 0, 0.06);
+  height: 6px;
+  border-radius: var(--radius-pill);
+  width: 100%;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.score-card-bar {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.score-card-bar.bg-primary {
+  background: var(--color-primary);
+}
+
+.score-card-bar.bg-eco {
+  background: var(--color-eco);
+}
+
+.score-card-bar.bg-gold {
+  background: #eab308;
+}
+
+.score-card-bar.bg-green {
+  background: #10B981;
+}
+
+/* Tablet & Desktop overrides for slides and buttons */
+@media (min-width: 768px) {
+  .btn {
+    width: auto !important;
+  }
+  .hero-actions .btn, .step-actions .btn, .calc-tab {
+    width: 100% !important;
+  }
+  .slide-card-container {
+    position: relative;
+    border-left: 5px solid transparent;
+    border-image: linear-gradient(to bottom, var(--color-primary), var(--color-eco)) 1;
+    padding-left: var(--space-6) !important;
+  }
+  [dir="rtl"] .slide-card-container {
+    border-left: none;
+    border-right: 5px solid transparent;
+    border-image: linear-gradient(to bottom, var(--color-primary), var(--color-eco)) 1;
+    padding-left: var(--space-4) !important;
+    padding-right: var(--space-6) !important;
+  }
+  .slide-trust-metric {
+    align-items: flex-start;
+    text-align: left;
+  }
+  [dir="rtl"] .slide-trust-metric {
+    align-items: flex-end;
+    text-align: right;
+  }
+  .score-cards-row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+/* ==========================================================================
    14. RTL Overrides for Arabic Language Context
    ========================================================================== */
 

@@ -1790,6 +1790,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const name = isArabic ? app.name_ar : app.name_en;
             const category = isArabic ? app.cat_ar : app.cat_en;
             const desc = isArabic ? app.desc_ar : app.desc_en;
+            const subtitle = isArabic ? (app.subtitle_ar || '') : (app.subtitle_en || '');
+            const subtitleHtml = subtitle ? `<p class="card-subtitle">${subtitle}</p>` : '';
             const isSelected = selectedAppliances.has(app.id);
             const selectedClass = isSelected ? ' selected' : '';
 
@@ -1812,6 +1814,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="card-details">
                             <span class="card-category">${category}</span>
                             <h4>${name}</h4>
+                            ${subtitleHtml}
                             <p class="card-desc">${desc}</p>
                             <span class="card-spec">${powerText} • ${app.hours}h/d</span>
                         </div>
@@ -2136,6 +2139,47 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 summaryText.textContent = `Based on your selected appliance profile, we recommend a ${systemSizeFormatted} kW solar system with ${result.panelCount} panels for your ${locLabel} property. This system is projected to generate ${savingsFmt} OMR in annual savings with a payback period of just ${paybackFmt} years — one of the fastest ROI timelines achievable in Oman's high-yield solar climate.`;
             }
+        }
+
+        // Update 4-Up Premium Score Cards
+        const cardReadinessVal = document.getElementById('score-card-readiness');
+        const cardReadinessBar = document.getElementById('score-card-readiness-bar');
+        const cardIndependenceVal = document.getElementById('score-card-independence');
+        const cardIndependenceBar = document.getElementById('score-card-independence-bar');
+        const cardFinancialVal = document.getElementById('score-card-financial');
+        const cardFinancialBar = document.getElementById('score-card-financial-bar');
+        const cardEnvironmentalVal = document.getElementById('score-card-environmental');
+        const cardEnvironmentalBar = document.getElementById('score-card-environmental-bar');
+
+        if (cardReadinessVal) {
+            let gradeText = grade;
+            if (isArabic) {
+                if (grade === "A+") gradeText = "أ+";
+                else if (grade === "A") gradeText = "أ";
+                else if (grade === "B") gradeText = "ب";
+                else if (grade === "C") gradeText = "ج";
+            }
+            cardReadinessVal.textContent = gradeText;
+        }
+        if (cardReadinessBar) {
+            let pct = 50;
+            if (grade === "A+") pct = 98;
+            else if (grade === "A") pct = 85;
+            else if (grade === "B") pct = 65;
+            else if (grade === "C") pct = 45;
+            cardReadinessBar.style.width = pct + '%';
+        }
+
+        if (cardIndependenceVal) animateValue(cardIndependenceVal, 0, indScore, 1000, "", "%");
+        if (cardIndependenceBar) cardIndependenceBar.style.width = indScore + '%';
+
+        if (cardFinancialVal) animateValue(cardFinancialVal, 0, result.yearlySavingsOmr, 1000, "", isArabic ? " ر.ع." : " OMR");
+        if (cardFinancialBar) cardFinancialBar.style.width = reductionPct + '%';
+
+        if (cardEnvironmentalVal) animateValue(cardEnvironmentalVal, 0, result.co2OffsetTons, 1000, "", isArabic ? " طن" : " T");
+        if (cardEnvironmentalBar) {
+            const envPct = Math.max(10, Math.min(100, Math.round((result.co2OffsetTons / 15) * 100)));
+            cardEnvironmentalBar.style.width = envPct + '%';
         }
     }
 
