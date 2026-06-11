@@ -700,7 +700,7 @@ body.js-enabled .reveal-right.active {
 /* Step 1: Appliance Selection Grid */
 .appliance-selection-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: var(--space-3);
   width: 100%;
 }
