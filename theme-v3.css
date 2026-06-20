@@ -3098,7 +3098,7 @@ body.js-enabled .reveal-right.active {
   gap: var(--space-3);
 }
 
-.form-control {
+.form-control, .contact-form input, .contact-form select, .contact-form textarea {
   width: 100%;
   padding: 0.75rem var(--space-4);
   border: 1.5px solid var(--color-border);
@@ -3110,12 +3110,12 @@ body.js-enabled .reveal-right.active {
   transition: var(--transition);
 }
 
-.form-control:focus {
+.form-control:focus, .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
   border-color: var(--color-primary);
   box-shadow: var(--shadow-glow);
 }
 
-.textarea-control {
+.textarea-control, .contact-form textarea {
   border-radius: var(--radius-card);
   resize: vertical;
   min-height: 100px;
