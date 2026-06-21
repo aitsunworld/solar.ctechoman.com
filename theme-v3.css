@@ -399,7 +399,7 @@ body.js-enabled .reveal-right.active {
   background-color: var(--color-surface);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-soft);
-  padding-bottom: var(--space-7);
+  padding-bottom: 5rem;
 }
 
 .hero-slider-track {
