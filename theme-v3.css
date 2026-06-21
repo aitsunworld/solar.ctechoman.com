@@ -4951,9 +4951,9 @@ footer {
 
   /* Hero Section Asymmetric Split */
   .hero {
-    min-height: 100vh;
+    min-height: auto;
     padding-top: 100px;
-    padding-bottom: 0;
+    padding-bottom: 2rem;
   }
 
   .hero-grid {
@@ -4985,7 +4985,7 @@ footer {
 
   /* Calculator Overlay */
   .calculator-section {
-    margin-top: -100px; /* Overlaps hero perfectly on desktop */
+    margin-top: 2rem; /* Was -100px, causing overlap */
   }
 
   .calculator-wrapper {
