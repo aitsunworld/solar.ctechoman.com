@@ -846,75 +846,7 @@
       return;
     }
 
-    // 2. Solar-Domain Relevance Gate (block off-topic AI proxy calls)
-    // ─── Only pass queries to Groq that are related to solar/energy/Oman context ───
-    const SOLAR_DOMAIN_KEYWORDS_EN = [
-      // Core solar terms
-      "solar", "panel", "photovoltaic", "pv", "inverter", "battery", "watt", "kwh", "kilowatt",
-      // Energy & utility
-      "electricity", "electric", "power", "energy", "grid", "metering", "utility", "bill",
-      // System & installation
-      "install", "installation", "system", "roof", "mount", "setup", "survey", "permit",
-      // Financial
-      "cost", "price", "saving", "payback", "roi", "finance", "afford", "quote", "invest",
-      // Oman/GCC specific
-      "oman", "muscat", "dcrec", "medc", "oetc", "reds", "concept", "ctech",
-      // Product terms
-      "panel", "module", "array", "charge", "backup", "off-grid", "on-grid", "net",
-      // Environment
-      "clean", "green", "renewable", "environment", "emission", "carbon", "sustainable",
-      // Maintenance
-      "maintenance", "warranty", "lifespan", "clean", "repair", "monitor",
-      // Appliances & load
-      "appliance", "air conditioner", "ac", "pump", "fridge", "refrigerator", "load", "consumption",
-      // General intent
-      "help", "information", "info", "detail", "tell me", "explain", "how", "what", "when", "can you"
-    ];
-    const SOLAR_DOMAIN_KEYWORDS_AR = [
-      // Core solar
-      "شمس", "شمسي", "الواح", "لوح", "طاقة", "كهرباء", "كهربائي", "طاقه", "شمسيه",
-      // System parts
-      "عاكس", "بطارية", "بطاريات", "شبكة", "نظام", "تركيب", "وات", "كيلوواط",
-      // Financial
-      "سعر", "تكلفة", "توفير", "وفر", "ريال", "فاتورة", "عائد", "ربح", "استثمار", "عرض",
-      // Oman
-      "عمان", "مسقط", "ديكريك", "مهيد", "مصدر",
-      // Maintenance
-      "صيانة", "ضمان", "تنظيف", "إصلاح", "كفاله",
-      // Appliances
-      "مكيف", "ثلاجة", "مضخة", "أجهزة", "استهلاك", "حمل",
-      // Environmental
-      "بيئة", "نظيفة", "خضراء", "كربون", "انبعاثات",
-      // Intent
-      "ساعد", "معلومات", "كيف", "ماذا", "متى", "شرح", "اخبرني", "اريد", "ابي"
-    ];
-
-    // Check if text is a pure greeting (already handled above, but double-check)
-    const isShortGreeting = /^(hy|hi|hello|hey|hola|مرحبا|سلام|اهلا|أهلاً|مرحباً|هلا|هلو|اهلين)$/i.test(normalized);
-
-    if (!isShortGreeting) {
-      const lowerText = text.toLowerCase();
-      const domainKeywords = (l === "ar") ? SOLAR_DOMAIN_KEYWORDS_AR : SOLAR_DOMAIN_KEYWORDS_EN;
-      const isSolarRelated = domainKeywords.some(kw => lowerText.includes(kw));
-
-      if (!isSolarRelated) {
-        // Off-topic query: politely redirect without hitting AI proxy
-        if (window.SolarAnalytics) {
-          window.SolarAnalytics.track("chatbot_offtopic_blocked", { text_length: text.length });
-        }
-        addBotMessage(
-          l === "ar"
-            ? "أنا متخصص في الطاقة الشمسية فقط 🌞\n\nيمكنني مساعدتك في:\n• أسعار وتكاليف أنظمة الطاقة الشمسية\n• توفير فاتورة الكهرباء\n• عملية التركيب والتصاريح\n• الضمانات والصيانة\n• الحصول على عرض سعر مجاني\n\nما الذي تريد معرفته عن الطاقة الشمسية؟"
-            : "I'm specialized in solar energy topics only ☀️\n\nI can help you with:\n• Solar system costs & pricing\n• Electricity bill savings\n• Installation process & permits\n• Warranties & maintenance\n• Getting a free quote\n\nWhat would you like to know about solar?",
-          [
-            { label: l === "ar" ? "💰 التوفير في الفاتورة" : "💰 Bill Savings", value: "savings" },
-            { label: l === "ar" ? "📋 احصل على عرض مجاني" : "📋 Get a Free Quote", value: "quote" },
-            { label: l === "ar" ? "🔙 القائمة الرئيسية" : "🔙 Main Menu", value: "menu" },
-          ]
-        );
-        return;
-      }
-    }
+    // The AI backend prompt securely handles off-topic filtering natively.
 
     // 3. Claude AI Proxy Route fallback (solar-related queries only)
     if (window.SolarAnalytics) {
