@@ -4985,7 +4985,7 @@ footer {
 
   /* Calculator Overlay */
   .calculator-section {
-    margin-top: 2rem; /* Was -100px, causing overlap */
+    margin-top: 5rem; /* Was 2rem, increased to add more space below hero */
   }
 
   .calculator-wrapper {
