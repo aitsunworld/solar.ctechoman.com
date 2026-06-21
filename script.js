@@ -1420,6 +1420,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        const updateSliderHeight = () => {
+            let maxHeight = 0;
+            const slides = document.querySelectorAll('.hero-slide .slide-card-container');
+            slides.forEach(slide => {
+                if (slide.offsetHeight > maxHeight) maxHeight = slide.offsetHeight;
+            });
+            if (maxHeight > 0) {
+                heroTrack.style.minHeight = maxHeight + 'px';
+            }
+        };
+
+        window.addEventListener('resize', updateSliderHeight);
+        window.addEventListener('load', updateSliderHeight);
+        setTimeout(updateSliderHeight, 100); // ensure initial calc
+
         // Initialize slider
         startSlider();
     }
