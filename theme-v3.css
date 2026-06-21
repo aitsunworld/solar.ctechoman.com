@@ -9166,6 +9166,27 @@ html[dir="rtl"] .calibration-ring-section .progress-ring-svg {
 /* 11. CTA Banner Section - Stacked Mobile
    ========================================================================== */
 
+/* Fix for Calculator Next Button Visibility (Single Page Feel) */
+.discovery-step-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.step-actions {
+  position: sticky !important;
+  bottom: 0;
+  background: var(--color-surface, #ffffff) !important;
+  z-index: 50;
+  padding: 1rem 0 0.5rem 0 !important;
+  border-top: 1px solid var(--color-border, #e2e8f0);
+  margin-top: auto !important;
+}
+.appliance-selection-grid, .appliance-qty-grid {
+  max-height: 45vh !important;
+  overflow-y: auto !important;
+}
+
 .cta-banner {
   background: #3eb649; /* Vibrant Green */
   border-radius: var(--radius-card);
